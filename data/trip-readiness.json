@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "last_verified": "2026-08-26",
+  "timezone": "Asia/Shanghai",
+  "checks": [
+    {
+      "id": "yu-garden",
+      "match": ["豫园", "Yu Garden", "สวนอวี้หยวน"],
+      "status": "verified",
+      "label": "ยืนยันแล้ว",
+      "detail": "09:00–16:30 · เข้าได้ถึง 16:00 · กันยายนเป็นฤดูราคาปกติ ¥40/ผู้ใหญ่ · ปิดวันจันทร์ (ยกเว้นวันหยุดตามประกาศ)",
+      "source_label": "Yu Garden Official",
+      "source_url": "https://www.yugarden.com.cn/page/articleview/message.html"
+    },
+    {
+      "id": "postal-museum",
+      "match": ["上海邮政博物馆", "Shanghai Postal Museum", "พิพิธภัณฑ์ไปรษณีย์"],
+      "status": "verified",
+      "label": "ยืนยันแล้ว",
+      "detail": "อังคาร–อาทิตย์ 09:00–17:00 · เข้าได้ถึง 16:00 · ปิดวันจันทร์ · วันหยุดอาจมีประกาศพิเศษ",
+      "source_label": "China Post Shanghai",
+      "source_url": "https://www.chinapost.com.cn/html1/report/2507/9131-1.htm"
+    },
+    {
+      "id": "dongjin-ferry",
+      "match": ["金陵东路渡口", "东昌路渡口", "Shanghai Ferry", "เรือเฟอร์รี"],
+      "status": "live",
+      "label": "เช็กวันจริง",
+      "detail": "Dongjin Line: East Jinling Road ฝั่ง Puxi 07:15–18:30 / Dongchang Road ฝั่ง Pudong 07:15–18:15 · สำหรับคนเดินเท้า · อาจหยุดเมื่อสภาพอากาศไม่เหมาะสม",
+      "source_label": "Shanghai Government · Ferry",
+      "source_url": "https://english.shanghai.gov.cn/en-Individuals-Transportation-Ferry/20260813/474fc35ff5a54d51aeeb68b2cb981088.html"
+    },
+    {
+      "id": "hangzhou-train",
+      "match": ["上海虹桥 → 杭州东", "杭州东 → 上海虹桥", "High-speed rail", "รถไฟความเร็วสูง"],
+      "status": "pending",
+      "label": "รอยืนยันตั๋ว",
+      "detail": "เวลาใน itinerary เป็นเวลาเป้าหมาย ไม่ใช่ขบวนที่จองแล้ว · 12306 ใช้ช่วงขายล่วงหน้า 15 วันรวมวันเดินทาง · วันที่ 26 ส.ค. ระบบขายถึง 9 ก.ย. · สำหรับ 16 ก.ย. ควรเริ่มตรวจตั้งแต่ 2 ก.ย. และยืนยันเวลาปล่อยตั๋วของสถานีใน 12306",
+      "source_label": "China Railway 12306",
+      "source_url": "https://mobile.12306.cn/weixin/wxcore/ysqcx"
+    },
+    {
+      "id": "passport-train",
+      "match": ["12306", "Passport"],
+      "status": "important",
+      "label": "Passport ตัวจริง",
+      "detail": "ผู้โดยสารต้องใช้เอกสารตัวจริงชนิดเดียวกับที่ใช้ซื้อตั๋วในการตรวจตัวตน/เข้าสถานี ผู้ถือหนังสือเดินทางต่างชาติที่เครื่องอ่านอัตโนมัติไม่รองรับให้ใช้ช่องเจ้าหน้าที่",
+      "source_label": "12306 · Real-name tickets",
+      "source_url": "https://kyfw.12306.cn/otn/gonggao/realNameTicket.html"
+    },
+    {
+      "id": "flight-outbound",
+      "match": ["HO1352"],
+      "status": "ticket",
+      "label": "ตาม e-ticket",
+      "detail": "BKK → PVG T2 · 13 ก.ย. · ใช้ e-ticket/Juneyao เป็นข้อมูลหลัก และตรวจ flight status อีกครั้งก่อนออกจากบ้าน",
+      "source_label": "Travel document",
+      "source_url": ""
+    },
+    {
+      "id": "flight-inbound",
+      "match": ["HO1351"],
+      "status": "ticket",
+      "label": "ตาม e-ticket",
+      "detail": "PVG T2 → BKK · 18 ก.ย. · ตรวจ terminal / counter / gate / flight status ในวันเดินทาง",
+      "source_label": "Travel document",
+      "source_url": ""
+    }
+  ],
+  "emergency": {
+    "police": "110",
+    "fire": "119",
+    "ambulance": "120",
+    "traffic": "122",
+    "shanghai_government": "12345",
+    "ferry_info": "33767736"
+  },
+  "hotel": {
+    "name": "Yitel Collection (Shanghai Train Station)",
+    "cn": "和颐至尚酒店(上海火车站南广场店)",
+    "address_cn": "上海市静安区天目西路511号",
+    "phone": "+86-21-52711555-0"
+  },
+  "insurance": {
+    "provider": "MSIG",
+    "overseas_assistance": "+66 2 039 5704",
+    "customer_service": "+66 2 825 8888"
+  },
+  "photo_policy": {
+    "ambient_matches": ["武康路", "安福路", "南京西路", "杭州西湖风景名胜区", "断桥残雪", "西湖游船", "龙井村", "陆家嘴", "上海中心大厦"],
+    "ambient_label": "ภาพบรรยากาศย่าน/กิจกรรม",
+    "default_label": "ภาพประกอบสถานที่"
+  }
+}
