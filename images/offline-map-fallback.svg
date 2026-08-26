@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <rect width="900" height="500" fill="#f2e7eb"/>
+  <path d="M600,-20 C560,80 650,145 590,230 C535,310 620,390 570,520" fill="none" stroke="#b9dce5" stroke-width="72"/>
+  <path d="M600,-20 C560,80 650,145 590,230 C535,310 620,390 570,520" fill="none" stroke="#d9f0f4" stroke-width="52"/>
+  <path d="M0,210 C160,185 280,240 420,215 C505,200 545,215 600,230" fill="none" stroke="#c9e5eb" stroke-width="28"/>
+  <g stroke="#dccbd2" stroke-width="3" fill="none" opacity=".9">
+    <path d="M80 70L520 430M150 20L690 470M20 350L530 80M120 470L520 40M700 30L860 430M650 110L880 280"/>
+    <path d="M40 120H540M10 300H560M650 160H880M640 350H870"/>
+  </g>
+  <g fill="#a34669" font-family="Arial,sans-serif" text-anchor="middle">
+    <circle cx="445" cy="245" r="10"/><text x="445" y="230" font-size="17" font-weight="700">ใจกลาง Shanghai</text>
+    <circle cx="690" cy="225" r="8"/><text x="690" y="208" font-size="15">Pudong</text>
+    <text x="590" y="455" font-size="14" transform="rotate(-82 590 455)">Huangpu River</text>
+  </g>
+  <text x="450" y="475" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#7c6570">Offline background — หมุดและเส้นทางออนไลน์จะแสดงทับเมื่อเชื่อมต่อสำเร็จ</text>
+</svg>
