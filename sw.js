@@ -1,6 +1,82 @@
-const CACHE='shanghai-family-trip-v1.20';
-const CORE=['./','./index.html','./styles.css','./mobile-enhancements.js','./manifest.webmanifest','./images/offline-map-fallback.svg','./images/photo-001.png','./images/photo-002.jpg','./images/photo-003.jpg','./images/photo-004.jpg','./images/photo-005.jpg','./images/photo-006.jpg','./images/photo-007.jpg','./images/photo-008.jpg','./images/photo-009.jpg','./images/photo-010.jpg','./images/photo-011.jpg','./images/photo-012.jpg','./images/photo-013.jpg','./images/photo-014.png','./images/photo-015.png','./images/photo-016.png','./images/photo-017.png','./images/photo-018.png','./images/photo-019.png','./images/photo-020.jpg','./images/photo-021.jpg','./images/photo-022.jpg','./images/photo-023.jpg','./images/photo-024.jpg','./images/photo-025.jpg','./images/photo-026.jpg','./images/photo-027.jpg','./images/photo-028.jpg','./images/photo-029.jpg','./images/photo-030.jpg','./images/photo-031.jpg','./images/photo-032.jpg','./images/photo-033.jpg','./images/photo-034.jpg','./images/photo-035.jpg','./images/photo-036.jpg','./images/photo-037.jpg','./images/photo-038.jpg','./images/photo-039.jpg','./images/photo-040.jpg','./images/photo-041.jpg','./images/photo-042.jpg','./images/photo-043.jpg','./images/photo-044.jpg','./images/photo-045.jpg','./images/photo-046.jpg','./images/photo-047.jpg','./images/photo-048.jpg','./images/photo-049.jpg','./images/photo-050.jpg','./images/photo-051.jpg','./images/photo-052.jpg','./images/photo-053.jpg','./images/user-bund.jpg','./images/user-french.jpg','./images/user-hotel.jpg','./images/user-huaihai.jpg','./images/user-huanghe.jpg','./images/user-jialing.jpg','./images/user-nanjing.jpg','./images/user-nanxiang.jpg','./images/user-people.jpg','./images/user-tianzifang.jpg','./images/user-weixiang.jpg','./images/user-wukang.jpg','./images/user-xintiandi.jpg','./images/user-yuyuan.jpg','./images/food-lai-lai-xiao-long-collage.png','./images/food-huxi-old-alley-noodle-house-collage.png','./images/food-shu-cai-ji-shengjian-kitchen-menu.png','./images/food-a-niang-noodle-house-beef-noodles.png','./images/food-ren-he-guan-storefront.png','./images/food-park-hotel-bakery-butterfly-pastry.png','./images/food-songhelou-suzhou-noodles-hongyi-collage.png','./images/food-da-hu-chun-shengjian-collage.png','./images/food-yongfeng-noodle-house-storefront-preferred.png','./images/food-shao-wan-sheng-shanxi-south-road-storefront.png','./images/food-shen-da-cheng-nanjing-east-road-exit-10.png','./images/food-apoli-itabakery-bakery-counter.png','./images/food-butterful-and-creamorous-west-nanjing-road-storefront.png','./images/food-shanghai-grandmother-restaurant-fuzhou-road-storefront.png','./images/food-maotou-laodie-jingan-yuyuan-road-storefront.png','./images/food-luo-chun-ge-shanghai-friedbuns-storefront.png','./images/food-wu-you-xian-storefront.png','./images/food-autumn-flavor-xiaoqiu-tianjin-road-406-storefront.png','./images/food-yaba-shengjian-suzhou-storefront.png'];
-CORE.push('./images/family-trip-cover.jpg');
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;if(event.request.mode==='navigate'){event.respondWith(fetch(event.request).then(response=>{const copy=response.clone();caches.open(CACHE).then(cache=>cache.put('./index.html',copy));return response}).catch(()=>caches.match('./index.html')));return}event.respondWith(caches.match(event.request).then(hit=>hit||fetch(event.request).then(response=>{const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));return response}))) });
+const CACHE='shanghai-family-trip-v1.21';
+
+const ESSENTIAL=[
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './styles.css',
+  './mobile-enhancements.js',
+  './v2/',
+  './v2/index.html',
+  './v2/readiness.js',
+  './data/trip-readiness.json',
+  './icons/trip-icon.svg',
+  './icons/trip-maskable.svg',
+  './images/offline-map-fallback.svg',
+  './images/photo-001.png'
+];
+
+const OPTIONAL=[];
+for(let i=2;i<=13;i++)OPTIONAL.push(`./images/photo-${String(i).padStart(3,'0')}.jpg`);
+for(let i=14;i<=19;i++)OPTIONAL.push(`./images/photo-${String(i).padStart(3,'0')}.png`);
+for(let i=20;i<=53;i++)OPTIONAL.push(`./images/photo-${String(i).padStart(3,'0')}.jpg`);
+[
+  'family-trip-cover.jpg','user-bund.jpg','user-french.jpg','user-hotel.jpg','user-huaihai.jpg','user-huanghe.jpg','user-jialing.jpg','user-nanjing.jpg','user-nanxiang.jpg','user-people.jpg','user-tianzifang.jpg','user-weixiang.jpg','user-wukang.jpg','user-xintiandi.jpg','user-yuyuan.jpg',
+  'food-lai-lai-xiao-long-collage.png','food-huxi-old-alley-noodle-house-collage.png','food-shu-cai-ji-shengjian-kitchen-menu.png','food-a-niang-noodle-house-beef-noodles.png','food-ren-he-guan-storefront.png','food-park-hotel-bakery-butterfly-pastry.png','food-songhelou-suzhou-noodles-hongyi-collage.png','food-da-hu-chun-shengjian-collage.png','food-yongfeng-noodle-house-storefront-preferred.png','food-shao-wan-sheng-shanxi-south-road-storefront.png','food-shen-da-cheng-nanjing-east-road-exit-10.png','food-apoli-itabakery-bakery-counter.png','food-butterful-and-creamorous-west-nanjing-road-storefront.png','food-shanghai-grandmother-restaurant-fuzhou-road-storefront.png','food-maotou-laodie-jingan-yuyuan-road-storefront.png','food-luo-chun-ge-shanghai-friedbuns-storefront.png','food-wu-you-xian-storefront.png','food-autumn-flavor-xiaoqiu-tianjin-road-406-storefront.png','food-yaba-shengjian-suzhou-storefront.png'
+].forEach(name=>OPTIONAL.push('./images/'+name));
+
+self.addEventListener('install',event=>{
+  event.waitUntil((async()=>{
+    const cache=await caches.open(CACHE);
+    await cache.addAll(ESSENTIAL);
+    // Optional photos must never make the whole PWA installation fail.
+    await Promise.allSettled(OPTIONAL.map(url=>cache.add(url)));
+    await self.skipWaiting();
+  })());
+});
+
+self.addEventListener('activate',event=>{
+  event.waitUntil((async()=>{
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch',event=>{
+  if(event.request.method!=='GET')return;
+  const url=new URL(event.request.url);
+
+  if(event.request.mode==='navigate'){
+    event.respondWith((async()=>{
+      try{
+        const response=await fetch(event.request);
+        const cache=await caches.open(CACHE);
+        cache.put(event.request,response.clone()).catch(()=>{});
+        return response;
+      }catch(err){
+        const fallback=url.pathname.includes('/v2/')?'./v2/index.html':'./index.html';
+        return (await caches.match(event.request)) || (await caches.match(fallback)) || (await caches.match('./index.html'));
+      }
+    })());
+    return;
+  }
+
+  event.respondWith((async()=>{
+    const cached=await caches.match(event.request);
+    if(cached)return cached;
+    try{
+      const response=await fetch(event.request);
+      if(response&&response.ok){
+        const cache=await caches.open(CACHE);
+        cache.put(event.request,response.clone()).catch(()=>{});
+      }
+      return response;
+    }catch(err){
+      if(event.request.destination==='image'){
+        return (await caches.match('./images/offline-map-fallback.svg')) || Response.error();
+      }
+      return Response.error();
+    }
+  })());
+});
