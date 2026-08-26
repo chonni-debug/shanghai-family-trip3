@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b6b74" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Shanghai Trip" />
+  <link rel="apple-touch-icon" href="images/photo-001.png" />
+  
+  <style>
+:root{--pink:#e84887;--pink-dark:#b92862;--pink-soft:#fff0f6;--ink:#36212b;--muted:#78636c;--card:#fff;--line:#f3ccdc;--bg:#fff8fb;--shadow:0 10px 28px rgba(151,42,87,.1);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Thai","Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;background:linear-gradient(180deg,#fff0f6 0,#fff8fb 280px);color:var(--ink);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%;padding-bottom:calc(88px + env(safe-area-inset-bottom))}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}.topbar{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left));background:rgba(255,248,251,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.topbar h1{font-size:20px;line-height:1.15;margin:2px 0}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:var(--pink-dark)}.icon-btn{width:44px;height:44px;border:0;border-radius:14px;background:var(--pink);color:#fff;font-size:24px;box-shadow:var(--shadow)}.app-shell{width:min(100%,820px);margin:auto;padding:14px 14px 36px}.bottom-nav{position:fixed;z-index:1200;left:0;right:0;bottom:0;display:flex;gap:3px;overflow-x:auto;padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(105,25,58,.08);scrollbar-width:none}.bottom-nav::-webkit-scrollbar,.day-selector::-webkit-scrollbar{display:none}.nav-btn{flex:1 0 62px;min-height:54px;border:0;border-radius:14px;background:transparent;color:var(--muted);display:grid;place-items:center;padding:5px 7px}.nav-btn span{font-size:21px;line-height:1}.nav-btn small{font-size:11px;white-space:nowrap}.nav-btn.active{color:#fff;background:linear-gradient(135deg,var(--pink),var(--pink-dark));box-shadow:0 7px 18px rgba(232,72,135,.25)}
+.hero{position:relative;min-height:225px;border-radius:24px;overflow:hidden;background:#e8cbd7;box-shadow:var(--shadow);margin:0 0 14px}.hero img,.event-photo img,.place-card img{width:100%;height:100%;object-fit:cover;display:block}.hero img{position:absolute;inset:0}.hero:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,rgba(45,12,28,.88))}.hero-overlay{position:absolute;z-index:1;left:18px;right:18px;bottom:18px;color:#fff}.hero-overlay h2{font-size:clamp(24px,7vw,34px);line-height:1.12;margin:8px 0 4px}.hero-overlay p{margin:0}.pill,.idea-badge,.walk-kicker{display:inline-flex;border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.9);color:var(--pink-dark);font-size:12px;font-weight:800}.grid3,.budget-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.stat,.card,.geo-card,.idea-card,.check-group,.city-walk-guide,.option-map-mini{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.stat{padding:12px 8px;text-align:center}.stat b{display:block;font-size:20px;color:var(--pink-dark)}.stat small{display:block;color:var(--muted);font-size:11px}.card,.geo-card,.idea-card,.check-group,.city-walk-guide{padding:16px;margin:12px 0}.section-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:22px 2px 10px}.section-title h2{margin:0;font-size:21px}.section-title span{font-size:12px;color:var(--muted);text-align:right}.notice{padding:13px 14px;border-radius:16px;background:var(--pink-soft);border:1px solid var(--line);color:#653448;margin:12px 0}.day-selector{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 10px;margin-bottom:4px;scroll-snap-type:x mandatory;scrollbar-width:none}.day-chip{scroll-snap-align:start;flex:0 0 92px;min-height:60px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);padding:9px}.day-chip b,.day-chip small{display:block}.day-chip small{color:var(--muted);font-size:11px}.day-chip.active{background:linear-gradient(135deg,var(--pink),var(--pink-dark));border-color:transparent;color:#fff}.day-chip.active small{color:#fff}
+.day-glance{background:linear-gradient(145deg,#fff,#fff0f6);border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0 18px;box-shadow:var(--shadow)}.day-glance-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}.day-glance-head h2{font-size:21px;margin:0}.day-glance-head span{color:var(--pink-dark);font-size:12px;font-weight:800}.day-glance-list{display:grid;gap:6px}.day-glance-row{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:start;padding:9px 10px;border-radius:13px;background:#fff}.day-glance-row time{font-weight:900;color:var(--pink-dark);font-variant-numeric:tabular-nums}.day-glance-row b{font-size:14px;line-height:1.35}.day-glance-row small{display:block;color:var(--muted);margin-top:2px}.day-glance-action{width:100%;margin-top:11px;min-height:46px}
+.timeline{position:relative}.event-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;margin:12px 0;overflow:hidden;box-shadow:var(--shadow)}.event-card.is-done{opacity:.72}.event-photo{height:190px;background:#ead3dd}.event-body{padding:15px}.event-head{display:flex;justify-content:space-between;gap:10px;align-items:start}.event-head h3,.idea-top h3{margin:0;font-size:19px;line-height:1.28}.cn{color:var(--pink-dark);font-weight:750}.event-card p,.idea-card p{margin:8px 0}.time-badge,.event-time{display:inline-flex;background:var(--pink);color:#fff;border-radius:0 0 12px 0;padding:6px 11px;font-size:13px;font-weight:900}.fav-btn{border:0;background:var(--pink-soft);color:var(--pink-dark);border-radius:12px;min-width:44px;min-height:44px;font-size:22px}.travel-grid,.idea-grid,.walk-amenities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}.travel-grid>*,.idea-grid>*,.walk-amenities>*{padding:9px 10px;border-radius:12px;background:var(--pink-soft);font-size:13px}.travel-grid span,.idea-grid span,.walk-amenities span{display:block;color:var(--muted)}.route{padding:10px;border-left:4px solid var(--pink);background:#fff7fa;border-radius:8px;margin:10px 0}.actions,.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.btn,.filter{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;border-radius:13px;border:1px solid var(--line);background:#fff;color:var(--pink-dark);font-weight:750;text-decoration:none;cursor:pointer}.btn.primary,.filter.active{background:var(--pink);border-color:var(--pink);color:#fff}.btn.gmap{color:#8b3153}.btn.warn{color:#9c3152;background:#fff1f4}.btn.done-btn{background:#ffe0eb;color:#8e244e}.btn.ghost{background:var(--pink-soft)}
+.leaflet-map{height:320px;border-radius:16px;overflow:hidden;background:#eadce2}.leaflet-map.master{height:440px}.compact-map{height:260px}.map-head,.idea-top{display:flex;align-items:start;justify-content:space-between;gap:10px;margin-bottom:10px}.map-help,.muted,.photo-credit{color:var(--muted);font-size:13px}.day-color-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:12px}.day-color-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}.map-day-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.map-day-card{min-height:92px;border:1px solid var(--line);border-radius:16px;background:#fff;text-align:left;padding:12px;color:var(--ink)}.map-day-card>*{display:block}.map-day-card b{color:var(--pink-dark)}.walk-detail{border:1px solid var(--line);border-radius:15px;margin:8px 0;background:#fff;overflow:hidden}.walk-detail summary{display:grid;grid-template-columns:38px 1fr 24px;gap:9px;align-items:center;padding:11px;cursor:pointer;list-style:none}.walk-num{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--pink);color:#fff;font-weight:900}.walk-summary small{display:block;color:var(--muted)}.walk-detail-body{padding:0 12px 13px}.walk-tags{display:flex;flex-wrap:wrap;gap:6px}.walk-tags span{font-size:11px;background:var(--pink-soft);padding:4px 8px;border-radius:999px}.toilet-alert,.walk-shortcuts{padding:11px;border-radius:14px;background:var(--pink-soft);margin:10px 0}.walk-progress{text-align:center;color:var(--pink-dark)}.walk-progress b{display:block;font-size:22px}.check-item{display:flex;gap:10px;align-items:center;min-height:48px;border-top:1px solid var(--line)}.check-item input{width:22px;height:22px;accent-color:var(--pink)}.search,.input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:13px;padding:10px 12px;background:#fff;color:var(--ink)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.form-grid .full{grid-column:1/-1}.expense-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.expense-row small{display:block;color:var(--muted)}.money{font-size:27px;font-weight:900;color:var(--pink-dark)}dialog{width:min(92vw,560px);border:0;border-radius:22px;padding:22px;color:var(--ink);box-shadow:0 25px 70px rgba(70,15,40,.3)}dialog::backdrop{background:rgba(44,13,27,.55)}.dialog-close{float:right;width:44px;height:44px;border:0;border-radius:50%;background:var(--pink-soft);font-size:24px}
+@media(max-width:540px){body{font-size:15px}.app-shell{padding:10px 10px 28px}.topbar h1{font-size:18px}.hero{min-height:195px;border-radius:20px}.hero-overlay{left:15px;right:15px;bottom:15px}.hero-overlay h2{font-size:25px}.grid3{gap:6px}.stat{padding:10px 5px}.stat b{font-size:18px}.stat small{font-size:10px}.section-title{margin-top:18px}.day-glance{padding:13px}.event-photo{height:165px}.event-body{padding:13px}.event-head h3{font-size:18px}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.actions .btn{width:100%;padding:8px 7px;font-size:13px}.travel-grid,.idea-grid,.walk-amenities{grid-template-columns:1fr}.leaflet-map{height:270px}.leaflet-map.master{height:340px}.geo-card,.card,.idea-card,.check-group,.city-walk-guide{padding:13px;border-radius:17px}.form-grid{grid-template-columns:1fr}.form-grid>*{grid-column:1}.bottom-nav{gap:2px}.nav-btn{flex-basis:58px;padding-inline:4px}.nav-btn small{font-size:10px}.budget-summary{grid-template-columns:1fr 1fr}}
+@media(min-width:821px){.app-shell{padding-top:20px}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:min(820px,100%);border-radius:22px 22px 0 0}.hero{min-height:330px}.event-card{display:grid;grid-template-columns:260px 1fr}.event-photo{height:100%;min-height:260px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.insurance-hero{padding:24px 20px;border-radius:24px;background:linear-gradient(145deg,#b92862,#ed5c94);color:#fff;box-shadow:var(--shadow);margin-bottom:12px}.insurance-hero span{font-size:11px;letter-spacing:.14em;font-weight:800}.insurance-hero h2{font-size:26px;line-height:1.2;margin:10px 0 5px}.insurance-hero p{margin:0}.insurance-logo{display:inline-flex;padding:7px 12px;border-radius:9px;background:#fff;color:#222;font-size:20px;font-weight:900;letter-spacing:.12em;margin-bottom:12px}.emergency-card{padding:17px;border:2px solid #e84887;border-radius:20px;background:#fff;box-shadow:var(--shadow);text-align:center}.emergency-card small,.emergency-card span{display:block;color:var(--muted)}.emergency-card a{display:block;color:var(--pink-dark);font-size:28px;font-weight:900;text-decoration:none;margin:4px 0}.insurance-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.policy-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.policy-facts div{padding:10px;border-radius:12px;background:var(--pink-soft)}.policy-facts small,.policy-facts b{display:block}.insured-person{display:flex;align-items:center;gap:10px;min-height:46px;border-bottom:1px solid var(--line)}.insured-person span{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--pink-soft);color:var(--pink-dark)}.coverage-list{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:var(--shadow)}.coverage-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:13px 15px;border-bottom:1px solid var(--line)}.coverage-row:last-child{border-bottom:0}.coverage-row b{text-align:right;color:var(--pink-dark)}.claim-guide li{margin:7px 0}@media(max-width:620px){.insurance-grid{grid-template-columns:1fr}.policy-facts{grid-template-columns:1fr 1fr}.coverage-row{grid-template-columns:1fr}.coverage-row b{text-align:left}.emergency-card a{font-size:24px}}@media print{body{background:#fff;padding:0}.topbar,.bottom-nav,.day-glance-action,[data-insurance-print],[data-insurance-export],[data-insurance-copy]{display:none!important}.app-shell{width:100%;max-width:none;padding:0}.insurance-hero,.emergency-card,.card,.coverage-list{box-shadow:none;break-inside:avoid}.insurance-hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.coverage-row{break-inside:avoid}}
+.travel-doc-banner{padding:20px;border-radius:20px;background:linear-gradient(145deg,#6f2548,#d4427a);color:#fff;box-shadow:var(--shadow);margin:12px 0}.travel-doc-banner span{font-size:11px;font-weight:800;letter-spacing:.08em}.travel-doc-banner h2{font-size:24px;margin:7px 0 3px}.travel-doc-banner p{margin:0}.travel-doc-route{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);margin:10px 0}.flight-line{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--pink-soft);color:var(--pink-dark)}.flight-line b{font-size:19px}.airport-row{display:grid;grid-template-columns:1fr 30px 1fr;align-items:center;gap:8px;padding:15px}.airport-row>div{display:grid;gap:3px}.airport-row small{color:var(--muted)}.airport-row b{line-height:1.3}.airport-row time{color:var(--pink-dark);font-weight:800}.airport-row i{text-align:center;font-style:normal;font-size:22px;color:var(--pink)}.baggage-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.baggage-grid>div{padding:12px;border-radius:13px;background:var(--pink-soft)}.baggage-grid small,.baggage-grid b{display:block}.hotel-detail-card a{color:var(--pink-dark)}@media(max-width:540px){.airport-row{grid-template-columns:1fr}.airport-row i{transform:rotate(90deg)}.baggage-grid{grid-template-columns:1fr}.travel-doc-banner h2{font-size:22px}}@media print{[data-travel-print],[data-travel-export]{display:none!important}.travel-doc-banner,.travel-doc-route{box-shadow:none;break-inside:avoid}}
+
+</style>
+  <style>
+    .family-cover{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(230px,.92fr);overflow:hidden;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#fff,#ffe6f0);box-shadow:var(--shadow);margin:12px 0 18px}
+    .family-cover-photo{min-height:390px;background:#eacdd9;overflow:hidden}.family-cover-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 43%}
+    .family-cover-copy{display:flex;flex-direction:column;justify-content:center;padding:25px}.family-cover-kicker{font-size:11px;font-weight:900;letter-spacing:.12em;color:var(--pink-dark)}
+    .family-cover h2{margin:8px 0 5px;font-size:30px;line-height:1.12;color:#5b2640}.family-cover p{margin:0;color:var(--muted)}.family-cover-members{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}
+    .family-cover-members span{padding:6px 9px;border-radius:999px;background:#fff;color:#8c3155;border:1px solid var(--line);font-size:12px;font-weight:800}
+    @media(max-width:620px){.family-cover{grid-template-columns:1fr;border-radius:20px}.family-cover-photo{min-height:0;aspect-ratio:3/4}.family-cover-copy{padding:17px}.family-cover h2{font-size:25px}.family-cover-members{margin-top:12px}}
+  </style>
+  <title>Shanghai Family Trip 2026</title>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">13–18 SEP 2026</div>
+      <h1>Shanghai Family Trip</h1>
+    </div>
+    <button id="installHelpBtn" class="icon-btn" aria-label="วิธีติดตั้ง">＋</button>
+  </header>
+
+  <main id="app" class="app-shell"></main>
+
+  <nav class="bottom-nav" aria-label="เมนูหลัก">
+    <button data-tab="home" class="nav-btn active"><span>⌂</span><small>วันนี้</small></button>
+    <button data-tab="plan" class="nav-btn"><span>☷</span><small>แผน</small></button>
+    <button data-tab="map" class="nav-btn"><span>◎</span><small>Map</small></button>
+    <button data-tab="ideas" class="nav-btn"><span>✦</span><small>ตัวเลือก</small></button>
+    <button data-tab="places" class="nav-btn"><span>⌖</span><small>สถานที่</small></button>
+    <button data-tab="checklist" class="nav-btn"><span>✓</span><small>เช็กลิสต์</small></button>
+    <button data-tab="budget" class="nav-btn"><span>¥</span><small>ค่าใช้จ่าย</small></button>
+    <button data-tab="insurance" class="nav-btn"><span>✚</span><small>ประกัน</small></button>
+    <button data-tab="trip" class="nav-btn"><span>ⓘ</span><small>ทริป</small></button>
+  </nav>
+
+  <dialog id="installDialog">
+    <button class="dialog-close" data-close-dialog>×</button>
+    <h2>ติดตั้งบน iPhone</h2>
+    <ol>
+      <li>เปิดเว็บนี้ด้วย <b>Safari</b></li>
+      <li>แตะปุ่ม <b>Share</b> ⤴︎</li>
+      <li>เลือก <b>Add to Home Screen</b></li>
+      <li>แตะ <b>Add</b> — แอปจะอยู่บนหน้าจอเหมือนแอปทั่วไป</li>
+    </ol>
+    <p class="muted">PWA ต้องเปิดจากเว็บไซต์ HTTPS จึงจะติดตั้งและใช้ออฟไลน์ได้เต็มรูปแบบ หากเปิดไฟล์จาก Files จะเป็นเพียงโหมดทดลองหน้าเว็บ</p>
+  </dialog>
+
+  <dialog id="placeDialog" class="place-dialog">
+    <button class="dialog-close" data-close-dialog>×</button>
+    <div id="placeDialogBody"></div>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+(function(){
+'use strict';
+const MEMBERS=['Chonnikarn','Chutimon','Punyawat','Wantanee'];
+const TRIP_START=new Date('2026-09-13T00:00:00+08:00');
+const TRIP_END=new Date('2026-09-18T23:59:59+08:00');
+const PHOTO={bund:'images/photo-002.jpg',yu:'images/photo-003.jpg',wukang:'images/photo-004.jpg',jade:'images/photo-005.jpg',westlake:'images/photo-006.jpg',jialing:'images/photo-007.jpg',xintiandi:'images/photo-008.jpg',jingan:'images/photo-009.jpg',westnanjing:'images/photo-010.jpg',huanghe:'images/photo-011.jpg',ifc:'images/photo-012.jpg',localfood:'images/photo-013.jpg'};
+
+const DAYMAP=['images/photo-014.png','images/photo-015.png','images/photo-016.png','images/photo-017.png','images/photo-018.png','images/photo-019.png'];
+const EVENT_PHOTOS=[
+ ['嘉陵菜市场','images/photo-020.jpg'],['武康大楼','images/photo-004.jpg'],['武康路','images/photo-004.jpg'],['安福路','images/photo-004.jpg'],['新天地','images/photo-021.jpg'],
+ ['玉佛禅寺','images/photo-022.jpg'],['静安寺','images/photo-023.jpg'],['南京西路','images/photo-024.jpg'],['上海星巴克臻选烘焙工坊','images/photo-025.jpg'],['国际饭店西饼屋','images/photo-026.jpg'],['黄河路','images/photo-027.jpg'],
+ ['豫园商城','images/photo-028.jpg'],['城隍庙','images/photo-028.jpg'],['豫园','images/photo-029.jpg'],['人民广场','images/photo-030.jpg'],['南京路步行街','images/photo-030.jpg'],['外滩','images/photo-031.jpg'],
+ ['杭州西湖风景名胜区','images/photo-032.jpg'],['断桥残雪','images/photo-032.jpg'],['西湖游船','images/photo-032.jpg'],['龙井村','images/photo-032.jpg'],
+ ['上海邮政博物馆','images/photo-033.jpg'],['乍浦路桥','images/photo-033.jpg'],['外白渡桥','images/photo-033.jpg'],['陆家嘴','images/photo-034.jpg'],['上海中心大厦','images/photo-034.jpg'],['上海国金中心商场','images/photo-035.jpg'],
+ ['淮海中路','images/photo-024.jpg'],['田子坊','images/photo-036.jpg']
+];
+const REAL_PHOTOS=[
+ ['嘉陵菜市场','images/photo-007.jpg','AMap · 嘉陵菜市场 · ภาพสถานที่จริง'],
+ ['五原路','images/photo-037.jpg','Wikimedia Commons · Livelikerw · CC BY-SA 3.0'],
+ ['乌鲁木齐中路','images/photo-038.jpg','Wikimedia Commons · Vesekskiy · CC BY-SA 4.0'],
+ ['安福路','images/photo-039.jpg','Wikimedia Commons · RunningTurtle8964 · CC0'],
+ ['延庆路','images/photo-040.jpg','Wikimedia Commons · Fabio Achilli · CC BY 2.0'],
+ ['武康大楼','images/photo-004.jpg','Wikimedia Commons · Supanut Arunoprayote'],
+ ['武康路','images/photo-004.jpg','Wikimedia Commons · Supanut Arunoprayote'],
+ ['新天地','images/photo-008.jpg','Asia Odyssey Travel · ภาพสถานที่จริง'],
+ ['玉佛禅寺','images/photo-005.jpg','Wikimedia Commons · Stefan Fussan'],
+ ['静安寺','images/photo-009.jpg','Wikimedia Commons · kallerna · CC BY-SA 4.0'],
+ ['豫园商城','images/photo-003.jpg','Wikimedia Commons · Stefan Fussan'],
+ ['豫园','images/photo-003.jpg','Wikimedia Commons · Stefan Fussan'],
+ ['城隍庙','images/photo-003.jpg','Wikimedia Commons · Yu Garden area'],
+ ['南京路步行街','images/photo-010.jpg','Wikimedia Commons · HeroicLife · CC BY 2.0'],
+ ['人民广场','images/photo-010.jpg','Wikimedia Commons · Nanjing Road area'],
+ ['外滩','images/photo-002.jpg','Wikimedia Commons · Suicasmo · CC0'],
+ ['杭州西湖风景名胜区','images/photo-006.jpg','Wikimedia Commons · Shujianyang · CC BY-SA 4.0'],
+ ['断桥残雪','images/photo-006.jpg','Wikimedia Commons · West Lake'],
+ ['西湖游船','images/photo-006.jpg','Wikimedia Commons · West Lake'],
+ ['龙井村','images/photo-006.jpg','Wikimedia Commons · Hangzhou / West Lake area'],
+ ['楼外楼','images/photo-006.jpg','Wikimedia Commons · West Lake area'],
+ ['上海邮政博物馆','images/photo-041.jpg','Wikimedia Commons · Adazzy.Gonzo · CC BY-SA 3.0'],
+ ['外白渡桥','images/photo-042.jpg','Wikimedia Commons · Suicasmo · CC0'],
+ ['乍浦路桥','images/photo-042.jpg','Wikimedia Commons · Suzhou Creek area'],
+ ['陆家嘴','images/photo-012.jpg','Wikimedia Commons · Shanghai skyline'],
+ ['东方明珠','images/photo-012.jpg','Wikimedia Commons · Lujiazui skyline'],
+ ['上海中心大厦','images/photo-012.jpg','Wikimedia Commons · Shanghai Tower'],
+ ['上海国金中心商场','images/photo-012.jpg','Wikimedia Commons · Lujiazui skyline'],
+ ['淮海中路','images/photo-008.jpg','ภาพจริงย่านใจกลาง Shanghai'],
+ ['田子坊','images/photo-043.jpg','Wikimedia Commons · Tianzifang · CC BY-SA'],
+ ['松鹤楼','images/photo-044.jpg','Trip.com · ภาพร้านจริง'],
+ ['永丰面馆','images/photo-045.jpg','Zhihu · ภาพร้านจริง'],
+ ['味香斋','images/photo-046.jpg','DeepVoyage · ภาพร้านจริง'],
+ ['裕兴记','images/photo-047.jpg','Trip.com · ภาพอาหารจริง'],
+ ['大壶春','images/photo-048.jpg','ภาพจริงจากข้อมูลที่คุณส่ง'],
+ ['人和馆','images/photo-049.jpg','ภาพจริงจากข้อมูลที่คุณส่ง'],
+ ['沈大成','images/photo-050.jpg','ภาพจริงจากข้อมูลที่คุณส่ง'],
+ ['小杨生煎','images/photo-051.jpg','ภาพจริงจากข้อมูลที่คุณส่ง'],
+ ['南翔馒头店','images/photo-052.jpg','ภาพจริงจากข้อมูลที่คุณส่ง'],
+ ['APOLI','images/photo-053.jpg','ภาพจริงจากข้อมูลที่คุณส่ง']
+];
+function realPhotoEntry(obj){const txt=((obj&&obj.cn)||'')+' '+((obj&&obj.en)||'')+' '+((obj&&obj.th)||'');const hit=REAL_PHOTOS.find(([k])=>txt.includes(k));return hit?{src:hit[1],source:hit[2]}:null;}
+function eventPhoto(e){const real=realPhotoEntry(e);if(real)return real.src;if(e.img)return e.img;const txt=(e.cn||'')+' '+(e.th||'');const hit=EVENT_PHOTOS.find(([k])=>txt.includes(k));return hit?hit[1]:null;}
+function placeImage(p){return realPhotoEntry(p)?.src||p.img||({sight:PHOTO.bund,temple:PHOTO.jade,food:PHOTO.yu,market:PHOTO.wukang}[p.cat]||PHOTO.bund);}
+function photoSource(obj){return realPhotoEntry(obj)?.source||'';}
+
+const days=[
+ {date:'2026-09-13',short:'13 ก.ย.',title:'Local Shanghai + 3 km French Concession Walk',hero:PHOTO.wukang,theme:'ตลาดสด • 五原路 → 乌鲁木齐中路 → 安福路 → 延庆路 • Xintiandi',events:[
+  {time:'06:45',th:'ถึงสนามบินผู่ตง T2',en:'Shanghai Pudong Airport T2',cn:'上海浦东国际机场T2',type:'transport',route:'รถรับที่จองไว้ → โรงแรม ใช้เวลาตามสภาพจราจร'},
+  {time:'09:30',th:'ตลาดสดเจียหลิง',en:'Jialing Market',cn:'嘉陵菜市场',type:'market',img:PHOTO.jialing,meal:'อาหารเช้า/สาย: 豆浆 น้ำเต้าหู้ • 油条 ปาท่องโก๋จีน • 粢饭团 ข้าวเหนียวปั้น • 生煎包 เซิงเจียน',route:'แนะนำ DiDi จากโรงแรม ลดการเดินช่วงเช้าหลังไฟลท์ดึก'},
+  {time:'11:30',th:'เริ่ม City Walk — ถนนอู่หยวน',en:'Wuyuan Road',cn:'五原路',type:'walk',route:'DiDi จากตลาดมาลง 自由公寓 五原路258号 แล้วเปิด Step-by-Step City Walk ด้านบน เริ่มเดินทีละช่วง 150–450 ม.'},
+  {time:'12:05',th:'ถนนอูหลู่มู่ฉีตอนกลาง',en:'Middle Wulumuqi Road',cn:'乌鲁木齐中路',type:'walk',route:'ช่วงนี้ในไกด์ละเอียดจะผ่าน 乌中驿站公厕 และ 乌中市集 ก่อนเข้าสู่ Anfu Road'},
+  {time:'12:40',th:'ถนนอันฝู + พักมื้อกลางวันเบา ๆ',en:'Anfu Road',cn:'安福路',type:'walk',meal:'พักหลักที่ Baker & Spice 安福路195号 • กาแฟ/ขนมประมาณ ¥35–80/คน หรือ brunch ¥80–150/คน',route:'ช่วงนี้เหมาะพัก 45–60 นาที ก่อนเดินต่อ'},
+  {time:'13:40',th:'ถนนเหยียนชิ่ง',en:'Yanqing Road',cn:'延庆路',type:'walk',route:'ใช้ไกด์ละเอียด: 延庆路2号 → 延庆坊/ULT. → 延庆路130号/151–157号 แล้วจบ City Walk'},
+  {time:'14:15',th:'อาคารอู่คัง (ต่อเสริมจาก City Walk)',en:'Wukang Mansion',cn:'武康大楼',type:'sight',img:PHOTO.wukang,route:'แนะนำ DiDi จากปลาย Yanqing Road ไป 武康大楼 เพื่อเก็บแรง; ใช้ 武康路393号甲 Tourist Information Center เป็นจุดพัก/ห้องน้ำได้'},
+  {time:'15:00',th:'ซินเทียนตี้',en:'Xintiandi',cn:'新天地',type:'sight',img:PHOTO.xintiandi,route:'แนะนำ DiDi จาก French Concession • เดินชม Shikumen และร้านค้าแบบสบาย ๆ'},
+  {time:'17:15',th:'กลับโรงแรมพัก',en:'Hotel break',cn:'和颐至尚酒店(上海火车站南广场店)',type:'rest',route:'พัก 1.5–2 ชม. ก่อนมื้อเย็น'},
+  {time:'19:30',th:'เหรินเหอก่วน',en:'Ren He Guan',cn:'人和馆',type:'food',img:PHOTO.localfood,meal:'มื้อเย็น Shanghai cuisine: 本帮红烧肉 หมูตุ๋น • 糖醋小排 ซี่โครงเปรี้ยวหวาน • 八宝饭 ข้าวแปดสมบัติ',route:'เลือกร้านสาขาที่ใกล้โรงแรม/เส้นทางที่สุดใน AMap วันจริง'}
+ ]},
+ {date:'2026-09-14' ,short:'14 ก.ย.',title:'Jade Buddha + Jing’an + West Nanjing',hero:PHOTO.jade,theme:'วัด • ช้อป • ของฝาก',events:[
+  {time:'08:00',th:'อาหารเช้าใกล้โรงแรม',en:'Local breakfast',cn:'上海火车站附近早餐',type:'food',meal:'包子 ซาลาเปา • 豆浆 น้ำเต้าหู้ • 葱油饼 แพนเค้กต้นหอม'},
+  {time:'09:00',th:'วัดพระหยก',en:'Jade Buddha Temple',cn:'玉佛禅寺',type:'temple',img:PHOTO.jade,route:'แนะนำ DiDi จากโรงแรม • ที่อยู่ค้นหา: 安远路170号'},
+  {time:'11:00',th:'วัดจิ้งอัน',en:"Jing'an Temple",cn:'静安寺',type:'temple',img:PHOTO.jingan,route:'DiDi ระยะสั้น หรือ Metro • ที่อยู่ค้นหา: 南京西路1686号'},
+  {time:'12:30',th:'มื้อกลางวันย่านจิ้งอัน',en:"Jing'an lunch",cn:'静安寺附近餐厅',type:'food',meal:'เลือกร้านนั่งสบายในห้าง/ย่าน南京西路 เพื่อพักขา'},
+  {time:'14:00',th:'ถนนหนานจิงตะวันตก',en:'West Nanjing Road',cn:'南京西路',type:'shopping',img:PHOTO.westnanjing,route:'เดินเฉพาะช่วงที่สนใจ แล้วพักในห้างเป็นระยะ'},
+  {time:'15:00',th:'Starbucks Reserve Roastery',en:'Starbucks Reserve Roastery Shanghai',cn:'上海星巴克臻选烘焙工坊',type:'cafe',img:PHOTO.westnanjing,route:'จุดพักกาแฟและชมโรงคั่ว'},
+  {time:'16:30',th:'Park Hotel Bakery',en:'Park Hotel Bakery',cn:'国际饭店西饼屋',type:'food',img:PHOTO.westnanjing,meal:'ซื้อ 蝴蝶酥 Butterfly Pastry เป็นของฝาก'},
+  {time:'19:30',th:'ถนนหวงเหอ (ถ้ายังไหว)',en:'Huanghe Road',cn:'黄河路',type:'food',img:PHOTO.huanghe,meal:'เดินดูไฟและของกินกลางคืน ไม่ต้องจัดเป็นมื้อใหญ่',route:'Optional — ถ้าเหนื่อยให้กลับโรงแรม'}
+ ]},
+ {date:'2026-09-15',short:'15 ก.ย.',title:'Old Shanghai → Nanjing Road → The Bund',hero:PHOTO.yu,theme:'Yu Garden • Local food • Bund Night',events:[
+  {time:'08:15',th:'ออกจากโรงแรม',en:'Leave hotel',cn:'和颐至尚酒店(上海火车站南广场店)',type:'transport',route:'แนะนำ DiDi ไป Yu Garden สำหรับครอบครัว 4 คน; Metro ทางเลือก: 上海火车站 → 人民广场 → 老西门 → 豫园'},
+  {time:'09:00',th:'สวนอวี้หยวน',en:'Yu Garden',cn:'豫园',type:'sight',img:PHOTO.yu,route:'เที่ยวก่อนคนแน่น • เช็กเวลาเปิด/ตั๋วอีกครั้งใกล้วันเดินทาง'},
+  {time:'10:30',th:'ตลาดอวี้หยวน + ศาลเทพเจ้าเมือง',en:'Yuyuan Bazaar + City God Temple',cn:'豫园商城 / 城隍庙',type:'market',img:PHOTO.yu,route:'เดิน 九曲桥 สะพานเก้าโค้งและย่านของฝาก'},
+  {time:'11:30',th:'หนานเสียงหมั่นโถวเตี้ยน',en:'Nanxiang Steamed Bun Restaurant',cn:'南翔馒头店(豫园店)',type:'food',img:PHOTO.localfood,meal:'小笼包 เสี่ยวหลงเปา • ถ้ามีลอง 蟹粉小笼',route:'อยู่ในโซน Yu Garden ไม่ต้องเดินทางเพิ่ม'},
+  {time:'13:15',th:'จัตุรัสประชาชน',en:"People's Square",cn:'人民广场',type:'sight',img:PHOTO.westnanjing,route:'Metro/DiDi จาก Yu Garden'},
+  {time:'13:45',th:'Food pick — เลือก 1 ร้าน',en:'People’s Square food pick',cn:'大壶春 / 莱莱小笼 / 永丰面馆',type:'food',img:PHOTO.localfood,meal:'A 大壶春 = 生煎 • B 莱莱小笼 = 蟹粉小笼 • C 永丰面馆 = 葱油拌面/红烧牛肉面',route:'อย่ากินครบทุกแห่ง — เลือก 1 ร้าน + ของว่าง 1 จุด'},
+  {time:'15:15',th:'ถนนคนเดินหนานจิง',en:'Nanjing Road Pedestrian Street',cn:'南京路步行街',type:'shopping',img:PHOTO.westnanjing,route:'เดินจากฝั่ง People’s Square ไปทาง Bund แบบค่อย ๆ พักห้างได้'},
+  {time:'17:15',th:'เดอะบันด์',en:'The Bund',cn:'外滩',type:'sight',img:PHOTO.bund,route:'อยู่ต่อถึง Blue Hour/เปิดไฟ จะได้ทั้งวิวกลางวันและกลางคืน'},
+  {time:'19:45',th:'มื้อเย็นเบา ๆ',en:'Light dinner',cn:'松鹤楼·苏式汤面(宏伊广场店)',type:'food',img:PHOTO.localfood,meal:'บะหมี่ซูโจว หรือกลับโรงแรมถ้าอิ่มจาก Food Walk'}
+ ]},
+ {date:'2026-09-16',short:'16 ก.ย.',title:'Hangzhou Day Trip',hero:PHOTO.westlake,theme:'High-speed train • West Lake • Longjing',events:[
+  {time:'06:30',th:'DiDi ไปสถานีหงเฉียว',en:'Shanghai Hongqiao Railway Station',cn:'上海虹桥站',type:'transport',route:'ออกเช้าเพื่อลดความเสี่ยงพลาดรถไฟ • ตั๋วขบวนจริงค่อยล็อกเมื่อเปิดขาย'},
+  {time:'07:30',th:'รถไฟความเร็วสูงไปหางโจว',en:'High-speed rail to Hangzhou',cn:'上海虹桥 → 杭州东',type:'train',route:'เก็บ QR/รายละเอียดตั๋วในมือถือและมี Passport ตัวจริง'},
+  {time:'09:15',th:'ทะเลสาบซีหู',en:'West Lake',cn:'杭州西湖风景名胜区',type:'sight',img:PHOTO.westlake,route:'จาก 杭州东站 แนะนำ DiDi ไป West Lake'},
+  {time:'10:00',th:'สะพานขาด',en:'Broken Bridge',cn:'断桥残雪',type:'sight',img:PHOTO.westlake,route:'เดินช่วงสั้น ไม่เดินรอบทะเลสาบเต็มวง'},
+  {time:'11:00',th:'ล่องเรือทะเลสาบซีหู',en:'West Lake Cruise',cn:'西湖游船',type:'sight',img:PHOTO.westlake,route:'ช่วยลดการเดินและได้วิวทะเลสาบ'},
+  {time:'12:15',th:'โหลวไว่โหลว',en:'Louwailou',cn:'楼外楼',type:'food',img:PHOTO.westlake,meal:'东坡肉 หมูตงโพ • 龙井虾仁 กุ้งผัดชา • 西湖莼菜汤 ซุปผักซีหู'},
+  {time:'14:00',th:'หมู่บ้านหลงจิ่ง',en:'Longjing Village',cn:'龙井村',type:'sight',img:PHOTO.westlake,route:'ตัวเลือกหลัก: นั่งพัก ชิมชา ดูไร่ชา; ถ้าครอบครัวอยากไหว้พระให้เปลี่ยนเป็น 灵隐寺'},
+  {time:'16:30',th:'กลับ杭州东站',en:'Return to Hangzhou East',cn:'杭州东站',type:'transport',route:'DiDi เผื่อเวลารถติดและหา Gate'},
+  {time:'18:30',th:'กลับเซี่ยงไฮ้',en:'Return to Shanghai',cn:'杭州东 → 上海虹桥',type:'train',meal:'เย็นกินง่าย ๆ ใกล้โรงแรม/Delivery'}
+ ]},
+ {date:'2026-09-17',short:'17 ก.ย.',title:'Suzhou Creek + Ferry + Lujiazui',hero:PHOTO.bund,theme:'Architecture • Local ferry • Skyline',events:[
+  {time:'09:00',th:'พิพิธภัณฑ์ไปรษณีย์เซี่ยงไฮ้',en:'Shanghai Postal Museum',cn:'上海邮政博物馆',type:'museum',img:PHOTO.bund,route:'DiDi/Metro จากโรงแรม • เช็กวันและเวลาเปิดก่อนเดินทาง'},
+  {time:'10:15',th:'สะพานจ้าผู่ → สะพานไว่ไป๋ตู้',en:'Zhapu Road Bridge → Waibaidu Bridge',cn:'乍浦路桥 → 外白渡桥',type:'walk',img:PHOTO.bund,route:'City Walk ระยะสั้นริม Suzhou Creek เน้นถ่ายรูปอาคาร'},
+  {time:'12:00',th:'เว่ยเซียงไจ',en:'Wei Xiang Zhai',cn:'味香斋',type:'food',img:PHOTO.localfood,meal:'麻酱面 บะหมี่ซอสงา • 咖喱牛肉汤 ซุปแกงกะหรี่เนื้อ • 排骨 พอร์คชอป'},
+  {time:'13:30',th:'เรือเฟอร์รีข้ามแม่น้ำ',en:'Shanghai Ferry',cn:'金陵东路渡口 → 东昌路渡口',type:'transport',img:PHOTO.bund,route:'ถ้าสายเรือให้บริการตามปกติ ใช้ประสบการณ์ local ข้ามไป Pudong; ถ้าปิดใช้ Metro/DiDi'},
+  {time:'14:15',th:'ลู่เจียจุ่ย',en:'Lujiazui',cn:'陆家嘴',type:'sight',img:PHOTO.bund,route:'ชม 东方明珠 • 上海中心大厦 • 金茂大厦 จากภายนอก'},
+  {time:'15:30',th:'Shanghai Tower (เลือกขึ้น 1 ตึก)',en:'Shanghai Tower',cn:'上海中心大厦',type:'sight',img:PHOTO.bund,route:'ถ้าจะซื้อ Observation Deck เลือก Shanghai Tower แห่งเดียวพอ'},
+  {time:'17:00',th:'Shanghai IFC Mall',en:'Shanghai IFC Mall',cn:'上海国金中心商场',type:'shopping',img:PHOTO.ifc,route:'พักขา/ช้อป/มุม Louis Vuitton จากรูปที่ส่งมา'},
+  {time:'18:30',th:'อวี้ซิงจี้',en:'Yuxingji',cn:'裕兴记',type:'food',img:PHOTO.localfood,meal:'蟹黄面 / 蟹粉面 บะหมี่ปู — ให้ AMap เลือกสาขาที่สะดวกที่สุดวันจริง'}
+ ]},
+ {date:'2026-09-18',short:'18 ก.ย.',title:'Last Day + Shopping + Airport',hero:PHOTO.bund,theme:'ช้อปเบา ๆ • ของฝาก • PVG',events:[
+  {time:'08:30',th:'อาหารเช้า + จัดกระเป๋า',en:'Breakfast & packing',cn:'酒店早餐 / 上海火车站附近早餐',type:'food',meal:'กินง่าย ๆ ใกล้โรงแรม'},
+  {time:'09:30',th:'เช็กเอาต์ ฝากกระเป๋า',en:'Checkout & luggage storage',cn:'和颐至尚酒店(上海火车站南广场店)',type:'hotel'},
+  {time:'10:15',th:'ถนนหวยไห่',en:'Huaihai Road',cn:'淮海中路',type:'shopping',img:PHOTO.xintiandi,route:'ช้อปเบา ๆ ไม่ออกนอกเมือง'},
+  {time:'11:30',th:'เถียนจื่อฝาง / ซินเทียนตี้',en:'Tianzifang / Xintiandi',cn:'田子坊 / 新天地',type:'sight',img:PHOTO.xintiandi,route:'เลือก 1 จุด หากวันแรกไป Xintiandi แล้วให้เลือก Tianzifang'},
+  {time:'12:30',th:'มื้อกลางวันสุดท้าย',en:'Last Shanghai lunch',cn:'沈大成 / 小杨生煎',type:'food',img:PHOTO.localfood,meal:'เลือก 沈大成 สำหรับขนม/อาหาร Shanghai หรือ 小杨生煎 สำหรับมื้อง่าย'},
+  {time:'14:00',th:'ซื้อของฝากเก็บตก',en:'Souvenir run',cn:'大白兔奶糖 / 蝴蝶酥 / 雪花膏 / 鲜肉月饼',type:'shopping',img:PHOTO.westnanjing},
+  {time:'15:30',th:'กลับโรงแรมรับกระเป๋า',en:'Collect luggage',cn:'和颐至尚酒店(上海火车站南广场店)',type:'hotel'},
+  {time:'16:30',th:'ออกไปสนามบิน PVG T2',en:'Depart for PVG T2',cn:'上海浦东国际机场T2',type:'transport',route:'เผื่อเวลาเย็นวันศุกร์และเช็กอินเที่ยวบินต่างประเทศ'},
+  {time:'20:50',th:'HO1351 เซี่ยงไฮ้ → กรุงเทพฯ',en:'Juneyao Airlines HO1351',cn:'吉祥航空 HO1351',type:'flight',route:'ถึง BKK 00:25 วันที่ 19 ก.ย. ตามเวลาท้องถิ่น'}
+ ]}
+];
+
+const places=[
+ {th:'โรงแรม Yitel Collection (Shanghai Train Station)',en:'Yitel Collection Shanghai Train Station',cn:'和颐至尚酒店(上海火车站南广场店)',cat:'hotel',city:'上海',addr:'上海市静安区天目西路511号',note:'ฐานที่พักของทริป • โทร +86-21-52711555-0'},
+ {th:'ตลาดสดเจียหลิง',en:'Jialing Market',cn:'嘉陵菜市场',cat:'market',city:'上海',addr:'上海市徐汇区嘉陵路508号',note:'ตลาด local + อาหารเช้า/ของกิน',img:PHOTO.jialing},
+ {th:'อาคารอู่คัง',en:'Wukang Mansion',cn:'武康大楼',cat:'sight',city:'上海',coord:'31.20565, 121.43319',note:'จุดเริ่ม French Concession City Walk',img:PHOTO.wukang},
+ {th:'ถนนอู่คัง',en:'Wukang Road',cn:'武康路',cat:'walk',city:'上海',note:'ถนนอาคารเก่า คาเฟ่ และร้านเล็ก'},
+ {th:'ถนนอู่หยวน',en:'Wuyuan Road',cn:'五原路',cat:'walk',city:'上海',note:'จุดเริ่ม 4-street City Walk จากรูปแนบ'},
+ {th:'ถนนอูหลู่มู่ฉีตอนกลาง',en:'Middle Wulumuqi Road',cn:'乌鲁木齐中路',cat:'walk',city:'上海',note:'ช่วงที่ 2 ของ City Walk — บรรยากาศ local / tree-lined street'},
+ {th:'ถนนอันฝู',en:'Anfu Road',cn:'安福路',cat:'walk',city:'上海',note:'คาเฟ่/ร้านแฟชั่น/พักกลางทาง'},
+ {th:'ถนนเหยียนชิ่ง',en:'Yanqing Road',cn:'延庆路',cat:'walk',city:'上海',note:'ช่วงท้ายของ 4-street City Walk'},
+ {th:'ซินเทียนตี้',en:'Xintiandi',cn:'新天地',cat:'sight',city:'上海',coord:'31.2196, 121.4751',note:'Shikumen + ร้านค้า + คาเฟ่',img:PHOTO.xintiandi},
+ {th:'วัดพระหยก',en:'Jade Buddha Temple',cn:'玉佛禅寺',cat:'temple',city:'上海',addr:'上海市普陀区安远路170号',coord:'31.2434, 121.4402',note:'วัดสำคัญของเซี่ยงไฮ้',img:PHOTO.jade},
+ {th:'วัดจิ้งอัน',en:"Jing'an Temple",cn:'静安寺',cat:'temple',city:'上海',addr:'上海市静安区南京西路1686号',coord:'31.2250, 121.4408',note:'วัดกลางย่านธุรกิจ',img:PHOTO.jingan},
+ {th:'Starbucks Reserve Roastery',en:'Starbucks Reserve Roastery Shanghai',cn:'上海星巴克臻选烘焙工坊',cat:'cafe',city:'上海',note:'จุดพักบน West Nanjing Road',img:PHOTO.westnanjing},
+ {th:'สวนอวี้หยวน',en:'Yu Garden',cn:'豫园',cat:'sight',city:'上海',coord:'31.2277, 121.4925',note:'สวนจีนคลาสสิก',img:PHOTO.yu},
+ {th:'ศาลเทพเจ้าประจำเมือง',en:'City God Temple',cn:'城隍庙',cat:'temple',city:'上海',note:'อยู่ใน Old City ใกล้ Yu Garden'},
+ {th:'ถนนคนเดินหนานจิง',en:'Nanjing Road Pedestrian Street',cn:'南京路步行街',cat:'shopping',city:'上海',coord:'31.2365, 121.4824',note:'ถนนช้อปปิ้งหลัก',img:PHOTO.westnanjing},
+ {th:'เดอะบันด์',en:'The Bund',cn:'外滩',cat:'sight',city:'上海',coord:'31.2380, 121.4900',note:'แนะนำช่วงเย็นถึงเปิดไฟ',img:PHOTO.bund},
+ {th:'Shanghai Postal Museum',en:'Shanghai Postal Museum',cn:'上海邮政博物馆',cat:'museum',city:'上海',coord:'31.2464, 121.4806',note:'อาคารประวัติศาสตร์ริม Suzhou Creek',img:PHOTO.bund},
+ {th:'สะพานไว่ไป๋ตู้',en:'Waibaidu Bridge',cn:'外白渡桥',cat:'sight',city:'上海',coord:'31.2454, 121.4903',note:'จุดถ่ายภาพและเดินต่อ North Bund',img:PHOTO.bund},
+ {th:'ลู่เจียจุ่ย',en:'Lujiazui',cn:'陆家嘴',cat:'sight',city:'上海',coord:'31.2380, 121.4997',note:'ย่าน Skyline ฝั่ง Pudong',img:PHOTO.bund},
+ {th:'Shanghai Tower',en:'Shanghai Tower',cn:'上海中心大厦',cat:'sight',city:'上海',coord:'31.2335, 121.5055',note:'เลือกขึ้น Observation Deck แห่งเดียว',img:PHOTO.bund},
+ {th:'สถานี Shanghai Hongqiao',en:'Shanghai Hongqiao Railway Station',cn:'上海虹桥站',cat:'transport',city:'上海',coord:'31.1969, 121.3278',note:'สถานีรถไฟไป Hangzhou'},
+ {th:'สถานี Hangzhou East',en:'Hangzhou East Railway Station',cn:'杭州东站',cat:'transport',city:'杭州',coord:'30.2921, 120.2120',note:'สถานีปลายทาง Hangzhou'},
+ {th:'ทะเลสาบซีหู',en:'West Lake',cn:'杭州西湖风景名胜区',cat:'sight',city:'杭州',coord:'30.2500, 120.1500',note:'จุดหลักของ Hangzhou Day Trip',img:PHOTO.westlake},
+ {th:'หมู่บ้านหลงจิ่ง',en:'Longjing Village',cn:'龙井村',cat:'sight',city:'杭州',note:'ชา Longjing + พักช่วงบ่าย'},
+ {th:'เถียนจื่อฝาง',en:'Tianzifang',cn:'田子坊',cat:'shopping',city:'上海',note:'ตรอก ร้านเล็ก ของฝาก',img:PHOTO.xintiandi},
+ // restaurants
+ {th:'ต้าหูชุน',en:'Da Hu Chun',cn:'大壶春',cat:'food',city:'上海',addr:'四川中路136号',note:'เด่น 生煎 เซิงเจียน',img:PHOTO.localfood},
+ {th:'ไหลไหลเสี่ยวหลง',en:'Lai Lai Xiao Long',cn:'莱莱小笼',cat:'food',city:'上海',addr:'天津路506号 / 479号',note:'เด่น 蟹粉小笼',img:PHOTO.localfood},
+ {th:'ย่งเฟิงเมี่ยนก่วน',en:'Yong Feng Mian Guan',cn:'永丰面馆',cat:'food',city:'上海',addr:'汉口路320号',note:'葱油拌面 / 红烧牛肉面',img:PHOTO.localfood},
+ {th:'เว่ยเซียงไจ',en:'Wei Xiang Zhai',cn:'味香斋',cat:'food',city:'上海',addr:'湖北路151号',note:'麻酱面 + 咖喱牛肉汤',img:PHOTO.localfood},
+ {th:'เสิ่นต้าเฉิง',en:'Shen Da Cheng',cn:'沈大成',cat:'food',city:'上海',note:'ขนมและอาหาร Shanghai มีหลายสาขา',img:PHOTO.localfood},
+ {th:'เสี่ยวหยางเซิงเจียน',en:"Yang's Dumpling",cn:'小杨生煎',cat:'food',city:'上海',note:'生煎 ร้านสะดวก มีหลายสาขา',img:PHOTO.localfood},
+ {th:'ซงเฮ่อโหลว',en:'Songhelou Suzhou-style Soup Noodles',cn:'松鹤楼·苏式汤面',cat:'food',city:'上海',note:'บะหมี่แบบ Suzhou',img:PHOTO.localfood},
+ {th:'เหรินเหอก่วน',en:'Ren He Guan',cn:'人和馆',cat:'food',city:'上海',note:'Shanghai cuisine แบบนั่งสบาย',img:PHOTO.localfood},
+ {th:'หนานเสียงหมั่นโถวเตี้ยน',en:'Nanxiang Steamed Bun Restaurant',cn:'南翔馒头店(豫园店)',cat:'food',city:'上海',note:'小笼包 ในโซน Yu Garden',img:PHOTO.localfood},
+ {th:'อวี้ซิงจี้',en:'Yuxingji',cn:'裕兴记',cat:'food',city:'上海',note:'蟹黄面 / 蟹粉面 บะหมี่ปู',img:PHOTO.localfood},
+ {th:'โหลวไว่โหลว',en:'Louwailou',cn:'楼外楼',cat:'food',city:'杭州',note:'อาหาร Hangzhou: 东坡肉 / 龙井虾仁'}
+];
+
+const DAY_MAPS=[
+ {city:'Shanghai',points:[['Hotel',52,28],['Jialing',34,79],['Wukang',38,61],['Anfu',44,55],['Xintiandi',61,54]]},
+ {city:'Shanghai',points:[['Hotel',52,28],['Jade Buddha',46,31],['Jing’an',42,45],['West Nanjing',52,44],['Huanghe',59,39]]},
+ {city:'Shanghai',points:[['Yu Garden',72,57],['People’s Sq.',56,44],['Nanjing Rd.',64,42],['The Bund',76,40]]},
+ {city:'Hangzhou',points:[['Hangzhou East',79,34],['West Lake',45,48],['Broken Bridge',50,37],['Louwailou',38,45],['Longjing',31,69]]},
+ {city:'Shanghai',points:[['Postal Museum',67,28],['Waibaidu',75,31],['Ferry',73,54],['Lujiazui',82,45],['Shanghai Tower',84,53],['IFC',80,42]]},
+ {city:'Shanghai',points:[['Hotel',52,28],['Huaihai Rd.',53,58],['Xintiandi/Tianzifang',58,62],['PVG Airport',92,80]]}
+];
+function dayMap(i){const m=DAY_MAPS[i];const pts=m.points;const poly=pts.map(p=>`${p[1]},${p[2]}`).join(' ');return `<div class="route-map-card"><div class="map-head"><b>แผนที่ภาพรวม Day ${i+1}</b><span>${m.city}</span></div><svg class="route-map" viewBox="0 0 100 100" role="img" aria-label="แผนที่ภาพรวมเส้นทาง"><defs><linearGradient id="bg${i}" x1="0" x2="1"><stop stop-color="#eaf4f3"/><stop offset="1" stop-color="#f7eee7"/></linearGradient></defs><rect x="1" y="1" width="98" height="98" rx="8" fill="url(#bg${i})"/><path d="M6 22 C28 12,44 28,62 18 S88 18,96 28 M4 70 C24 60,42 76,60 65 S82 55,97 64" fill="none" stroke="#c8d9d8" stroke-width="1.2"/><polyline points="${poly}" fill="none" stroke="#0b6b74" stroke-width="1.6" stroke-dasharray="3 2"/>${pts.map((p,n)=>`<g><circle cx="${p[1]}" cy="${p[2]}" r="3.2" fill="#0b6b74"/><circle cx="${p[1]}" cy="${p[2]}" r="1.35" fill="#fff"/><text x="${p[1]}" y="${p[2]-5}" text-anchor="middle" font-size="4.2" font-weight="700" fill="#183b3f">${n+1}. ${esc(p[0])}</text></g>`).join('')}</svg><div class="map-legend">${pts.map((p,n)=>`<span><b>${n+1}</b>${esc(p[0])}</span>`).join('')}</div><small>แผนที่นี้เป็นภาพรวมเพื่อให้เห็นตำแหน่งสัมพัทธ์ของแต่ละจุด ไม่ใช้แทนการนำทางจริง — กด AMap ในแต่ละจุดเมื่อต้องเดินทาง</small></div>`;}
+const EVENT_META={
+ '2026-09-13|06:45':{walk:'ประมาณ 100–300 ม. ในสนามบิน/จุดรับรถ',transit:'รถรับสนามบินที่จองไว้ → โรงแรม',price:'รถรับชำระไว้แล้ว'},
+ '2026-09-13|09:30':{walk:'ภายในตลาด/ถนนอาหารประมาณ 400–700 ม.',transit:'DiDi จากโรงแรม ≈ 20–30 นาที',foodPrice:'¥15–35/คน'},
+ '2026-09-13|11:30':{walk:'ใช้ Step-by-Step Guide: แต่ละช่วงประมาณ 150–450 ม. รวมราว 2.5–3 กม.',transit:'DiDi 嘉陵菜市场 → 自由公寓 五原路258号 ≈ 20–30 นาที',metro:'ทางเลือก: 常熟路站 Line 1/7 แล้วเดินเข้าถนน五原路'},
+ '2026-09-13|12:05':{walk:'ช่วง五原路: 自由公寓 → 历史弄堂 → WILDE → 乌中公厕 ประมาณ 600–800 ม. รวมการแวะ',transit:'เดินตามไกด์จุด 1–4'},
+ '2026-09-13|12:40':{walk:'乌中市集 → 安福路 ช่วงละประมาณ 200–400 ม.',foodPrice:'Baker & Spice: กาแฟ/ขนม ¥35–80/คน; brunch ¥80–150/คน',transit:'พัก 35–50 นาทีบน Anfu Road'},
+ '2026-09-13|13:40':{walk:'安福路 → 延庆路2号 → 延庆坊 → บ้านเก่า ช่วงละประมาณ 200–450 ม.',transit:'ถ้าเหนื่อยหลังมื้อกลางวัน เรียก DiDi ข้ามไป 延庆坊 ได้'},
+ '2026-09-13|14:15':{walk:'ไม่จำเป็นต้องเดินต่อจาก Yanqing Road',transit:'แนะนำ DiDi → 武康大楼; จุดบริการ/ห้องน้ำ: 武康路旅游咨询中心 武康路393号甲'},
+ '2026-09-13|15:00':{walk:'新天地站/จุดลงรถ → ย่านเดินเล่นประมาณ 250–500 ม.',metro:'新天地站 Line 10/13 • Exit 6',transit:'จาก French Concession แนะนำ DiDi ≈ 15–25 นาที'},
+ '2026-09-13|17:15':{walk:'จากจุดลงรถถึงโรงแรม ≈ 50–150 ม.',transit:'DiDi กลับโรงแรม'},
+ '2026-09-13|19:30':{walk:'ขึ้นกับสาขาที่เลือก',transit:'เลือกสาขา 人和馆 ที่ใกล้โรงแรม/เส้นทางใน AMap',foodPrice:'ประมาณ ¥120–220/คน'},
+
+ '2026-09-14|08:00':{walk:'ใกล้โรงแรม ≈ 100–500 ม.',foodPrice:'¥10–25/คน'},
+ '2026-09-14|09:00':{walk:'จากจุดลง DiDi ≈ 100–200 ม.',transit:'DiDi จากโรงแรม ≈ 10–15 นาที',metro:'ทางเลือก: 江宁路站 Line 13 แล้วเดินราว 700–900 ม.',price:'ค่าเข้าโดยประมาณ ¥20'},
+ '2026-09-14|11:00':{walk:'Jing’an Temple Exit 1 → วัด ≈ 60–80 ม.',metro:'静安寺站 Line 2/7/14 • Exit 1',transit:'จาก玉佛禅寺 แนะนำ DiDi ≈ 10–15 นาที',price:'ค่าเข้าโดยประมาณ ¥50'},
+ '2026-09-14|12:30':{walk:'เลือกร้านภายใน/ใกล้ห้าง ≈ 100–400 ม.',foodPrice:'¥50–100/คน'},
+ '2026-09-14|14:00':{walk:'เดินช้อปตามช่วงที่เลือก ≈ 1–2 กม. ตลอดบ่าย',metro:'南京西路站 Line 2/12/13 • เลือก Exit ตามห้างที่ต้องการ'},
+ '2026-09-14|15:00':{walk:'จาก 南京西路站 ประมาณ 350–500 ม.',metro:'南京西路站 Line 2/12/13 • Exit 11 ใกล้โซนโรงคั่ว',foodPrice:'เครื่องดื่ม/ขนม ¥35–70/คน'},
+ '2026-09-14|16:30':{walk:'จาก People’s Square ประมาณ 200–400 ม.',metro:'人民广场站 Line 1/2/8 • ใช้ Exit ฝั่ง南京西路แล้วเช็ก AMap',foodPrice:'ของฝากประมาณ ¥30–120+'},
+ '2026-09-14|19:30':{walk:'เดินถนนอาหารประมาณ 500–900 ม.',metro:'人民广场站 ใกล้ Huanghe Road; เช็ก Exit ใน AMap ตามจุดเริ่ม',foodPrice:'ของกินเล่น ¥20–50/คน'},
+
+ '2026-09-15|08:15':{walk:'DiDi ส่งใกล้ทางเข้า; เดินประมาณ 100–300 ม.',transit:'DiDi โรงแรม → 豫园 ≈ 20–30 นาที',metro:'ทางเลือก: 豫园站 Line 14 Exit 7 หรือ Line 10 Exit 1'},
+ '2026-09-15|09:00':{walk:'จาก Metro Exit 7/1 → ประตูสวนประมาณ 500–700 ม.',metro:'豫园站 • Line 14 Exit 7 / Line 10 Exit 1',price:'ค่าเข้าเดือน ก.ย. โดยประมาณ ¥40'},
+ '2026-09-15|10:30':{walk:'Yu Garden → Bazaar/城隍庙 รวมประมาณ 400–800 ม.',transit:'เดินในย่านเดียวกัน'},
+ '2026-09-15|11:30':{walk:'อยู่ในโซน 豫园商城 ≈ 100–300 ม.',foodPrice:'ประมาณ ¥50–90/คน'},
+ '2026-09-15|13:15':{walk:'People’s Square Exit 1 → จัตุรัส/พิพิธภัณฑ์ ≈ 50–150 ม.',metro:'人民广场站 Line 1/2/8 • Exit 1',transit:'จาก豫园 นั่ง Metro/DiDi ≈ 10–20 นาที'},
+ '2026-09-15|13:45':{walk:'ร้านแต่ละแห่งห่างโซน People’s Square ≈ 500 ม.–1 กม.',foodPrice:'大壶春 ¥25–40 • 莱莱小笼 ¥60–100 • 永丰面馆 ¥20–40/คน'},
+ '2026-09-15|15:15':{walk:'เดิน Nanjing Road ไปทาง Bund ประมาณ 1.3–1.8 กม. แบ่งพักได้',metro:'เริ่มได้จาก 人民广场站 หรือ 南京东路站'},
+ '2026-09-15|17:15':{walk:'南京东路站 Exit 7 → Bund ≈ 800 ม. / 10–12 นาที',metro:'南京东路站 Line 2/10 • Exit 7',transit:'ถ้าเดินมาจาก Nanjing Road อยู่ต่อเนื่องได้เลย'},
+ '2026-09-15|19:45':{walk:'ขึ้นกับจุดที่อยู่บน Nanjing Road ≈ 300–700 ม.',foodPrice:'ประมาณ ¥40–80/คน'},
+
+ '2026-09-16|06:30':{walk:'จากจุดลงรถถึงโถงสถานี ≈ 200–500 ม.',transit:'DiDi โรงแรม → 上海虹桥站 ≈ 30–45 นาที',price:'DiDi โดยประมาณ ¥70–110/คัน'},
+ '2026-09-16|07:30':{walk:'ภายในสถานีใหญ่ อาจเดิน 500 ม.–1 กม.',transit:'高铁 上海虹桥 → 杭州东',price:'รถไฟชั้น 2 โดยทั่วไปประมาณ ¥70–90/คน; เช็กราคาจริงใน 12306'},
+ '2026-09-16|09:15':{walk:'จากจุดลง DiDi ถึงริมทะเลสาบ ≈ 100–300 ม.',transit:'DiDi 杭州东站 → 西湖 ≈ 25–40 นาที'},
+ '2026-09-16|10:00':{walk:'เดินริมทะเลสาบช่วงสั้น ≈ 500–900 ม.',transit:'เดินจากโซน West Lake'},
+ '2026-09-16|11:00':{walk:'ไปท่าเรือ ≈ 200–500 ม. แล้วแต่ท่า',price:'เรือโดยประมาณ ¥50–70/คน; เลือกเส้นทางและเช็กราคาหน้างาน'},
+ '2026-09-16|12:15':{walk:'จากท่าเรือ/孤山 ≈ 200–500 ม.',foodPrice:'ประมาณ ¥120–220/คน'},
+ '2026-09-16|14:00':{walk:'เดินในหมู่บ้าน/ไร่ชา ≈ 500 ม.–1.5 กม. เลือกตามกำลัง',transit:'DiDi จาก West Lake ≈ 20–30 นาที',foodPrice:'ชิมชา/ขนม ¥30–80/คน'},
+ '2026-09-16|16:30':{walk:'ภายใน杭州东站 ≈ 300–700 ม.',transit:'DiDi 龙井村 → 杭州东站 ≈ 35–50 นาที'},
+ '2026-09-16|17:30':{walk:'ภายในสถานี ≈ 300–700 ม.',transit:'高铁 杭州东 → 上海虹桥'},
+ '2026-09-16|19:30':{walk:'น้อย',transit:'DiDi 上海虹桥站 → โรงแรม ≈ 30–45 นาที',foodPrice:'มื้อเบา ๆ/Delivery ¥30–60/คน'},
+
+ '2026-09-17|08:30':{walk:'จากโรงแรมถึงจุดขึ้นรถ ≈ 50–150 ม.',transit:'DiDi/Metro ไป North Suzhou Creek'},
+ '2026-09-17|09:00':{walk:'Postal Museum → Zhapu Road Bridge → Waibaidu Bridge ประมาณ 1.2–1.6 กม.',metro:'天潼路站 Line 10/12 เป็นสถานีใกล้โซน; เลือก Exit ตาม AMap'},
+ '2026-09-17|11:00':{walk:'พักระหว่าง City Walk',foodPrice:'กาแฟ ¥30–60/คน'},
+ '2026-09-17|12:00':{walk:'ขึ้นกับสาขา 味香斋 ≈ 300–700 ม.',foodPrice:'¥25–45/คน'},
+ '2026-09-17|13:30':{walk:'ไปท่าเรือ + หลังลงเรือรวม ≈ 500–900 ม.',transit:'金陵东路渡口 → 东昌路渡口',price:'เรือท้องถิ่นราคาต่ำมาก; เตรียม Alipay/WeChat และเช็กหน้างาน'},
+ '2026-09-17|14:00':{walk:'ท่าเรือ → Lujiazui ≈ 1–1.5 กม.; ถ้าเหนื่อยเรียก DiDi',metro:'陆家嘴站 Line 2/14'},
+ '2026-09-17|15:00':{walk:'陆家嘴站 Exit 6 → Shanghai Tower ≈ 500–800 ม. / 7–10 นาที',metro:'陆家嘴站 Line 2 Exit 6 หรือ Line 14 Exit 9A',price:'Observation Deck โดยประมาณ ¥180/คน'},
+ '2026-09-17|16:30':{walk:'IFC เชื่อมกับ Lujiazui; จาก Exit 6 ระยะสั้นมาก',metro:'陆家嘴站 • Exit 6',foodPrice:'กาแฟ/ของว่าง ¥30–70/คน'},
+ '2026-09-17|18:00':{walk:'ขึ้นกับสาขา 裕兴记',foodPrice:'บะหมี่ปูประมาณ ¥80–160/คน'},
+ '2026-09-17|19:30':{walk:'เดินริมน้ำตามกำลัง ≈ 500 ม.–1 กม.',transit:'กลับโรงแรมด้วย DiDi หรือ Line 2 ต่อ Line 1'},
+
+ '2026-09-18|08:30':{walk:'ใกล้โรงแรม',foodPrice:'¥10–25/คน'},
+ '2026-09-18|09:30':{walk:'ในโรงแรม',transit:'ฝากกระเป๋าที่โรงแรม'},
+ '2026-09-18|10:15':{walk:'เดินช้อปประมาณ 800 ม.–1.5 กม. ตามร้านที่เลือก',metro:'淮海中路站 Line 13 • Exit 1 เป็นจุดเริ่มสะดวก',transit:'จากโรงแรมแนะนำ DiDi ≈ 15–25 นาที'},
+ '2026-09-18|11:30':{walk:'Tianzifang: 打浦桥站 Exit 1 → ทางเข้า ≈ 150–250 ม.',metro:'田子坊: 打浦桥站 Line 9 • Exit 1 / Xintiandi: 新天地站 Exit 6'},
+ '2026-09-18|12:30':{walk:'เลือกร้านบนเส้นทาง ≈ 100–500 ม.',foodPrice:'沈大成 ¥30–60 • 小杨生煎 ¥25–45/คน'},
+ '2026-09-18|14:00':{walk:'ขึ้นกับร้าน/ห้างที่เลือก',foodPrice:'งบของฝากตามต้องการ ¥50–300+'},
+ '2026-09-18|15:30':{walk:'น้อย',transit:'DiDi กลับโรงแรม รับกระเป๋า'},
+ '2026-09-18|16:30':{walk:'สนามบินหลังลงรถ ≈ 300–700 ม. ถึงเคาน์เตอร์/ตม.',transit:'โรงแรม → PVG T2 เผื่อ 60–90 นาที',price:'DiDi/รถประมาณ ¥180–260/คัน ขึ้นกับรถและจราจร'},
+ '2026-09-18|20:50':{walk:'หลัง Security ไป Gate ตามที่บอร์ดแจ้ง',transit:'HO1351 PVG T2 → BKK'}
+};
+function metaFor(dayIndex,e){return EVENT_META[`${days[dayIndex].date}|${e.time}`]||{};}
+function eventKey(dayIndex,eventIndex,e){return `event:${days[dayIndex].date}|${e.time}|${e.cn||e.th}|${eventIndex}`;}
+function getSet(name){try{return new Set(JSON.parse(localStorage.getItem(name)||'[]'))}catch{return new Set()}}
+function saveSet(name,set){localStorage.setItem(name,JSON.stringify([...set]));}
+function isDone(k){return getSet('sh-done').has(k)}
+function isFav(k){return getSet('sh-favorites').has(k)}
+function toggleSet(name,k){const s=getSet(name);if(s.has(k))s.delete(k);else s.add(k);saveSet(name,s);return s.has(k)}
+function placeKey(p){return `place:${p.cn||p.th}`;}
+function favoriteCount(){return getSet('sh-favorites').size;}
+const defaultChecklist={
+ 'เอกสารและการเดินทาง':['Passport ตัวจริงทุกคน','ตั๋วเครื่องบิน / Booking reference','Booking โรงแรม','ประกันการเดินทาง','ข้อมูลรถรับสนามบิน','ตั๋วรถไฟ Hangzhou (เมื่อเปิดขาย)','สำเนาเอกสารเก็บในมือถือแบบล็อก'],
+ 'มือถือและการจ่ายเงิน':['ติดตั้ง Alipay และผูกบัตร','ติดตั้ง WeChat / Weixin','ติดตั้ง AMap (高德地图)','เตรียม DiDi / Ride-hailing','ติดตั้ง 12306 สำหรับรถไฟ','eSIM / Roaming ที่ใช้ในจีนได้','Power bank + สายชาร์จ','ดาวน์โหลดแอปนี้ให้เปิด Offline ได้'],
+ 'ของใช้และเสื้อผ้า':['รองเท้าเดินสบาย','ร่มพับ / เสื้อกันฝน','หมวก / กันแดด','ยาประจำตัว','ยาสามัญและพลาสเตอร์','ทิชชู่เปียก / เจลล้างมือ','ขวดน้ำเล็ก'],
+ 'ก่อนออกจากโรงแรมแต่ละวัน':['Passport (วัน Hangzhou)','โทรศัพท์ + Power bank','ตรวจพยากรณ์อากาศ','เช็ก AMap เส้นทางแรก','ถ่ายรูปเลขห้อง/นามบัตรโรงแรม','พกน้ำและยา']
+};
+
+let state={tab:'home',selectedDay:0,placeFilter:'all',placeQuery:''};
+const app=document.getElementById('app');
+const installDialog=document.getElementById('installDialog');
+const placeDialog=document.getElementById('placeDialog');
+const placeDialogBody=document.getElementById('placeDialogBody');
+
+function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function googleQuery(p){const city=(p.city||((p.cn||'').match(/杭州|西湖|龙井/)?'Hangzhou':'Shanghai'));return [p.en||p.th||p.cn,p.cn,p.addr,city,'China'].filter(Boolean).join(', ');}
+function googleMapsUrl(p){return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(googleQuery(p))}&utm_source=shanghai_family_trip&utm_campaign=place_details_search`;}
+function googleReviewsUrl(p){return googleMapsUrl(p);}
+const GOOGLE_DAY_STOPS=[
+ ['Yitel Collection Shanghai Train Station','Jialing Market Shanghai','Wuyuan Road Shanghai','Wulumuqi Middle Road Shanghai','Anfu Road Shanghai','Yanqing Road Shanghai','Wukang Mansion Shanghai','Xintiandi Shanghai'],
+ ['Yitel Collection Shanghai Train Station','Jade Buddha Temple Shanghai','Jing’an Temple Shanghai','Starbucks Reserve Roastery Shanghai','Huanghe Road Shanghai'],
+ ['Yu Garden Shanghai','People’s Square Shanghai','Nanjing Road Pedestrian Street Shanghai','The Bund Shanghai'],
+ ['Hangzhou East Railway Station','West Lake Hangzhou','Broken Bridge Hangzhou','Louwailou Hangzhou','Longjing Village Hangzhou'],
+ ['Shanghai Postal Museum','Waibaidu Bridge Shanghai','Jinling East Road Ferry Shanghai','Lujiazui Shanghai','Shanghai Tower','Shanghai IFC Mall'],
+ ['Yitel Collection Shanghai Train Station','Huaihai Road Shanghai','Tianzifang Shanghai','Yitel Collection Shanghai Train Station','Shanghai Pudong International Airport T2']
+];
+function googleDayEmbedUrl(i){const s=GOOGLE_DAY_STOPS[i]||[];if(s.length<2)return `https://maps.google.com/maps?q=${encodeURIComponent(s[0]||'Shanghai')}&output=embed`;const start=encodeURIComponent(s[0]);const dest=s.slice(1).map(x=>encodeURIComponent(x)).join('+to:');return `https://maps.google.com/maps?saddr=${start}&daddr=${dest}&t=m&output=embed`;}
+function googleDayOpenUrl(i){const s=GOOGLE_DAY_STOPS[i]||[];if(s.length<2)return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s[0]||'Shanghai')}`;const mids=s.slice(1,-1).slice(0,8).join('|');return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(s[0])}&destination=${encodeURIComponent(s[s.length-1])}${mids?`&waypoints=${encodeURIComponent(mids)}`:''}&utm_source=shanghai_family_trip&utm_campaign=directions_request`;}
+function googleMapCard(i){const stops=GOOGLE_DAY_STOPS[i]||[];return `<div class="google-map-card"><div class="map-head"><b>Google Maps · Day ${i+1}</b><span>${i===3?'Hangzhou':'Shanghai'}</span></div><div class="google-map-wrap"><iframe title="Google Maps Day ${i+1}" src="${googleDayEmbedUrl(i)}" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><div class="google-stop-list">${stops.map((x,n)=>`<span><b>${n+1}</b>${esc(x.replace(/ Shanghai| Hangzhou/g,''))}</span>`).join('')}</div><div class="actions"><a class="btn gmap" href="${googleDayOpenUrl(i)}" target="_blank" rel="noopener">🗺 เปิดเส้นทางรวมใน Google Maps</a></div><small>แผนที่โหลดจาก Google Maps แบบออนไลน์ ส่วนปุ่ม AMap ในแต่ละจุดยังคงไว้เป็นทางสำรองสำหรับใช้งานในจีน</small></div>`;}
+function googleWalkingUrl(origin,destination,waypoints=[]){return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}${waypoints.length?`&waypoints=${encodeURIComponent(waypoints.join('|'))}`:''}&travelmode=walking&utm_source=shanghai_family_trip&utm_campaign=city_walk`;}
+const CITY_WALK_DAY1=[
+ {n:1,time:'11:30',dist:'เริ่มต้น',th:'อาคารลิเบอร์ตี้',en:'Liberty Apartments',cn:'自由公寓',addr:'五原路258号',query:'Liberty Apartments Wuyuan Road 258 Shanghai',tags:['🏛 อาคารสวย','📸 จุดถ่ายรูป'],stay:'10–15 นาที',note:'Art Deco ยุคทศวรรษ 1930 • ถ่ายจากฝั่งตรงข้ามถนนให้เห็นแนวตั้งของอาคารและต้นไม้ • เป็นอาคารพักอาศัย จึงไม่ควรเข้าไปด้านใน',toilet:'—',seat:'—'},
+ {n:2,time:'11:45',dist:'≈ 200 ม.',th:'ตรอกบ้านเก่าบนถนนอู่หยวน',en:'Wuyuan Road Historic Lanes',cn:'五原路251弄 / 五原路205弄',addr:'五原路251弄',query:'五原路251弄 上海',tags:['🏘 บ้านเก่า','📸 Street photo'],stay:'10 นาที',note:'สังเกตหน้าต่าง กระเบื้องอิฐ ประตูตรอก และป้าย 建筑可阅读 • ถ่ายจากพื้นที่สาธารณะและหลีกเลี่ยงการรบกวนผู้อยู่อาศัย',toilet:'—',seat:'—'},
+ {n:3,time:'12:00',dist:'≈ 200–250 ม.',th:'ร้านดอกไม้วิลด์',en:'WILDE Flower Shop',cn:'WILDE王尔德',addr:'五原路208号',query:'WILDE王尔德 五原路208号 Shanghai',tags:['🌷 ร้านดอกไม้','☕ กาแฟ','📸 ถ่ายรูป'],stay:'15–20 นาที',note:'ร้านดอกไม้พร้อมบรรยากาศสวนเล็กและมุมถ่ายรูป • เป็นหนึ่งในจุด City Walk ที่ทางการเขต Xuhui เคยแนะนำ',toilet:'ไม่ยืนยัน — ใช้จุดถัดไปดีกว่า',seat:'มีพื้นที่ร้าน/สวนเล็ก แต่ขึ้นกับความหนาแน่น'},
+ {n:4,time:'12:20',dist:'≈ 180–250 ม.',th:'ห้องน้ำสาธารณะอูจง',en:'Wuzhong Public Restroom',cn:'乌中驿站公厕',addr:'五原路 × 乌鲁木齐中路',query:'乌中驿站公厕 上海',tags:['🚻 ห้องน้ำ','♿ จุดบริการ','🌿 มุมเมือง'],stay:'5–10 นาที',note:'จุดพักสำคัญที่สุดของช่วงแรก อยู่ตรงหัวมุม五原路–乌鲁木齐中路 และเป็นห้องน้ำสาธารณะที่ปรับปรุงใหม่ในย่าน衡复',toilet:'✅ ห้องน้ำสาธารณะ',seat:'ไม่ควรนับเป็นจุดนั่งพักยาว'},
+ {n:5,time:'12:30',dist:'≈ 200–300 ม.',th:'ตลาดอูจง',en:'Wuzhong Market',cn:'乌中市集',addr:'乌鲁木齐中路318号',query:'乌中市集 乌鲁木齐中路318号 Shanghai',tags:['🧺 Local market','📸 ชีวิตประจำวัน','🥤 น้ำ/ผลไม้'],stay:'10–15 นาที',note:'แวะดูตลาดชุมชนแบบสั้น ๆ เพื่อเห็นชีวิตประจำวันของย่าน • วันแรกเราไป Jialing Market มาแล้ว จึงไม่ต้องใช้เวลานาน',toilet:'ใช้ 乌中驿站公厕 ที่เพิ่งผ่านมา',seat:'จำกัด'},
+ {n:6,time:'12:50',dist:'≈ 300–400 ม.',th:'เบเกอร์ แอนด์ สไปซ์',en:'Baker & Spice',cn:'Baker & Spice 安福路店',addr:'安福路195号',query:'Baker & Spice 195 Anfu Road Shanghai',tags:['☕ กาแฟ','🥐 ขนม','🪑 นั่งพัก','🍽 มื้อเบา'],stay:'35–50 นาที',note:'จุดพักหลักของ City Walk — กาแฟและขนมประมาณ ¥35–80/คน; ถ้ากิน brunch เต็มมื้อเผื่อประมาณ ¥80–150/คน',toilet:'ห้องน้ำขึ้นกับบริการของร้าน — มีห้องน้ำสาธารณะสำรองที่ 安福路167号',seat:'✅ เหมาะเป็นจุดนั่งพัก'},
+ {n:7,time:'13:35',dist:'≈ 150–250 ม.',th:'จุดบริการชุมชนอันฝู 167',en:'Anfu Community Service Station',cn:'湖南街道安福居民区党群服务站',addr:'安福路167号',query:'安福路167号 上海',tags:['🚻 ห้องน้ำสำรอง','ℹ️ จุดบริการ'],stay:'5 นาที',note:'ใช้เป็นห้องน้ำสำรองก่อนออกจาก Anfu Road • เอกสารเขต Xuhui ระบุว่าห้องน้ำของจุดบริการนี้เปิดให้ประชาชนใช้',toilet:'✅ ห้องน้ำเปิดสู่สาธารณะตามข้อมูลเขต',seat:'อาจมีพื้นที่บริการ แต่ไม่ควรวางแผนเป็นคาเฟ่พักยาว'},
+ {n:8,time:'13:45',dist:'≈ 350–450 ม.',th:'อาคารสีเขียวถนนเหยียนชิ่ง',en:'Yanqing Road No. 2',cn:'延庆路2号',addr:'延庆路2号',query:'延庆路2号 Shanghai',tags:['🏛 อาคารสวย','📸 จุดถ่ายรูป','🌳 ถนนร่ม'],stay:'10 นาที',note:'อาคารอังกฤษสีเขียวมิ้นต์เป็นจุดจำง่ายของ Yanqing Road • ใช้ช่วงเดินเชื่อมจาก Anfu ผ่าน常熟路/长乐路เป็นจังหวะดู street life',toilet:'—',seat:'—'},
+ {n:9,time:'14:00',dist:'≈ 300–400 ม.',th:'เหยียนชิ่งเลน + ULT.',en:'Yanqing Lane + ULT.',cn:'延庆坊 / ULT.',addr:'延庆路122号 / 延庆路110弄',query:'延庆坊 Yanqing Lane Shanghai',tags:['☕ กาแฟ','🛍 ร้านใหม่','🪑 นั่งพัก','📸 Lifestyle'],stay:'20–35 นาที',note:'โครงการ lifestyle ที่เปิดใหม่และยังถูกอัปเดตในปี 2026 • ULT. อยู่ใน延庆路110弄 เหมาะพักขาหากไม่ต้องการเดินต่อรวดเดียว',toilet:'ตรวจในโครงการ/ร้าน ณ วันจริง',seat:'✅ มีคาเฟ่และพื้นที่นั่งตามร้าน'},
+ {n:10,time:'14:25',dist:'≈ 200–300 ม.',th:'บ้านสวนเก่าถนนเหยียนชิ่ง',en:'Yanqing Historic Villas',cn:'延庆路130号 / 延庆路151–157号',addr:'延庆路130号',query:'延庆路130号 Shanghai',tags:['🏛 สถาปัตยกรรม','📸 หน้าบ้านเก่า'],stay:'15 นาที',note:'เลข 130 มีรายละเอียดแบบ French classical/Baroque ส่วนช่วง 151–157 เป็นกลุ่มบ้านสวนเรียงกัน • ชมจากทางเท้าและเคารพความเป็นส่วนตัว',toilet:'—',seat:'—'}
+];
+const CITY_WALK_STREETS=[
+ {cn:'五原路',th:'ถนนอู่หยวน',img:'images/photo-037.jpg',focus:'เงียบ ร่ม และเน้นสถาปัตยกรรม',stops:'自由公寓 → 五原路历史弄堂 → WILDE王尔德'},
+ {cn:'乌鲁木齐中路',th:'อูหลู่มู่ฉีตอนกลาง',img:'images/photo-038.jpg',focus:'Local life + ตลาด + จุดห้องน้ำที่สำคัญ',stops:'乌中驿站公厕 → 乌中市集'},
+ {cn:'安福路',th:'ถนนอันฝู',img:'images/photo-039.jpg',focus:'คาเฟ่ ร้านแฟชั่น และจุดพักกลางทาง',stops:'Baker & Spice → 安福路167号公共服务点'},
+ {cn:'延庆路',th:'ถนนเหยียนชิ่ง',img:'images/photo-040.jpg',focus:'ถนนคดเคี้ยว อาคารสีสวย และ lifestyle ใหม่',stops:'延庆路2号 → 延庆坊 / ULT. → 延庆路130号 / 151–157号'}
+];
+function walkStopKey(s){return `walk:2026-09-13:${s.n}:${s.cn}`;}
+function renderCityWalkStop(s,idx){const prev=idx?CITY_WALK_DAY1[idx-1]:null;const k=walkStopKey(s),done=isDone(k),fav=isFav(k);const seg=prev?googleWalkingUrl(prev.query,s.query):googleMapsUrl({cn:s.cn,en:s.en,th:s.th,addr:s.addr,city:'Shanghai'});return `<details class="walk-detail ${done?'is-done':''}" ${idx<2?'open':''}><summary><span class="walk-num">${s.n}</span><span class="walk-summary"><b>${esc(s.th)}</b><small>${esc(s.cn)} · ${esc(s.dist)} · ${esc(s.stay)}</small></span><span class="walk-check">${done?'✓':'›'}</span></summary><div class="walk-detail-body"><div class="walk-tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div><div class="walk-address"><b>📍 ${esc(s.en)}</b><span>${esc(s.addr)}</span></div><p>${esc(s.note)}</p><div class="walk-amenities"><div><b>🚻 ห้องน้ำ</b><span>${esc(s.toilet)}</span></div><div><b>🪑 ที่นั่งพัก</b><span>${esc(s.seat)}</span></div></div><div class="actions"><button class="btn ${done?'done-btn':'primary'}" data-done="${esc(k)}">${done?'✓ ไปแล้ว':'○ ไปแล้ว'}</button><button class="btn ghost" data-favorite="${esc(k)}">${fav?'★ Favorite':'☆ Favorite'}</button><a class="btn gmap" href="${seg}" target="_blank" rel="noopener">${prev?'เดินจากจุดก่อนหน้า':'Google Maps'}</a><a class="btn primary" href="${amapUrl({cn:s.cn,city:'上海'})}" target="_blank" rel="noopener">AMap</a><button class="btn" data-copy="${esc(s.cn)}">Copy 中文</button></div></div></details>`;}
+function detailedDay1Walk(){const doneCount=CITY_WALK_DAY1.filter(s=>isDone(walkStopKey(s))).length;const all=googleWalkingUrl('自由公寓 五原路258号 Shanghai','延庆路151号 Shanghai',['WILDE王尔德 五原路208号 Shanghai','乌中驿站公厕 Shanghai','乌中市集 Shanghai','Baker & Spice 195 Anfu Road Shanghai','安福路167号 Shanghai','延庆路2号 Shanghai','延庆坊 Shanghai']);return `<div class="city-walk-guide"><div class="walk-guide-head"><div><span class="walk-kicker">DAY 1 · STEP-BY-STEP GUIDE</span><h3>French Concession City Walk แบบเดินตามจริง</h3><p>แบ่งเป็นช่วงสั้นประมาณ 150–450 ม. • รวมราว 2.5–3 กม. • ใช้ 2.5–3 ชม. เมื่อรวมถ่ายรูปและพักกาแฟ</p></div><div class="walk-progress"><b>${doneCount}/${CITY_WALK_DAY1.length}</b><small>จุดที่ไปแล้ว</small></div></div><div class="street-strip">${CITY_WALK_STREETS.map(x=>`<div class="street-card"><img src="${x.img}" alt="${esc(x.th)}" loading="lazy"><div><b>${esc(x.th)}</b><span>${esc(x.cn)}</span><small>${esc(x.focus)}</small><em>${esc(x.stops)}</em></div></div>`).join('')}</div><div class="toilet-alert"><b>🚻 ห้องน้ำที่วางใจได้บนเส้นทาง</b><span>① 乌中驿站公厕 ที่ 五原路×乌鲁木齐中路 · ② 安福路167号 จุดบริการชุมชน · ถ้าต่อไป武康大楼 ใช้ 武康路393号甲 Tourist Information Center ได้</span></div><div class="walk-details">${CITY_WALK_DAY1.map(renderCityWalkStop).join('')}</div><div class="walk-shortcuts"><b>👨‍👩‍👧‍👦 โหมดครอบครัว / ลดการเดิน</b><p>ถ้าร้อนหรือเริ่มเหนื่อย: หลัง Baker & Spice สามารถเรียก DiDi ไป <span class="cn-inline">延庆坊</span> แล้วเดินเฉพาะ Yanqing Road ช่วงท้าย หรือจบที่ Yanqing Lane แล้วเรียก DiDi ไป <span class="cn-inline">武康大楼</span> ได้เลย</p></div><div class="actions"><a class="btn gmap" href="${all}" target="_blank" rel="noopener">Google Maps · เปิดเส้นเดินรวม</a><a class="btn primary" href="${amapUrl({cn:'自由公寓',city:'上海'})}" target="_blank" rel="noopener">AMap · เริ่มที่ 自由公寓</a></div><small class="walk-source-note">ระยะเป็นค่าประมาณสำหรับแบ่งจังหวะเดิน ไม่ใช่ระยะนำทางแบบ turn-by-turn; ให้ AMap/Google Maps คำนวณซ้ำในวันจริง โดยเฉพาะเมื่อมีงานก่อสร้างหรือปิดทางเดิน</small></div>`;}
+function specialWalkCard(i){
+ if(i===0){ return detailedDay1Walk(); }
+ if(i===4){
+  const u=googleWalkingUrl('Kunshan Road Shanghai','Waibaidu Bridge Shanghai',['Zhapu Road Shanghai','Shanghai Postal Museum','Zhapu Road Bridge Shanghai']);
+  return `<div class="city-walk-card compact"><div class="walk-title"><div><span class="walk-kicker">OPTIONAL HISTORIC WALK</span><h3>Kunshan / Zhapu → Suzhou Creek</h3><p>昆山路 → 乍浦路 → 上海邮政博物馆 → 乍浦路桥 → 外白渡桥</p></div><span class="walk-distance">~2 km</span></div><div class="walk-tip">เหมาะกับ Day 5 และสอดคล้องกับ City Walk map ที่คุณส่งก่อนหน้า; ถ้าร้อนหรือเหนื่อยให้เริ่มตรง Postal Museum ได้เลย</div><div class="actions"><a class="btn gmap" href="${u}" target="_blank" rel="noopener">Google Maps · Walking Route</a></div></div>`;
+ }
+ return '';
+}
+function amapUrl(p){const key=p.cn||p.th;return `https://uri.amap.com/search?keyword=${encodeURIComponent(key)}&city=${encodeURIComponent(p.city||'上海')}&view=map&src=shanghai-family-trip&callnative=1`;}
+function copyText(text){navigator.clipboard?.writeText(text).then(()=>toast('คัดลอกแล้ว: '+text)).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('คัดลอกแล้ว: '+text);});}
+let toastTimer;function toast(msg){let el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.style.cssText='position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:99;background:#102d31;color:#fff;padding:10px 14px;border-radius:999px;font-size:12px;box-shadow:0 6px 20px rgba(0,0,0,.2);max-width:90vw;text-align:center';document.body.appendChild(el);}el.textContent=msg;el.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.style.display='none',1800);}
+function dateStatus(){const now=new Date();const start=new Date('2026-09-13T00:00:00+07:00');const end=new Date('2026-09-19T00:00:00+07:00');if(now<start){const d=Math.ceil((start-now)/86400000);return {label:`อีก ${d} วัน`,sub:'ก่อนออกเดินทาง',day:0};}if(now>=end)return {label:'ทริปจบแล้ว',sub:'ข้อมูลยังเปิดดูย้อนหลังได้',day:5};const bkkDate=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);let idx=days.findIndex(d=>d.date===bkkDate);if(idx<0)idx=0;return {label:`Day ${idx+1}`,sub:days[idx].short,day:idx};}
+function iconFor(type){return {food:'🍜',market:'🧺',sight:'📍',walk:'🚶',temple:'🪷',shopping:'🛍️',cafe:'☕',museum:'🏛️',transport:'🚕',train:'🚄',flight:'✈️',hotel:'🏨',rest:'🛏️'}[type]||'•';}
+function eventCard(e,dayIndex,eventIndex){const ph=eventPhoto(e);const srcLabel=photoSource(e);const m=metaFor(dayIndex,e);const k=eventKey(dayIndex,eventIndex,e);const done=isDone(k),fav=isFav(k);const city=e.cn?.match(/杭州|西湖|龙井/)?'杭州':'上海';const gp={cn:e.cn,en:e.en,th:e.th,city};const info=[m.metro?`<div class="travel-chip"><b>🚇 Metro / Exit</b><span>${esc(m.metro)}</span></div>`:'',m.walk?`<div class="travel-chip"><b>🚶 ระยะเดิน</b><span>${esc(m.walk)}</span></div>`:'',m.transit?`<div class="travel-chip"><b>↔️ การเดินทาง</b><span>${esc(m.transit)}</span></div>`:'',m.price?`<div class="travel-chip"><b>🎟️ ราคา/ค่าเดินทาง</b><span>${esc(m.price)}</span></div>`:'',m.foodPrice?`<div class="travel-chip food-price"><b>💴 ราคาอาหาร</b><span>${esc(m.foodPrice)}</span></div>`:''].join('');return `<div class="timeline-item ${done?'timeline-done':''}"><div class="time">${esc(e.time)} · ${iconFor(e.type)} ${done?'· ✓ ไปแล้ว':''}</div><div class="card event-card">${ph?`<img class="event-photo" src="${ph}" alt="${esc(e.th)}" loading="lazy">${srcLabel?`<div class="real-photo-badge">📷 ${esc(srcLabel)}</div>`:''}`:''}<div class="event-head"><div><h3>${esc(e.th)}</h3><div class="cn">${esc(e.cn)}</div></div><button class="fav-btn ${fav?'active':''}" data-favorite="${esc(k)}" aria-label="Favorite">${fav?'★':'☆'}</button></div>${e.en?`<p>${esc(e.en)}</p>`:''}${e.meal?`<p><b>🍽 ${esc(e.meal)}</b></p>`:''}${info?`<div class="travel-grid">${info}</div>`:''}${e.route?`<div class="route">🚦 ${esc(e.route)}</div>`:''}<div class="actions"><button class="btn ${done?'done-btn':'primary'}" data-done="${esc(k)}">${done?'✓ ไปแล้ว':'○ ไปแล้ว'}</button><button class="btn" data-copy="${esc(e.cn)}">复制 Copy 中文</button><a class="btn primary" href="${amapUrl({cn:e.cn,city})}" target="_blank" rel="noopener">AMap</a><a class="btn gmap" href="${googleMapsUrl(gp)}" target="_blank" rel="noopener">Google Maps</a><a class="btn ghost" href="${googleReviewsUrl(gp)}" target="_blank" rel="noopener">📷 รูป/รีวิว Google</a><button class="btn ghost" data-copy="${esc(e.cn)}">Copy สำหรับ DiDi</button></div></div></div>`;}
+function renderHome(){const s=dateStatus();const d=days[s.day];const total=getExpenses().reduce((a,x)=>a+Number(x.amount||0),0);const done=getSet('sh-done');const todayDone=d.events.filter((e,i)=>done.has(eventKey(s.day,i,e))).length;return `<section class="hero"><img src="${d.hero}" alt="Shanghai"><div class="hero-overlay"><span class="pill">${esc(s.label)} · ${esc(s.sub)}</span><h2>${esc(d.title)}</h2><p>${esc(d.theme)}</p></div></section><div class="grid3"><div class="stat"><b>${todayDone}/${d.events.length}</b><small>ไปแล้ววันนี้</small></div><div class="stat"><b>★ ${favoriteCount()}</b><small>Favorites</small></div><div class="stat"><b>¥${total.toFixed(0)}</b><small>ค่าใช้จ่าย</small></div></div><div class="notice">📌 หน้า Today แสดงเฉพาะโปรแกรมของวันที่ตรงกับทริป ณ วันนั้น ก่อนทริปจะแสดง Day 1 เป็นตัวอย่าง และหลังทริปจะแสดง Day 6</div><div class="section-title"><h2>Today</h2><span>${d.short} · ${d.events.length} รายการ</span></div>${googleMapCard(s.day)}${specialWalkCard(s.day)}<div class="timeline">${d.events.map((e,i)=>eventCard(e,s.day,i)).join('')}</div>`;}
+function renderPlan(){const d=days[state.selectedDay];return `<div class="day-selector">${days.map((x,i)=>`<button class="day-chip ${i===state.selectedDay?'active':''}" data-day="${i}"><b>Day ${i+1}</b><small>${x.short}</small></button>`).join('')}</div><section class="hero"><img src="${d.hero}" alt="${esc(d.title)}"><div class="hero-overlay"><span class="pill">Day ${state.selectedDay+1} · ${d.short}</span><h2>${esc(d.title)}</h2><p>${esc(d.theme)}</p></div></section><div class="section-title"><h2>แผนที่ภาพรวมวันนี้</h2><span>Google Maps</span></div>${googleMapCard(state.selectedDay)}${specialWalkCard(state.selectedDay)}<div class="section-title"><h2>Timeline</h2><span>Metro • Walk • ราคา</span></div><div class="timeline">${d.events.map((e,i)=>eventCard(e,state.selectedDay,i)).join('')}</div><div class="notice">⏱ ระยะเดิน เวลา ค่าโดยสาร และราคาอาหารเป็นค่าประมาณ • Google Maps ใช้ดูภาพรวม/รูป/รีวิวเมื่อออนไลน์; ในจีนควรเก็บ AMap เป็นแผนที่สำรองสำหรับนำทางจริง</div>`;}
+function renderPlaces(){const cats=[['all','ทั้งหมด'],['favorites','★ Favorites'],['sight','เที่ยว'],['food','อาหาร'],['market','ตลาด'],['temple','วัด'],['shopping','ช้อป'],['transport','เดินทาง']];const q=state.placeQuery.trim().toLowerCase();const favs=getSet('sh-favorites');const list=places.filter(p=>((state.placeFilter==='all')||(state.placeFilter==='favorites'&&favs.has(placeKey(p)))||p.cat===state.placeFilter)&&(!q||[p.th,p.en,p.cn,p.addr,p.note].join(' ').toLowerCase().includes(q)));return `<input id="placeSearch" class="search" placeholder="ค้นหา ไทย / English / 中文" value="${esc(state.placeQuery)}"><div class="filter-row">${cats.map(c=>`<button class="filter ${state.placeFilter===c[0]?'active':''}" data-filter="${c[0]}">${c[1]}</button>`).join('')}</div><div class="place-list">${list.map((p,i)=>placeCard(p,places.indexOf(p))).join('')}</div>${!list.length?'<div class="empty">ไม่พบสถานที่</div>':''}`;}
+function placeCard(p,i){const img=placeImage(p);const srcLabel=photoSource(p);const k=placeKey(p),fav=isFav(k);return `<article class="place-card"><div class="place-photo-wrap"><img src="${img}" alt="${esc(p.th)}">${srcLabel?`<span class="photo-pill">REAL PHOTO</span>`:''}</div><div class="place-body"><div class="event-head"><h3>${esc(p.th)}</h3><button class="fav-btn ${fav?'active':''}" data-favorite="${esc(k)}" aria-label="Favorite">${fav?'★':'☆'}</button></div><div class="cn">${esc(p.cn)}</div><p>${esc(p.en||'')}</p><p>${esc(p.note||p.addr||'')}</p><div class="actions"><button class="btn" data-place="${i}">รายละเอียด</button><a class="btn gmap" href="${googleMapsUrl(p)}" target="_blank" rel="noopener">Google</a><button class="btn ghost" data-copy="${esc(p.cn)}">Copy 中文</button></div></div></article>`;}
+function showPlace(i){const p=places[i];if(!p)return;const img=placeImage(p);const srcLabel=photoSource(p);placeDialogBody.innerHTML=`<img src="${img}" alt="${esc(p.th)}">${srcLabel?`<div class="real-photo-badge">📷 ${esc(srcLabel)}</div>`:''}<span class="tag">${esc(p.city)}</span><span class="tag">${esc(p.cat)}</span><h2>${esc(p.th)}</h2><div class="cn" style="font-size:22px">${esc(p.cn)}</div><p>${esc(p.en||'')}</p>${p.addr?`<p><b>ที่อยู่:</b> ${esc(p.addr)}</p>`:''}${p.coord?`<p><b>พิกัด:</b> ${esc(p.coord)}</p>`:''}<p>${esc(p.note||'')}</p><div class="actions"><button class="btn" data-copy="${esc(p.cn)}">Copy 中文</button>${p.addr?`<button class="btn ghost" data-copy="${esc(p.addr)}">Copy 地址</button>`:''}<a class="btn primary" href="${amapUrl(p)}" target="_blank" rel="noopener">AMap</a><a class="btn gmap" href="${googleMapsUrl(p)}" target="_blank" rel="noopener">Google Maps</a><a class="btn ghost" href="${googleReviewsUrl(p)}" target="_blank" rel="noopener">📷 รูป/รีวิว Google</a></div>`;placeDialog.showModal();}
+function getChecklistState(){try{return JSON.parse(localStorage.getItem('sh-checklist')||'{}')}catch{return {}}}
+function renderChecklist(){const st=getChecklistState();let n=0,done=0;Object.values(defaultChecklist).flat().forEach((_,idx)=>{});const groups=Object.entries(defaultChecklist).map(([g,items],gi)=>{return `<div class="check-group"><h3>${esc(g)}</h3>${items.map((item,ii)=>{const key=`${gi}-${ii}`;n++;if(st[key])done++;return `<label class="check-item ${st[key]?'done':''}"><input type="checkbox" data-check="${key}" ${st[key]?'checked':''}><span>${esc(item)}</span></label>`;}).join('')}</div>`;}).join('');return `<div class="section-title"><h2>Checklist</h2><span>${done}/${n} รายการ</span></div><div class="card"><div class="money">${Math.round(done/n*100)||0}%</div><p>เตรียมพร้อมแล้ว</p></div>${groups}<button class="btn warn" id="resetChecklist">ล้างเครื่องหมายทั้งหมด</button>`;}
+function getExpenses(){try{return JSON.parse(localStorage.getItem('sh-expenses')||'[]')}catch{return []}}
+function saveExpenses(a){localStorage.setItem('sh-expenses',JSON.stringify(a));}
+function expenseBalances(expenses){const bal=Object.fromEntries(MEMBERS.map(m=>[m,0]));expenses.forEach(e=>{const amt=Number(e.amount)||0;const split=(e.split&&e.split.length?e.split:MEMBERS);bal[e.payer]=(bal[e.payer]||0)+amt;const share=amt/split.length;split.forEach(m=>bal[m]=(bal[m]||0)-share);});return bal;}
+function settlements(expenses){const b=expenseBalances(expenses);let debt=Object.entries(b).filter(([,v])=>v<-.01).map(([m,v])=>[m,-v]);let cred=Object.entries(b).filter(([,v])=>v>.01).map(([m,v])=>[m,v]);const out=[];let i=0,j=0;while(i<debt.length&&j<cred.length){const x=Math.min(debt[i][1],cred[j][1]);out.push(`${debt[i][0]} → ${cred[j][0]} ¥${x.toFixed(2)}`);debt[i][1]-=x;cred[j][1]-=x;if(debt[i][1]<.01)i++;if(cred[j][1]<.01)j++;}return out;}
+function renderBudget(){const ex=getExpenses();const total=ex.reduce((a,x)=>a+Number(x.amount||0),0);const settle=settlements(ex);return `<div class="budget-summary"><div class="card"><div class="money">¥${total.toFixed(2)}</div><p>ใช้ทั้งหมด</p></div><div class="card"><div class="money">${ex.length}</div><p>รายการ</p></div></div><div class="card"><h3>+ เพิ่มค่าใช้จ่าย</h3><form id="expenseForm" class="form-grid"><input class="input full" name="title" placeholder="เช่น มื้อเย็น 大壶春" required><input class="input" name="amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="CNY" required><select class="input" name="payer">${MEMBERS.map(m=>`<option>${m}</option>`).join('')}</select><select class="input" name="category"><option>อาหาร</option><option>เดินทาง</option><option>ตั๋ว</option><option>ช้อปปิ้ง</option><option>อื่น ๆ</option></select><select class="input" name="date">${days.map(d=>`<option value="${d.date}">${d.short}</option>`).join('')}</select><div class="full"><small>หารกับ:</small><div class="actions">${MEMBERS.map(m=>`<label class="btn ghost"><input type="checkbox" name="split" value="${m}" checked> ${m}</label>`).join('')}</div></div><button class="btn primary full" type="submit">บันทึก</button></form></div><div class="card"><h3>สรุปว่าใครคืนใคร</h3>${settle.length?settle.map(x=>`<p>💸 ${esc(x)}</p>`).join(''):'<p>ยังไม่มีข้อมูลเพียงพอ</p>'}</div><div class="card"><h3>รายการล่าสุด</h3>${ex.length?ex.slice().reverse().map((e,ri)=>{const idx=ex.length-1-ri;return `<div class="expense-row"><div><b>${esc(e.title)}</b><small>${esc(e.date)} · ${esc(e.category)} · ${esc(e.payer)} จ่าย · หาร ${esc((e.split||[]).join(', '))}</small></div><div><b>¥${Number(e.amount).toFixed(2)}</b><button class="btn warn" data-del-expense="${idx}">ลบ</button></div></div>`;}).join(''):'<div class="empty">ยังไม่มีค่าใช้จ่าย</div>'}</div>`;}
+function renderTrip(){return `<div class="section-title"><h2>Trip Info</h2><span>ข้อมูลสำคัญ</span></div><div class="card"><h3>✈️ เที่ยวบินไป</h3><p><b>13 Sep 2026</b> · BKK 01:25 → PVG T2 06:45</p><p>Juneyao Airlines <b>HO1352</b> · Economy</p></div><div class="card"><h3>✈️ เที่ยวบินกลับ</h3><p><b>18 Sep 2026</b> · PVG T2 20:50 → BKK 00:25 (+1)</p><p>Juneyao Airlines <b>HO1351</b> · Economy</p></div><div class="card"><h3>🏨 โรงแรม</h3><p><b>Yitel Collection (Shanghai Train Station)</b></p><div class="cn">和颐至尚酒店(上海火车站南广场店)</div><p>上海市静安区天目西路511号</p><p>☎ +86-21-52711555-0</p><div class="actions"><button class="btn" data-copy="和颐至尚酒店(上海火车站南广场店)">Copy ชื่อจีน</button><button class="btn ghost" data-copy="上海市静安区天目西路511号">Copy ที่อยู่จีน</button><a class="btn primary" href="${amapUrl({cn:'和颐至尚酒店(上海火车站南广场店)',city:'上海'})}" target="_blank">AMap</a></div></div><div class="card"><h3>👨‍👩‍👧‍👦 สมาชิก</h3><p>${MEMBERS.join(' · ')}</p><p class="muted">ไม่ได้เก็บเลข Passport หรือวันเกิดไว้ใน PWA เพื่อความปลอดภัย</p></div><div class="card"><h3>💾 Backup ข้อมูลในแอป</h3><p>Checklist, Expense, Favorites และสถานะ “ไปแล้ว” เก็บในเครื่องด้วย localStorage ควร Export สำรองเป็นครั้งคราว</p><div class="actions"><button class="btn primary" id="exportData">Export JSON</button><label class="btn ghost">Import JSON<input id="importData" type="file" accept="application/json" hidden></label></div></div><div class="card"><h3>📷 รูปจริงและเครดิต</h3><p class="photo-credit">รูปสถานที่หลักในแอปเป็นภาพถ่ายจริงจาก Wikimedia Commons, AMap และเว็บไซต์ท่องเที่ยว/ร้านอาหารที่ระบุบนการ์ด ไม่ใช่ภาพ AI ส่วนรูปจาก Google Reviews ไม่ถูกคัดลอกมาเก็บในแอป — ใช้ปุ่ม “รูป/รีวิว Google” เพื่อเปิดข้อมูลสดจาก Google Maps</p></div><div class="notice">⚠️ เวลาเปิด ร้านอาหาร เส้นทางรถไฟ และราคาอาจเปลี่ยนแปลง ควรเช็ก AMap / 12306 / เว็บไซต์ทางการใกล้วันใช้งานจริง</div>`;}
+function renderTripWithFamily(){return `<section class="family-cover"><div class="family-cover-photo"><img src="images/family-trip-cover.jpg" alt="ภาพครอบครัว Shanghai Family Trip" loading="eager"></div><div class="family-cover-copy"><span class="family-cover-kicker">OUR FAMILY JOURNEY · 2026</span><h2>Shanghai Family Trip</h2><p>ความทรงจำดี ๆ ของพวกเรา · 13–18 กันยายน 2026</p><div class="family-cover-members">${MEMBERS.map(m=>`<span>${m}</span>`).join('')}</div></div></section>${renderTrip()}`;}
+function render(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));app.innerHTML=({home:renderHome,plan:renderPlan,places:renderPlaces,checklist:renderChecklist,budget:renderBudget,trip:renderTripWithFamily}[state.tab]||renderHome)();attachDynamic();window.scrollTo({top:0,behavior:'instant'});}
+function attachDynamic(){app.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copyText(b.dataset.copy)));app.querySelectorAll('[data-done]').forEach(b=>b.addEventListener('click',()=>{const yes=toggleSet('sh-done',b.dataset.done);toast(yes?'บันทึกว่าไปแล้ว ✓':'ยกเลิกสถานะไปแล้ว');render();}));app.querySelectorAll('[data-favorite]').forEach(b=>b.addEventListener('click',()=>{const yes=toggleSet('sh-favorites',b.dataset.favorite);toast(yes?'เพิ่มใน Favorites ★':'นำออกจาก Favorites');render();}));app.querySelectorAll('[data-go-tab]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.goTab;render();}));app.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>{state.selectedDay=Number(b.dataset.day);render();}));app.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{state.placeFilter=b.dataset.filter;render();}));app.querySelectorAll('[data-place]').forEach(b=>b.addEventListener('click',()=>showPlace(Number(b.dataset.place))));const ps=document.getElementById('placeSearch');if(ps)ps.addEventListener('input',e=>{state.placeQuery=e.target.value;const pos=e.target.selectionStart;app.innerHTML=renderPlaces();attachDynamic();const n=document.getElementById('placeSearch');n.focus();n.setSelectionRange(pos,pos);});app.querySelectorAll('[data-check]').forEach(c=>c.addEventListener('change',()=>{const st=getChecklistState();st[c.dataset.check]=c.checked;localStorage.setItem('sh-checklist',JSON.stringify(st));render();}));document.getElementById('resetChecklist')?.addEventListener('click',()=>{if(confirm('ล้าง Checklist ทั้งหมด?')){localStorage.removeItem('sh-checklist');render();}});document.getElementById('expenseForm')?.addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(e.target);const split=fd.getAll('split');if(!split.length){toast('เลือกอย่างน้อย 1 คนสำหรับหารค่าใช้จ่าย');return;}const ex=getExpenses();ex.push({title:fd.get('title'),amount:Number(fd.get('amount')),payer:fd.get('payer'),category:fd.get('category'),date:fd.get('date'),split});saveExpenses(ex);render();toast('บันทึกค่าใช้จ่ายแล้ว');});app.querySelectorAll('[data-del-expense]').forEach(b=>b.addEventListener('click',()=>{const ex=getExpenses();ex.splice(Number(b.dataset.delExpense),1);saveExpenses(ex);render();}));document.getElementById('exportData')?.addEventListener('click',exportData);document.getElementById('importData')?.addEventListener('change',importData);}
+function exportData(){const data={version:2,exportedAt:new Date().toISOString(),checklist:getChecklistState(),expenses:getExpenses(),done:[...getSet('sh-done')],favorites:[...getSet('sh-favorites')]};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shanghai-trip-backup.json';a.click();URL.revokeObjectURL(a.href);}
+function importData(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.checklist)localStorage.setItem('sh-checklist',JSON.stringify(d.checklist));if(d.expenses)saveExpenses(d.expenses);if(d.done)localStorage.setItem('sh-done',JSON.stringify(d.done));if(d.favorites)localStorage.setItem('sh-favorites',JSON.stringify(d.favorites));toast('Import สำเร็จ');render();}catch{alert('ไฟล์ไม่ถูกต้อง');}};r.readAsText(f);}
+
+
+/* ===== v1.6: Master Map + per-day geo maps + optional ideas + Day 1 chronology fix ===== */
+state.ideaDay=state.ideaDay??0;
+state.mapCity=state.mapCity||'上海';
+
+// Fix Day 1 chronology: arrival → hotel → market → city walk → Wukang cluster → Xintiandi → rest → dinner.
+days[0].title='Arrival + Local Market + French Concession City Walk';
+days[0].theme='PVG → โรงแรม → 嘉陵菜市场 → 五原路/安福路 → 武康路 → 新天地';
+days[0].events=[
+ {time:'06:45',th:'ถึงสนามบินผู่ตง T2',en:'Shanghai Pudong Airport T2',cn:'上海浦东国际机场T2',type:'transport',route:'ผ่าน ตม. / รับกระเป๋า → พบรถรับสนามบินที่จองไว้'},
+ {time:'08:30',th:'ถึงโรงแรม ฝากกระเป๋า + พักสั้น ๆ',en:'Yitel Collection Shanghai Train Station',cn:'和颐至尚酒店(上海火车站南广场店)',type:'rest',route:'รถรับสนามบิน → 天目西路511号 • ฝากกระเป๋า ล้างหน้า เข้าห้องน้ำ และพักก่อนเริ่มเที่ยว'},
+ {time:'09:30',th:'ตลาดสดเจียหลิง',en:'Jialing Market',cn:'嘉陵菜市场',type:'market',img:PHOTO.jialing,meal:'อาหารเช้า/สาย: 豆浆 • 油条 • 粢饭团 • 生煎包',route:'DiDi จากโรงแรม • เดินตลาดแบบสั้น ๆ ประมาณ 60–75 นาที'},
+ {time:'11:30',th:'French Concession City Walk — เริ่มที่ถนนอู่หยวน',en:'Wuyuan → Wulumuqi → Anfu → Yanqing',cn:'五原路 → 乌鲁木齐中路 → 安福路 → 延庆路',type:'walk',route:'DiDi จาก嘉陵菜市场ไป五原路258号 แล้วใช้ Step-by-Step Guide ที่แทรกอยู่ใต้กิจกรรมนี้'},
+ {time:'15:45',th:'Wukang Road Shopping & Photo Cluster',en:'Wukang Road + Wukang Mansion',cn:'武康路 / 武康大楼',type:'shopping',img:PHOTO.wukang,route:'LOOKNOW武康路旗舰店 → 武康大楼 → TEENIE WEENIE武康路概念店 • หากเหนื่อยให้นั่ง DiDi จาก延庆坊มาจุดนี้'},
+ {time:'17:15',th:'ซินเทียนตี้',en:'Xintiandi',cn:'新天地',type:'sight',img:PHOTO.xintiandi,route:'DiDi จาก武康大楼 • เดิน Shikumen / ร้านค้า / ของหวานประมาณ 60 นาที'},
+ {time:'18:30',th:'กลับโรงแรมพัก',en:'Hotel break',cn:'和颐至尚酒店(上海火车站南广场店)',type:'rest',route:'พัก 1–1.5 ชม. ก่อนมื้อเย็น'},
+ {time:'20:00',th:'มื้อเย็นอาหารเซี่ยงไฮ้',en:'Shanghai dinner — Ren He Guan',cn:'人和馆',type:'food',img:PHOTO.localfood,meal:'本帮红烧肉 • 糖醋小排 • 八宝饭',route:'เลือกสาขาที่เหมาะกับตำแหน่งจริงใน AMap วันนั้น'}
+];
+Object.assign(EVENT_META,{
+ '2026-09-13|06:45':{walk:'ในสนามบินและจุดรับรถประมาณ 100–300 ม.',transit:'รถรับสนามบินที่จองไว้ → โรงแรม',price:'รถรับชำระไว้แล้ว'},
+ '2026-09-13|08:30':{walk:'จากจุดลงรถเข้าโรงแรมระยะสั้น',transit:'PVG → โรงแรมโดยรถประมาณ 45–70 นาทีตามจราจร'},
+ '2026-09-13|09:30':{walk:'ในตลาดและโซนของกินประมาณ 400–700 ม.',transit:'DiDi จากโรงแรมประมาณ 20–30 นาที',foodPrice:'¥15–35/คน'},
+ '2026-09-13|11:30':{walk:'City Walk ประมาณ 2.8–3.5 กม. แบ่งช่วง 150–500 ม.',transit:'DiDi 嘉陵菜市场 → 五原路258号 ประมาณ 20–30 นาที',foodPrice:'คาเฟ่/ขนมระหว่างทางประมาณ ¥35–100/คน'},
+ '2026-09-13|15:45':{walk:'LOOKNOW → 武康大楼 → TEENIE WEENIE ราว 500–800 ม. รวมแวะร้าน',transit:'แนะนำ DiDi จาก延庆坊มา武康路 เพื่อประหยัดแรง'},
+ '2026-09-13|17:15':{walk:'ใน Xintiandi ประมาณ 500–900 ม.',transit:'DiDi จาก武康大楼ประมาณ 15–25 นาที'},
+ '2026-09-13|18:30':{transit:'DiDi กลับโรงแรม'},
+ '2026-09-13|20:00':{foodPrice:'ประมาณ ¥100–220/คน ขึ้นกับเมนู/สาขา',transit:'DiDi จากโรงแรมหรือเลือกร้านสาขาใกล้ที่สุด'}
+});
+
+// Correct/add places requested by user.
+const wei=places.find(p=>p.cn==='味香斋'); if(wei){wei.addr='雁荡路14号';wei.note='麻酱面 / 麻酱馄饨 • ใช้เป็นตัวเลือกย่าน Huaihai/Sinan';}
+[
+ {th:'ลุคนาว แอนด์ โฟลว์',en:'LOOKNOW&FLOW',cn:'LOOKNOW&FLOW',cat:'shopping',city:'上海',addr:'安福路168号',note:'แฟชั่น/ไลฟ์สไตล์บน Anfu Road'},
+ {th:'วิกเกิล วิกเกิล เซี่ยงไฮ้',en:'Wiggle Wiggle Shanghai Flagship',cn:'wiggle wiggle上海旗舰店',cat:'shopping',city:'上海',addr:'安福路308号',note:'ร้านสีสันสด เหมาะแวะระหว่าง City Walk'},
+ {th:'ลุคนาว สาขาอู่คัง',en:'LOOKNOW Wukang Flagship',cn:'LOOKNOW武康路旗舰店',cat:'shopping',city:'上海',addr:'武康路286号',note:'ร้านแฟชั่นบน Wukang Road'},
+ {th:'ทีนี่ วีนี่ อู่คัง',en:'TEENIE WEENIE Wukang Concept Store',cn:'TEENIE WEENIE武康路概念店',cat:'shopping',city:'上海',addr:'淮海中路1946号',note:'อยู่ใกล้ Wukang Mansion'},
+ {th:'หู่ซีเหล่า弄堂เมี่ยนก่วน',en:'Huxi Old Alley Noodle House',cn:'沪西老弄堂面馆',cat:'food',city:'上海',note:'เมนูที่อยากลอง: 猪肝面 / 蛤蜊猪肝面 • เช็กสาขาใกล้ Jing’an ใน AMap'},
+ {th:'ซูไช่จี้เซิงเจียน',en:'Shu Cai Ji Shengjian',cn:'舒蔡记生煎菜饭',cat:'food',city:'上海',addr:'浙江中路120号',note:'特色生煎 / 菜饭 • ตัวเลือก Food Walk Day 3'},
+ {th:'อาเหนียงเมี่ยนก่วน',en:'A Niang Noodle House',cn:'阿娘面馆',cat:'food',city:'上海',addr:'思南路36号',note:'蟹粉面 / 黄鱼面 • เหมาะจับคู่ Sinan Mansions'},
+ {th:'พิพิธภัณฑ์เซี่ยงไฮ้',en:'Shanghai Museum — People’s Square',cn:'上海博物馆(人民广场馆)',cat:'sight',city:'上海',note:'ตัวเลือกวัน 3 ถ้าต้องการพิพิธภัณฑ์'},
+ {th:'ซือหนานแมนชั่นส์',en:'Sinan Mansions',cn:'思南公馆',cat:'sight',city:'上海',note:'สถาปัตยกรรม/คาเฟ่ ใกล้ Huaihai/Xintiandi'},
+ {th:'พิพิธภัณฑ์ธรรมชาติเซี่ยงไฮ้',en:'Shanghai Natural History Museum',cn:'上海自然博物馆',cat:'sight',city:'上海',note:'ตัวเลือก Day 2 ใช้เวลา 2–3 ชม.'},
+ {th:'เดอะหลุยส์',en:'The Louis',cn:'路易号',cat:'shopping',city:'上海',addr:'南京西路789号',note:'Louis Vuitton ship-shaped landmark / exhibition / retail'},
+ {th:'เทียนอัน 1,000 Trees',en:'1000 Trees',cn:'天安千树',cat:'shopping',city:'上海',note:'ห้าง/สถาปัตยกรรมริม Suzhou Creek'},
+ {th:'พิพิธภัณฑ์ศิลปะผู่ตง',en:'Museum of Art Pudong',cn:'浦东美术馆',cat:'sight',city:'上海',note:'ตัวเลือก Day 5 ที่ Lujiazui'},
+ {th:'นอร์ทบันด์กรีนแลนด์',en:'North Bund Greenland',cn:'北外滩滨江绿地',cat:'sight',city:'上海',note:'วิว skyline + ทางเดินริมน้ำ'},
+ {th:'ซูเปอร์แบรนด์มอลล์',en:'Super Brand Mall',cn:'正大广场',cat:'shopping',city:'上海',note:'ห้างใน Lujiazui'},
+ {th:'เมืองโบราณจูเจียเจี่ยว',en:'Zhujiajiao Ancient Town',cn:'朱家角古镇',cat:'sight',city:'上海',note:'Half/Full-day swap — ไม่อยู่ในโปรแกรมหลัก'},
+ {th:'เมืองซูโจว',en:'Suzhou',cn:'苏州',cat:'sight',city:'苏州',note:'Full-day swap — ไม่อยู่ในโปรแกรมหลัก'},
+ {th:'เมืองเทมส์',en:'Thames Town',cn:'泰晤士小镇',cat:'sight',city:'上海',note:'Half-day swap — อยู่ไกลจากใจกลางเมือง'},
+ {th:'ท็อปทอย โกลบอลแฟลกชิป',en:'TOP TOY Shanghai Global Flagship',cn:'TOP TOY上海全球旗舰店',cat:'shopping',city:'上海',addr:'南京东路558号',note:'Global Flagship บน Nanjing Road'},
+ {th:'มินิโซแลนด์ โกลบอลแฟลกชิป',en:'MINISO LAND Shanghai',cn:'名创优品IP乐园(全球壹号店)',cat:'shopping',city:'上海',addr:'南京东路479号U479商场',note:'IP flagship บน Nanjing East Road'},
+ {th:'มินิโซ เซี่ยงไฮ้แฟลกชิป',en:'MINISO Shanghai Flagship',cn:'名创优品(上海旗舰店)',cat:'shopping',city:'上海',addr:'淮海中路688号(近思南路)',note:'เหมาะกับ Day 6 Huaihai/Sinan'},
+ {th:'13DE MARZO คาเฟ่ อันฝู',en:'13DE MARZO CAFÉ Anfu',cn:'13DE MARZO CAFÉ(上海安福路店)',cat:'cafe',city:'上海',addr:'安福路322号4号楼1楼',note:'ตัวเลือกคาเฟ่ช่วง Anfu Road'}
+].forEach(p=>{if(!places.some(x=>x.cn===p.cn))places.push(p);});
+
+// Step-by-step Day 1 with the additional Wukang/Anfu stores.
+CITY_WALK_DAY1.splice(0,CITY_WALK_DAY1.length,
+ {n:1,time:'11:30',dist:'เริ่มต้น',th:'อาคารลิเบอร์ตี้',en:'Liberty Apartments',cn:'自由公寓',addr:'五原路258号',query:'自由公寓 五原路258号 上海',tags:['🏛 อาคารสวย','📸 จุดถ่ายรูป'],stay:'10–15 นาที',note:'จุดเริ่มเดินบน五原路 • ถ่ายจากพื้นที่สาธารณะและไม่เข้าเขตพักอาศัย',toilet:'—',seat:'—'},
+ {n:2,time:'11:45',dist:'≈ 200 ม.',th:'ตรอกบ้านเก่าอู่หยวน',en:'Wuyuan Historic Lanes',cn:'五原路251弄 / 205弄',addr:'五原路251弄',query:'五原路251弄 上海',tags:['🏘 บ้านเก่า','📸 Street photo'],stay:'10 นาที',note:'ดูประตูตรอก อิฐ หน้าต่าง และป้ายอาคารประวัติศาสตร์',toilet:'—',seat:'—'},
+ {n:3,time:'12:00',dist:'≈ 200–250 ม.',th:'WILDE Flower Shop',en:'WILDE',cn:'WILDE王尔德',addr:'五原路208号',query:'WILDE王尔德 五原路208号 上海',tags:['🌷 ร้านดอกไม้','☕ กาแฟ','📸'],stay:'15 นาที',note:'แวะถ่ายรูป/ดูร้าน ไม่ต้องนั่งนานเพราะมีคาเฟ่หลักที่ Anfu Road',toilet:'ไม่ยืนยัน',seat:'จำกัด'},
+ {n:4,time:'12:20',dist:'≈ 180–250 ม.',th:'ห้องน้ำสาธารณะอูจง',en:'Wuzhong Public Restroom',cn:'乌中驿站公厕',addr:'五原路×乌鲁木齐中路',query:'乌中驿站公厕 上海',tags:['🚻 ห้องน้ำ','♿ จุดบริการ'],stay:'5–10 นาที',note:'จุดพักสำคัญก่อนเข้าช่วง乌鲁木齐中路',toilet:'✅ ห้องน้ำสาธารณะ',seat:'พักสั้น'},
+ {n:5,time:'12:30',dist:'≈ 200–300 ม.',th:'ตลาดอูจง',en:'Wuzhong Market',cn:'乌中市集',addr:'乌鲁木齐中路318号',query:'乌中市集 乌鲁木齐中路318号 上海',tags:['🧺 Local market','🥤 น้ำ/ผลไม้'],stay:'10–15 นาที',note:'แวะสั้น ๆ เพราะช่วงเช้ามี Jialing Market แล้ว',toilet:'ใช้จุดก่อนหน้า',seat:'จำกัด'},
+ {n:6,time:'12:50',dist:'≈ 250–350 ม.',th:'LOOKNOW&FLOW',en:'LOOKNOW&FLOW',cn:'LOOKNOW&FLOW',addr:'安福路168号',query:'LOOKNOW&FLOW 安福路168号 上海',tags:['🛍 Fashion','📸 ร้านสวย'],stay:'15–20 นาที',note:'หนึ่งในร้านที่ต้องการแวะบน Anfu Road',toilet:'—',seat:'—'},
+ {n:7,time:'13:10',dist:'≈ 50–100 ม.',th:'จุดบริการชุมชนอันฝู',en:'Anfu Community Service Station',cn:'湖南街道安福居民区党群服务站',addr:'安福路167号',query:'安福路167号 上海',tags:['🚻 ห้องน้ำสำรอง'],stay:'5 นาที',note:'ใช้เป็นห้องน้ำสำรอง',toilet:'✅ ห้องน้ำสาธารณะตามข้อมูลเขต',seat:'พักสั้น'},
+ {n:8,time:'13:20',dist:'≈ 100–180 ม.',th:'Baker & Spice',en:'Baker & Spice Anfu',cn:'Baker & Spice 安福路店',addr:'安福路195号',query:'Baker & Spice 安福路195号 上海',tags:['☕ กาแฟ','🥐 ขนม','🪑 นั่งพัก','🍽 มื้อเบา'],stay:'35–45 นาที',note:'พักมื้อกลางวันเบา ๆ และเข้าห้องน้ำถ้ามีบริการ',toilet:'ขึ้นกับร้าน',seat:'✅ จุดพักหลัก'},
+ {n:9,time:'14:05',dist:'≈ 350–450 ม.',th:'Wiggle Wiggle Shanghai',en:'Wiggle Wiggle Shanghai Flagship',cn:'wiggle wiggle上海旗舰店',addr:'安福路308号',query:'wiggle wiggle上海旗舰店 安福路308号 上海',tags:['🛍 Lifestyle','📸 สีสัน'],stay:'15–20 นาที',note:'แวะร้านตาม Wish List ก่อนออกจาก Anfu Road',toilet:'—',seat:'—'},
+ {n:10,time:'14:30',dist:'≈ 350–500 ม.',th:'อาคารสีเขียวถนนเหยียนชิ่ง',en:'Yanqing Road No. 2',cn:'延庆路2号',addr:'延庆路2号',query:'延庆路2号 上海',tags:['🏛 อาคารสวย','📸'],stay:'10 นาที',note:'เดินผ่านย่านบ้านเก่าไปทาง延庆坊',toilet:'—',seat:'—'},
+ {n:11,time:'14:45',dist:'≈ 300–400 ม.',th:'เหยียนชิ่งเลน + ULT.',en:'Yanqing Lane + ULT.',cn:'延庆坊 / ULT.',addr:'延庆路122号 / 110弄',query:'延庆坊 上海',tags:['☕ กาแฟ','🪑 พัก','📸'],stay:'20–30 นาที',note:'พักขาได้ ถ้าวันแรกเริ่มเหนื่อยให้จบ City Walk ตรงนี้แล้วเรียก DiDi ไป Wukang Road',toilet:'ตรวจในโครงการ/ร้าน',seat:'✅ มีคาเฟ่'},
+ {n:12,time:'15:10',dist:'≈ 200–300 ม.',th:'บ้านสวนเก่าถนนเหยียนชิ่ง',en:'Yanqing Historic Villas',cn:'延庆路130号 / 151–157号',addr:'延庆路130号',query:'延庆路130号 上海',tags:['🏛 สถาปัตยกรรม','📸'],stay:'10–15 นาที',note:'ชมจากทางเท้าและเคารพความเป็นส่วนตัว',toilet:'—',seat:'—'},
+ {n:13,time:'15:30',dist:'🚕 DiDi 5–15 นาที',th:'LOOKNOW Wukang Flagship',en:'LOOKNOW Wukang Flagship',cn:'LOOKNOW武康路旗舰店',addr:'武康路286号',query:'LOOKNOW武康路旗舰店 武康路286号 上海',mode:'didi',tags:['🛍 Fashion','📸 Wukang Road'],stay:'15–20 นาที',note:'แนะนำเรียก DiDi จาก Yanqing เพื่อไม่เพิ่มระยะเดินวันแรก',toilet:'—',seat:'—'},
+ {n:14,time:'15:55',dist:'≈ 450–550 ม.',th:'อาคารอู่คัง',en:'Wukang Mansion',cn:'武康大楼',addr:'淮海中路1850号',query:'武康大楼 上海',tags:['⭐ Must photo','🏛 Landmark'],stay:'20–25 นาที',note:'ถ่ายมุมสามแยกและอาคารเต็มทรง • ระวังรถและอย่ายืนบนผิวจราจร',toilet:'ใช้ Tourist Information Center แถว武康路ถ้าจำเป็น',seat:'มีจุดพักรอบย่าน'},
+ {n:15,time:'16:25',dist:'≈ 80–150 ม.',th:'TEENIE WEENIE Wukang Concept Store',en:'TEENIE WEENIE Wukang Concept Store',cn:'TEENIE WEENIE武康路概念店',addr:'淮海中路1946号',query:'TEENIE WEENIE武康路概念店 淮海中路1946号 上海',tags:['🛍 Shopping','☕ Concept store'],stay:'15–25 นาที',note:'จุดสุดท้ายของ Wukang cluster ก่อนเรียก DiDi ไป Xintiandi',toilet:'ตรวจในร้าน',seat:'ขึ้นกับร้าน'}
+);
+
+// Geo database. Coordinates are for visual orientation; long roads/areas use representative center points.
+const MAP_POINTS={
+ hotel:{th:'โรงแรม',en:'Yitel Collection Shanghai Train Station',cn:'和颐至尚酒店',lat:31.2495,lng:121.4500,city:'上海',kind:'hotel'},
+ pvg:{th:'สนามบิน PVG T2',en:'Pudong Airport T2',cn:'上海浦东国际机场T2',lat:31.1443,lng:121.8083,city:'上海',kind:'transport'},
+ jialing:{th:'ตลาดสดเจียหลิง',en:'Jialing Market',cn:'嘉陵菜市场',lat:31.142745,lng:121.433517,city:'上海',kind:'market'},
+ liberty:{th:'อาคารลิเบอร์ตี้',en:'Liberty Apartments',cn:'自由公寓',lat:31.2149,lng:121.4458,city:'上海',kind:'sight'},
+ wuyuan:{th:'ถนนอู่หยวน',en:'Wuyuan Road',cn:'五原路',lat:31.2150,lng:121.4463,city:'上海',kind:'walk'},
+ wulumuqi:{th:'อูหลู่มู่ฉีตอนกลาง',en:'Middle Wulumuqi Road',cn:'乌鲁木齐中路',lat:31.2147,lng:121.4498,city:'上海',kind:'walk'},
+ looknowflow:{th:'LOOKNOW&FLOW',en:'LOOKNOW&FLOW',cn:'LOOKNOW&FLOW 安福路168号',lat:31.214353,lng:121.444827,city:'上海',kind:'shopping'},
+ anfu:{th:'ถนนอันฝู',en:'Anfu Road',cn:'安福路',lat:31.2143,lng:121.4448,city:'上海',kind:'walk'},
+ wiggle:{th:'Wiggle Wiggle',en:'Wiggle Wiggle Shanghai',cn:'wiggle wiggle上海旗舰店',lat:31.2135,lng:121.4409,city:'上海',kind:'shopping'},
+ yanqing:{th:'ถนนเหยียนชิ่ง',en:'Yanqing Road',cn:'延庆路',lat:31.2114,lng:121.4422,city:'上海',kind:'walk'},
+ yanqinglane:{th:'เหยียนชิ่งเลน',en:'Yanqing Lane',cn:'延庆坊',lat:31.2101,lng:121.4413,city:'上海',kind:'cafe'},
+ looknowwukang:{th:'LOOKNOW Wukang',en:'LOOKNOW Wukang Flagship',cn:'LOOKNOW武康路旗舰店',lat:31.207491,lng:121.440028,city:'上海',kind:'shopping'},
+ wukang:{th:'อาคารอู่คัง',en:'Wukang Mansion',cn:'武康大楼',lat:31.20627,lng:121.43370,city:'上海',kind:'sight'},
+ teenie:{th:'TEENIE WEENIE',en:'TEENIE WEENIE Wukang',cn:'TEENIE WEENIE武康路概念店',lat:31.2065,lng:121.4346,city:'上海',kind:'shopping'},
+ xintiandi:{th:'ซินเทียนตี้',en:'Xintiandi',cn:'新天地',lat:31.2186,lng:121.4752,city:'上海',kind:'sight'},
+ sinan:{th:'ซือหนานแมนชั่นส์',en:'Sinan Mansions',cn:'思南公馆',lat:31.214509,lng:121.468956,city:'上海',kind:'option'},
+ tianzifang:{th:'เถียนจื่อฝาง',en:'Tianzifang',cn:'田子坊',lat:31.208197,lng:121.468662,city:'上海',kind:'option'},
+ jade:{th:'วัดพระหยก',en:'Jade Buddha Temple',cn:'玉佛禅寺',lat:31.241445,lng:121.445125,city:'上海',kind:'temple'},
+ jingan:{th:'วัดจิ้งอัน',en:"Jing'an Temple",cn:'静安寺',lat:31.223505,lng:121.445320,city:'上海',kind:'temple'},
+ westnanjing:{th:'หนานจิงตะวันตก',en:'West Nanjing Road',cn:'南京西路',lat:31.2293,lng:121.4591,city:'上海',kind:'shopping'},
+ starbucks:{th:'Starbucks Reserve Roastery',en:'Starbucks Reserve Roastery',cn:'上海星巴克臻选烘焙工坊',lat:31.230694,lng:121.462314,city:'上海',kind:'cafe'},
+ parkhotel:{th:'Park Hotel Bakery',en:'Park Hotel Bakery',cn:'国际饭店西饼屋',lat:31.2311,lng:121.4736,city:'上海',kind:'food'},
+ huanghe:{th:'ถนนหวงเหอ',en:'Huanghe Road',cn:'黄河路',lat:31.2355,lng:121.4695,city:'上海',kind:'food'},
+ natural:{th:'พิพิธภัณฑ์ธรรมชาติ',en:'Shanghai Natural History Museum',cn:'上海自然博物馆',lat:31.2367,lng:121.4611,city:'上海',kind:'option'},
+ louis:{th:'The Louis',en:'The Louis',cn:'路易号',lat:31.2300,lng:121.4672,city:'上海',kind:'option'},
+ trees:{th:'1000 Trees',en:'1000 Trees',cn:'天安千树',lat:31.249159,lng:121.445495,city:'上海',kind:'option'},
+ yugarden:{th:'สวนอวี้หยวน',en:'Yu Garden',cn:'豫园',lat:31.2272,lng:121.4921,city:'上海',kind:'sight'},
+ citygod:{th:'ศาลเทพเจ้าเมือง',en:'City God Temple',cn:'城隍庙',lat:31.2276,lng:121.4926,city:'上海',kind:'sight'},
+ people:{th:'จัตุรัสประชาชน',en:"People's Square",cn:'人民广场',lat:31.2304,lng:121.4737,city:'上海',kind:'sight'},
+ museum:{th:'พิพิธภัณฑ์เซี่ยงไฮ้',en:'Shanghai Museum',cn:'上海博物馆(人民广场馆)',lat:31.228231,lng:121.475480,city:'上海',kind:'option'},
+ fuzhou:{th:'ถนนฝูโจว',en:'Fuzhou Road',cn:'福州路',lat:31.2328,lng:121.4837,city:'上海',kind:'option'},
+ toptoy:{th:'TOP TOY Global Flagship',en:'TOP TOY Shanghai Global Flagship',cn:'TOP TOY上海全球旗舰店',lat:31.235847,lng:121.479595,city:'上海',kind:'option'},
+ minisoland:{th:'MINISO LAND Global Flagship',en:'MINISO LAND Shanghai',cn:'名创优品IP乐园(全球壹号店)',lat:31.236025,lng:121.481325,city:'上海',kind:'option'},
+ miniso:{th:'MINISO Huaihai Flagship',en:'MINISO Shanghai Flagship',cn:'名创优品(上海旗舰店)',lat:31.219704,lng:121.465364,city:'上海',kind:'option'},
+ marco:{th:'13DE MARZO CAFÉ',en:'13DE MARZO CAFÉ Anfu',cn:'13DE MARZO CAFÉ(上海安福路店)',lat:31.213256,lng:121.440149,city:'上海',kind:'option'},
+ nanjing:{th:'ถนนหนานจิงตะวันออก',en:'Nanjing Road Pedestrian Street',cn:'南京路步行街',lat:31.2359,lng:121.4815,city:'上海',kind:'shopping'},
+ bund:{th:'เดอะบันด์',en:'The Bund',cn:'外滩',lat:31.2335,lng:121.4904,city:'上海',kind:'sight'},
+ lailai:{th:'Lai Lai Xiao Long',en:'Lai Lai Xiao Long',cn:'莱莱小笼',lat:31.2379,lng:121.4793,city:'上海',kind:'food'},
+ shucaiji:{th:'Shu Cai Ji',en:'Shu Cai Ji Shengjian',cn:'舒蔡记生煎菜饭',lat:31.2348,lng:121.4780,city:'上海',kind:'food'},
+ hangzhoueast:{th:'Hangzhou East',en:'Hangzhou East Railway Station',cn:'杭州东站',lat:30.2921,lng:120.2120,city:'杭州',kind:'transport'},
+ westlake:{th:'ทะเลสาบซีหู',en:'West Lake',cn:'西湖',lat:30.2500,lng:120.1500,city:'杭州',kind:'sight'},
+ brokenbridge:{th:'สะพานขาด',en:'Broken Bridge',cn:'断桥残雪',lat:30.2599,lng:120.1514,city:'杭州',kind:'sight'},
+ louwailou:{th:'โหลวไว่โหลว',en:'Louwailou',cn:'楼外楼',lat:30.2535,lng:120.1356,city:'杭州',kind:'food'},
+ longjing:{th:'หมู่บ้านหลงจิ่ง',en:'Longjing Village',cn:'龙井村',lat:30.2105,lng:120.1098,city:'杭州',kind:'sight'},
+ lingyin:{th:'วัดหลิงอิ่น',en:'Lingyin Temple',cn:'灵隐寺',lat:30.2401,lng:120.1010,city:'杭州',kind:'option'},
+ leifeng:{th:'เจดีย์เหลยเฟิง',en:'Leifeng Pagoda',cn:'雷峰塔',lat:30.2311,lng:120.1483,city:'杭州',kind:'option'},
+ hefang:{th:'ถนนเหอฟาง',en:'Hefang Street',cn:'河坊街',lat:30.2374,lng:120.1772,city:'杭州',kind:'option'},
+ postal:{th:'พิพิธภัณฑ์ไปรษณีย์',en:'Shanghai Postal Museum',cn:'上海邮政博物馆',lat:31.2489,lng:121.4866,city:'上海',kind:'sight'},
+ zhapu:{th:'สะพานจ้าผู่',en:'Zhapu Road Bridge',cn:'乍浦路桥',lat:31.2466,lng:121.4868,city:'上海',kind:'sight'},
+ waibaidu:{th:'สะพานไว่ไป๋ตู้',en:'Waibaidu Bridge',cn:'外白渡桥',lat:31.2453,lng:121.4906,city:'上海',kind:'sight'},
+ northbund:{th:'North Bund Greenland',en:'North Bund Greenland',cn:'北外滩滨江绿地',lat:31.247461,lng:121.499372,city:'上海',kind:'option'},
+ ferry:{th:'ท่าเรือจินหลิงตะวันออก',en:'East Jinling Road Ferry',cn:'金陵东路渡口',lat:31.2269,lng:121.4968,city:'上海',kind:'transport'},
+ lujiazui:{th:'ลู่เจียจุ่ย',en:'Lujiazui',cn:'陆家嘴',lat:31.2380,lng:121.4997,city:'上海',kind:'sight'},
+ shanghaitower:{th:'Shanghai Tower',en:'Shanghai Tower',cn:'上海中心大厦',lat:31.2335,lng:121.5055,city:'上海',kind:'sight'},
+ ifc:{th:'Shanghai IFC Mall',en:'Shanghai IFC Mall',cn:'上海国金中心商场',lat:31.2373,lng:121.5019,city:'上海',kind:'shopping'},
+ pudongart:{th:'Museum of Art Pudong',en:'Museum of Art Pudong',cn:'浦东美术馆',lat:31.238115,lng:121.496310,city:'上海',kind:'option'},
+ pearl:{th:'Oriental Pearl Tower',en:'Oriental Pearl Tower',cn:'东方明珠广播电视塔',lat:31.2397,lng:121.4998,city:'上海',kind:'option'},
+ superbrand:{th:'Super Brand Mall',en:'Super Brand Mall',cn:'正大广场',lat:31.2376,lng:121.4993,city:'上海',kind:'option'},
+ huaihai:{th:'ถนนหวยไห่',en:'Huaihai Middle Road',cn:'淮海中路',lat:31.2165,lng:121.4685,city:'上海',kind:'shopping'},
+ aniang:{th:'A Niang Noodle House',en:'A Niang Noodle House',cn:'阿娘面馆',lat:31.2141,lng:121.4682,city:'上海',kind:'food'},
+ weixiangzhai:{th:'Wei Xiang Zhai',en:'Wei Xiang Zhai',cn:'味香斋',lat:31.2168,lng:121.4698,city:'上海',kind:'food'},
+ huxi:{th:'Huxi Old Alley Noodles',en:'Huxi Old Alley Noodle House',cn:'沪西老弄堂面馆',lat:31.2241,lng:121.4444,city:'上海',kind:'food'},
+ zhujiajiao:{th:'จูเจียเจี่ยว',en:'Zhujiajiao Ancient Town',cn:'朱家角古镇',lat:31.1134,lng:121.0539,city:'上海',kind:'swap'},
+ suzhou:{th:'ซูโจว',en:'Suzhou',cn:'苏州',lat:31.2989,lng:120.5853,city:'苏州',kind:'swap'},
+ thames:{th:'Thames Town',en:'Thames Town',cn:'泰晤士小镇',lat:31.0318,lng:121.1944,city:'上海',kind:'swap'}
+};
+const DAY_POINT_IDS=[
+ ['hotel','jialing','liberty','looknowflow','wiggle','looknowwukang','wukang','teenie','xintiandi','hotel'],
+ ['hotel','jade','jingan','westnanjing','starbucks','parkhotel','huanghe','hotel'],
+ ['hotel','yugarden','citygod','people','nanjing','bund','hotel'],
+ ['hangzhoueast','westlake','brokenbridge','louwailou','longjing','hangzhoueast'],
+ ['hotel','postal','zhapu','waibaidu','ferry','lujiazui','shanghaitower','ifc','hotel'],
+ ['hotel','huaihai','tianzifang','hotel']
+];
+const DAY_COLORS=['#0b6b74','#b7672c','#8b4fb3','#397d3c','#2b66b1','#bf4e66'];
+const MAP_KIND_LABEL={hotel:'โรงแรม',transport:'เดินทาง',market:'ตลาด',walk:'City Walk',shopping:'ช้อป',sight:'เที่ยว',temple:'วัด',food:'อาหาร',cafe:'คาเฟ่',option:'ตัวเลือก',swap:'สลับวัน'};
+function point(id){return MAP_POINTS[id];}
+function haversineKm(a,b){const R=6371,rad=x=>x*Math.PI/180,dLat=rad(b.lat-a.lat),dLon=rad(b.lng-a.lng);const q=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(q));}
+function fmtKm(k){return k<1?`${Math.round(k*1000)} ม.`:`${k.toFixed(k<10?1:0)} กม.`;}
+function pointGoogle(p){return googleMapsUrl({th:p.th,en:p.en,cn:p.cn,city:p.city});}
+function pointAmap(p){return amapUrl({cn:p.cn,city:p.city});}
+function markerHtml(label,color){return `<div class="geo-pin" style="--pin:${color}"><span>${esc(label)}</span></div>`;}
+function initLeafletMap(id,pts,{numbered=true,line=true,fit=true}={}){const el=document.getElementById(id);if(!el||el.dataset.ready)return;el.dataset.ready='1';if(!window.L){el.innerHTML='<div class="map-fallback">แผนที่ Interactive ต้องใช้อินเทอร์เน็ต • ใช้ปุ่ม Google Maps หรือ AMap ด้านล่างได้</div>';return;}const map=L.map(el,{zoomControl:true,scrollWheelZoom:false});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);const latlngs=[];pts.forEach((x,i)=>{const p=x.p||x;const color=x.color||'#0b6b74';if(!p)return;const icon=L.divIcon({className:'geo-div-icon',html:markerHtml(numbered?(x.label||String(i+1)):'★',color),iconSize:[30,36],iconAnchor:[15,34]});const m=L.marker([p.lat,p.lng],{icon}).addTo(map);m.bindPopup(`<b>${esc(p.th)}</b><br>${esc(p.en)}<br><span class="cn">${esc(p.cn)}</span><br><small>${esc(MAP_KIND_LABEL[p.kind]||'')}</small><br><a href="${pointGoogle(p)}" target="_blank">Google Maps</a> · <a href="${pointAmap(p)}" target="_blank">AMap</a>`);latlngs.push([p.lat,p.lng]);});if(line&&latlngs.length>1)L.polyline(latlngs,{color:pts[0]?.color||'#0b6b74',weight:3,opacity:.7,dashArray:'7 7'}).addTo(map);if(fit&&latlngs.length){map.fitBounds(latlngs,{padding:[24,24],maxZoom:14});}else map.setView([31.2304,121.4737],11);setTimeout(()=>map.invalidateSize(),60);}
+function dayGeoPoints(i){return (DAY_POINT_IDS[i]||[]).map((id,n)=>({p:point(id),id,label:String(n+1),color:DAY_COLORS[i]})).filter(x=>x.p);}
+function dailyDistanceList(i){const pts=dayGeoPoints(i);return `<div class="distance-list">${pts.slice(1).map((x,n)=>{const a=pts[n],km=haversineKm(a.p,x.p);return `<div><b>${n+1}→${n+2}</b><span>${esc(a.p.th)} → ${esc(x.p.th)}</span><strong>≈ ${fmtKm(km)}</strong></div>`;}).join('')}</div>`;}
+function dayGeoMapCard(i){const city=i===3?'Hangzhou':'Shanghai';const special=i===0?'PVG → โรงแรมเป็น transfer แยกประมาณ 45–55 กม. ทางถนน จึงไม่ใส่รวมใน scale ของแผนที่เมือง':i===5?'โรงแรม → PVG เป็น transfer แยกช่วงท้ายวัน เพื่อไม่ทำให้แผนที่ใจกลาง Shanghai ซูมออกมากเกินไป':i===3?'上海虹桥 ↔ 杭州东 เป็นช่วงรถไฟความเร็วสูง แยกจากแผนที่เที่ยวใน Hangzhou':'';return `<div class="geo-card"><div class="map-head"><b>📍 ตำแหน่งจริง · Day ${i+1}</b><span>${city}</span></div><div id="dayGeoMap" class="leaflet-map"></div>${special?`<div class="map-note">🚦 ${esc(special)}</div>`:''}<div class="section-mini"><b>ระยะระหว่างจุด (เส้นตรง)</b><small>ใช้ดูว่าอยู่ใกล้/ไกลกันแค่ไหน ไม่ใช่ระยะถนนจริง</small></div>${dailyDistanceList(i)}<div class="actions"><a class="btn gmap" href="${googleDayOpenUrl(i)}" target="_blank" rel="noopener">Google Maps · เส้นทางวันนี้</a><a class="btn primary" href="https://www.amap.com/" target="_blank" rel="noopener">AMap</a></div></div>`;}
+function googleCityOverview(city){const q=city==='杭州'?'Hangzhou China':'Shanghai China';return `<div class="google-map-card"><div class="map-head"><b>Google Maps · ภาพรวม ${city==='杭州'?'Hangzhou':'Shanghai'}</b><span>Online</span></div><div class="google-map-wrap"><iframe title="Google Maps overview" src="https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=${city==='杭州'?11:10}&output=embed" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><small>Google Maps ใช้ดูภาพรวม/รีวิวเมื่อออนไลน์ ส่วนหมุดหลายจุดด้านล่างเป็นแผนที่ Interactive เพื่อให้เห็นทุกตำแหน่งพร้อมกัน</small></div>`;}
+function masterPoints(city){const plannedIds=new Set(DAY_POINT_IDS.flat());return Object.entries(MAP_POINTS).filter(([id,p])=>{if(city==='杭州')return p.city==='杭州';if(city==='上海')return p.city==='上海'&&id!=='pvg'&&id!=='zhujiajiao'&&id!=='thames';if(city==='รอบเมือง')return ['pvg','zhujiajiao','thames','suzhou'].includes(id);return true;}).map(([id,p])=>{let d=DAY_POINT_IDS.findIndex(a=>a.includes(id));return {id,p,color:d>=0?DAY_COLORS[d]:'#7b8587',label:d>=0?String(d+1):'★',planned:plannedIds.has(id),day:d};});}
+function renderMasterMap(){const city=state.mapCity;const pts=masterPoints(city);return `<div class="section-title"><h2>Map ภาพรวม</h2><span>ทุกจุดในทริป</span></div><div class="filter-row"><button class="filter ${city==='上海'?'active':''}" data-map-city="上海">Shanghai</button><button class="filter ${city==='杭州'?'active':''}" data-map-city="杭州">Hangzhou</button><button class="filter ${city==='รอบเมือง'?'active':''}" data-map-city="รอบเมือง">สนามบิน / Day Trip</button></div>${city!=='รอบเมือง'?googleCityOverview(city):''}<div class="geo-card"><div class="map-head"><b>หมุดสถานที่ทั้งหมด</b><span>${pts.length} จุด</span></div><div id="masterGeoMap" class="leaflet-map master"></div><div class="day-color-legend">${days.map((d,i)=>`<span><i style="background:${DAY_COLORS[i]}"></i>Day ${i+1}</span>`).join('')}<span><i style="background:#7b8587"></i>ตัวเลือก</span></div><p class="map-help">แตะหมุดเพื่อดู ไทย / English / 中文 และเปิด Google Maps หรือ AMap • หมุดสีตาม Day, ★ คือกิจกรรมสำรอง</p></div><div class="section-title"><h2>ดูทีละวัน</h2><span>ตำแหน่ง + ระยะ</span></div><div class="map-day-grid">${days.map((d,i)=>`<button class="map-day-card" data-map-day="${i}"><b>Day ${i+1}</b><span>${esc(d.short)}</span><small>${esc(d.title)}</small></button>`).join('')}</div>`;}
+
+const OPTIONAL_BY_DAY=[
+ [
+  {id:'sinan',duration:'45–60 นาที',fit:'เพิ่มหลัง Xintiandi ถ้ายังมีแรง',why:'อาคารประวัติศาสตร์และคาเฟ่ บรรยากาศต่างจาก Wukang'},
+  {id:'tianzifang',duration:'60–90 นาที',fit:'ใช้แทน Xintiandi ไม่แนะนำทำทั้งคู่วันแรก',why:'ตรอกเล็ก ร้านของฝาก และร้านอาหาร'},
+  {id:'weixiangzhai',duration:'30–45 นาที',fit:'มื้อ/ของว่างถ้าเปลี่ยนเส้นไป Huaihai',why:'麻酱面 / 麻酱馄饨'},
+  {id:'marco',duration:'20–45 นาที',fit:'อยู่安福路322号 ใกล้ปลายช่วง Anfu Road',why:'คาเฟ่แฟชั่น — แวะได้ถ้าไม่พักนานที่ Baker & Spice'}
+ ],
+ [
+  {id:'natural',duration:'2–3 ชม.',fit:'แทนช่วงช้อป West Nanjing',why:'เหมาะวันฝนตกหรืออยากพักการเดินกลางแจ้ง'},
+  {id:'louis',duration:'30–60 นาที',fit:'แทรกระหว่าง West Nanjing Road',why:'แลนด์มาร์ก LV รูปเรือ / retail / exhibition'},
+  {id:'trees',duration:'60–90 นาที',fit:'แทน Huanghe Road ช่วงเย็น',why:'สถาปัตยกรรมห้างสีเขียวริม Suzhou Creek'},
+  {id:'huxi',duration:'30–45 นาที',fit:'มื้อกลางวันหลัง Jing’an Temple',why:'อยากลอง 猪肝面 / liver noodles; เช็กสาขาที่ใกล้ที่สุดใน AMap'}
+ ],
+ [
+  {id:'museum',duration:'1.5–2.5 ชม.',fit:'แทรกตอน People’s Square แล้วลด Food Walk',why:'พิพิธภัณฑ์หลักของเมือง'},
+  {id:'fuzhou',duration:'30–60 นาที',fit:'เดินเชื่อม People’s Square → Nanjing/The Bund',why:'ถนนหนังสือ + อาคารเก่า'},
+  {id:'lailai',duration:'30–60 นาที',fit:'ใช้แทนร้านของกินอีกหนึ่งร้าน',why:'小笼包 / 蟹粉小笼'},
+  {id:'shucaiji',duration:'20–40 นาที',fit:'Snack stop แถว Zhejiang Middle Rd',why:'生煎 + 菜饭 ราคาย่อมเยา'},
+  {id:'toptoy',duration:'30–60 นาที',fit:'อยู่南京东路558号 แทรกตอนเดิน Nanjing Road',why:'Global Flagship สำหรับของเล่น/Blind box'},
+  {id:'minisoland',duration:'30–60 นาที',fit:'อยู่南京东路479号 แทรกก่อนเดินต่อ The Bund',why:'MINISO LAND Global Flagship / IP store'}
+ ],
+ [
+  {id:'lingyin',duration:'2–3 ชม.',fit:'เลือกแทน Longjing ช่วงบ่าย',why:'วัดดังของ Hangzhou แต่ต้องเดินมากกว่า'},
+  {id:'leifeng',duration:'60–90 นาที',fit:'แทรกหลัง West Lake ถ้ามีแรง',why:'วิว West Lake จากมุมสูง'},
+  {id:'hefang',duration:'60–90 นาที',fit:'เลือกช่วงเย็นก่อนกลับสถานี',why:'ถนนเก่า ของกิน ของฝาก'}
+ ],
+ [
+  {id:'northbund',duration:'30–60 นาที',fit:'ต่อจาก Waibaidu ก่อนข้ามไป Pudong',why:'วิว Lujiazui จากฝั่งเหนือและพื้นที่นั่งพัก'},
+  {id:'pudongart',duration:'1.5–2.5 ชม.',fit:'แทนการขึ้น Shanghai Tower',why:'พิพิธภัณฑ์ศิลปะริมแม่น้ำ'},
+  {id:'pearl',duration:'1.5–2 ชม.',fit:'เลือกขึ้นแทน Shanghai Tower ไม่ทำทั้งสอง',why:'แลนด์มาร์กคลาสสิกของ Shanghai'},
+  {id:'superbrand',duration:'45–90 นาที',fit:'พัก/กินก่อนหรือหลัง Lujiazui',why:'ห้างใหญ่ อยู่ใกล้ Oriental Pearl'}
+ ],
+ [
+  {id:'sinan',duration:'45–60 นาที',fit:'ใช้ถ้า Day 1 ไม่ได้แวะ',why:'อยู่ใกล้ Huaihai และ Xintiandi'},
+  {id:'aniang',duration:'30–60 นาที',fit:'มื้อกลางวันเมื่อไป Sinan',why:'蟹粉面 / 黄鱼面'},
+  {id:'weixiangzhai',duration:'30–45 นาที',fit:'ตัวเลือก local noodle ก่อนช้อปกลับ',why:'麻酱面 / sesame-sauce noodles'},
+  {id:'trees',duration:'60–90 นาที',fit:'ถ้าตัด Huaihai และต้องการห้าง/สถาปัตยกรรม',why:'ใกล้โรงแรมกว่าหลายจุด'},
+  {id:'miniso',duration:'30–60 นาที',fit:'淮海中路688号 ใกล้思南路',why:'MINISO Shanghai Flagship — เหมาะกับวัน Huaihai/Sinan'}
+ ]
+];
+const BIG_SWAPS=[
+ {id:'zhujiajiao',duration:'ครึ่งวัน–เต็มวัน',fit:'ใช้แทน Day 6 หรือวัน Shanghai 1 วัน',why:'เมืองน้ำโบราณ; ไม่ควรยัดเป็นกิจกรรมแทรก 1–2 ชม.'},
+ {id:'suzhou',duration:'เต็มวัน',fit:'ต้องสลับกับ Hangzhou หรือ Shanghai 1 วัน',why:'สวนจีน/คลอง/เมืองเก่า; ใช้รถไฟความเร็วสูง'},
+ {id:'thames',duration:'ครึ่งวัน',fit:'ใช้แทนกิจกรรมช้อป/City Walk',why:'เมืองจำลองอังกฤษ อยู่ไกลจากใจกลาง'}
+];
+function ideaKey(x){return `idea:${x.id}`;}
+function renderIdeaCard(x){const p=point(x.id);if(!p)return '';const fav=isFav(ideaKey(x));return `<div class="idea-card"><div class="idea-top"><div><span class="idea-badge">${esc(MAP_KIND_LABEL[p.kind]||'ตัวเลือก')}</span><h3>${esc(p.th)}</h3><div class="cn">${esc(p.cn)}</div><small>${esc(p.en)}</small></div><button class="fav-btn ${fav?'active':''}" data-favorite="${esc(ideaKey(x))}">${fav?'★':'☆'}</button></div><div class="idea-grid"><div><b>⏱ เวลา</b><span>${esc(x.duration)}</span></div><div><b>🧩 ใส่ตรงไหน</b><span>${esc(x.fit)}</span></div></div><p>✨ ${esc(x.why)}</p><div class="actions"><a class="btn gmap" href="${pointGoogle(p)}" target="_blank" rel="noopener">Google Maps</a><a class="btn primary" href="${pointAmap(p)}" target="_blank" rel="noopener">AMap</a><button class="btn" data-copy="${esc(p.cn)}">Copy 中文</button></div></div>`;}
+function renderIdeas(){const i=state.ideaDay;const list=OPTIONAL_BY_DAY[i];return `<div class="section-title"><h2>ตัวเลือกเพิ่มเติม</h2><span>ยังไม่อยู่ในโปรแกรมหลัก</span></div><div class="notice">💡 ใช้หน้านี้เป็น Plan B: ฝนตก, ร้านปิด, อยากช้อปเพิ่ม หรือมีแรงเหลือ ไม่ควรทำทั้งหมดในวันเดียว</div><div class="day-selector idea-days">${days.map((d,n)=>`<button class="day-chip ${i===n?'active':''}" data-idea-day="${n}"><b>Day ${n+1}</b><small>${d.short}</small></button>`).join('')}</div><div class="option-map-mini"><div id="ideaGeoMap" class="leaflet-map compact-map"></div></div><div class="idea-list">${list.map(renderIdeaCard).join('')}</div><div class="section-title"><h2>สลับโปรแกรมทั้งช่วง</h2><span>ต้องเผื่อเวลาเยอะ</span></div>${BIG_SWAPS.map(renderIdeaCard).join('')}`;}
+
+function renderCityWalkStopV16(s,idx){const prev=idx?CITY_WALK_DAY1[idx-1]:null,k=walkStopKey(s),done=isDone(k),fav=isFav(k);let seg=googleMapsUrl({cn:s.cn,en:s.en,th:s.th,city:'Shanghai'});let segLabel='Google Maps';if(prev){seg=s.mode==='didi'?`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(prev.query)}&destination=${encodeURIComponent(s.query)}&travelmode=driving`:googleWalkingUrl(prev.query,s.query);segLabel=s.mode==='didi'?'🚕 เปิดเส้นทางรถ':'🚶 เดินจากจุดก่อนหน้า';}return `<details class="walk-detail ${done?'is-done':''}" ${idx<2?'open':''}><summary><span class="walk-num">${s.n}</span><span class="walk-summary"><b>${esc(s.th)}</b><small>${esc(s.cn)} · ${esc(s.dist)} · ${esc(s.stay)}</small></span><span class="walk-check">${done?'✓':'›'}</span></summary><div class="walk-detail-body"><div class="walk-tags">${s.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div><div class="walk-address"><b>📍 ${esc(s.en)}</b><span>${esc(s.addr)}</span></div><p>${esc(s.note)}</p><div class="walk-amenities"><div><b>🚻 ห้องน้ำ</b><span>${esc(s.toilet)}</span></div><div><b>🪑 ที่นั่งพัก</b><span>${esc(s.seat)}</span></div></div><div class="actions"><button class="btn ${done?'done-btn':'primary'}" data-done="${esc(k)}">${done?'✓ ไปแล้ว':'○ ไปแล้ว'}</button><button class="btn ghost" data-favorite="${esc(k)}">${fav?'★ Favorite':'☆ Favorite'}</button><a class="btn gmap" href="${seg}" target="_blank" rel="noopener">${segLabel}</a><a class="btn primary" href="${amapUrl({cn:s.cn,city:'上海'})}" target="_blank" rel="noopener">AMap</a><button class="btn" data-copy="${esc(s.cn)}">Copy 中文</button></div></div></details>`;}
+renderCityWalkStop=renderCityWalkStopV16;
+detailedDay1Walk=function(){const doneCount=CITY_WALK_DAY1.filter(s=>isDone(walkStopKey(s))).length;return `<div class="city-walk-guide embedded"><div class="walk-guide-head"><div><span class="walk-kicker">11:30–16:50 · STEP-BY-STEP</span><h3>French Concession → Wukang Guide</h3><p>เดินเป็นช่วงสั้น 150–500 ม. • มี LOOKNOW&FLOW, Wiggle Wiggle, LOOKNOW Wukang, Wukang Mansion และ TEENIE WEENIE • ช่วง Yanqing→Wukang แนะนำ DiDi</p></div><div class="walk-progress"><b>${doneCount}/${CITY_WALK_DAY1.length}</b><small>ไปแล้ว</small></div></div><div class="toilet-alert"><b>🚻 จุดพัก</b><span>乌中驿站公厕 → 安福路167号 → Baker & Spice → 延庆坊/ULT. • ถ้าเหนื่อยให้ย่อเส้นทางได้ทันที</span></div><div class="walk-details">${CITY_WALK_DAY1.map(renderCityWalkStop).join('')}</div><div class="walk-shortcuts"><b>👨‍👩‍👧‍👦 Family shortcut</b><p>หลัง Baker & Spice สามารถข้าม Wiggle/Yanqing แล้วเรียก DiDi ไป <span class="cn-inline">LOOKNOW武康路旗舰店</span> หรือ <span class="cn-inline">武康大楼</span> ได้</p></div></div>`;};
+function timelineWithGuide(dayIndex){const d=days[dayIndex];return d.events.map((e,i)=>eventCard(e,dayIndex,i)+(dayIndex===0&&e.time==='11:30'?detailedDay1Walk():'')).join('');}
+
+renderHome=function(){const s=dateStatus(),d=days[s.day],total=getExpenses().reduce((a,x)=>a+Number(x.amount||0),0),done=getSet('sh-done'),todayDone=d.events.filter((e,i)=>done.has(eventKey(s.day,i,e))).length;return `<section class="hero"><img src="${d.hero}" alt="Shanghai"><div class="hero-overlay"><span class="pill">${esc(s.label)} · ${esc(s.sub)}</span><h2>${esc(d.title)}</h2><p>${esc(d.theme)}</p></div></section><div class="grid3"><div class="stat"><b>${todayDone}/${d.events.length}</b><small>ไปแล้ววันนี้</small></div><div class="stat"><b>★ ${favoriteCount()}</b><small>Favorites</small></div><div class="stat"><b>¥${total.toFixed(0)}</b><small>ค่าใช้จ่าย</small></div></div><div class="section-title"><h2>Today</h2><span>${d.short}</span></div>${dayGeoMapCard(s.day)}<div class="timeline">${timelineWithGuide(s.day)}</div>`;};
+renderPlan=function(){const d=days[state.selectedDay];return `<div class="day-selector">${days.map((x,i)=>`<button class="day-chip ${i===state.selectedDay?'active':''}" data-day="${i}"><b>Day ${i+1}</b><small>${x.short}</small></button>`).join('')}</div><section class="hero"><img src="${d.hero}" alt="${esc(d.title)}"><div class="hero-overlay"><span class="pill">Day ${state.selectedDay+1} · ${d.short}</span><h2>${esc(d.title)}</h2><p>${esc(d.theme)}</p></div></section><div class="section-title"><h2>แผนที่วันนี้</h2><span>ตำแหน่ง + ระยะ</span></div>${dayGeoMapCard(state.selectedDay)}${googleMapCard(state.selectedDay)}<div class="section-title"><h2>Timeline</h2><span>เรียงตามเวลาจริง</span></div><div class="timeline">${timelineWithGuide(state.selectedDay)}</div><div class="notice">📌 ระยะในแผนที่ Interactive เป็นระยะเส้นตรงเพื่ออ่านตำแหน่งเท่านั้น • ระยะเดิน/รถจริงให้กด Google Maps หรือ AMap • Day 1 แก้ลำดับให้สนามบินและโรงแรมอยู่ก่อน City Walk แล้ว</div>`;};
+
+const oldAttachDynamic=attachDynamic;
+attachDynamic=function(){oldAttachDynamic();app.querySelectorAll('[data-map-city]').forEach(b=>b.addEventListener('click',()=>{state.mapCity=b.dataset.mapCity;render();}));app.querySelectorAll('[data-map-day]').forEach(b=>b.addEventListener('click',()=>{state.selectedDay=Number(b.dataset.mapDay);state.tab='plan';render();}));app.querySelectorAll('[data-idea-day]').forEach(b=>b.addEventListener('click',()=>{state.ideaDay=Number(b.dataset.ideaDay);render();}));};
+const oldRender=render;
+render=function(){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));app.innerHTML=({home:renderHome,plan:renderPlan,map:renderMasterMap,ideas:renderIdeas,places:renderPlaces,checklist:renderChecklist,budget:renderBudget,trip:renderTripWithFamily}[state.tab]||renderHome)();attachDynamic();setTimeout(initActiveMaps,0);window.scrollTo({top:0,behavior:'instant'});};
+function initActiveMaps(){if(state.tab==='map'){const pts=masterPoints(state.mapCity);initLeafletMap('masterGeoMap',pts,{numbered:false,line:false});}if(state.tab==='home'){initLeafletMap('dayGeoMap',dayGeoPoints(dateStatus().day),{numbered:true,line:true});}if(state.tab==='plan'){initLeafletMap('dayGeoMap',dayGeoPoints(state.selectedDay),{numbered:true,line:true});}if(state.tab==='ideas'){const pts=(OPTIONAL_BY_DAY[state.ideaDay]||[]).map(x=>({p:point(x.id),color:'#7b8587',label:'★'}));initLeafletMap('ideaGeoMap',pts,{numbered:false,line:false});}}
+
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.tab;render();}));document.getElementById('installHelpBtn').addEventListener('click',()=>installDialog.showModal());document.querySelectorAll('[data-close-dialog]').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));document.addEventListener('click',e=>{const b=e.target.closest?.('[data-copy]');if(b&&!app.contains(b))copyText(b.dataset.copy);});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();
+})();
+
+</script>
+  <script>
+(function(){
+  'use strict';
+  document.title='Shanghai Family Trip 2026 · Pink Edition v1.20';
+  var theme=document.querySelector('meta[name="theme-color"]');
+  if(theme) theme.content='#e84887';
+  var app=document.getElementById('app');
+  var insurance={provider:'MSIG Insurance (Thailand) PCL.',product:'MSIG Worldwide Plus',plan:'Easy 3',journey:'Thailand - China',policyNo:'26-43239988',effective:'13/09/2026',expiry:'19/09/2026',insured:['Chonnikarn Chukhajorn','Chutimon Chukhajorn','Punyawat Chukajon','Wantanee Karoonakorn'],assistance:'+66 2 039 5704',customerService:'+66 2 825 8888',coverage:[['เสียชีวิต/สูญเสียอวัยวะ/ทุพพลภาพถาวรจากอุบัติเหตุ','สูงสุด 3,000,000 บาท'],['ค่ารักษาพยาบาลจากอุบัติเหตุหรือเจ็บป่วย','สูงสุด 2,000,000 บาท'],['เคลื่อนย้ายฉุกเฉินหรือส่งกลับประเทศไทย','สูงสุด 2,000,000 บาท'],['ส่งศพกลับประเทศไทย','สูงสุด 2,000,000 บาท'],['ความรับผิดต่อบุคคลภายนอก','สูงสุด 1,000,000 บาท'],['ยกเลิกหรือเลื่อนการเดินทาง','สูงสุด 200,000 บาท'],['ลดจำนวนวันเดินทาง','สูงสุด 200,000 บาท'],['เที่ยวบินล่าช้า','สูงสุด 15,000 บาท (3,000 บาท/ทุก 6 ชม.)'],['สัมภาระ/ทรัพย์สินสูญหายหรือเสียหาย','สูงสุด 30,000 บาท'],['สัมภาระล่าช้า','สูงสุด 15,000 บาท'],['เอกสารเดินทางสูญหายหรือเสียหาย','สูงสุด 10,000 บาท'],['Telemedicine ผ่านแอป MorDee','ตามเงื่อนไขกรมธรรม์']]};
+  var travelDocs={airline:'Juneyao Airlines',airlineReference:'MZXMN8',passengers:['Chonnikarn Chukhajorn','Chutimon Chukhajorn','Punyawat Chukajon','Wantanee Karoonakorn'],outbound:{flight:'HO1352',from:'BKK Suvarnabhumi Airport',depart:'13 Sep 2026 · 01:25',to:'PVG Shanghai Pudong T2',arrive:'13 Sep 2026 · 06:45'},inbound:{flight:'HO1351',from:'PVG Shanghai Pudong T2',depart:'18 Sep 2026 · 20:50',to:'BKK Suvarnabhumi Airport',arrive:'19 Sep 2026 · 00:25'},baggage:{carryOn:'1 ชิ้น/คน · 5 กก. · รวมขนาดไม่เกิน 115 ซม. (20×40×55 ซม.)',checked:'1 ชิ้น/คน · 23 กก. · รวมขนาดไม่เกิน 158 ซม.'},hotel:{name:'Yitel Collection (Shanghai Train Station)',cn:'和颐至尚酒店(上海火车站南广场店)',address:'No. 511 Tianmu West Road, Jing’an District, Shanghai',addressCn:'上海市静安区天目西路511号',phone:'+86-21-52711555-0',checkIn:'13 Sep 2026 · หลัง 15:00',checkOut:'18 Sep 2026 · ก่อน 12:00',rooms:'Queen Room · 2 ห้อง · 5 คืน',meals:'ไม่รวมอาหารเช้า',occupancy:'ห้องละไม่เกิน 2 คน / ผู้ใหญ่สูงสุด 2 คน',note:'โรงแรมใน Shanghai อาจไม่จัดแปรงสีฟัน หวี มีดโกน ตะไบเล็บ และอุปกรณ์ใช้แล้วทิ้งไว้ในห้อง ควรเตรียมไปเอง'}};
+  var curatedPhotos=[
+    {keys:['Starbucks Reserve Roastery','上海星巴克臻选烘焙工坊'],url:'https://about.starbucks.com/wp-content/uploads/2019/01/Starbucks_Roastery_Shanghai_G.jpeg',source:'Starbucks Stories · Shanghai Roastery'},
+    {keys:['Park Hotel Bakery','国际饭店西饼屋'],url:'https://ak-d.tripcdn.com/images/1mk20224x90jekl5hF7C3.jpg',source:'Trip.com · Park Hotel Deli storefront'},
+    {keys:['ถนนหวงเหอ','黄河路'],url:'https://upload.wikimedia.org/wikipedia/commons/8/80/20240120_Night_view_of_Huanghe_Road%2C_Shanghai_03.jpg',source:'Wikimedia Commons · Huanghe Road 2024'},
+    {keys:['จัตุรัสประชาชน',"People's Square",'人民广场'],url:'https://obj.shine.cn/files/2024/01/05/a90d854e-49b1-4289-9518-09c84148bb39_0.jpg',source:'City News Service · People’s Square'},
+    {keys:['หมู่บ้านหลงจิ่ง','Longjing Village','龙井村'],url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Tea%20plantations%20in%20Longjing%2C%20Hangzhou.jpg?width=1280',source:'Wikimedia Commons · Wishva de Silva · CC BY-SA 3.0'},
+    {keys:['โหลวไว่โหลว','Louwailou','楼外楼'],url:'https://hznews.hangzhou.com.cn/wghz/images/2019-05/09/6eedd313-a4c6-45cb-a64a-46ff7a833669.jpeg',source:'Hangzhou News · Louwailou'},
+    {keys:['เรือเฟอร์รีข้ามแม่น้ำ','Shanghai Ferry','金陵东路渡口'],url:'https://ak-d.tripcdn.com/images/1mi19224x92dugw9o0FD9.jpg?proc=source%2Ftrip',source:'Trip.com · Dongchang Road Shanghai Ferry'},
+    {keys:['Shanghai IFC Mall','上海国金中心商场'],url:'https://benoycdn.azureedge.net/files/projects/shanghai-ifc/_largeImage/L2143_N93_medium.jpg',source:'Benoy · Shanghai IFC architecture'}
+  ];
+  function text(el,selectors){for(var i=0;i<selectors.length;i++){var n=el.querySelector(selectors[i]);if(n&&n.textContent.trim())return n.textContent.trim()}return ''}
+  function enhance(){
+    enhancePhotos();
+    enhanceDay5();
+    enhanceTrip();
+    if(!app||app.querySelector('.day-glance')) return;
+    var timeline=app.querySelector('.timeline');
+    var hero=app.querySelector('.hero');
+    if(!timeline||!hero) return;
+    timeline.id='daily-timeline';
+    var cards=Array.from(timeline.querySelectorAll('.event-card')).slice(0,12);
+    if(!cards.length) return;
+    cards.forEach(function(card,i){card.id='daily-stop-'+(i+1)});
+    var rows=cards.map(function(card){
+      var time=text(card,['.time-badge','.event-time','time'])||'—';
+      var name=text(card,['.event-head h3','h3']);
+      var cn=text(card,['.cn']);
+      return '<div class="day-glance-row"><time>'+escapeHtml(time)+'</time><div><b>'+escapeHtml(name)+'</b>'+(cn?'<small>'+escapeHtml(cn)+'</small>':'')+'</div></div>';
+    }).join('');
+    var box=document.createElement('section');
+    box.className='day-glance';
+    box.setAttribute('aria-label','สรุปแผนการเดินทางวันนี้');
+    box.innerHTML='<div class="day-glance-head"><h2>แผนวันนี้แบบย่อ</h2><span>'+cards.length+' จุด · เรียงตามเวลา</span></div><div class="day-glance-list">'+rows+'</div><button class="btn primary day-glance-action" type="button">ดูรายละเอียดและวิธีเดินทาง ↓</button>';
+    hero.insertAdjacentElement('afterend',box);
+    box.querySelector('button').addEventListener('click',function(){timeline.scrollIntoView({behavior:'smooth',block:'start'})});
+  }
+  function escapeHtml(value){return String(value||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]})}
+  function enhancePhotos(){
+    if(!app)return;
+    Array.from(app.querySelectorAll('img[alt]:not([data-curated-photo])')).forEach(function(img){var alt=img.getAttribute('alt')||'';var hit=curatedPhotos.find(function(p){return p.keys.some(function(k){return alt.indexOf(k)>-1})});if(!hit)return;var fallback=img.currentSrc||img.src;img.dataset.curatedPhoto='1';img.dataset.photoSource=hit.source;img.addEventListener('error',function(){if(img.src!==fallback){img.src=fallback;img.classList.add('photo-offline-fallback')}},{once:true});img.src=hit.url;var card=img.closest('.event-card,.place-card,.hero');var badge=card&&card.querySelector('.real-photo-badge,.photo-pill');if(badge)badge.textContent='📷 '+hit.source});
+  }
+  function enhanceDay5(){
+    if(!app||app.querySelector('.day5-clarity'))return;
+    var hero=app.querySelector('.hero');var heading=hero&&hero.querySelector('h2');
+    if(!heading||heading.textContent.indexOf('Suzhou Creek')===-1)return;
+    heading.textContent='Shanghai Waterfront: คลอง Suzhou Creek → Lujiazui';
+    var theme=hero.querySelector('.hero-overlay p');if(theme)theme.textContent='คลองประวัติศาสตร์ใน Shanghai · Postal Museum · สะพาน · Ferry · Pudong Skyline';
+    var note=document.createElement('div');note.className='notice day5-clarity';note.innerHTML='<b>📍 Suzhou Creek / 苏州河 อยู่ใน Shanghai</b><br>ไม่ใช่ Day Trip ไปเมือง Suzhou เส้นที่ตรวจแล้ว: Shanghai Postal Museum → ข้าม Sichuan Road Bridge → เดินริมฝั่งใต้ → Zhapu Road Bridge → Waibaidu Bridge → เรียก DiDi ไปร้านอาหาร → ไปท่าเรือ Jinling East Road → Ferry ข้ามไป Dongchang Road → Lujiazui';
+    hero.insertAdjacentElement('afterend',note);
+  }
+  function routeCard(label,f){return '<div class="travel-doc-route"><div class="flight-line"><span>'+escapeHtml(label)+'</span><b>'+escapeHtml(f.flight)+'</b></div><div class="airport-row"><div><small>ออกจาก</small><b>'+escapeHtml(f.from)+'</b><time>'+escapeHtml(f.depart)+'</time></div><i>→</i><div><small>ถึง</small><b>'+escapeHtml(f.to)+'</b><time>'+escapeHtml(f.arrive)+'</time></div></div></div>'}
+  function enhanceTrip(){
+    if(!app||app.querySelector('.trip-document-details'))return;
+    var active=document.querySelector('.nav-btn.active');
+    if(!active||active.dataset.tab!=='trip')return;
+    var title=app.querySelector('.section-title');
+    if(!title)return;
+    Array.from(app.querySelectorAll('.card')).forEach(function(card){var heading=card.querySelector('h3');var label=heading?heading.textContent.trim():'';if(label.indexOf('✈️ เที่ยวบิน')===0||label.indexOf('🏨 โรงแรม')===0)card.remove()});
+    var h=travelDocs.hotel;
+    var box=document.createElement('div');box.className='trip-document-details';
+    box.innerHTML='<div class="travel-doc-banner"><span>ยืนยันจาก Flight Ticket + Hotel Voucher</span><h2>ข้อมูลการจองพร้อมใช้</h2><p>ผู้เดินทาง 4 คน · Economy · Airline reference <b>'+escapeHtml(travelDocs.airlineReference)+'</b></p></div><div class="section-title"><h2>เที่ยวบิน</h2><span>'+escapeHtml(travelDocs.airline)+'</span></div>'+routeCard('ขาไป',travelDocs.outbound)+routeCard('ขากลับ',travelDocs.inbound)+'<div class="card"><h3>🧳 สัมภาระต่อคน — ทั้งขาไปและกลับ</h3><div class="baggage-grid"><div><small>ถือขึ้นเครื่อง</small><b>'+escapeHtml(travelDocs.baggage.carryOn)+'</b></div><div><small>โหลดใต้เครื่อง</small><b>'+escapeHtml(travelDocs.baggage.checked)+'</b></div></div><div class="notice">แนะนำถึงสนามบินอย่างน้อย 3 ชั่วโมงก่อนเวลาออก และต้องใช้บัตรโดยสารตามลำดับเที่ยวบิน</div></div><div class="section-title"><h2>โรงแรม</h2><span>2 ห้อง · 5 คืน</span></div><div class="card hotel-detail-card"><h3>'+escapeHtml(h.name)+'</h3><div class="cn">'+escapeHtml(h.cn)+'</div><div class="policy-facts"><div><small>เช็กอิน</small><b>'+escapeHtml(h.checkIn)+'</b></div><div><small>เช็กเอาต์</small><b>'+escapeHtml(h.checkOut)+'</b></div><div><small>ห้องพัก</small><b>'+escapeHtml(h.rooms)+'</b></div><div><small>อาหาร</small><b>'+escapeHtml(h.meals)+'</b></div></div><p><b>📍 '+escapeHtml(h.address)+'</b><br><span class="cn">'+escapeHtml(h.addressCn)+'</span></p><p>☎ <a href="tel:+8621527115550">'+escapeHtml(h.phone)+'</a></p><p>'+escapeHtml(h.occupancy)+'</p><div class="notice">🪥 '+escapeHtml(h.note)+'</div><div class="actions"><a class="btn primary" href="tel:+8621527115550">โทรโรงแรม</a><button class="btn" data-copy="'+escapeHtml(h.addressCn)+'">Copy ที่อยู่จีน</button><a class="btn ghost" target="_blank" rel="noopener" href="https://uri.amap.com/search?keyword='+encodeURIComponent(h.cn)+'&city=上海">เปิด AMap</a></div></div><div class="card"><h3>Export ข้อมูลเที่ยวบินและโรงแรม</h3><p class="muted">สรุปสำหรับส่งให้ครอบครัว โดยไม่รวม E-ticket number, เลขหนังสือเดินทาง และหมายเลขยืนยันโรงแรมเต็มชุด</p><div class="actions"><button class="btn primary" data-travel-export="txt">Export TXT</button><button class="btn" data-travel-export="json">Export JSON</button><button class="btn ghost" data-travel-print>พิมพ์ / บันทึก PDF</button></div></div>';
+    title.insertAdjacentElement('afterend',box);
+  }
+  function exportTravel(kind){var payload={exportedAt:new Date().toISOString(),travel:travelDocs,privacyNote:'Excluded: e-ticket numbers, passport numbers, full hotel confirmation and Trip.com booking numbers.'},body,type,name;if(kind==='json'){body=JSON.stringify(payload,null,2);type='application/json';name='Shanghai_Trip_Flight_Hotel_Summary.json'}else{var h=travelDocs.hotel;body=['SHANGHAI FAMILY TRIP - FLIGHT & HOTEL','Airline: '+travelDocs.airline,'Airline reference: '+travelDocs.airlineReference,'','OUTBOUND '+travelDocs.outbound.flight,travelDocs.outbound.from+' | '+travelDocs.outbound.depart,'To '+travelDocs.outbound.to+' | '+travelDocs.outbound.arrive,'','RETURN '+travelDocs.inbound.flight,travelDocs.inbound.from+' | '+travelDocs.inbound.depart,'To '+travelDocs.inbound.to+' | '+travelDocs.inbound.arrive,'','BAGGAGE','Carry-on: '+travelDocs.baggage.carryOn,'Checked: '+travelDocs.baggage.checked,'','HOTEL',h.name,h.cn,h.address,h.addressCn,'Phone: '+h.phone,'Check-in: '+h.checkIn,'Check-out: '+h.checkOut,h.rooms,h.meals,'','Private booking and identity numbers are excluded.'].join('\r\n');type='text/plain;charset=utf-8';name='Shanghai_Trip_Flight_Hotel_Summary.txt'}var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:type}));a.download=name;a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)}
+  function renderInsurance(){
+    document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.tab==='insurance')});
+    var people=insurance.insured.map(function(name){return '<div class="insured-person"><span>✓</span><b>'+escapeHtml(name)+'</b></div>'}).join('');
+    var benefits=insurance.coverage.map(function(x){return '<div class="coverage-row"><span>'+escapeHtml(x[0])+'</span><b>'+escapeHtml(x[1])+'</b></div>'}).join('');
+    app.innerHTML='<section class="insurance-hero"><div class="insurance-logo">MSIG</div><span>TRAVEL INSURANCE</span><h2>ประกันเดินทางของครอบครัว</h2><p>'+escapeHtml(insurance.product)+' · แผน '+escapeHtml(insurance.plan)+'</p></section><div class="emergency-card"><small>กรณีฉุกเฉินระหว่างอยู่ต่างประเทศ</small><a href="tel:+6620395704">☎ '+escapeHtml(insurance.assistance)+'</a><span>MSIG Assist Overseas Emergency Assistance</span></div><div class="insurance-grid"><div class="card"><h3>รายละเอียดกรมธรรม์</h3><div class="policy-facts"><div><small>เลขกรมธรรม์</small><b>'+escapeHtml(insurance.policyNo)+'</b></div><div><small>เส้นทาง</small><b>'+escapeHtml(insurance.journey)+'</b></div><div><small>เริ่มคุ้มครอง</small><b>'+escapeHtml(insurance.effective)+'</b></div><div><small>สิ้นสุด</small><b>'+escapeHtml(insurance.expiry)+'</b></div></div></div><div class="card"><h3>ผู้เอาประกัน 4 คน</h3>'+people+'</div></div><div class="section-title"><h2>วงเงินสำคัญ</h2><span>ต่อคน · ตามเงื่อนไขกรมธรรม์</span></div><div class="coverage-list">'+benefits+'</div><div class="card claim-guide"><h3>เมื่อเจ็บป่วยหรือเกิดเหตุ</h3><ol><li>หากฉุกเฉิน โทร MSIG Assist ก่อนเข้ารับการรักษาเมื่อทำได้</li><li>เก็บใบรับรองแพทย์ ใบเสร็จ รายงานเหตุ และหลักฐานการเดินทางทั้งหมด</li><li>กรณีเที่ยวบินหรือสัมภาระล่าช้า ขอหนังสือรับรองจากสายการบิน</li><li>Telemedicine ใช้ผ่านแอป MorDee และไม่ใช่บริการช่วยเหลือฉุกเฉิน</li></ol><div class="actions"><a class="btn primary" href="tel:+6620395704">โทรฉุกเฉิน</a><a class="btn" href="tel:+6628258888">บริการลูกค้า</a></div></div><div class="card"><h3>Export ข้อมูลประกัน</h3><p class="muted">ไฟล์ Export ไม่มีเลขบัตรประชาชน หนังสือเดินทาง ที่อยู่ หรือวันเกิด</p><div class="actions"><button class="btn primary" data-insurance-export="txt">Export TXT</button><button class="btn" data-insurance-export="json">Export JSON</button><button class="btn ghost" data-insurance-print>พิมพ์ / บันทึก PDF</button><button class="btn ghost" data-insurance-copy>Copy เบอร์ฉุกเฉิน</button></div></div><div class="notice">ข้อมูลนี้เป็นสรุปเพื่อใช้ระหว่างเดินทาง หากมีความแตกต่าง ให้ยึดใบรับรองประกันภัย ตารางผลประโยชน์ และเงื่อนไขฉบับเต็มเป็นหลัก</div>';
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  function exportInsurance(kind){var payload={exportedAt:new Date().toISOString(),insurance:insurance,privacyNote:'Excluded: ID/passport numbers, addresses and dates of birth.'},body,type,name;if(kind==='json'){body=JSON.stringify(payload,null,2);type='application/json';name='Shanghai_Trip_Insurance_Summary.json'}else{body=['SHANGHAI FAMILY TRIP - TRAVEL INSURANCE','Provider: '+insurance.provider,'Product: '+insurance.product+' / '+insurance.plan,'Policy: '+insurance.policyNo,'Period: '+insurance.effective+' - '+insurance.expiry,'Emergency Assistance: '+insurance.assistance,'Customer Service: '+insurance.customerService,'','INSURED'].concat(insurance.insured.map(function(x){return '- '+x}),['','KEY COVERAGE']).concat(insurance.coverage.map(function(x){return '- '+x[0]+': '+x[1]}),['','This summary excludes ID/passport numbers, addresses and dates of birth.']).join('\r\n');type='text/plain;charset=utf-8';name='Shanghai_Trip_Insurance_Summary.txt'}var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:type}));a.download=name;a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)}
+  document.addEventListener('click',function(e){var nav=e.target.closest&&e.target.closest('.nav-btn[data-tab="insurance"]');if(nav){e.preventDefault();e.stopImmediatePropagation();renderInsurance();return}var ex=e.target.closest&&e.target.closest('[data-insurance-export]');if(ex){exportInsurance(ex.dataset.insuranceExport);return}var travelEx=e.target.closest&&e.target.closest('[data-travel-export]');if(travelEx){exportTravel(travelEx.dataset.travelExport);return}if(e.target.closest&&e.target.closest('[data-insurance-print],[data-travel-print]')){window.print();return}if(e.target.closest&&e.target.closest('[data-insurance-copy]')){navigator.clipboard&&navigator.clipboard.writeText('MSIG Assist: '+insurance.assistance+' | Customer Service: '+insurance.customerService)}} ,true);
+  new MutationObserver(function(){requestAnimationFrame(enhance)}).observe(app,{childList:true,subtree:false});
+  enhance();
+})();
+
+</script>
+
+<style id="v113-photo-styles">
+.user-photo-note{display:block;padding:7px 11px;background:#fff2f7;color:#7d3652;font-size:11px;font-weight:750;border-top:1px solid #f4c9d9}
+.hotel-user-photo{width:100%;height:220px;object-fit:cover;border-radius:16px;margin:0 0 14px}
+.huaihai-spots{margin:10px 0;padding:12px;border-radius:14px;background:#fff4f8;border:1px solid #f2c5d6}.huaihai-spots b{display:block;margin-bottom:7px}.huaihai-spots span{display:inline-flex;margin:3px;padding:5px 8px;border-radius:999px;background:#fff;color:#873657;font-size:12px;border:1px solid #efd0dc}
+@media(max-width:540px){.hotel-user-photo{height:175px}.event-card>.event-photo{height:175px}.user-photo-note{font-size:10px}}
+</style>
+<script id="v113-photo-upgrade">
+(function(){
+  var V113={"french":"images/user-french.jpg","people":"images/user-people.jpg","weixiang":"images/user-weixiang.jpg","hotel":"images/user-hotel.jpg","jialing":"images/user-jialing.jpg","yuyuan":"images/user-yuyuan.jpg","nanxiang":"images/user-nanxiang.jpg","nanjing":"images/user-nanjing.jpg","tianzifang":"images/user-tianzifang.jpg","huanghe":"images/user-huanghe.jpg","huaihai":"images/user-huaihai.jpg","xintiandi":"images/user-xintiandi.jpg","bund":"images/user-bund.jpg","wukang":"images/user-wukang.jpg"};
+  var labels={hotel:'ภาพที่ผู้ใช้ส่ง · Yitel Collection Shanghai Train Station',jialing:'ภาพที่ผู้ใช้ส่ง · 嘉陵菜市场',french:'ภาพที่ผู้ใช้ส่ง · French Concession / 五原路',wukang:'ภาพที่ผู้ใช้ส่ง · 武康大楼',huanghe:'ภาพที่ผู้ใช้ส่ง · ฉากจำลอง Huanghe Road ที่ Shanghai Film Park',yuyuan:'ภาพที่ผู้ใช้ส่ง · 豫园商城',nanxiang:'ภาพที่ผู้ใช้ส่ง · 南翔馒头店(豫园店)',people:'ภาพที่ผู้ใช้ส่ง · 人民广场',nanjing:'ภาพที่ผู้ใช้ส่ง · 南京路步行街',bund:'ภาพที่ผู้ใช้ส่ง · 外滩',weixiang:'ภาพที่ผู้ใช้ส่ง · 味香斋',huaihai:'ภาพที่ผู้ใช้ส่ง · 淮海中路',xintiandi:'ภาพที่ผู้ใช้ส่ง · 新天地',tianzifang:'ภาพที่ผู้ใช้ส่ง · 田子坊'};
+  var matches=[
+    {key:'hotel',terms:['ถึงโรงแรม ฝากกระเป๋า','Yitel Collection']},
+    {key:'jialing',terms:['ตลาดสดเจียหลิง','嘉陵菜市场']},
+    {key:'french',terms:['French Concession City Walk','เริ่ม City Walk — ถนนอู่หยวน']},
+    {key:'wukang',terms:['อาคารอู่คัง','武康大楼']},
+    {key:'huanghe',terms:['ถนนหวงเหอ','黄河路']},
+    {key:'yuyuan',terms:['ตลาดอวี้หยวน','豫园商城']},
+    {key:'nanxiang',terms:['หนานเสียงหมั่นโถวเตี้ยน','南翔馒头店']},
+    {key:'people',terms:['จัตุรัสประชาชน','人民广场']},
+    {key:'nanjing',terms:['ถนนคนเดินหนานจิง','南京路步行街']},
+    {key:'bund',terms:['เดอะบันด์','外滩']},
+    {key:'weixiang',terms:['Wei Xiang Zhai','味香斋']},
+    {key:'huaihai',terms:['ถนนหวยไห่','淮海中路']},
+    {key:'xintiandi',terms:['ซินเทียนตี้','新天地']},
+    {key:'tianzifang',terms:['เถียนจื่อฝาง','田子坊']}
+  ];
+  function hit(text){return matches.find(function(m){return m.terms.some(function(t){return text.indexOf(t)>-1})})}
+  function setCardPhoto(card,m){
+    if(!card||!m||card.dataset.userPhoto===m.key)return;
+    var old=card.querySelector(':scope > img.event-photo');
+    if(!old){old=document.createElement('img');old.className='event-photo';old.loading='lazy';card.insertBefore(old,card.firstChild)}
+    old.src=V113[m.key];old.alt=m.terms[0];card.dataset.userPhoto=m.key;
+    var prior=card.querySelector(':scope > .real-photo-badge');if(prior)prior.remove();
+    var note=card.querySelector(':scope > .user-photo-note');if(!note){note=document.createElement('small');note.className='user-photo-note';old.insertAdjacentElement('afterend',note)}
+    note.textContent='📷 '+labels[m.key];
+    if(m.key==='huanghe')note.textContent+=' · ใช้เป็นภาพบรรยากาศประกอบ ไม่ใช่ภาพถนนจริง';
+    if(m.key==='huaihai'&&!card.querySelector('.huaihai-spots')){
+      var box=document.createElement('div');box.className='huaihai-spots';box.innerHTML='<b>จุดน่าสนใจที่เลือกแวะได้</b><span>TX Huaihai</span><span>Farmer BOB</span><span>MINISO Pink</span><span>Itzy Bitzy Gift Shop</span><span>HAUS NOWHERE</span><span>Shaanxi Road</span><span>Basement FG</span><small>เช็กสาขาและเวลาเปิดใน AMap วันจริง</small>';
+      var body=card.querySelector('.event-body')||card;body.appendChild(box);
+    }
+  }
+  function apply(){
+    document.querySelectorAll('.day-glance-row').forEach(function(row){if((row.textContent||'').indexOf('田子坊 / 新天地')>-1){var b=row.querySelector('b'),s=row.querySelector('small');if(b)b.textContent='เถียนจื่อฝาง';if(s)s.textContent='田子坊'}});
+    document.querySelectorAll('.event-card').forEach(function(card){var identity=((card.querySelector('h3')||{}).textContent||'')+' '+((card.querySelector('.cn')||{}).textContent||'');if(identity.indexOf('田子坊')>-1&&identity.indexOf('新天地')>-1){var h=card.querySelector('h3'),cn=card.querySelector('.cn'),p=card.querySelector('.event-head~p'),route=card.querySelector('.route');if(h)h.textContent='เถียนจื่อฝาง';if(cn)cn.textContent='田子坊';if(p)p.textContent='Tianzifang';if(route)route.textContent='🚦 เลือก Tianzifang สำหรับตรอก ร้านงานฝีมือ และของฝาก; Day 1 มี Xintiandi อยู่แล้ว จึงไม่ซ้ำโปรแกรม';identity='เถียนจื่อฝาง 田子坊'}setCardPhoto(card,hit(identity))});
+    document.querySelectorAll('.idea-card,.place-card').forEach(function(card){var identity=((card.querySelector('h3')||{}).textContent||'')+' '+((card.querySelector('.cn')||{}).textContent||'');setCardPhoto(card,hit(identity))});
+    var trip=document.querySelector('.hotel-detail-card');if(trip&&!trip.querySelector('.hotel-user-photo')){var img=document.createElement('img');img.className='hotel-user-photo';img.src=V113.hotel;img.alt='Yitel Collection Shanghai Train Station';trip.insertBefore(img,trip.firstChild)}
+  }
+  try{
+    var d1=days[0],d2=days[1],d3=days[2],d6=days[5];
+    d1.hero=V113.french;d2.events.forEach(function(e){if(e.cn==='黄河路')e.img=V113.huanghe});
+    d3.hero=V113.yuyuan;
+    d6.events.forEach(function(e){if(e.cn==='淮海中路'){e.img=V113.huaihai;e.route='เดินเลือกเฉพาะจุดที่สนใจ: TX Huaihai / Farmer BOB / MINISO Pink / Itzy Bitzy Gift Shop / HAUS NOWHERE / Shaanxi Road / Basement FG • เช็กสาขาและเวลาเปิดใน AMap วันจริง'}if((e.cn||'').indexOf('田子坊')>-1){e.th='เถียนจื่อฝาง';e.en='Tianzifang';e.cn='田子坊';e.img=V113.tianzifang;e.route='เลือก Tianzifang สำหรับตรอก ร้านงานฝีมือ และของฝาก; Day 1 มี Xintiandi อยู่แล้ว จึงไม่ซ้ำโปรแกรม'}});
+    if(typeof render==='function')render();
+  }catch(e){}
+  new MutationObserver(function(){requestAnimationFrame(apply)}).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
+  apply();
+})();
+</script>
+<style id="v115-reliability-styles">
+.asset-warning{position:sticky;top:66px;z-index:120;margin:8px auto 12px;max-width:820px;padding:13px 15px;border-radius:16px;background:#fff3cd;border:1px solid #efc766;color:#684d00;box-shadow:0 8px 24px rgba(75,36,0,.14)}
+.asset-warning b{display:block;margin-bottom:4px}.asset-warning code{font-weight:800}.asset-warning button{margin-top:8px;border:0;border-radius:10px;background:#9a4164;color:#fff;padding:8px 12px;font-weight:800}
+.image-load-failed{min-height:150px;background:linear-gradient(135deg,#f7dce7,#fff4f8)!important;color:#813958}
+.map-loading-help{position:absolute;z-index:450;left:12px;right:12px;bottom:12px;padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.94);border:1px solid #e6b8ca;color:#6d3450;font-size:12px;box-shadow:0 4px 16px rgba(80,26,48,.12)}
+.leaflet-map{background:#eadde3 url('images/offline-map-fallback.svg') center/cover no-repeat!important}
+@media(max-width:540px){.asset-warning{top:58px;margin:7px 10px;font-size:13px}.map-loading-help{font-size:11px}}
+</style>
+<script id="v115-reliability">
+(function(){
+  var warningShown=false;
+  function showAssetWarning(){
+    if(warningShown)return;warningShown=true;
+    var box=document.createElement('div');box.className='asset-warning';box.innerHTML='<b>⚠️ ไม่พบโฟลเดอร์รูปภาพ</b><span>กรุณาแตกไฟล์ ZIP ก่อน แล้วเปิด <code>index.html</code> โดยให้โฟลเดอร์ <code>images</code> อยู่ข้างกัน หากนำขึ้นเว็บไซต์ต้องอัปโหลดทั้งโฟลเดอร์ ไม่ใช่เฉพาะ HTML</span><br><button type="button">ปิดข้อความ</button>';
+    box.querySelector('button').onclick=function(){box.remove()};
+    (document.querySelector('.app-shell')||document.body).prepend(box);
+  }
+  function watchImages(root){
+    (root||document).querySelectorAll('img:not([data-load-watch])').forEach(function(img){
+      img.dataset.loadWatch='1';
+      img.addEventListener('error',function(){img.classList.add('image-load-failed');if((img.getAttribute('src')||'').indexOf('images/')===0)showAssetWarning()});
+      if(img.complete&&img.naturalWidth===0&&(img.getAttribute('src')||'').indexOf('images/')===0)showAssetWarning();
+    });
+  }
+  function mapHealth(){
+    document.querySelectorAll('.leaflet-map').forEach(function(map){
+      var tiles=map.querySelectorAll('.leaflet-tile');if(!tiles.length)return;
+      var broken=Array.from(tiles).filter(function(t){return t.complete&&t.naturalWidth===0}).length;
+      var help=map.querySelector('.map-loading-help');
+      if(broken>0&&!help){help=document.createElement('div');help.className='map-loading-help';help.textContent='แผนที่ออนไลน์โหลดไม่ครบ — กำลังลองใหม่ กรุณารอสักครู่ หรือใช้ปุ่ม AMap / Google Maps ด้านล่าง';map.appendChild(help);setTimeout(function(){tiles.forEach(function(t){if(t.complete&&t.naturalWidth===0){var src=t.src;t.src='';t.src=src}})},1200)}
+      if(broken===0&&help)help.remove();
+    });
+  }
+  new MutationObserver(function(){requestAnimationFrame(function(){watchImages(document);mapHealth()})}).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
+  window.addEventListener('online',function(){document.querySelectorAll('.leaflet-tile').forEach(function(t){if(!t.naturalWidth){var src=t.src;t.src='';t.src=src}})});
+  watchImages(document);setInterval(mapHealth,2500);
+})();
+</script>
+<style id="v116-layout-map-styles">
+/* Desktop event cards: one image column and one continuous content column. */
+@media(min-width:821px){
+  .event-card{display:grid!important;grid-template-columns:minmax(250px,34%) minmax(0,1fr)!important;grid-auto-flow:row;align-items:start}
+  .event-card>img.event-photo{grid-column:1!important;grid-row:1 / span 40!important;width:100%!important;height:100%!important;min-height:320px!important;object-fit:cover!important;align-self:stretch}
+  .event-card>.user-photo-note,.event-card>.real-photo-badge,.event-card>.event-head,.event-card>p,.event-card>.travel-grid,.event-card>.route,.event-card>.actions,.event-card>.huaihai-spots{grid-column:2!important;margin-left:0;margin-right:0}
+  .event-card>.user-photo-note{grid-row:auto!important;border-top:0;border-bottom:1px solid #f4c9d9}
+  .event-card>.event-head{padding-top:14px}
+}
+@media(max-width:820px){
+  .event-card{display:block!important}
+  .event-card>img.event-photo{width:100%!important;height:190px!important;min-height:0!important;object-fit:cover!important}
+}
+@media(max-width:540px){.event-card>img.event-photo{height:170px!important}}
+
+/* The reliable position map is complete without internet tiles. */
+.leaflet-map:not(.street-map-on) .leaflet-tile-pane{display:none!important}
+.leaflet-map:not(.street-map-on){background:#eadde3 url('images/offline-map-fallback.svg') center/cover no-repeat!important}
+.map-mode-control{position:absolute;z-index:700;right:9px;top:9px;display:flex;gap:5px;padding:5px;border-radius:12px;background:rgba(255,255,255,.94);border:1px solid #e5b8ca;box-shadow:0 4px 15px rgba(80,28,47,.13)}
+.map-mode-control button{border:0;border-radius:8px;padding:7px 9px;background:#f8e8ef;color:#7f3653;font:700 11px/1.2 inherit;cursor:pointer}
+.map-mode-control button.active{background:#d9477f;color:#fff}
+.map-mode-label{padding:8px 12px;border-radius:13px;background:#fff3f7;border:1px solid #efc7d7;color:#6d3450;font-size:12px;margin:8px 0}
+@media(max-width:540px){.map-mode-control{right:6px;top:6px}.map-mode-control button{padding:6px 7px;font-size:10px}.map-mode-label{font-size:11px}}
+</style>
+<script id="v116-layout-map">
+(function(){
+  function addMapControls(){
+    document.querySelectorAll('.leaflet-map').forEach(function(map){
+      if(map.dataset.mapModeReady)return;map.dataset.mapModeReady='1';
+      var ctl=document.createElement('div');ctl.className='map-mode-control';
+      ctl.innerHTML='<button type="button" class="active" data-mode="position">ตำแหน่งครบ</button><button type="button" data-mode="street">ถนนออนไลน์</button>';
+      ctl.addEventListener('click',function(e){var btn=e.target.closest('button');if(!btn)return;var online=btn.dataset.mode==='street';map.classList.toggle('street-map-on',online);ctl.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b===btn)});var label=map.parentElement&&map.parentElement.querySelector('.map-mode-label');if(label)label.textContent=online?'โหมดถนนออนไลน์: รายละเอียดถนนขึ้นกับความเร็วอินเทอร์เน็ต':'โหมดตำแหน่งครบ: หมุดและเส้นทางแสดงครบโดยไม่พึ่งแผ่นภาพแผนที่ออนไลน์'});
+      map.appendChild(ctl);
+      var label=document.createElement('div');label.className='map-mode-label';label.textContent='โหมดตำแหน่งครบ: หมุดและเส้นทางแสดงครบโดยไม่พึ่งแผ่นภาพแผนที่ออนไลน์';map.insertAdjacentElement('afterend',label);
+    });
+  }
+  function markStructuredCards(){
+    document.querySelectorAll('.event-card').forEach(function(card){
+      if(card.dataset.layoutFixed)return;card.dataset.layoutFixed='1';
+      var img=card.querySelector(':scope>img.event-photo');
+      if(img){img.style.removeProperty('height');img.style.removeProperty('min-height')}
+    });
+  }
+  function apply(){addMapControls();markStructuredCards()}
+  new MutationObserver(function(){requestAnimationFrame(apply)}).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});
+  apply();
+})();
+</script>
+<style id="v118-food-tab-styles">
+.food-hero{padding:20px;border-radius:24px;background:linear-gradient(135deg,#b92f68,#ed6c9f 62%,#ffb5cf);color:#fff;box-shadow:0 12px 30px rgba(138,37,77,.22);margin-bottom:14px}.food-hero span{font-size:12px;font-weight:900;letter-spacing:.08em}.food-hero h2{font-size:29px;line-height:1.15;margin:7px 0}.food-hero p{margin:0;max-width:650px}.food-tools{display:grid;grid-template-columns:1fr auto;gap:9px;margin:13px 0}.food-search{min-height:46px;border:1px solid #e8bfd0;border-radius:14px;padding:0 14px;background:#fff;color:#432634;font:inherit}.food-filter-title{margin:14px 2px 7px;font-size:.92rem;color:#7b2949}.food-filter-row{display:flex;gap:7px;overflow-x:auto;padding:2px 0 9px;scrollbar-width:none}.area-filter-row{padding-bottom:5px}.area-filter-row .food-filter{background:#fff7fb;border-color:#efb7ce}.area-filter-row .food-filter.active{background:#c92968;border-color:#c92968;color:#fff}.food-filter{white-space:nowrap;border:1px solid #e7bfd0;background:#fff;color:#823653;border-radius:999px;min-height:39px;padding:7px 12px;font-weight:800}.food-filter.active{background:#d9477f;color:#fff;border-color:#d9477f}.food-count{display:flex;align-items:center;padding:0 12px;border-radius:14px;background:#fff1f6;color:#8c3155;font-weight:900}.restaurant-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.restaurant-card{background:#fff;border:1px solid #edc6d5;border-radius:20px;overflow:hidden;box-shadow:0 8px 24px rgba(84,31,53,.09)}.restaurant-cover{height:155px;background:linear-gradient(135deg,#f4d4e1,#fff3f7);position:relative;overflow:hidden}.restaurant-cover img{width:100%;height:100%;object-fit:cover}.restaurant-cover.no-photo{display:flex;align-items:center;justify-content:center;font-size:54px}.restaurant-day{position:absolute;left:10px;top:10px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.93);color:#92395b;font-size:11px;font-weight:900}.restaurant-body{padding:14px}.restaurant-title{display:flex;justify-content:space-between;gap:8px;align-items:start}.restaurant-title h3{margin:0;font-size:18px;line-height:1.25}.restaurant-title .cn{margin-top:3px}.restaurant-type{display:inline-flex;margin:8px 0 3px;padding:4px 8px;border-radius:999px;background:#fff0f5;color:#8c3456;font-size:11px;font-weight:850}.restaurant-menu{margin:8px 0;padding:9px 10px;border-radius:12px;background:#fff7fa;color:#583846}.restaurant-meta{display:grid;gap:6px;margin:8px 0;font-size:13px}.restaurant-meta span{display:block;color:#725565}.restaurant-note{font-size:12px;color:#806472}.restaurant-card .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.restaurant-card .btn{font-size:12px;padding:7px;min-height:40px}.food-empty{grid-column:1/-1;padding:30px;text-align:center;border:1px dashed #daa9bc;border-radius:18px;color:#7f5a69;background:#fff}
+@media(max-width:700px){.restaurant-grid{grid-template-columns:1fr}.food-tools{grid-template-columns:1fr}.food-count{min-height:40px;justify-content:center}.food-hero{padding:17px;border-radius:20px}.food-hero h2{font-size:25px}.restaurant-cover{height:180px}}
+</style>
+<script id="v118-food-tab">
+(function(){
+  var FOOD=[
+    {id:'nanxiang',th:'หนานเสียงหมั่นโถวเตี้ยน',en:'Nanxiang Steamed Bun Restaurant',cn:'南翔馒头店(豫园店)',type:'xiaolongbao',typeLabel:'เสี่ยวหลงเปา',zone:'yuyuan',day:'Day 3',area:'Yu Garden · 豫园',address:'豫园商城内',menu:'小笼包 · 蟹粉小笼',price:'ประมาณ ¥50–90/คน',note:'อยู่ในโซน Yu Garden เหมาะเป็นมื้อสาย',img:'images/user-nanxiang.jpg'},
+    {id:'lubolang',th:'ลวี่โปหลาง',en:'Lü Bo Lang',cn:'绿波廊',type:'shanghai',typeLabel:'อาหารจีน/ติ่มซำ',zone:'yuyuan',day:'Day 3 · ตัวเลือก',area:'Yu Garden · 豫园',address:'豫园商城内',menu:'点心 · 上海菜',price:'ตรวจราคาใน AMap',note:'ภาพที่ได้รับมีเครดิตผู้สร้าง จึงแสดงข้อมูลโดยไม่เผยแพร่ภาพนั้น'},
+    {id:'lailai',th:'ไลไลเสี่ยวหลง',en:'Lai Lai Xiao Long',cn:'莱莱小笼·乔艾',type:'xiaolongbao',typeLabel:'เสี่ยวหลงเปา',zone:'nanjing',day:'Day 3 · ตัวเลือก',area:'Tianjin Road / Nanjing East',address:'天津路506号',menu:'蟹粉小笼 · 蟹膏小笼',price:'ประมาณ ¥50–80/คน',note:'เลือกร้านนี้แทน Food Pick ร้านอื่น ไม่ควรกินครบทุกแห่ง',img:'images/food-lai-lai-xiao-long-collage.png'},
+    {id:'autumn',th:'ออทัมน์เฟลเวอร์',en:'Autumn Flavor',cn:'小秋家常菜',type:'shanghai',typeLabel:'อาหารเซี่ยงไฮ้',zone:'nanjing',day:'Day 3 · ตัวเลือก',area:'Tianjin Road / Nanjing East',address:'天津路406号（ตรวจอีกครั้ง）',menu:'上海家常菜',price:'ตรวจราคาใน AMap',note:'ภาพหน้าร้านยืนยันชื่อและเลขที่ 406; ควรตรวจพิกัดก่อนเดินทาง',img:'images/food-autumn-flavor-xiaoqiu-tianjin-road-406-storefront.png'},
+    {id:'shucaiji',th:'ซูไช่จี้เซิงเจียน',en:'Shu Cai Ji Shengjian',cn:'舒蔡记生煎菜饭(浙江中路店)',type:'shengjian',typeLabel:'เซิงเจียน',zone:'nanjing',day:'Day 3 · ตัวเลือก',area:'People’s Square / Nanjing',address:'浙江中路120号',menu:'特色生煎 · 菜饭',price:'ประมาณ ¥20–40/คน',note:'เหมาะเป็น Snack stop ระหว่าง Food Walk',img:'images/food-shu-cai-ji-shengjian-kitchen-menu.png'},
+    {id:'shendacheng',th:'เสิ่นต้าเฉิง',en:'Shen Da Cheng',cn:'沈大成',type:'bakery',typeLabel:'ขนม/ของฝาก',zone:'nanjing',day:'Day 3 · ตัวเลือก',area:'Nanjing East Road',address:'ใกล้ MRT 南京东路 Exit 10',menu:'上海糕点 · 青团',price:'ตรวจราคาใน AMap',note:'ภาพนี้ผูกกับจุด Nanjing East Road Exit 10 โดยเฉพาะ',img:'images/food-shen-da-cheng-nanjing-east-road-exit-10.png'},
+    {id:'shendacheng-dashijie',th:'เสิ่นต้าเฉิง — ต้าซื่อเจี้ย',en:'Shen Da Cheng — Dashijie',cn:'沈大成',type:'xiaolongbao',typeLabel:'ติ่มซำ/รอตรวจเมนู',zone:'nanjing',day:'ตัวเลือก',area:'Dashijie',address:'ใกล้ MRT 大世界 Exit 1',menu:'Soup dumpling — รอยืนยัน',price:'ตรวจราคาใน AMap',note:'รอตรวจว่าเป็นสาขาและเมนูเดียวกับรายการ Nanjing East หรือไม่'},
+    {id:'songhelou',th:'ซงเฮ่อโหลวบะหมี่ซูโจว',en:'Songhelou Suzhou Noodles',cn:'松鹤楼·苏式汤面(宏伊广场店)',type:'noodle',typeLabel:'บะหมี่',zone:'nanjing',day:'Day 3 · มื้อเย็นเบา ๆ',area:'Nanjing East Road',address:'宏伊国际广场',menu:'苏式汤面',price:'ประมาณ ¥40–80/คน',note:'เลือกเมื่อยังหิวหลังเดิน The Bund',img:'images/food-songhelou-suzhou-noodles-hongyi-collage.png'},
+    {id:'parkhotel',th:'พาร์กโฮเทลเบเกอรี',en:'Park Hotel Bakery',cn:'国际饭店西饼屋',type:'bakery',typeLabel:'เบเกอรี/ของฝาก',zone:'nanjing',day:'Day 2',area:'People’s Square / Huanghe Road',address:'南京西路170号附近',menu:'蝴蝶酥 · Butterfly pastry',price:'ประมาณ ¥30–100',note:'เหมาะซื้อเป็นของฝาก อาจมีคิว',img:'images/food-park-hotel-bakery-butterfly-pastry.png'},
+    {id:'yongfeng',th:'หย่งเฟิงเมี่ยนก่วน',en:'Yongfeng Noodle House',cn:'永丰面馆',type:'noodle',typeLabel:'บะหมี่',zone:'nanjing',day:'Day 3 · Food Pick',area:'Hankou Road / People’s Square',address:'汉口路320号',menu:'葱油拌面 · 红烧牛肉面',price:'ประมาณ ¥25–50/คน',note:'หน้าร้านระบุเริ่มกิจการปี 1962',img:'images/food-yongfeng-noodle-house-storefront-preferred.png'},
+    {id:'shaowansheng',th:'เส้าว่านเซิง',en:'Shao Wan Sheng',cn:'邵万生',type:'bakery',typeLabel:'ของฝาก',zone:'nanjing',day:'Day 3 · ของฝาก',area:'Nanjing East Road',address:'山西南路157号附近',menu:'上海老字号伴手礼',price:'ขึ้นกับสินค้า',note:'ใกล้ MRT Nanjing East Road Exit 1; ภาพเห็น Bee Cheng Hiang อยู่ติดกัน',img:'images/food-shao-wan-sheng-shanxi-south-road-storefront.png'},
+    {id:'dingxing',th:'แพนเค้กไข่ถนนติ้งซิง',en:'Dingxing Road Egg Pancake Stall',cn:'定兴路蛋饼摊',type:'snack',typeLabel:'อาหารเช้า/ของกินเล่น',zone:'nanjing',day:'ตัวเลือก',area:'Huangpu',address:'黄浦区定兴路6号（ตรวจอีกครั้ง）',menu:'蛋饼 · Egg Pancake',price:'ประหยัด',note:'ภาพอ้างอิงไม่เผยแพร่; ควรตรวจเวลาเปิดและพิกัดวันจริง'},
+    {id:'grandmother',th:'เซี่ยงไฮ้แกรนด์มาเธอร์',en:'Shanghai Grandmother Restaurant',cn:'上海姥姥家常饭馆',type:'shanghai',typeLabel:'อาหารเซี่ยงไฮ้',zone:'bund',day:'Day 3 · ตัวเลือก',area:'The Bund / Fuzhou Road',address:'福州路 ใกล้ The Bund',menu:'红烧肉 · 上海家常菜',price:'ตรวจราคาใน AMap',note:'จุดสังเกต: ถนน Fuzhou ระหว่าง Custom House กับอาคารธนาคารกรุงเทพ',img:'images/food-shanghai-grandmother-restaurant-fuzhou-road-storefront.png'},
+    {id:'dahuchun',th:'ต้าหูชุน',en:'Da Hu Chun',cn:'大壶春',type:'shengjian',typeLabel:'เซิงเจียน',zone:'bund',day:'Day 3 · Food Pick',area:'The Bund / Sichuan Middle Road',address:'四川中路136号',menu:'生煎包',price:'ประมาณ ¥20–40/คน',note:'เลือกร้านนี้หรือร้าน Food Pick อื่น ไม่จำเป็นต้องกินครบ',img:'images/food-da-hu-chun-shengjian-collage.png'},
+    {id:'weixiang',th:'เว่ยเซียงไจ',en:'Wei Xiang Zhai',cn:'味香斋(雁荡路店)',type:'noodle',typeLabel:'บะหมี่',zone:'huaihai',day:'Day 6 · ตัวเลือก',area:'Huaihai / Sinan',address:'雁荡路14号',menu:'麻酱面 · 麻酱馄饨',price:'ประมาณ ¥25–45/คน',note:'เหมาะจับคู่กับ Huaihai และ Sinan',img:'images/user-weixiang.jpg'},
+    {id:'aniang',th:'อาเหนียงเมี่ยนก่วน',en:'A Niang Noodle House',cn:'阿娘面馆(锡荣别墅店)',type:'noodle',typeLabel:'บะหมี่ปู',zone:'huaihai',day:'Day 6 · ตัวเลือก',area:'Sinan Road',address:'思南路36号',menu:'蟹粉面 · 黄鱼面',price:'ประมาณ ¥40–100/คน',note:'เหมาะเมื่อเลือกเดิน Sinan Mansion / Huaihai',img:'images/food-a-niang-noodle-house-beef-noodles.png'},
+    {id:'baos',th:'เป่าซือฝู',en:'Bao’s Pastry',cn:'鲍师傅糕点',type:'bakery',typeLabel:'เบเกอรี/เค้กหมูหยอง',zone:'huaihai',day:'Day 6 · ตัวเลือก',area:'Huaihai Middle Road',address:'淮海中路576号（รอยืนยัน）',menu:'肉松小贝 · ขนมหมูหยอง',price:'ขึ้นกับสินค้า',note:'ภาพที่ได้รับระบุ Huaihai Middle Road ไม่ยืนยันว่าเป็น Xintiandi; ไม่เผยแพร่ภาพที่มีเครดิตผู้สร้าง'},
+    {id:'huxi',th:'หู่ซีเหล่า弄堂เมี่ยนก่วน',en:'Huxi Old Alley Noodle House',cn:'沪西老弄堂面馆(静安寺店)',type:'noodle',typeLabel:'บะหมี่',zone:'jingan',day:'Day 2 · ตัวเลือก',area:'Jing’an Temple',address:'ค้นหาสาขาใกล้ 静安寺',menu:'猪肝面 · Liver noodles',price:'ประมาณ ¥30–55/คน',note:'เหมาะเป็นมื้อกลางวันหลัง Jing’an Temple; เช็กสาขาปัจจุบัน',img:'images/food-huxi-old-alley-noodle-house-collage.png'},
+    {id:'maotou',th:'เหมาโถวเหล่าเตีย',en:'Maotou Laodie',cn:'毛头老爹饭店',type:'shanghai',typeLabel:'อาหารจีน',zone:'jingan',day:'ตัวเลือก',area:'Jing’an / Yuyuan Road',address:'愚园路附近（เลือกสาขาใน AMap）',menu:'家常菜',price:'ตรวจราคาใน AMap',note:'รอยืนยันชื่อสาขาและที่อยู่เต็ม',img:'images/food-maotou-laodie-jingan-yuyuan-road-storefront.png'},
+    {id:'butterful',th:'บัตเตอร์ฟูล แอนด์ ครีมอรัส',en:'Butterful & Creamorous',cn:'Butterful & Creamorous',type:'bakery',typeLabel:'เบเกอรี/ของหวาน',zone:'jingan',day:'Day 2 · ตัวเลือก',area:'West Nanjing Road',address:'南京西路附近（เลือกสาขาใน AMap）',menu:'ครัวซองต์ · ขนมอบ',price:'ตรวจราคาใน AMap',note:'ตรวจสาขาและที่อยู่เต็มก่อนเดินทาง',img:'images/food-butterful-and-creamorous-west-nanjing-road-storefront.png'},
+    {id:'holiland',th:'โฮลิแลนด์',en:'Holiland',cn:'好利来',type:'bakery',typeLabel:'เบเกอรี/เค้ก',zone:'lujiazui',day:'Day 5 · ตัวเลือก',area:'Lujiazui / Super Brand Mall',address:'正大广场内（รอยืนยันชั้นและสาขา）',menu:'蛋糕 · 面包',price:'ขึ้นกับสินค้า',note:'ตรวจว่ายังมีสาขาในห้างและอยู่ชั้นใดก่อนเดินทาง'},
+    {id:'newsukiyaki',th:'นิวสุกี้ยากี้',en:'New Sukiyaki',cn:'New Sukiyaki',type:'mall',typeLabel:'สุกี้ยากี้/ร้านในห้าง',zone:'cloudnine',day:'ตัวเลือก',area:'Cloud Nine / Longemont',address:'龙之梦购物中心内',menu:'สุกี้ยากี้',price:'ตรวจราคาใน AMap',note:'ตรวจชื่อจีนและชั้นของสาขาก่อนเดินทาง'},
+    {id:'renhe',th:'เหรินเหอก่วน',en:'Ren He Guan',cn:'人和馆',type:'shanghai',typeLabel:'อาหารเซี่ยงไฮ้',zone:'multi',day:'Day 1 · มื้อเย็น',area:'หลายสาขา',address:'เลือกสาขาใกล้โรงแรม/เส้นทาง',menu:'本帮红烧肉 · 糖醋小排 · 八宝饭',price:'ประมาณ ¥100–220/คน',note:'เลือกสาขาตามเส้นทางจริงและจองโต๊ะหากจำเป็น',img:'images/food-ren-he-guan-storefront.png'},
+    {id:'feidachu',th:'เฟ่ยต้าฉู',en:'Fei Da Chu Chili Fried Pork',cn:'费大厨辣椒炒肉',type:'chinese',typeLabel:'อาหารหูหนาน',zone:'multi',day:'ตัวเลือก',area:'หลายสาขา',address:'เลือกสาขาใกล้เส้นทาง',menu:'辣椒炒肉',price:'ตรวจราคาใน AMap',note:'ไม่ผูกกับ Taikoo Li Qiantan จนกว่าจะเลือกสาขาที่เหมาะ; ภาพอ้างอิงไม่เผยแพร่'},
+    {id:'yeren',th:'เย่เหรินเซียนเซิง',en:'Ye Ren Xian Sheng Gelato',cn:'野人先生',type:'dessert',typeLabel:'เจลาโต/ของหวาน',zone:'multi',day:'ตัวเลือก',area:'หลายสาขา',address:'เลือกสาขาใกล้เส้นทาง',menu:'Pistachio Affogato',price:'ตรวจราคาใน AMap',note:'ยืนยันว่าเมนูมีจำหน่ายในสาขาที่เลือกก่อนเดินทาง; ภาพอ้างอิงไม่เผยแพร่'},
+    {id:'wuyouxian',th:'อู๋โหย่วเซียน',en:'Wu You Xian',cn:'屋有鲜',type:'xiaolongbao',typeLabel:'เสี่ยวหลงเปา/ปู',zone:'multi',day:'ตัวเลือก',area:'เลือกสาขาใกล้เส้นทาง',address:'ค้นหาสาขาใน AMap',menu:'小笼包 · 蟹粉',price:'ตรวจราคาใน AMap',note:'ตรวจสาขาและเมนูเด่นก่อนเดินทาง',img:'images/food-wu-you-xian-storefront.png'},
+    {id:'luochunge',th:'หลัวชุนเก๋อ',en:'Luo Chun Ge',cn:'萝春阁',type:'shengjian',typeLabel:'เซิงเจียน',zone:'multi',day:'ตัวเลือก',area:'เลือกสาขาใกล้เส้นทาง',address:'ค้นหาสาขาใน AMap',menu:'生煎包',price:'ตรวจราคาใน AMap',note:'หน้าร้านระบุ Shanghai Friedbuns 1920; ตรวจสาขาก่อนเดินทาง',img:'images/food-luo-chun-ge-shanghai-friedbuns-storefront.png'},
+    {id:'dushe',th:'ตู๋เสอเมี่ยนก่วน',en:'Du She Noodle House',cn:'毒蛇面馆',type:'noodle',typeLabel:'บะหมี่',zone:'multi',day:'ตัวเลือก',area:'รอตรวจสาขา',address:'ค้นหาสาขาใน AMap',menu:'面',price:'ตรวจราคาใน AMap',note:'รอยืนยันสาขาและที่อยู่ก่อนผูกกับแผนรายวัน'},
+    {id:'apoli',th:'อโปลี อิตาเบเกอรี',en:'APOLI ITABAKERY',cn:'APOLI ITABAKERY',type:'bakery',typeLabel:'เบเกอรี',zone:'multi',day:'ตัวเลือก',area:'รอตรวจสาขา',address:'ค้นหาชื่อร้านในแผนที่',menu:'ขนมอบสไตล์อิตาเลียน',price:'ขึ้นกับสินค้า',note:'ยืนยันชื่อจากป้ายแล้ว แต่ยังไม่ยืนยันสาขา',img:'images/food-apoli-itabakery-bakery-counter.png'},
+    {id:'amam',th:'อามาม เบเกอรีทาวน์',en:'Amam Lonbakery Town',cn:'Amam Lonbakery Town',type:'bakery',typeLabel:'เบเกอรี',zone:'multi',day:'ตัวเลือก',area:'รอยืนยัน',address:'ต้องยืนยันชื่อทางการและสาขา',menu:'เบเกอรี',price:'ไม่ทราบ',note:'เก็บเป็นรายการรอตรวจสอบ ยังไม่ควรใช้เป็นจุดนำทาง'},
+    {id:'yaba',th:'ย่าปาเซิงเจียน',en:'Yaba Shengjian',cn:'哑巴生煎',type:'shengjian',typeLabel:'เซิงเจียน',zone:'suzhou',day:'Suzhou Day Trip',area:'Suzhou',address:'เลือกสาขาใกล้เส้นทางซูโจว',menu:'生煎包',price:'ตรวจราคาใน AMap',note:'แยกจาก Shanghai และเลือกสาขาหลังสรุปเส้นทาง Day Trip',img:'images/food-yaba-shengjian-suzhou-storefront.png'},
+    {id:'louwailou',th:'โหลวไว่โหลว',en:'Louwailou',cn:'楼外楼',type:'hangzhou',typeLabel:'อาหารหางโจว',zone:'hangzhou',day:'Day 4',area:'West Lake · Hangzhou',address:'孤山路30号',menu:'西湖醋鱼 · 东坡肉 · 龙井虾仁',price:'ประมาณ ¥150–300/คน',note:'ร้านเก่าแก่ริม West Lake ควรเผื่อเวลารอ'}
+  ];
+  var foodFilter='all',zoneFilter='all',foodSearch='';
+  function esc(s){return String(s||'').replace(/[&<>\"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]})}
+  function amap(r){var city=r.zone==='hangzhou'?'杭州':r.zone==='suzhou'?'苏州':'上海';return 'https://uri.amap.com/search?keyword='+encodeURIComponent(r.cn+(r.address?' '+r.address:''))+'&city='+city+'&view=map&src=shanghai-family-trip&callnative=1'}
+  function google(r){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.en+', '+r.cn+', '+r.address+', China')}
+  function card(r){return '<article class="restaurant-card"><div class="restaurant-cover '+(r.img?'':'no-photo')+'">'+(r.img?'<img src="'+esc(r.img)+'" alt="'+esc(r.th)+'" loading="lazy">':'🍜')+'<span class="restaurant-day">'+esc(r.day)+'</span></div><div class="restaurant-body"><div class="restaurant-title"><div><h3>'+esc(r.th)+'</h3><div class="cn">'+esc(r.cn)+'</div><small>'+esc(r.en)+'</small></div></div><span class="restaurant-type">'+esc(r.typeLabel)+'</span><div class="restaurant-menu"><b>เมนูเด่น</b><br>'+esc(r.menu)+'</div><div class="restaurant-meta"><div><b>📍 ย่าน</b><span>'+esc(r.area)+'</span></div><div><b>🏠 ที่อยู่/ค้นหา</b><span>'+esc(r.address)+'</span></div><div><b>💴 งบประมาณ</b><span>'+esc(r.price)+'</span></div></div><p class="restaurant-note">'+esc(r.note)+'</p><div class="actions"><a class="btn primary" href="'+amap(r)+'" target="_blank" rel="noopener">AMap</a><a class="btn gmap" href="'+google(r)+'" target="_blank" rel="noopener">Google Maps</a><button class="btn" data-food-copy="'+esc(r.cn)+'">Copy 中文</button><button class="btn ghost" data-food-fav="'+esc(r.id)+'">☆ Favorite</button></div></div></article>'}
+  function visibleFood(){var q=foodSearch.trim().toLowerCase();return FOOD.filter(function(r){var cat=foodFilter==='all'||r.type===foodFilter;var zone=zoneFilter==='all'||r.zone===zoneFilter;var text=(r.th+' '+r.en+' '+r.cn+' '+r.menu+' '+r.area+' '+r.address).toLowerCase();return cat&&zone&&(!q||text.indexOf(q)>-1)})}
+  function renderCards(){var list=visibleFood(),grid=document.querySelector('.restaurant-grid'),count=document.querySelector('.food-count');if(grid)grid.innerHTML=list.length?list.map(card).join(''):'<div class="food-empty">ไม่พบร้านที่ค้นหา</div>';if(count)count.textContent=list.length+' ร้าน';updateFavs()}
+  function updateFavs(){var fav=JSON.parse(localStorage.getItem('sh-food-favorites')||'[]');document.querySelectorAll('[data-food-fav]').forEach(function(b){var on=fav.indexOf(b.dataset.foodFav)>-1;b.textContent=on?'★ Favorite':'☆ Favorite';b.classList.toggle('done-btn',on)})}
+  function renderFood(){document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.hasAttribute('data-food-tab'))});var app=document.getElementById('app');app.innerHTML='<section class="food-hero"><span>SHANGHAI FAMILY FOOD GUIDE · v1.19</span><h2>🍜 ร้านอาหารและเมนูที่อยากลอง</h2><p>เลือกย่านที่กำลังเที่ยว แล้วกรองต่อด้วยประเภทอาหารได้โดยไม่ต้องไล่หาร้านทีละวัน</p></section><div class="food-tools"><input class="food-search" type="search" placeholder="ค้นหาร้าน เมนู ย่าน หรือชื่อจีน…" aria-label="ค้นหาร้านอาหาร"><div class="food-count"></div></div><h3 class="food-filter-title">📍 เลือกตามย่าน</h3><div class="food-filter-row area-filter-row"><button class="food-filter active" data-zone-filter="all">ทุกย่าน</button><button class="food-filter" data-zone-filter="yuyuan">Yu Garden</button><button class="food-filter" data-zone-filter="nanjing">Nanjing / People’s Square</button><button class="food-filter" data-zone-filter="bund">The Bund</button><button class="food-filter" data-zone-filter="huaihai">Huaihai / Xintiandi</button><button class="food-filter" data-zone-filter="jingan">Jing’an</button><button class="food-filter" data-zone-filter="lujiazui">Lujiazui</button><button class="food-filter" data-zone-filter="cloudnine">Cloud Nine</button><button class="food-filter" data-zone-filter="multi">หลายสาขา</button><button class="food-filter" data-zone-filter="suzhou">Suzhou</button><button class="food-filter" data-zone-filter="hangzhou">Hangzhou</button></div><h3 class="food-filter-title">🍽️ เลือกตามประเภท</h3><div class="food-filter-row"><button class="food-filter active" data-food-filter="all">ทุกประเภท</button><button class="food-filter" data-food-filter="xiaolongbao">เสี่ยวหลงเปา</button><button class="food-filter" data-food-filter="shengjian">เซิงเจียน</button><button class="food-filter" data-food-filter="noodle">บะหมี่</button><button class="food-filter" data-food-filter="shanghai">อาหารเซี่ยงไฮ้</button><button class="food-filter" data-food-filter="chinese">อาหารจีน</button><button class="food-filter" data-food-filter="bakery">เบเกอรี/ของฝาก</button><button class="food-filter" data-food-filter="dessert">ของหวาน</button><button class="food-filter" data-food-filter="snack">ของกินเล่น</button></div><div class="notice">ร้านที่ระบุ “รอยืนยัน” หรือ “เลือกสาขา” ควรตรวจใน AMap ใกล้วันเดินทาง ภาพที่มีลายน้ำ/เครดิตผู้สร้างถูกเก็บเป็นข้อมูลอ้างอิงและไม่นำมาเผยแพร่ในแอป</div><div class="restaurant-grid"></div>';foodFilter='all';zoneFilter='all';foodSearch='';renderCards();scrollTo({top:0,behavior:'instant'})}
+  function addTab(){var nav=document.querySelector('.bottom-nav');if(!nav||nav.querySelector('[data-food-tab]'))return;var trip=nav.querySelector('[data-tab="trip"]');var b=document.createElement('button');b.className='nav-btn';b.setAttribute('data-food-tab','1');b.innerHTML='<span>🍜</span><small>ร้านอาหาร</small>';nav.insertBefore(b,trip||null)}
+  document.addEventListener('click',function(e){var tab=e.target.closest&&e.target.closest('[data-food-tab]');if(tab){e.preventDefault();e.stopPropagation();renderFood();return}var zoneBtn=e.target.closest&&e.target.closest('[data-zone-filter]');if(zoneBtn){zoneFilter=zoneBtn.dataset.zoneFilter;document.querySelectorAll('[data-zone-filter]').forEach(function(b){b.classList.toggle('active',b===zoneBtn)});renderCards();return}var filter=e.target.closest&&e.target.closest('[data-food-filter]');if(filter){foodFilter=filter.dataset.foodFilter;document.querySelectorAll('[data-food-filter]').forEach(function(b){b.classList.toggle('active',b===filter)});renderCards();return}var copy=e.target.closest&&e.target.closest('[data-food-copy]');if(copy){navigator.clipboard&&navigator.clipboard.writeText(copy.dataset.foodCopy);copy.textContent='คัดลอกแล้ว ✓';setTimeout(function(){copy.textContent='Copy 中文'},1000);return}var favBtn=e.target.closest&&e.target.closest('[data-food-fav]');if(favBtn){var fav=JSON.parse(localStorage.getItem('sh-food-favorites')||'[]'),id=favBtn.dataset.foodFav,i=fav.indexOf(id);if(i>-1)fav.splice(i,1);else fav.push(id);localStorage.setItem('sh-food-favorites',JSON.stringify(fav));updateFavs()}},true);
+  document.addEventListener('input',function(e){if(e.target.matches('.food-search')){foodSearch=e.target.value;renderCards()}},true);
+  new MutationObserver(addTab).observe(document.body,{childList:true,subtree:true});addTab();
+})();
+</script>
+</body>
+</html>

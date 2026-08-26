@@ -1,0 +1,12 @@
+{
+  "name": "Shanghai Family Trip 2026",
+  "short_name": "Shanghai Trip",
+  "description": "แผนเที่ยวเซี่ยงไฮ้สำหรับครอบครัว 13–18 กันยายน 2026",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff8fb",
+  "theme_color": "#e84887",
+  "lang": "th"
+}
+
