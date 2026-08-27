@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "departure_buffers": {
+    "default": 10,
+    "didi": 15,
+    "metro": 15,
+    "ferry": 20,
+    "train": 60
+  },
+  "signs": [
+    {"cn":"入口","th":"ทางเข้า","en":"Entrance","tip":"มองหาก่อนเข้าพื้นที่/สถานี"},
+    {"cn":"出口","th":"ทางออก","en":"Exit","tip":"ใน Metro ให้ตามด้วยเลข Exit"},
+    {"cn":"地铁","th":"รถไฟใต้ดิน","en":"Metro","tip":"มักอยู่บนป้ายทางเข้าสถานี"},
+    {"cn":"换乘","th":"เปลี่ยนสาย","en":"Transfer","tip":"เดินตามสี/หมายเลข Line ต่อไป"},
+    {"cn":"站","th":"สถานี","en":"Station","tip":"มักต่อท้ายชื่อสถานี"},
+    {"cn":"检票口","th":"ประตูตรวจตั๋ว","en":"Ticket gate","tip":"รถไฟความเร็วสูงต้องดูหมายเลข gate"},
+    {"cn":"候车室","th":"ห้อง/พื้นที่รอรถไฟ","en":"Waiting hall","tip":"ดู Train No. บนจอใหญ่"},
+    {"cn":"车次","th":"เลขขบวน","en":"Train No.","tip":"เช่น G1234"},
+    {"cn":"车厢","th":"ตู้รถไฟ","en":"Coach","tip":"ดูเลข Coach บนตั๋ว"},
+    {"cn":"座位","th":"ที่นั่ง","en":"Seat","tip":"ดูเลขที่นั่งหลังขึ้นตู้ถูกแล้ว"},
+    {"cn":"卫生间","th":"ห้องน้ำ","en":"Toilet","tip":"ใช้ได้ทั่วไป"},
+    {"cn":"洗手间","th":"ห้องน้ำ","en":"Restroom","tip":"คำที่ใช้ถามคนได้บ่อย"},
+    {"cn":"服务台","th":"เคาน์เตอร์บริการ","en":"Service desk","tip":"ไปจุดนี้เมื่อไม่แน่ใจ"},
+    {"cn":"售票处","th":"ที่ขายตั๋ว","en":"Ticket office","tip":"ใช้เมื่อจำเป็นต้องคุยกับเจ้าหน้าที่"},
+    {"cn":"安检","th":"ตรวจความปลอดภัย","en":"Security check","tip":"สนามบินและสถานีรถไฟ"},
+    {"cn":"行李寄存","th":"ฝากกระเป๋า","en":"Luggage storage","tip":"มองหาที่สถานี/สถานที่ใหญ่"},
+    {"cn":"急诊","th":"ฉุกเฉินโรงพยาบาล","en":"Emergency department","tip":"ใช้กรณีต้องไปโรงพยาบาล"},
+    {"cn":"收银台","th":"แคชเชียร์","en":"Cashier","tip":"ร้านอาหาร/ร้านค้า"}
+  ],
+  "restaurant_phrases": [
+    {"th":"พวกเรามี 4 คน","cn":"我们四个人。","pinyin":"Wǒmen sì ge rén."},
+    {"th":"ขอเมนูภาษาอังกฤษได้ไหม","cn":"有英文菜单吗？","pinyin":"Yǒu Yīngwén càidān ma?"},
+    {"th":"ไม่เผ็ด / เผ็ดน้อยมาก","cn":"不要辣，微微辣也可以。","pinyin":"Bú yào là, wēiwēi là yě kěyǐ."},
+    {"th":"ไม่เอาเครื่องใน","cn":"不要内脏，谢谢。","pinyin":"Bú yào nèizàng, xièxie."},
+    {"th":"เมนูไหนแนะนำ","cn":"请问有什么推荐？","pinyin":"Qǐngwèn yǒu shénme tuījiàn?"},
+    {"th":"ขอน้ำเปล่า","cn":"请给我们白水，谢谢。","pinyin":"Qǐng gěi wǒmen báishuǐ, xièxie."},
+    {"th":"คิดเงินด้วย","cn":"买单，谢谢。","pinyin":"Mǎidān, xièxie."},
+    {"th":"ใส่กลับบ้าน","cn":"请帮我们打包，谢谢。","pinyin":"Qǐng bāng wǒmen dǎbāo, xièxie."}
+  ],
+  "privacy": {
+    "public_rule": "Public build should contain itinerary, public business/location data, emergency contacts and non-secret booking facts only.",
+    "private_rule": "Passport numbers, booking references, policy numbers, ticket QR/screenshots and full passenger identity lists should be stored only on the user's device or another private location."
+  }
+}

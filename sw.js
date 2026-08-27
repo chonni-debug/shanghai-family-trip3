@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v1.22';
+const CACHE='shanghai-family-trip-v1.24';
 
 const ESSENTIAL=[
   './',
@@ -10,8 +10,12 @@ const ESSENTIAL=[
   './v2/index.html',
   './v2/readiness.js',
   './v2/first-time-china.js',
+  './v2/journey-controller.js',
+  './v2/privacy-guard.js',
+  './v2/simulator-fix.js',
   './data/trip-readiness.json',
   './data/china-first-time.json',
+  './data/journey-controller.json',
   './icons/trip-icon.svg',
   './icons/trip-maskable.svg',
   './images/offline-map-fallback.svg',
@@ -31,7 +35,6 @@ self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE);
     await cache.addAll(ESSENTIAL);
-    // Optional photos must never make the whole PWA installation fail.
     await Promise.allSettled(OPTIONAL.map(url=>cache.add(url)));
     await self.skipWaiting();
   })());
@@ -48,7 +51,6 @@ self.addEventListener('activate',event=>{
 self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET')return;
   const url=new URL(event.request.url);
-
   if(event.request.mode==='navigate'){
     event.respondWith((async()=>{
       try{
@@ -63,7 +65,6 @@ self.addEventListener('fetch',event=>{
     })());
     return;
   }
-
   event.respondWith((async()=>{
     const cached=await caches.match(event.request);
     if(cached)return cached;
@@ -75,9 +76,7 @@ self.addEventListener('fetch',event=>{
       }
       return response;
     }catch(err){
-      if(event.request.destination==='image'){
-        return (await caches.match('./images/offline-map-fallback.svg')) || Response.error();
-      }
+      if(event.request.destination==='image')return (await caches.match('./images/offline-map-fallback.svg')) || Response.error();
       return Response.error();
     }
   })());
