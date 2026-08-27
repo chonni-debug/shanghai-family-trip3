@@ -1,17 +1,16 @@
-const CACHE='shanghai-family-trip-v2.4';
+const CACHE='shanghai-family-trip-v2.5';
 
 const ESSENTIAL=[
   './',
   './index.html',
   './manifest.webmanifest',
-  './styles.css',
-  './mobile-enhancements.js',
   './v2/',
   './v2/index.html',
   './v2/app.css',
   './v2/private-wallet.css',
   './v2/photo-integrity.css',
   './v2/usability.css',
+  './v2/production-readiness.css',
   './v2/app-core.js',
   './v2/app-views-main.js',
   './v2/app-views-more.js',
@@ -20,6 +19,7 @@ const ESSENTIAL=[
   './v2/verified-photo-library.js',
   './v2/photo-integrity.js',
   './v2/usability.js',
+  './v2/production-readiness.js',
   './v2/app-events.js',
   './data/app-trip.json',
   './data/app-days-1.json',
