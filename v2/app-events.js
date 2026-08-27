@@ -44,6 +44,7 @@ async function init(){
     const parts=await Promise.all(urls.map(async url=>{const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error('data '+url);return r.json()}));
     DATA={...parts[0],...parts[4],days:[...parts[1].days,...parts[2].days,...parts[3].days]};
     if(DATA.days.length!==6)throw new Error('itinerary days');
+    if(typeof applyPhotoIntegrity==='function')applyPhotoIntegrity(DATA);
     state.selectedDay=Math.max(0,Math.min(DATA.days.length-1,tripStatus().day));render();
     if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});
   }catch(err){app.innerHTML=`<div class="card"><h2>${state.lang==='zh'?'无法加载数据':'โหลดข้อมูลไม่สำเร็จ'}</h2><p>${esc(err.message)}</p></div>`}
