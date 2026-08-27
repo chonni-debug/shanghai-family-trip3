@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v1.26';
+const CACHE='shanghai-family-trip-v1.27';
 
 const ESSENTIAL=[
   './',
@@ -15,6 +15,7 @@ const ESSENTIAL=[
   './v2/simulator-fix.js',
   './v2/i18n.js',
   './v2/i18n-fix.js',
+  './v2/mobile-layout-fix.js',
   './data/trip-readiness.json',
   './data/china-first-time.json',
   './data/journey-controller.json',
