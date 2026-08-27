@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "updated": "2026-08-27",
+  "foodStatusLabels": {
+    "planned": {"th":"🍜 Planned Meal","zh":"🍜 计划用餐"},
+    "must_try": {"th":"⭐ Must Try if Nearby","zh":"⭐ 顺路必试"},
+    "backup": {"th":"↔ Backup","zh":"↔ 备用"}
+  },
+  "places": [
+    {"id":"lailai-tianjin","name":{"th":"ไลไลเสี่ยวหลง","zh":"莱莱小笼·乔艾"},"en":"Lai Lai Xiao Long","cn":"莱莱小笼·乔艾","cat":"food","city":"上海","addr":"天津路506号","copyText":"莱莱小笼·乔艾 天津路506号","dayHint":[3],"foodStatus":"must_try","tripRole":"must_try","avgPrice":"约 ¥58/人","hours":"08:00–14:00 / 15:00–20:00","menu":{"th":"蟹粉小笼 / 蟹膏小笼 — เสี่ยวหลงเปาปู","zh":"蟹粉小笼 / 蟹膏小笼"},"note":{"th":"ควรไปสูงเมื่ออยู่โซน People's Square/Nanjing; ผู้ใช้ตรวจว่าเป็น Michelin Bib Gourmand","zh":"人民广场/南京路附近优先级较高；用户资料标注为米其林必比登推荐"},"checked":"2026-08-27"},
+    {"id":"weixiang-yandang","name":{"th":"เว่ยเซียงไจ","zh":"味香斋(雁荡路店)"},"en":"Wei Xiang Zhai","cn":"味香斋(雁荡路店)","cat":"food","city":"上海","addr":"雁荡路14号","copyText":"味香斋(雁荡路店) 雁荡路14号","dayHint":[6],"foodStatus":"backup","tripRole":"backup","menu":{"th":"麻酱拌面 บะหมี่ซอสงา • 小牛汤 • 麻酱馄饨","zh":"麻酱拌面 • 小牛汤 • 麻酱馄饨"},"note":{"th":"ใช้ที่อยู่ 雁荡路14号; ที่อยู่ 122 Yangping Road ยังไม่ยืนยัน","zh":"先使用雁荡路14号；122 Yangping Road 地址尚未确认"},"checked":"2026-08-27"},
+    {"id":"huxi-jingan","name":{"th":"หู่ซีเหล่า弄堂เมี่ยนก่วน","zh":"沪西老弄堂面馆(静安寺店)"},"en":"Huxi Old Alley Noodle House","cn":"沪西老弄堂面馆(静安寺店)","cat":"food","city":"上海","addr":"北京西路1738号","copyText":"沪西老弄堂面馆(静安寺店) 北京西路1738号","dayHint":[2],"foodStatus":"planned","tripRole":"planned","menu":{"th":"蛤蜊猪肝面 บะหมี่ตับหมูกับหอย • 大肠面 • 葱油拌面 • 炸猪排","zh":"蛤蜊猪肝面 • 大肠面 • 葱油拌面 • 炸猪排"},"note":{"th":"เหมาะหลัง Jing’an Temple ไม่ต้องออกนอกเส้นมาก","zh":"适合静安寺之后顺路用餐"},"checked":"2026-08-27"},
+    {"id":"shucaiji","name":{"th":"ซูไช่จี้เซิงเจียน","zh":"舒蔡记生煎菜饭(浙江中路店)"},"en":"Shu Cai Ji Shengjian","cn":"舒蔡记生煎菜饭(浙江中路店)","cat":"food","city":"上海","addr":"浙江中路120号","copyText":"舒蔡记生煎菜饭(浙江中路店) 浙江中路120号","dayHint":[3],"foodStatus":"must_try","tripRole":"must_try","avgPrice":"约 ¥22/人","menu":{"th":"特色生煎 • 菜饭 • 锅贴 • 牛肉汤 — เหมาะสั่งแบ่งชิม","zh":"特色生煎 • 菜饭 • 锅贴 • 牛肉汤，适合多人分着尝"},"note":{"th":"Street-food option ในโซน People's Square/Nanjing Road ไม่จำเป็นต้องเป็นมื้อใหญ่","zh":"人民广场/南京路区域的小吃选择，不必作为正餐"},"checked":"2026-08-27"},
+    {"id":"aniang-sinan","name":{"th":"อาเหนียงเมี่ยนก่วน","zh":"阿娘面馆(锡荣别墅店)"},"en":"A Niang Noodle House","cn":"阿娘面馆(锡荣别墅店)","cat":"food","city":"上海","addr":"思南路36号","copyText":"阿娘面馆(锡荣别墅店) 思南路36号","dayHint":[6],"foodStatus":"must_try","tripRole":"must_try","hours":"11:00–20:00","menu":{"th":"蟹粉干面/蟹粉拌面 บะหมี่ปู • 黄鱼面/黄鱼煨面 บะหมี่ปลาจวดเหลือง","zh":"蟹粉干面 / 蟹粉拌面 • 黄鱼面 / 黄鱼煨面"},"note":{"th":"เข้ากับ Sinan Mansion มาก แต่ข้อมูลสถานะร้านจากบางฐานข้อมูลขัดแย้ง","zh":"与思南公馆路线很合适，但部分旧数据库对营业状态信息有冲突"},"verifyBeforeTrip":true,"checked":"2026-08-27"}
+  ]
+}
