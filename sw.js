@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v1.27';
+const CACHE='shanghai-family-trip-v2.0';
 
 const ESSENTIAL=[
   './',
@@ -8,17 +8,17 @@ const ESSENTIAL=[
   './mobile-enhancements.js',
   './v2/',
   './v2/index.html',
-  './v2/readiness.js',
-  './v2/first-time-china.js',
-  './v2/journey-controller.js',
-  './v2/privacy-guard.js',
-  './v2/simulator-fix.js',
-  './v2/i18n.js',
-  './v2/i18n-fix.js',
-  './v2/mobile-layout-fix.js',
-  './data/trip-readiness.json',
-  './data/china-first-time.json',
-  './data/journey-controller.json',
+  './v2/app.css',
+  './v2/app-core.js',
+  './v2/app-views-main.js',
+  './v2/app-views-more.js',
+  './v2/app-modals.js',
+  './v2/app-events.js',
+  './data/app-trip.json',
+  './data/app-days-1.json',
+  './data/app-days-2.json',
+  './data/app-days-3.json',
+  './data/app-support.json',
   './icons/trip-icon.svg',
   './icons/trip-maskable.svg',
   './images/offline-map-fallback.svg',
@@ -30,7 +30,6 @@ for(let i=2;i<=13;i++)OPTIONAL.push(`./images/photo-${String(i).padStart(3,'0')}
 for(let i=14;i<=19;i++)OPTIONAL.push(`./images/photo-${String(i).padStart(3,'0')}.png`);
 for(let i=20;i<=53;i++)OPTIONAL.push(`./images/photo-${String(i).padStart(3,'0')}.jpg`);
 [
-  'family-trip-cover.jpg','user-bund.jpg','user-french.jpg','user-hotel.jpg','user-huaihai.jpg','user-huanghe.jpg','user-jialing.jpg','user-nanjing.jpg','user-nanxiang.jpg','user-people.jpg','user-tianzifang.jpg','user-weixiang.jpg','user-wukang.jpg','user-xintiandi.jpg','user-yuyuan.jpg',
   'food-lai-lai-xiao-long-collage.png','food-huxi-old-alley-noodle-house-collage.png','food-shu-cai-ji-shengjian-kitchen-menu.png','food-a-niang-noodle-house-beef-noodles.png','food-ren-he-guan-storefront.png','food-park-hotel-bakery-butterfly-pastry.png','food-songhelou-suzhou-noodles-hongyi-collage.png','food-da-hu-chun-shengjian-collage.png','food-yongfeng-noodle-house-storefront-preferred.png','food-shao-wan-sheng-shanxi-south-road-storefront.png','food-shen-da-cheng-nanjing-east-road-exit-10.png','food-apoli-itabakery-bakery-counter.png','food-butterful-and-creamorous-west-nanjing-road-storefront.png','food-shanghai-grandmother-restaurant-fuzhou-road-storefront.png','food-maotou-laodie-jingan-yuyuan-road-storefront.png','food-luo-chun-ge-shanghai-friedbuns-storefront.png','food-wu-you-xian-storefront.png','food-autumn-flavor-xiaoqiu-tianjin-road-406-storefront.png','food-yaba-shengjian-suzhou-storefront.png'
 ].forEach(name=>OPTIONAL.push('./images/'+name));
 
