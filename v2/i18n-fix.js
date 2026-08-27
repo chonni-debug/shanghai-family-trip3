@@ -15,13 +15,4 @@ function mark(){markShell();markFrame()}
 mark();
 if(frame)frame.addEventListener('load',function(){setTimeout(markFrame,80);setTimeout(function(){var d;try{d=frame.contentDocument}catch(e){}if(d&&d.body)new MutationObserver(markFrame).observe(d.body,{childList:true,subtree:true})},180)});
 document.addEventListener('sh-language-change',function(){setTimeout(mark,0)});
-
-// Load the mobile overflow guard last so it can override earlier feature styles.
-if(!document.querySelector('script[data-mobile-layout-fix]')){
-  var s=document.createElement('script');
-  s.src='mobile-layout-fix.js';
-  s.defer=true;
-  s.setAttribute('data-mobile-layout-fix','1');
-  document.head.appendChild(s);
-}
 })();
