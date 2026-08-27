@@ -63,6 +63,34 @@ test('Explore restores extended places and food roles',async({page})=>{
   await expect(page.getByText('เว่ยเซียงไจ',{exact:true})).toBeVisible();
 });
 
+test('Today shows plan-context suggestions for People’s Square',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.addInitScript(()=>localStorage.setItem('sh-sim-v3',JSON.stringify({active:true,day:2,time:'13:20'})));
+  await prime(page);
+  const context=page.locator('.context-suggestions');
+  await expect(context).toBeVisible();
+  await expect(context).toContainText('อิงจากจุดในแผน');
+  await expect(context.locator('.context-mini-card')).toHaveCount(3);
+  await expect(context).toContainText('ไลไลเสี่ยวหลง');
+  await expect(context).toContainText('ซูไช่จี้เซิงเจียน');
+  await expect(context).toContainText('พิพิธภัณฑ์เซี่ยงไฮ้');
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+  await context.locator('[data-context-detail]').first().click();
+  await expect(page.locator('#modal')).toBeVisible();
+  await expect(page.locator('#modalBody')).toContainText('天津路506号');
+});
+
+test('rest family mode does not encourage extra contextual stops',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.addInitScript(()=>{
+    localStorage.setItem('sh-sim-v3',JSON.stringify({active:true,day:2,time:'13:20'}));
+    localStorage.setItem('sh-family-status','rest');
+  });
+  await prime(page);
+  await expect(page.locator('.context-suggestions')).toHaveCount(0);
+});
+
 test('offline reload keeps the root app usable after cache warmup',async({page,context})=>{
   await page.setViewportSize({width:390,height:844});
   await prime(page);
