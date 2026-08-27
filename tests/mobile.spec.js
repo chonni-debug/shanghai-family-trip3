@@ -29,11 +29,15 @@ test('Thai and Chinese navigation both render',async({page})=>{
   await expect(page.locator('#bottomNav button').first()).toContainText('今天');
 });
 
-test('plan exposes six days and skip can be toggled',async({page})=>{
+test('plan exposes six days, detailed Day 1 walk and skip can be toggled',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await prime(page);
   await page.locator('[data-tab="plan"]').click();
   await expect(page.locator('.day-chip')).toHaveCount(6);
+  await expect(page.locator('.content-route-card')).toBeVisible();
+  await expect(page.locator('.content-route-sequence > div')).toHaveCount(11);
+  await expect(page.locator('.content-route-card')).toContainText('LOOKNOW&FLOW');
+  await expect(page.locator('.content-route-card')).toContainText('TEENIE WEENIE');
   const firstCard=page.locator('.event-card').first();
   await firstCard.locator('[data-event-more]').click();
   await expect(page.locator('[data-skip-event]')).toBeVisible();
@@ -41,6 +45,22 @@ test('plan exposes six days and skip can be toggled',async({page})=>{
   await expect(page.locator('.event-card.skipped').first()).toBeVisible();
   await page.locator('.event-card.skipped [data-skip-event]').first().click();
   await expect(page.locator('.event-card.skipped')).toHaveCount(0);
+});
+
+test('Explore restores extended places and food roles',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await prime(page);
+  await page.locator('[data-tab="explore"]').click();
+  await expect(page.getByText('พิพิธภัณฑ์เซี่ยงไฮ้',{exact:true})).toBeVisible();
+  await expect(page.getByText('ซือหนานแมนชั่นส์',{exact:true})).toBeVisible();
+  await page.locator('[data-filter="food"]').click();
+  await expect(page.locator('[data-food-role]')).toHaveCount(4);
+  await expect(page.getByText('ไลไลเสี่ยวหลง',{exact:true})).toBeVisible();
+  await page.locator('[data-food-role="must_try"]').click();
+  await expect(page.getByText('ซูไช่จี้เซิงเจียน',{exact:true})).toBeVisible();
+  await expect(page.getByText('หู่ซีเหล่า弄堂เมี่ยนก่วน',{exact:true})).toHaveCount(0);
+  await page.locator('[data-food-role="backup"]').click();
+  await expect(page.getByText('เว่ยเซียงไจ',{exact:true})).toBeVisible();
 });
 
 test('offline reload keeps the root app usable after cache warmup',async({page,context})=>{
