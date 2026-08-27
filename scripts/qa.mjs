@@ -30,6 +30,7 @@ const v2Html=read('v2/index.html');
 ok(!/<iframe\b/i.test(rootHtml)&&!/<iframe\b/i.test(v2Html),'root and v2 contain no iframe');
 ok(/<base href="\.\/v2\/">/.test(rootHtml),'root directly loads the standalone v2 application');
 ok(rootHtml.includes('production-readiness.js')&&v2Html.includes('production-readiness.js'),'production readiness layer loads in root and v2');
+ok(rootHtml.includes('wallet-storage-guard.js')&&v2Html.includes('wallet-storage-guard.js'),'wallet storage guard loads in root and v2');
 
 const readiness=read('v2/production-readiness.js');
 ok(readiness.includes("const SKIP_KEY='sh-skipped'"),'skip-event state is implemented');
@@ -37,12 +38,18 @@ ok(readiness.includes("const ONBOARD_KEY='sh-onboarding-v1'"),'first-run onboard
 ok(readiness.includes('checkOfflineReadiness'),'offline readiness check is implemented');
 ok(readiness.includes('adaptiveFamilyCard'),'family adaptive plan is implemented');
 
+const walletGuard=read('v2/wallet-storage-guard.js');
+ok(walletGuard.includes('probeWalletStorage'),'wallet storage capability probe is implemented');
+ok(walletGuard.includes('Private')&&walletGuard.includes('QuotaExceededError'),'wallet storage guard distinguishes restricted/private and quota failures');
+ok(walletGuard.includes('showWalletStorageHelp'),'wallet storage failure has an actionable recovery flow');
+
 const publicData=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json'].map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public trip data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.5"),'service worker cache version is v2.5');
+ok(sw.includes("shanghai-family-trip-v2.6"),'service worker cache version is v2.6');
 ok(sw.includes('./v2/production-readiness.js')&&sw.includes('./v2/production-readiness.css'),'production readiness assets are precached');
+ok(sw.includes('./v2/wallet-storage-guard.js'),'wallet storage guard is precached');
 
 const photoLib=read('v2/verified-photo-library.js');
 const verifiedKeys=[...photoLib.matchAll(/^\s*'([^']+)'\s*:\s*\{/gm)].map(m=>m[1]);
