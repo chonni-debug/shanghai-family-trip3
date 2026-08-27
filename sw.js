@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v2.2';
+const CACHE='shanghai-family-trip-v2.3';
 
 const ESSENTIAL=[
   './',
@@ -16,6 +16,7 @@ const ESSENTIAL=[
   './v2/app-views-more.js',
   './v2/app-modals.js',
   './v2/private-wallet.js',
+  './v2/verified-photo-library.js',
   './v2/photo-integrity.js',
   './v2/app-events.js',
   './data/app-trip.json',
@@ -76,7 +77,7 @@ self.addEventListener('fetch',event=>{
     if(cached)return cached;
     try{
       const response=await fetch(event.request);
-      if(response&&response.ok){
+      if(response&&(response.ok||response.type==='opaque')){
         const cache=await caches.open(CACHE);
         cache.put(event.request,response.clone()).catch(()=>{});
       }
