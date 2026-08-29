@@ -15,12 +15,12 @@ const RD_TEXT={
   noData:{th:'กำลังโหลดข้อมูลความพร้อม…',zh:'正在加载准备信息…'}
 };
 function rdt(k){const v=RD_TEXT[k];return v?(v[state.lang]||v.th):k}
-function rdLoc(v){return typeof v==='string'?v:(v?.[state.lang]||v?.th||v?.zh||'')}
+function rdField(x,k){return state.lang==='zh'?(x?.[`${k}_zh`]||x?.[k]||''):(x?.[k]||x?.[`${k}_zh`]||'')}
 function rdStatusClass(s){return ['verified','pending','recheck','live','important','ticket'].includes(s)?s:'recheck'}
 function rdStatusLabel(s){return rdt(s)||s}
 function renderTripReadiness(){
   if(!TRIP_READINESS)return `${backMore()}<div class="card"><p>${rdt('noData')}</p></div>`;
-  const rows=(TRIP_READINESS.checks||[]).map(x=>`<article class="readiness-item ${rdStatusClass(x.status)}"><div class="readiness-head"><span class="readiness-dot"></span><div><b>${esc(rdLoc(x.label)||x.id)}</b><small>${esc(rdStatusLabel(x.status))}</small></div></div><p>${esc(rdLoc(x.detail))}</p>${x.source_url?`<a class="btn ghost" href="${esc(x.source_url)}" target="_blank" rel="noopener">↗ ${rdt('source')} · ${esc(rdLoc(x.source_label)||'Official')}</a>`:''}</article>`).join('');
+  const rows=(TRIP_READINESS.checks||[]).map(x=>`<article class="readiness-item ${rdStatusClass(x.status)}"><div class="readiness-head"><span class="readiness-dot"></span><div><b>${esc(rdField(x,'label')||x.id)}</b><small>${esc(rdStatusLabel(x.status))}</small></div></div><p>${esc(rdField(x,'detail'))}</p>${x.source_url?`<a class="btn ghost" href="${esc(x.source_url)}" target="_blank" rel="noopener">↗ ${rdt('source')} · ${esc(rdField(x,'source_label')||'Official')}</a>`:''}</article>`).join('');
   return `${backMore()}<div class="section-head"><h2>${rdt('title')}</h2><span>${esc(TRIP_READINESS.last_verified||'')}</span></div><div class="notice">${rdt('sub')} · ${rdt('last')} ${esc(TRIP_READINESS.last_verified||'')}</div><div class="readiness-list">${rows}</div>`;
 }
 
