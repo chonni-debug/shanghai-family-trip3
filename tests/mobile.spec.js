@@ -29,22 +29,50 @@ test('Thai and Chinese navigation both render',async({page})=>{
   await expect(page.locator('#bottomNav button').first()).toContainText('今天');
 });
 
-test('plan exposes six days, detailed Day 1 walk and skip can be toggled',async({page})=>{
+test('Plan v3 shows six days, bilingual compact cards, detail actions and skip state',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await prime(page);
   await page.locator('[data-tab="plan"]').click();
-  await expect(page.locator('.day-chip')).toHaveCount(6);
-  await expect(page.locator('.content-route-card')).toBeVisible();
-  await expect(page.locator('.content-route-sequence > div')).toHaveCount(11);
-  await expect(page.locator('.content-route-card')).toContainText('LOOKNOW&FLOW');
-  await expect(page.locator('.content-route-card')).toContainText('TEENIE WEENIE');
-  const firstCard=page.locator('.event-card').first();
-  await firstCard.locator('[data-event-more]').click();
-  await expect(page.locator('[data-skip-event]')).toBeVisible();
-  await page.locator('[data-skip-event]').click();
-  await expect(page.locator('.event-card.skipped').first()).toBeVisible();
-  await page.locator('.event-card.skipped [data-skip-event]').first().click();
-  await expect(page.locator('.event-card.skipped')).toHaveCount(0);
+  await expect(page.locator('.v3-day-chip')).toHaveCount(6);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(10);
+  const first=page.locator('.v3-itinerary-card').first();
+  await expect(first).toContainText('ถึงสนามบินผู่ตง T2');
+  await expect(first).toContainText('抵达浦东机场 T2');
+  await expect(first.locator('.v3-thumb')).toBeVisible();
+  await first.locator('.v3-card-summary').click();
+  await expect(first.locator('.v3-card-detail')).toBeVisible();
+  await expect(first.locator('.v3-cn-copy')).toContainText('上海浦东国际机场T2');
+  await expect(first.locator('[data-copy]')).toBeVisible();
+  await expect(first.locator('[data-show-cn-day]')).toBeVisible();
+  await expect(first.locator('[data-speak]')).toBeVisible();
+  await first.locator('[data-skip-event]').click();
+  await expect(page.locator('.v3-itinerary-card.skipped').first()).toBeVisible();
+  await page.locator('.v3-itinerary-card.skipped [data-skip-event]').first().click();
+  await expect(page.locator('.v3-itinerary-card.skipped')).toHaveCount(0);
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+});
+
+test('Plan v3 preserves the 11-stop detailed Day 1 City Walk',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await prime(page);
+  await page.locator('[data-tab="plan"]').click();
+  const walk=page.locator('.v3-walk-detail');
+  await expect(walk).toBeVisible();
+  await expect(walk.locator('.v3-walk-sequence > div')).toHaveCount(11);
+  await walk.locator('summary').click();
+  await expect(walk).toContainText('LOOKNOW&FLOW');
+  await expect(walk).toContainText('TEENIE WEENIE');
+});
+
+test('Plan v3 keeps Thai visible when UI switches to Chinese',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await prime(page);
+  await page.locator('#langBtn').click();
+  await page.locator('[data-tab="plan"]').click();
+  const first=page.locator('.v3-itinerary-card').first();
+  await expect(first).toContainText('抵达浦东机场 T2');
+  await expect(first).toContainText('ไทย · ถึงสนามบินผู่ตง T2');
 });
 
 test('Explore restores extended places and food roles',async({page})=>{
