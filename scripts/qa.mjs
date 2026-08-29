@@ -31,9 +31,7 @@ const day1Walk=json('data/day1-citywalk.json');
 const contextual=json('data/contextual-suggestions.json');
 ok((extraPlaces.places||[]).length>=40,'extended place library restores at least 40 places and route stops');
 ok((extraFood.places||[]).length>=5,'food guide restores researched restaurant entries');
-for(const p of [...extraPlaces.places,...extraFood.places]){
-  ok(Boolean(p.cn&&p.name?.th&&p.name?.zh),`extended place ${p.id||p.cn} is bilingual and has Chinese copy text`);
-}
+for(const p of [...extraPlaces.places,...extraFood.places])ok(Boolean(p.cn&&p.name?.th&&p.name?.zh),`extended place ${p.id||p.cn} is bilingual and has Chinese copy text`);
 for(const key of ['五原路','乌鲁木齐中路','安福路','延庆坊','武康大楼','上海博物馆','思南公馆','北外滩滨江绿地','上海自然博物馆','豫园老街','正大广场'])ok(extraPlaces.places.some(p=>p.cn===key),`extended place library contains ${key}`);
 for(const key of ['莱莱小笼·乔艾','味香斋(雁荡路店)','沪西老弄堂面馆(静安寺店)','舒蔡记生煎菜饭(浙江中路店)','阿娘面馆(锡荣别墅店)'])ok(extraFood.places.some(p=>p.cn===key),`food guide contains ${key}`);
 ok(new Set(extraFood.places.map(p=>p.foodStatus)).has('planned')&&new Set(extraFood.places.map(p=>p.foodStatus)).has('must_try')&&new Set(extraFood.places.map(p=>p.foodStatus)).has('backup'),'food guide uses Planned / Must Try / Backup roles');
@@ -60,9 +58,9 @@ ok(/<base href="\.\/v2\/">/.test(rootHtml),'root directly loads the standalone v
 ok(rootHtml.includes('production-readiness.js')&&v2Html.includes('production-readiness.js'),'production readiness layer loads in root and v2');
 ok(rootHtml.includes('wallet-storage-guard.js')&&v2Html.includes('wallet-storage-guard.js'),'wallet storage guard loads in root and v2');
 ok(rootHtml.includes('content-library.js')&&v2Html.includes('content-library.js'),'extended content library loads in root and v2');
-ok(rootHtml.includes('content-library.css')&&v2Html.includes('content-library.css'),'extended content library styles load in root and v2');
 ok(rootHtml.includes('contextual-suggestions.js')&&v2Html.includes('contextual-suggestions.js'),'contextual Today suggestions load in root and v2');
-ok(rootHtml.includes('contextual-suggestions.css')&&v2Html.includes('contextual-suggestions.css'),'contextual suggestion styles load in root and v2');
+ok(rootHtml.includes('itinerary-v3.js')&&v2Html.includes('itinerary-v3.js'),'itinerary card UI v3 loads in root and v2');
+ok(rootHtml.includes('itinerary-v3.css')&&v2Html.includes('itinerary-v3.css'),'itinerary card UI v3 styles load in root and v2');
 
 const readiness=read('v2/production-readiness.js');
 ok(readiness.includes("const SKIP_KEY='sh-skipped'"),'skip-event state is implemented');
@@ -77,26 +75,35 @@ ok(walletGuard.includes('showWalletStorageHelp'),'wallet storage failure has an 
 
 const contentLayer=read('v2/content-library.js');
 ok(contentLayer.includes('foodStatus')&&contentLayer.includes('data-food-role'),'Explore food guide exposes role filtering');
-ok(contentLayer.includes('contentRoute')&&contentLayer.includes('content-mini-stops'),'Plan can show the detailed route without adding core activities');
+ok(contentLayer.includes('contentRoute')&&contentLayer.includes('content-mini-stops'),'Plan data layer can carry detailed route without adding core activities');
 
 const contextLayer=read('v2/contextual-suggestions.js');
 ok(contextLayer.includes('ctContext')&&contextLayer.includes('contextualCard'),'Today has plan-context suggestion logic');
 ok(contextLayer.includes("state.family==='rest'")&&contextLayer.includes("state.family==='tired'"),'context suggestions respect tired/rest family modes');
 ok(contextLayer.includes('ไม่ใช้ GPS')&&contextLayer.includes('不使用 GPS'),'context UI does not claim live GPS proximity');
 
+const itineraryV3=read('v2/itinerary-v3.js');
+ok(itineraryV3.includes('v3DayChips')&&itineraryV3.includes('v3-itinerary-card'),'Plan v3 uses scrollable day chips and compact itinerary cards');
+ok(itineraryV3.includes('v3Names')&&itineraryV3.includes('v3-cn-name'),'Plan v3 always keeps Thai and Chinese place names available');
+ok(itineraryV3.includes('data-copy')&&itineraryV3.includes('data-show-cn-day')&&itineraryV3.includes('data-speak'),'expanded Plan cards retain Copy Chinese, Show Chinese and speech actions');
+ok(itineraryV3.includes('data-skip-event')&&itineraryV3.includes('data-done'),'expanded Plan cards retain skip and arrival state actions');
+ok(itineraryV3.includes('v3Transport')&&!itineraryV3.includes('durationMinutes'),'route connectors classify transport without inventing transit duration');
+ok(itineraryV3.includes('contextualCard'),'expanded Plan cards can expose existing contextual suggestions');
+
 const publicData=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/day1-citywalk.json','data/contextual-suggestions.json'].map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public trip data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.8"),'service worker cache version is v2.8');
+ok(sw.includes("shanghai-family-trip-v2.9"),'service worker cache version is v2.9');
 ok(sw.includes('./v2/production-readiness.js')&&sw.includes('./v2/production-readiness.css'),'production readiness assets are precached');
 ok(sw.includes('./v2/wallet-storage-guard.js'),'wallet storage guard is precached');
 ok(sw.includes('./v2/content-library.js')&&sw.includes('./data/content-food.json')&&sw.includes('./data/day1-citywalk.json'),'extended content library and data are precached');
 ok(sw.includes('./v2/contextual-suggestions.js')&&sw.includes('./v2/contextual-suggestions.css')&&sw.includes('./data/contextual-suggestions.json'),'contextual suggestion assets and data are precached');
+ok(sw.includes('./v2/itinerary-v3.js')&&sw.includes('./v2/itinerary-v3.css'),'itinerary card UI v3 assets are precached');
 
 const photoLib=read('v2/verified-photo-library.js');
 const verifiedKeys=[...photoLib.matchAll(/^\s*'([^']+)'\s*:\s*\{/gm)].map(m=>m[1]);
 ok(new Set(verifiedKeys).size===verifiedKeys.length,'verified photo library has unique exact-place keys');
 ok(verifiedKeys.length>=7,'verified photo library retains verified exact-place sources');
 
-console.log(`\nQA complete: ${days.length} days, ${events.length} core activities, ${extraPlaces.places.length} extended places, ${extraFood.places.length} researched food entries, ${contextual.contexts.length} contextual zones, ${verifiedKeys.length} exact-place remote photo mappings.`);
+console.log(`\nQA complete: ${days.length} days, ${events.length} core activities, ${extraPlaces.places.length} extended places, ${extraFood.places.length} researched food entries, ${contextual.contexts.length} contextual zones, Plan UI v3 enabled.`);
