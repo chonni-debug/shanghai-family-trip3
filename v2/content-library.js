@@ -48,12 +48,13 @@ function applyDayEnhancement(walk){
 }
 async function loadContentLibrary(){
   try{
-    const [places,food,walk]=await Promise.all([
+    const [places,food,reference,walk]=await Promise.all([
       fetch('../data/content-places.json').then(r=>{if(!r.ok)throw new Error('places');return r.json()}),
       fetch('../data/content-food.json').then(r=>{if(!r.ok)throw new Error('food');return r.json()}),
+      fetch('../data/reference-itinerary-ideas.json').then(r=>{if(!r.ok)throw new Error('reference');return r.json()}),
       fetch('../data/day1-citywalk.json').then(r=>{if(!r.ok)throw new Error('walk');return r.json()})
     ]);
-    CONTENT_LIBRARY={places:[...(places.places||[]),...(food.places||[])],foodStatusLabels:food.foodStatusLabels||{},walk};
+    CONTENT_LIBRARY={places:[...(places.places||[]),...(food.places||[]),...(reference.places||[])],foodStatusLabels:food.foodStatusLabels||{},walk,referenceSourceNote:reference.sourceNote||null};
     const apply=()=>{
       if(!DATA?.places||!DATA?.days)return false;
       CONTENT_LIBRARY.places.forEach(mergeExtendedPlace);
