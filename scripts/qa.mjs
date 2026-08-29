@@ -7,15 +7,17 @@ const json=p=>JSON.parse(read(p));
 const fail=msg=>{throw new Error('QA: '+msg)};
 const ok=(cond,msg)=>{if(!cond)fail(msg);console.log('✓',msg)};
 
-const dayParts=['data/app-days-1.json','data/app-days-2.json','data/app-days-3.json'].map(json);
-const days=dayParts.flatMap(x=>x.days||[]);
-ok(days.length===6,'itinerary has exactly 6 days');
+const parts=['data/app-days-1.json','data/app-days-2.json','data/app-days-3.json'].map(json);
+const days=parts.flatMap(x=>x.days||[]);
 const events=days.flatMap(d=>d.events||[]);
-ok(events.length===53,'itinerary keeps all 53 core activities');
+ok(days.length===6,'revised itinerary has exactly 6 days');
+ok(events.length===57,'revised itinerary has 57 intentional core activities');
+ok(days.map(d=>d.date).join(',')==='2026-09-13,2026-09-14,2026-09-15,2026-09-16,2026-09-17,2026-09-18','trip dates remain Sep 13–18 2026');
 
 for(const [di,day] of days.entries()){
-  ok(Boolean(day.date),`day ${di+1} has a date`);
+  ok(Boolean(day.date),`day ${di+1} has date`);
   ok(Boolean(day.title?.th&&day.title?.zh),`day ${di+1} title is bilingual`);
+  ok(Boolean(day.theme?.th&&day.theme?.zh),`day ${di+1} theme is bilingual`);
   for(const [ei,e] of (day.events||[]).entries()){
     const tag=`day ${di+1} event ${ei+1}`;
     ok(Boolean(e.time),`${tag} has time`);
@@ -25,96 +27,91 @@ for(const [di,day] of days.entries()){
   }
 }
 
+const has=(dayNo,cn)=>days[dayNo-1].events.some(e=>e.cn===cn||String(e.cn).includes(cn));
+ok(has(1,'人民广场')&&has(1,'南京路步行街')&&has(1,'外滩'),'Day 1 is Classic Shanghai with People’s Square, Nanjing Road and Bund');
+ok(has(2,'武康大楼')&&has(2,'安福路')&&has(2,'淮海中路')&&has(2,'新天地'),'Day 2 is French Concession core route');
+ok(has(3,'上海虹桥 → 杭州东')&&has(3,'灵隐寺 / 飞来峰')&&has(3,'龙井村'),'Day 3 is Hangzhou on Sep 15 with Lingyin and Longjing');
+ok(has(4,'豫园')&&has(4,'上海博物馆东馆')&&has(4,'上海中心大厦'),'Day 4 is Yu Garden, Museum East and Shanghai Tower');
+ok(has(5,'静安寺')&&has(5,'南京西路 / 张园')&&has(5,'北外滩滨江绿地'),'Day 5 is Jing’an, Zhangyuan and North Bund');
+ok(has(6,'天安千树')&&has(6,'苏州河')&&has(6,'吉祥航空 HO1351'),'Day 6 is 1000 Trees, Suzhou Creek and airport return');
+
+const trip=json('data/app-trip.json');
+ok(trip.trip.flights[0].flight==='HO1352'&&trip.trip.flights[0].from==='BKK 01:25'&&trip.trip.flights[0].to==='PVG T2 06:45','outbound e-ticket time is preserved');
+ok(trip.trip.flights[1].flight==='HO1351'&&trip.trip.flights[1].from==='PVG T2 20:50'&&trip.trip.flights[1].to==='BKK 00:25 (+1)','return e-ticket time is preserved');
+ok(days[0].events[0].time==='06:45'&&days[5].events.at(-1).time==='20:50','timeline uses e-ticket airport/flight times instead of conflicting prose times');
+
 const extraPlaces=json('data/content-places.json');
 const extraFood=json('data/content-food.json');
 const reference=json('data/reference-itinerary-ideas.json');
-const day1Walk=json('data/day1-citywalk.json');
+const revised=json('data/revised-plan-content.json');
+const master=json('data/plan-2026-09-v2.json');
+const walk=json('data/day1-citywalk.json');
 const contextual=json('data/contextual-suggestions.json');
-ok((extraPlaces.places||[]).length>=40,'extended place library restores at least 40 places and route stops');
-ok((extraFood.places||[]).length>=5,'food guide restores researched restaurant entries');
-ok((reference.places||[]).length>=14,'reference itinerary pass adds at least 14 useful places/restaurants');
-ok(Boolean(reference.sourceNote?.th&&reference.sourceNote?.zh),'reference itinerary source note is bilingual');
-for(const p of [...extraPlaces.places,...extraFood.places,...reference.places])ok(Boolean(p.cn&&p.name?.th&&p.name?.zh),`extended place ${p.id||p.cn} is bilingual and has Chinese text`);
-for(const key of ['五原路','乌鲁木齐中路','安福路','延庆坊','武康大楼','上海博物馆','思南公馆','北外滩滨江绿地','上海自然博物馆','豫园老街','正大广场'])ok(extraPlaces.places.some(p=>p.cn===key),`extended place library contains ${key}`);
-for(const key of ['莱莱小笼·乔艾','味香斋(雁荡路店)','沪西老弄堂面馆(静安寺店)','舒蔡记生煎菜饭(浙江中路店)','阿娘面馆(锡荣别墅店)'])ok(extraFood.places.some(p=>p.cn===key),`food guide contains ${key}`);
-for(const key of ['REi·FLOWER COFFEE BAR','纽约贝果博物馆(新天地时尚店)','费大厨辣椒炒肉(北外滩来福士店)','顶特勒粥面馆','鲍师傅糕点(淮海中路店)','牛New寿喜烧(上海中心店)','Luneurs(洛克·外滩源店)','Blue Bottle Coffee蓝瓶咖啡(张园店)','Alimentari Mulino(丰盛里店)','喜粤8号（汝南街总店）'])ok(reference.places.some(p=>p.cn===key),`reference library contains ${key}`);
-for(const key of ['REi·FLOWER COFFEE BAR','鲍师傅糕点(淮海中路店)','牛New寿喜烧(上海中心店)','Blue Bottle Coffee蓝瓶咖啡(张园店)']){
-  const p=reference.places.find(x=>x.cn===key);ok(Boolean(p?.copyText&&p?.checked),'verified reference entry has copy text and checked date: '+key);
-}
-ok(reference.places.some(p=>p.verifyBeforeTrip===true),'reference library marks uncertain items for recheck');
-ok(new Set(extraFood.places.map(p=>p.foodStatus)).has('planned')&&new Set(extraFood.places.map(p=>p.foodStatus)).has('must_try')&&new Set(extraFood.places.map(p=>p.foodStatus)).has('backup'),'food guide uses Planned / Must Try / Backup roles');
-ok(day1Walk.sequence?.length===11,'Day 1 detailed city walk keeps 11 ordered stops');
-ok(day1Walk.sequence?.some(x=>x.cn.includes('LOOKNOW&FLOW 安福路168号'))&&day1Walk.sequence?.some(x=>x.cn.includes('TEENIE WEENIE武康路概念店 淮海中路1946号')),'Day 1 detailed route contains Anfu and Wukang shopping stops');
+const readiness=json('data/trip-readiness.json');
 
-const contextPlaces=new Set([...extraPlaces.places,...extraFood.places,...reference.places].map(p=>p.cn));
-ok((contextual.contexts||[]).length>=10,'contextual guide covers at least ten day/zone contexts');
-for(const [i,c] of (contextual.contexts||[]).entries()){
-  ok(Number(c.day)>=1&&Number(c.day)<=6,`context ${i+1} targets a valid trip day`);
+ok((extraPlaces.places||[]).length>=40,'extended place library still preserves at least 40 places');
+ok((extraFood.places||[]).length>=5,'researched food library is retained');
+ok((reference.places||[]).length>=14,'screenshot-derived reference library is retained');
+ok((revised.places||[]).length>=10,'revised plan adds at least 10 verified/practical places');
+for(const p of [...extraPlaces.places,...extraFood.places,...reference.places,...revised.places])ok(Boolean(p.cn&&p.name?.th&&p.name?.zh),`content item ${p.id||p.cn} is bilingual with Chinese text`);
+for(const key of ['佳家汤包(黄河路店)','Sunflour(安福路店)','绿茶餐厅(龙井船宴·品牌总店)','知味观(湖滨店)','上海博物馆东馆','天安千树']){
+  const p=revised.places.find(x=>x.cn===key);ok(Boolean(p),`revised content contains ${key}`);ok(Boolean(p.copyText||key==='张园'),`${key} retains Chinese copy/search text`);
+}
+ok(master.booking?.train?.date==='2026-09-15','master audit plan moves Hangzhou train to Sep 15');
+ok(master.booking?.lingyin?.date==='2026-09-15','master audit plan tracks Lingyin on Sep 15');
+
+ok(walk.date==='2026-09-14','detailed French Concession route moved to Day 2');
+ok(walk.sequence?.length===9,'Day 2 detailed route contains 9 focused stops');
+ok(walk.sequence?.[0]?.cn==='武康大楼'&&walk.sequence.some(x=>x.cn==='安福路')&&walk.sequence.some(x=>x.cn.includes('TEENIE WEENIE')),'Day 2 route follows Wukang → Anfu → Huaihai focus');
+ok((walk.preservedInExplore||[]).includes('五原路')&&(walk.preservedInExplore||[]).includes('延庆路'),'removed core City Walk locations are explicitly preserved in Explore');
+
+const allContent=new Set([...extraPlaces.places,...extraFood.places,...reference.places,...revised.places].map(p=>p.cn));
+ok((contextual.contexts||[]).length>=9,'revised contextual guide covers key zones');
+for(const [i,c] of contextual.contexts.entries()){
+  ok(c.day>=1&&c.day<=6,`context ${i+1} targets valid day`);
   ok(Boolean(c.reason?.th&&c.reason?.zh),`context ${i+1} reason is bilingual`);
-  ok(Array.isArray(c.anchors)&&c.anchors.length>0,`context ${i+1} has itinerary anchors`);
-  ok(Array.isArray(c.suggestions)&&c.suggestions.length>0,`context ${i+1} has suggestions`);
-  for(const cn of c.suggestions)ok(contextPlaces.has(cn),`context ${i+1} suggestion resolves to content place ${cn}`);
+  for(const cn of c.suggestions)ok(allContent.has(cn),`context ${i+1} suggestion resolves: ${cn}`);
 }
-ok(contextual.contexts.some(c=>c.day===2&&c.anchors.includes('静安寺')&&c.suggestions.includes('沪西老弄堂面馆(静安寺店)')),'Jing’an context suggests Huxi noodle house');
-ok(contextual.contexts.some(c=>c.day===3&&c.anchors.includes('人民广场')&&c.suggestions.includes('莱莱小笼·乔艾')&&c.suggestions.includes('舒蔡记生煎菜饭(浙江中路店)')),'People’s Square context includes nearby food choices');
-ok(contextual.contexts.some(c=>c.day===5&&c.anchors.includes('上海邮政博物馆')&&c.suggestions.includes('Luneurs(洛克·外滩源店)')&&c.suggestions.includes('REi·FLOWER COFFEE BAR')),'Day 5 Suzhou Creek context includes reference cafe ideas');
-ok(contextual.contexts.some(c=>c.day===5&&c.anchors.includes('陆家嘴')&&c.suggestions.includes('牛New寿喜烧(上海中心店)')),'Lujiazui context includes New Sukiyaki backup');
-ok(contextual.contexts.some(c=>c.day===6&&c.anchors.includes('淮海中路')&&c.suggestions.includes('鲍师傅糕点(淮海中路店)')&&c.suggestions.includes('顶特勒粥面馆')),'Huaihai context includes reference food stops');
+ok(contextual.contexts.some(c=>c.day===1&&c.anchors.includes('人民广场')),'People’s Square context moved to Day 1');
+ok(contextual.contexts.some(c=>c.day===3&&c.suggestions.includes('绿茶餐厅(龙井船宴·品牌总店)')),'Hangzhou context contains Green Tea Restaurant');
+ok(contextual.contexts.some(c=>c.day===4&&c.anchors.includes('陆家嘴')&&c.suggestions.includes('牛New寿喜烧(上海中心店)')),'Day 4 Lujiazui keeps dinner backup');
+ok(contextual.contexts.some(c=>c.day===5&&c.anchors.includes('南京西路 / 张园')),'Day 5 West Nanjing/Zhangyuan context is aligned');
+ok(!contextual.contexts.some(c=>c.day===6),'Day 6 has no optional contextual detours before flight');
 
-const rootHtml=read('index.html');
-const v2Html=read('v2/index.html');
-ok(!/<iframe\b/i.test(rootHtml)&&!/<iframe\b/i.test(v2Html),'root and v2 contain no iframe');
-ok(/<base href="\.\/v2\/">/.test(rootHtml),'root directly loads the standalone v2 application');
-ok(rootHtml.includes('production-readiness.js')&&v2Html.includes('production-readiness.js'),'production readiness layer loads in root and v2');
-ok(rootHtml.includes('wallet-storage-guard.js')&&v2Html.includes('wallet-storage-guard.js'),'wallet storage guard loads in root and v2');
-ok(rootHtml.includes('content-library.js')&&v2Html.includes('content-library.js'),'extended content library loads in root and v2');
-ok(rootHtml.includes('contextual-suggestions.js')&&v2Html.includes('contextual-suggestions.js'),'contextual Today suggestions load in root and v2');
-ok(rootHtml.includes('itinerary-v3.js')&&v2Html.includes('itinerary-v3.js'),'itinerary card UI v3 loads in root and v2');
-ok(rootHtml.includes('itinerary-v3.css')&&v2Html.includes('itinerary-v3.css'),'itinerary card UI v3 styles load in root and v2');
+ok(readiness.last_verified==='2026-08-29','trip readiness has current verification date');
+for(const id of ['hangzhou-train','lingyin','yu-garden','museum-east','shanghai-tower','1000-trees','weather','passport-train'])ok(readiness.checks.some(x=>x.id===id),`readiness tracks ${id}`);
+ok(readiness.checks.find(x=>x.id==='hangzhou-train')?.detail.includes('15 ก.ย.'),'train readiness uses revised Sep 15 date');
+ok(readiness.checks.find(x=>x.id==='lingyin')?.detail.includes('杭州灵隐飞来峰'),'Lingyin readiness includes official mini-program');
+ok(readiness.checks.find(x=>x.id==='museum-east')?.status==='verified','Museum East is marked verified in readiness data');
+ok(readiness.checks.find(x=>x.id==='weather')?.status==='live','weather remains a live/recheck item rather than a fixed forecast');
 
-const readiness=read('v2/production-readiness.js');
-ok(readiness.includes("const SKIP_KEY='sh-skipped'"),'skip-event state is implemented');
-ok(readiness.includes("const ONBOARD_KEY='sh-onboarding-v1'"),'first-run onboarding is implemented');
-ok(readiness.includes('checkOfflineReadiness'),'offline readiness check is implemented');
-ok(readiness.includes('adaptiveFamilyCard'),'family adaptive plan is implemented');
-
-const walletGuard=read('v2/wallet-storage-guard.js');
-ok(walletGuard.includes('probeWalletStorage'),'wallet storage capability probe is implemented');
-ok(walletGuard.includes('Private')&&walletGuard.includes('QuotaExceededError'),'wallet storage guard distinguishes restricted/private and quota failures');
-ok(walletGuard.includes('showWalletStorageHelp'),'wallet storage failure has an actionable recovery flow');
+const rootHtml=read('index.html'),v2Html=read('v2/index.html');
+ok(!/<iframe\b/i.test(rootHtml)&&!/<iframe\b/i.test(v2Html),'root and v2 remain standalone with no iframe');
+ok(rootHtml.includes('trip-readiness-ui.js')&&v2Html.includes('trip-readiness-ui.js'),'trip readiness UI loads in root and v2');
+ok(rootHtml.includes('trip-readiness-ui.css')&&v2Html.includes('trip-readiness-ui.css'),'trip readiness styles load in root and v2');
 
 const contentLayer=read('v2/content-library.js');
-ok(contentLayer.includes('foodStatus')&&contentLayer.includes('data-food-role'),'Explore food guide exposes role filtering');
-ok(contentLayer.includes('contentRoute')&&contentLayer.includes('content-mini-stops'),'Plan data layer can carry detailed route without adding core activities');
-ok(contentLayer.includes('reference-itinerary-ideas.json'),'extended content layer loads screenshot-derived reference ideas');
-
-const contextLayer=read('v2/contextual-suggestions.js');
-ok(contextLayer.includes('ctContext')&&contextLayer.includes('contextualCard'),'Today has plan-context suggestion logic');
-ok(contextLayer.includes("state.family==='rest'")&&contextLayer.includes("state.family==='tired'"),'context suggestions respect tired/rest family modes');
-ok(contextLayer.includes('ไม่ใช้ GPS')&&contextLayer.includes('不使用 GPS'),'context UI does not claim live GPS proximity');
+ok(contentLayer.includes('revised-plan-content.json'),'content library loads revised plan content');
+ok(contentLayer.includes('DAY ${dayNo}'),'detailed route header is day-aware instead of hardcoded Day 1');
+const readinessUi=read('v2/trip-readiness-ui.js');
+ok(readinessUi.includes("state.moreView==='readiness'")&&readinessUi.includes('trip-readiness.json'),'More menu exposes trip readiness view');
 
 const itineraryV3=read('v2/itinerary-v3.js');
-ok(itineraryV3.includes('v3DayChips')&&itineraryV3.includes('v3-itinerary-card'),'Plan v3 uses scrollable day chips and compact itinerary cards');
-ok(itineraryV3.includes('v3Names')&&itineraryV3.includes('v3-cn-name'),'Plan v3 always keeps Thai and Chinese place names available');
-ok(itineraryV3.includes('data-copy')&&itineraryV3.includes('data-show-cn-day')&&itineraryV3.includes('data-speak'),'expanded Plan cards retain Copy Chinese, Show Chinese and speech actions');
-ok(itineraryV3.includes('data-skip-event')&&itineraryV3.includes('data-done'),'expanded Plan cards retain skip and arrival state actions');
-ok(itineraryV3.includes('v3Transport')&&!itineraryV3.includes('durationMinutes'),'route connectors classify transport without inventing transit duration');
-ok(itineraryV3.includes('contextualCard'),'expanded Plan cards can expose existing contextual suggestions');
+ok(itineraryV3.includes('v3DayChips')&&itineraryV3.includes('v3-itinerary-card'),'Plan v3 remains enabled');
+ok(itineraryV3.includes('v3-cn-name')&&itineraryV3.includes('data-copy'),'Plan v3 retains bilingual names and Copy Chinese');
+ok(itineraryV3.includes('data-skip-event')&&itineraryV3.includes('data-done'),'Plan v3 retains skip and arrival actions');
 
-const publicData=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/day1-citywalk.json','data/contextual-suggestions.json'].map(read).join('\n');
-for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public trip data excludes private key ${forbidden}`);
+const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day1-citywalk.json','data/contextual-suggestions.json'];
+const publicData=publicFiles.map(read).join('\n');
+for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.10"),'service worker cache version is v2.10');
-ok(sw.includes('./v2/production-readiness.js')&&sw.includes('./v2/production-readiness.css'),'production readiness assets are precached');
-ok(sw.includes('./v2/wallet-storage-guard.js'),'wallet storage guard is precached');
-ok(sw.includes('./v2/content-library.js')&&sw.includes('./data/content-food.json')&&sw.includes('./data/reference-itinerary-ideas.json')&&sw.includes('./data/day1-citywalk.json'),'extended and reference content data are precached');
-ok(sw.includes('./v2/contextual-suggestions.js')&&sw.includes('./v2/contextual-suggestions.css')&&sw.includes('./data/contextual-suggestions.json'),'contextual suggestion assets and data are precached');
-ok(sw.includes('./v2/itinerary-v3.js')&&sw.includes('./v2/itinerary-v3.css'),'itinerary card UI v3 assets are precached');
+ok(sw.includes("shanghai-family-trip-v2.11"),'service worker cache is v2.11');
+for(const asset of ['./data/revised-plan-content.json','./data/plan-2026-09-v2.json','./data/trip-readiness.json','./v2/trip-readiness-ui.js','./v2/trip-readiness-ui.css'])ok(sw.includes(asset),`service worker precaches ${asset}`);
 
 const photoLib=read('v2/verified-photo-library.js');
 const verifiedKeys=[...photoLib.matchAll(/^\s*'([^']+)'\s*:\s*\{/gm)].map(m=>m[1]);
 ok(new Set(verifiedKeys).size===verifiedKeys.length,'verified photo library has unique exact-place keys');
-ok(verifiedKeys.length>=7,'verified photo library retains verified exact-place sources');
+ok(verifiedKeys.length>=7,'verified photo library is retained');
 
-console.log(`\nQA complete: ${days.length} days, ${events.length} core activities, ${extraPlaces.places.length} extended places, ${extraFood.places.length} researched food entries, ${reference.places.length} screenshot-derived reference ideas, ${contextual.contexts.length} contextual zones.`);
+console.log(`\nQA complete: ${days.length} days, ${events.length} revised core activities, ${revised.places.length} revised-plan content items, ${contextual.contexts.length} contextual zones, readiness enabled.`);

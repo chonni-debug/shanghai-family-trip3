@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v2.10';
+const CACHE='shanghai-family-trip-v2.11';
 
 const ESSENTIAL=[
   './',
@@ -14,18 +14,21 @@ const ESSENTIAL=[
   './v2/photo-integrity.css',
   './v2/usability.css',
   './v2/production-readiness.css',
+  './v2/trip-readiness-ui.css',
   './v2/app-core.js',
   './v2/app-views-main.js',
   './v2/app-views-more.js',
   './v2/app-modals.js',
   './v2/private-wallet.js',
   './v2/content-library.js',
+  './v2/revised-place-overrides.js',
   './v2/contextual-suggestions.js',
   './v2/itinerary-v3.js',
   './v2/verified-photo-library.js',
   './v2/photo-integrity.js',
   './v2/usability.js',
   './v2/production-readiness.js',
+  './v2/trip-readiness-ui.js',
   './v2/wallet-storage-guard.js',
   './v2/app-events.js',
   './data/app-trip.json',
@@ -36,6 +39,10 @@ const ESSENTIAL=[
   './data/content-places.json',
   './data/content-food.json',
   './data/reference-itinerary-ideas.json',
+  './data/revised-plan-content.json',
+  './data/revised-place-overrides.json',
+  './data/plan-2026-09-v2.json',
+  './data/trip-readiness.json',
   './data/day1-citywalk.json',
   './data/contextual-suggestions.json',
   './icons/trip-icon.svg',

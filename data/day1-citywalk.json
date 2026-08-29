@@ -1,23 +1,22 @@
 {
-  "version": 1,
-  "date": "2026-09-13",
-  "routeTitle": {"th":"Day 1 City Walk — เส้นเดินฉบับละเอียด","zh":"Day 1 城市漫步 — 详细路线"},
+  "version": 2,
+  "date": "2026-09-14",
+  "routeTitle": {"th":"Day 2 French Concession — เส้นแวะฉบับละเอียด","zh":"Day 2 法租界 — 详细停留路线"},
   "sequence": [
-    {"cn":"五原路","th":"ถนนอู่หยวน"},
-    {"cn":"乌鲁木齐中路","th":"ถนนอูหลู่มู่ฉีตอนกลาง"},
+    {"cn":"武康大楼","th":"อาคารอู่คัง"},
+    {"cn":"武康路","th":"ถนนอู่คัง"},
+    {"cn":"LOOKNOW武康路旗舰店 武康路286号","th":"LOOKNOW Wukang"},
     {"cn":"安福路","th":"ถนนอันฝู"},
     {"cn":"LOOKNOW&FLOW 安福路168号","th":"LOOKNOW&FLOW"},
     {"cn":"Baker & Spice 安福路195号","th":"Baker & Spice"},
     {"cn":"wiggle wiggle上海旗舰店 安福路308号","th":"Wiggle Wiggle"},
-    {"cn":"LOOKNOW武康路旗舰店 武康路286号","th":"LOOKNOW Wukang"},
-    {"cn":"武康路","th":"ถนนอู่คัง"},
-    {"cn":"武康大楼","th":"อาคารอู่คัง"},
     {"cn":"TEENIE WEENIE武康路概念店 淮海中路1946号","th":"TEENIE WEENIE"},
     {"cn":"淮海中路","th":"ถนนหวยไห่กลาง"}
   ],
   "eventExtras": {
+    "武康大楼": {"miniStops":["武康路","LOOKNOW武康路旗舰店","TEENIE WEENIE武康路概念店"]},
     "安福路": {"miniStops":["LOOKNOW&FLOW","Baker & Spice 安福路店","wiggle wiggle上海旗舰店"]},
-    "延庆路": {"miniStops":["延庆坊","ULT.","延庆路历史建筑 / 老洋房"]},
-    "武康大楼": {"miniStops":["LOOKNOW武康路旗舰店","武康路","TEENIE WEENIE武康路概念店","淮海中路"]}
-  }
+    "淮海中路": {"miniStops":["TEENIE WEENIE武康路概念店","ตามแรงแล้วต่อ DiDi ไป 新天地"]}
+  },
+  "preservedInExplore": ["五原路","乌鲁木齐中路","延庆路","延庆坊","ULT.","延庆路历史建筑 / 老洋房"]
 }

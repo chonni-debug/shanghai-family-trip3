@@ -1,94 +1,119 @@
 {
-  "version": 1,
-  "last_verified": "2026-08-26",
+  "version": 3,
+  "last_verified": "2026-08-29",
   "timezone": "Asia/Shanghai",
   "checks": [
+    {
+      "id": "hangzhou-train",
+      "match": ["上海虹桥 → 杭州东", "杭州东 → 上海虹桥", "High-speed rail", "รถไฟความเร็วสูง"],
+      "status": "pending",
+      "label": "รอเปิดขาย",
+      "label_zh": "等待开售",
+      "detail": "แผนใหม่เดินทาง 15 ก.ย. · เป้าหมายขาไป 07:15–07:40 / ขากลับ 19:40–20:15 · 12306 ใช้ช่วงขายล่วงหน้าประมาณ 15 วัน จึงเริ่มตรวจ 1 ก.ย. และยึดขบวน/เวลาในตั๋วจริงหลังจอง",
+      "detail_zh": "新版行程为9月15日 · 去程目标07:15–07:40 / 返程19:40–20:15 · 12306目前约提前15天开售，从9月1日起检查；购票后以实际车次和时间为准",
+      "source_label": "China Railway 12306",
+      "source_label_zh": "中国铁路12306",
+      "source_url": "https://hzfw.12306.cn/zgzfw/resources/web/ysqcx.html"
+    },
+    {
+      "id": "lingyin",
+      "match": ["灵隐寺", "飞来峰", "杭州灵隐飞来峰"],
+      "status": "pending",
+      "label": "เริ่มจอง 8 ก.ย.",
+      "label_zh": "9月8日起检查预约",
+      "detail": "Lingyin–Feilai Peak ฟรีตั้งแต่ 1 ธ.ค. 2025 แต่ใช้ real-name time-slot reservation · จองผ่าน Alipay/WeChat Mini Program 杭州灵隐飞来峰 ได้สูงสุด 7 วันล่วงหน้า · ตั้งแต่ 1 ก.พ. 2026 ยกเลิก walk-in registration หน้างาน · กฎทางการปัจจุบันระบุผู้สูงอายุ 70+ เป็นกลุ่มยกเว้นการจอง แต่ต้องพกเอกสารตัวจริงและควรตรวจนโยบายอีกครั้งก่อนวันไป",
+      "detail_zh": "灵隐飞来峰自2025年12月1日起免费，但实行实名分时预约 · 可通过支付宝/微信“杭州灵隐飞来峰”小程序提前最多7天预约 · 自2026年2月1日起取消现场登记 · 当前官方规则将70岁以上老人列为免预约人群，但须携带有效证件原件，并在出发前再次确认政策",
+      "source_label": "Lingyin Official",
+      "source_label_zh": "灵隐寺官方",
+      "source_url": "https://en.lingyinsi.org/detail_15142.html"
+    },
     {
       "id": "yu-garden",
       "match": ["豫园", "Yu Garden", "สวนอวี้หยวน"],
       "status": "verified",
       "label": "ยืนยันแล้ว",
-      "detail": "09:00–16:30 · เข้าได้ถึง 16:00 · กันยายนเป็นฤดูราคาปกติ ¥40/ผู้ใหญ่ · ปิดวันจันทร์ (ยกเว้นวันหยุดตามประกาศ)",
+      "label_zh": "已确认",
+      "detail": "Day 4 · พุธ 16 ก.ย. · 09:00–16:30 · เข้าได้ถึง 16:00 · ปิดวันจันทร์ (ยกเว้นวันหยุดตามประกาศ) · ก.ย. ผู้ใหญ่ ¥40 · อายุ 60+ ครึ่งราคา",
+      "detail_zh": "Day 4 · 9月16日周三 · 09:00–16:30 · 16:00停止入园 · 周一闭园（法定节假日以公告为准）· 9月成人¥40 · 60岁以上半价",
       "source_label": "Yu Garden Official",
+      "source_label_zh": "豫园官方",
       "source_url": "https://www.yugarden.com.cn/page/articleview/message.html"
     },
     {
-      "id": "postal-museum",
-      "match": ["上海邮政博物馆", "Shanghai Postal Museum", "พิพิธภัณฑ์ไปรษณีย์"],
+      "id": "museum-east",
+      "match": ["上海博物馆东馆", "Shanghai Museum East"],
       "status": "verified",
-      "label": "ยืนยันแล้ว",
-      "detail": "อังคาร–อาทิตย์ 09:00–17:00 · เข้าได้ถึง 16:00 · ปิดวันจันทร์ · วันหยุดอาจมีประกาศพิเศษ",
-      "source_label": "China Post Shanghai",
-      "source_url": "https://www.chinapost.com.cn/html1/report/2507/9131-1.htm"
+      "label": "ไม่ต้องจองทั่วไป",
+      "label_zh": "散客免预约",
+      "detail": "Day 4 · 10:00–18:00 · เข้าได้ถึง 17:00 · ปิดวันอังคาร · นโยบายปัจจุบันบุคคลทั่วไปไม่ต้องจอง ใช้ Passport/ID ตัวจริงผ่าน B1 East Gate; Curio-City/Digital Gallery ยังต้องจองเฉพาะ",
+      "detail_zh": "Day 4 · 10:00–18:00 · 17:00停止入馆 · 周二闭馆 · 当前散客免预约，携带护照/有效证件原件从B1东门入馆；Curio-City/Digital Gallery仍需专项预约",
+      "source_label": "Shanghai Museum Official",
+      "source_label_zh": "上海博物馆官方",
+      "source_url": "https://www.shanghaimuseum.net/mu/frontend/pg/en/service/visit-east"
     },
     {
-      "id": "dongjin-ferry",
-      "match": ["金陵东路渡口", "东昌路渡口", "Shanghai Ferry", "เรือเฟอร์รี"],
+      "id": "shanghai-tower",
+      "match": ["上海中心大厦", "Shanghai Tower"],
+      "status": "recheck",
+      "label": "เช็ก slot + visibility",
+      "label_zh": "检查时段 + 能见度",
+      "detail": "Day 4 เป้าหมาย 118F ช่วง 16:30–17:00 · ใช้ real-name timed entry และ Passport ได้ · เวลาเปิดทั่วไปตามประกาศปัจจุบัน 08:30–22:00 (เข้าได้ถึง 21:30) · เช็กฝน เมฆ และ visibility ก่อนซื้อตั๋ว sunset",
+      "detail_zh": "Day 4 目标118层16:30–17:00入场 · 实名分时入馆，可使用护照 · 当前一般开放08:30–22:00（21:30停止入馆）· 购买日落票前先看降雨、云量和能见度",
+      "source_label": "Shanghai Tower Official",
+      "source_label_zh": "上海中心官方",
+      "source_url": "https://www.shanghaitower.com/shagnhai.html"
+    },
+    {
+      "id": "1000-trees",
+      "match": ["天安千树", "1000 Trees"],
+      "status": "verified",
+      "label": "ยืนยันเวลาแล้ว",
+      "label_zh": "营业时间已确认",
+      "detail": "Day 6 · Shanghai Official Tourism ระบุ 10:00–22:00 · ที่อยู่ 莫干山路600号 · ใช้ 60–90 นาทีพอและไม่ควรทำให้เวลาไปสนามบินเลื่อน",
+      "detail_zh": "Day 6 · 上海官方文旅信息为10:00–22:00 · 地址莫干山路600号 · 停留60–90分钟即可，不能影响前往机场时间",
+      "source_label": "Shanghai Official Tourism",
+      "source_label_zh": "上海文旅官方",
+      "source_url": "https://www.meet-in-shanghai.net/cn/shopping/cheonan-thousand-trees-010053/"
+    },
+    {
+      "id": "weather",
+      "match": ["天气", "weather", "อากาศ"],
       "status": "live",
-      "label": "เช็กวันจริง",
-      "detail": "Dongjin Line: East Jinling Road ฝั่ง Puxi 07:15–18:30 / Dongchang Road ฝั่ง Pudong 07:15–18:15 · สำหรับคนเดินเท้า · อาจหยุดเมื่อสภาพอากาศไม่เหมาะสม",
-      "source_label": "Shanghai Government · Ferry",
-      "source_url": "https://english.shanghai.gov.cn/en-Individuals-Transportation-Ferry/20260813/474fc35ff5a54d51aeeb68b2cb981088.html"
-    },
-    {
-      "id": "hangzhou-train",
-      "match": ["上海虹桥 → 杭州东", "杭州东 → 上海虹桥", "High-speed rail", "รถไฟความเร็วสูง"],
-      "status": "pending",
-      "label": "รอยืนยันตั๋ว",
-      "detail": "เวลาใน itinerary เป็นเวลาเป้าหมาย ไม่ใช่ขบวนที่จองแล้ว · 12306 ใช้ช่วงขายล่วงหน้า 15 วันรวมวันเดินทาง · วันที่ 26 ส.ค. ระบบขายถึง 9 ก.ย. · สำหรับ 16 ก.ย. ควรเริ่มตรวจตั้งแต่ 2 ก.ย. และยืนยันเวลาปล่อยตั๋วของสถานีใน 12306",
-      "source_label": "China Railway 12306",
-      "source_url": "https://mobile.12306.cn/weixin/wxcore/ysqcx"
+      "label": "เริ่มเช็ก 5–7 วันก่อน",
+      "label_zh": "提前5–7天开始关注",
+      "detail": "ติดตาม Shanghai 13–18 ก.ย. และ Hangzhou 15 ก.ย. · เน้นฝน/พายุ/ความร้อน และ visibility สำหรับ Bund 13 ก.ย., Hangzhou 15 ก.ย., Shanghai Tower 16 ก.ย., North Bund 17 ก.ย. · forecast ระยะไกลยังไม่ใช้ตัดสินใจซื้อ sunset ticket",
+      "detail_zh": "关注上海9月13–18日及杭州9月15日天气 · 重点看降雨、雷暴、高温和能见度，尤其外滩13日、杭州15日、上海中心16日、北外滩17日 · 远期预报暂不用于决定购买日落票"
     },
     {
       "id": "passport-train",
       "match": ["12306", "Passport"],
       "status": "important",
       "label": "Passport ตัวจริง",
-      "detail": "ผู้โดยสารต้องใช้เอกสารตัวจริงชนิดเดียวกับที่ใช้ซื้อตั๋วในการตรวจตัวตน/เข้าสถานี ผู้ถือหนังสือเดินทางต่างชาติที่เครื่องอ่านอัตโนมัติไม่รองรับให้ใช้ช่องเจ้าหน้าที่",
-      "source_label": "12306 · Real-name tickets",
-      "source_url": "https://kyfw.12306.cn/otn/gonggao/realNameTicket.html"
+      "label_zh": "携带护照原件",
+      "detail": "รถไฟ พิพิธภัณฑ์ และ attraction ที่ผูก identity ให้พก Passport/เอกสารตัวจริงชนิดเดียวกับที่ใช้จอง",
+      "detail_zh": "高铁、博物馆及实名制景点应携带与预订时一致的护照/有效证件原件"
     },
     {
       "id": "flight-outbound",
       "match": ["HO1352"],
       "status": "ticket",
       "label": "ตาม e-ticket",
-      "detail": "BKK → PVG T2 · 13 ก.ย. · ใช้ e-ticket/Juneyao เป็นข้อมูลหลัก และตรวจ flight status อีกครั้งก่อนออกจากบ้าน",
-      "source_label": "Travel document",
-      "source_url": ""
+      "label_zh": "以电子客票为准",
+      "detail": "BKK 01:25 → PVG T2 06:45 · 13 ก.ย. · ใช้ e-ticket เป็นข้อมูลหลัก แม้ข้อความแผนอื่นระบุเวลาแตกต่าง",
+      "detail_zh": "9月13日 BKK 01:25 → PVG T2 06:45 · 以电子客票为最高优先级，即使其他行程文字时间不同"
     },
     {
       "id": "flight-inbound",
       "match": ["HO1351"],
       "status": "ticket",
       "label": "ตาม e-ticket",
-      "detail": "PVG T2 → BKK · 18 ก.ย. · ตรวจ terminal / counter / gate / flight status ในวันเดินทาง",
-      "source_label": "Travel document",
-      "source_url": ""
+      "label_zh": "以电子客票为准",
+      "detail": "PVG T2 20:50 → BKK 00:25 (+1) · 18 ก.ย. · ออกจากโรงแรมไม่เกินประมาณ 15:30–15:45 และตรวจ terminal/counter/gate วันจริง",
+      "detail_zh": "9月18日 PVG T2 20:50 → BKK 00:25 (+1) · 最晚约15:30–15:45离开酒店，并在当天确认航站楼、柜台和登机口"
     }
   ],
-  "emergency": {
-    "police": "110",
-    "fire": "119",
-    "ambulance": "120",
-    "traffic": "122",
-    "shanghai_government": "12345",
-    "ferry_info": "33767736"
-  },
-  "hotel": {
-    "name": "Yitel Collection (Shanghai Train Station)",
-    "cn": "和颐至尚酒店(上海火车站南广场店)",
-    "address_cn": "上海市静安区天目西路511号",
-    "phone": "+86-21-52711555-0"
-  },
-  "insurance": {
-    "provider": "MSIG",
-    "overseas_assistance": "+66 2 039 5704",
-    "customer_service": "+66 2 825 8888"
-  },
-  "photo_policy": {
-    "ambient_matches": ["武康路", "安福路", "南京西路", "杭州西湖风景名胜区", "断桥残雪", "西湖游船", "龙井村", "陆家嘴", "上海中心大厦"],
-    "ambient_label": "ภาพบรรยากาศย่าน/กิจกรรม",
-    "default_label": "ภาพประกอบสถานที่"
-  }
+  "emergency": {"police":"110","fire":"119","ambulance":"120","traffic":"122","shanghai_government":"12345","ferry_info":"33767736"},
+  "hotel": {"name":"Yitel Collection (Shanghai Train Station)","cn":"和颐至尚酒店(上海火车站南广场店)","address_cn":"上海市静安区天目西路511号","phone":"+86-21-52711555-0"},
+  "insurance": {"provider":"MSIG","overseas_assistance":"+66 2 039 5704","customer_service":"+66 2 825 8888"},
+  "photo_policy": {"ambient_matches":["武康路","安福路","南京西路","杭州西湖风景名胜区","断桥残雪","龙井村","陆家嘴","上海中心大厦"],"ambient_label":"ภาพบรรยากาศย่าน/กิจกรรม","default_label":"ภาพประกอบสถานที่"}
 }
