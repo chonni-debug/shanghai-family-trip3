@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v2.8';
+const CACHE='shanghai-family-trip-v2.9';
 
 const ESSENTIAL=[
   './',
@@ -10,6 +10,7 @@ const ESSENTIAL=[
   './v2/private-wallet.css',
   './v2/content-library.css',
   './v2/contextual-suggestions.css',
+  './v2/itinerary-v3.css',
   './v2/photo-integrity.css',
   './v2/usability.css',
   './v2/production-readiness.css',
@@ -20,6 +21,7 @@ const ESSENTIAL=[
   './v2/private-wallet.js',
   './v2/content-library.js',
   './v2/contextual-suggestions.js',
+  './v2/itinerary-v3.js',
   './v2/verified-photo-library.js',
   './v2/photo-integrity.js',
   './v2/usability.js',
