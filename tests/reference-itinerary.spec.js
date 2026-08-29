@@ -6,7 +6,7 @@ async function prime(page){
   await expect(page.locator('#app')).toBeVisible();
 }
 
-test('Explore exposes verified screenshot-derived Huaihai food data with Chinese copy',async({page})=>{
+test('Explore still exposes screenshot-derived Huaihai food data with Chinese copy',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await prime(page);
   await page.locator('[data-tab="explore"]').click();
@@ -16,21 +16,32 @@ test('Explore exposes verified screenshot-derived Huaihai food data with Chinese
   await expect(card).toBeVisible();
   await expect(card).toContainText('淮海中路576号');
   await expect(card.locator('[data-copy]')).toBeVisible();
-  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
-  expect(overflow).toBeLessThanOrEqual(1);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)).toBeLessThanOrEqual(1);
 });
 
-test('Day 5 Postal Museum context uses reference itinerary ideas without changing the core timeline',async({page})=>{
+test('Day 5 North Bund context keeps useful reference cafes without adding extra core stops',async({page})=>{
   await page.setViewportSize({width:390,height:844});
-  await page.addInitScript(()=>localStorage.setItem('sh-sim-v3',JSON.stringify({active:true,day:4,time:'09:05'})));
+  await page.addInitScript(()=>localStorage.setItem('sh-sim-v3',JSON.stringify({active:true,day:4,time:'16:05'})));
   await prime(page);
   const context=page.locator('.context-suggestions');
   await expect(context).toBeVisible();
-  await expect(context.locator('.context-mini-card')).toHaveCount(3);
+  await expect(context.locator('.context-mini-card')).toHaveCount(2);
   await expect(context).toContainText('Luneurs Rock Bund');
   await expect(context).toContainText('REi·FLOWER COFFEE BAR');
-  await expect(context).toContainText('นอร์ทบันด์ริเวอร์ฟรอนต์');
   await page.locator('[data-tab="plan"]').click();
   await page.locator('.v3-day-chip').nth(4).click();
   await expect(page.locator('.v3-itinerary-card')).toHaveCount(8);
+  await expect(page.locator('.v3-timeline')).toContainText('North Bund');
+});
+
+test('Day 6 stays intentionally light before the confirmed return flight',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await prime(page);
+  await page.locator('[data-tab="plan"]').click();
+  await page.locator('.v3-day-chip').nth(5).click();
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(9);
+  await expect(page.locator('.v3-timeline')).toContainText('1000 Trees');
+  await expect(page.locator('.v3-timeline')).toContainText('เดินริม Suzhou Creek แบบสั้น');
+  await expect(page.locator('.v3-timeline')).toContainText('HO1351');
+  await expect(page.locator('.v3-timeline')).toContainText('20:50');
 });
