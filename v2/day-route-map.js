@@ -52,6 +52,17 @@ function dayRouteMapCard(dayIndex){
   </section>`;
 }
 
+/* Wrap the final Itinerary v3 renderer so the map sits below the hotel strip and above detailed routes/cards. */
+const renderPlanBeforeDayRouteMap=renderPlan;
+renderPlan=function(){
+  let html=renderPlanBeforeDayRouteMap();
+  const card=dayRouteMapCard(state.selectedDay);if(!card)return html;
+  const walkMarker='<details class="v3-walk-detail">',overviewMarker='<div class="v3-overview-label">';
+  if(html.includes(walkMarker))return html.replace(walkMarker,card+walkMarker);
+  if(html.includes(overviewMarker))return html.replace(overviewMarker,card+overviewMarker);
+  return card+html;
+};
+
 async function loadDayRouteMaps(){
   try{
     const r=await fetch('../data/day-route-maps.json');if(!r.ok)throw new Error('route map data');DAY_ROUTE_MAPS=await r.json();
