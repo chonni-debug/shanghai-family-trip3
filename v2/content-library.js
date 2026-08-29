@@ -48,13 +48,14 @@ function applyDayEnhancement(walk){
 }
 async function loadContentLibrary(){
   try{
-    const [places,food,reference,walk]=await Promise.all([
+    const [places,food,reference,revised,walk]=await Promise.all([
       fetch('../data/content-places.json').then(r=>{if(!r.ok)throw new Error('places');return r.json()}),
       fetch('../data/content-food.json').then(r=>{if(!r.ok)throw new Error('food');return r.json()}),
       fetch('../data/reference-itinerary-ideas.json').then(r=>{if(!r.ok)throw new Error('reference');return r.json()}),
+      fetch('../data/revised-plan-content.json').then(r=>{if(!r.ok)throw new Error('revised');return r.json()}),
       fetch('../data/day1-citywalk.json').then(r=>{if(!r.ok)throw new Error('walk');return r.json()})
     ]);
-    CONTENT_LIBRARY={places:[...(places.places||[]),...(food.places||[]),...(reference.places||[])],foodStatusLabels:food.foodStatusLabels||{},walk,referenceSourceNote:reference.sourceNote||null};
+    CONTENT_LIBRARY={places:[...(places.places||[]),...(food.places||[]),...(reference.places||[]),...(revised.places||[])],foodStatusLabels:food.foodStatusLabels||{},walk,referenceSourceNote:reference.sourceNote||null};
     const apply=()=>{
       if(!DATA?.places||!DATA?.days)return false;
       CONTENT_LIBRARY.places.forEach(mergeExtendedPlace);
@@ -68,7 +69,6 @@ async function loadContentLibrary(){
   }catch(err){console.warn('Extended content library unavailable',err)}
 }
 
-/* Loaded after Photo Integrity + Usability + Production Readiness, so this wraps the final card renderer instead of replacing it. */
 const eventCardBeforeContent=eventCard;
 eventCard=function(e,di,ei){
   const html=eventCardBeforeContent(e,di,ei),stops=e.contentExtras?.miniStops||[];
@@ -82,7 +82,8 @@ renderPlan=function(){
   let html=renderPlanBeforeContent();
   const d=DATA?.days?.[state.selectedDay],route=d?.contentRoute;
   if(!route?.sequence?.length)return html;
-  const card=`<section class="content-route-card"><div class="content-route-head"><div><small>DAY 1 · CITY WALK</small><h3>${esc(clLoc(route.routeTitle)||clt('detailRoute'))}</h3></div><span>${route.sequence.length} stops</span></div><div class="content-route-sequence">${route.sequence.map((x,i)=>`<div><i>${i+1}</i><span><b>${esc(state.lang==='zh'?x.cn:x.th)}</b><small>${esc(state.lang==='zh'?x.th:x.cn)}</small></span></div>`).join('')}</div></section>`;
+  const dayNo=(DATA.days.findIndex(x=>x.date===route.date)+1)||state.selectedDay+1;
+  const card=`<section class="content-route-card"><div class="content-route-head"><div><small>DAY ${dayNo} · CITY WALK</small><h3>${esc(clLoc(route.routeTitle)||clt('detailRoute'))}</h3></div><span>${route.sequence.length} stops</span></div><div class="content-route-sequence">${route.sequence.map((x,i)=>`<div><i>${i+1}</i><span><b>${esc(state.lang==='zh'?x.cn:x.th)}</b><small>${esc(state.lang==='zh'?x.th:x.cn)}</small></span></div>`).join('')}</div></section>`;
   const marker='<div class="section-head"><h2>';
   return html.includes(marker)?html.replace(marker,card+marker):card+html;
 };
