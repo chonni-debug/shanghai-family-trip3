@@ -48,6 +48,7 @@ const master=json('data/plan-2026-09-v2.json');
 const walk=json('data/day1-citywalk.json');
 const contextual=json('data/contextual-suggestions.json');
 const readiness=json('data/trip-readiness.json');
+const routeMaps=json('data/day-route-maps.json');
 
 ok((extraPlaces.places||[]).length>=40,'extended place library still preserves at least 40 places');
 ok((extraFood.places||[]).length>=5,'researched food library is retained');
@@ -85,10 +86,23 @@ ok(readiness.checks.find(x=>x.id==='lingyin')?.detail.includes('杭州灵隐飞�
 ok(readiness.checks.find(x=>x.id==='museum-east')?.status==='verified','Museum East is marked verified in readiness data');
 ok(readiness.checks.find(x=>x.id==='weather')?.status==='live','weather remains a live/recheck item rather than a fixed forecast');
 
+ok(routeMaps.days?.length===6,'daily Google route map data covers all 6 days');
+ok(Boolean(routeMaps.note?.th&&routeMaps.note?.zh),'daily route map usage note is bilingual');
+for(const [i,d] of routeMaps.days.entries()){
+  ok(d.date===days[i].date,`route map day ${i+1} matches itinerary date`);
+  ok(Array.isArray(d.stops)&&d.stops.length>=4,`route map day ${i+1} has at least four ordered locations`);
+  for(const [si,s] of d.stops.entries())ok(Boolean(s.th&&s.zh&&s.query),`route map day ${i+1} stop ${si+1} is bilingual and searchable`);
+}
+ok(routeMaps.days[0].stops.map(x=>x.zh).join('>').includes('人民广场>佳家汤包(黄河路店)>南京路步行街>外滩'),'Day 1 Google route preserves People’s Square → Jia Jia → Nanjing → Bund order');
+ok(routeMaps.days[2].stops.some(x=>x.zh.includes('灵隐寺'))&&routeMaps.days[2].stops.some(x=>x.zh.includes('龙井村')),'Hangzhou Google route includes Lingyin and Longjing');
+ok(routeMaps.days[5].stops.at(-1).zh==='上海浦东国际机场T2','Day 6 Google route ends at PVG T2');
+
 const rootHtml=read('index.html'),v2Html=read('v2/index.html');
-ok(!/<iframe\b/i.test(rootHtml)&&!/<iframe\b/i.test(v2Html),'root and v2 remain standalone with no iframe');
+ok(!/<iframe\b/i.test(rootHtml)&&!/<iframe\b/i.test(v2Html),'root and v2 shells remain standalone with no shell iframe');
 ok(rootHtml.includes('trip-readiness-ui.js')&&v2Html.includes('trip-readiness-ui.js'),'trip readiness UI loads in root and v2');
 ok(rootHtml.includes('trip-readiness-ui.css')&&v2Html.includes('trip-readiness-ui.css'),'trip readiness styles load in root and v2');
+ok(rootHtml.includes('day-route-map.js')&&v2Html.includes('day-route-map.js'),'daily Google route map layer loads in root and v2');
+ok(rootHtml.includes('day-route-map.css')&&v2Html.includes('day-route-map.css'),'daily Google route map styles load in root and v2');
 
 const contentLayer=read('v2/content-library.js');
 ok(contentLayer.includes('revised-plan-content.json'),'content library loads revised plan content');
@@ -100,18 +114,22 @@ const itineraryV3=read('v2/itinerary-v3.js');
 ok(itineraryV3.includes('v3DayChips')&&itineraryV3.includes('v3-itinerary-card'),'Plan v3 remains enabled');
 ok(itineraryV3.includes('v3-cn-name')&&itineraryV3.includes('data-copy'),'Plan v3 retains bilingual names and Copy Chinese');
 ok(itineraryV3.includes('data-skip-event')&&itineraryV3.includes('data-done'),'Plan v3 retains skip and arrival actions');
+const routeMapLayer=read('v2/day-route-map.js');
+ok(routeMapLayer.includes('www.google.com/maps/dir/?api=1')&&routeMapLayer.includes('waypoints'),'daily route map uses official no-key Google Maps URL format for full-route links');
+ok(routeMapLayer.includes('drmChunk')&&routeMapLayer.includes('data-drm-segment'),'daily route map splits long mobile routes into ordered segments');
+ok(routeMapLayer.includes('v3-walk-detail')&&routeMapLayer.includes('v3-overview-label'),'daily route map inserts above detailed route/timeline');
 
-const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day1-citywalk.json','data/contextual-suggestions.json'];
+const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day-route-maps.json','data/day1-citywalk.json','data/contextual-suggestions.json'];
 const publicData=publicFiles.map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.11"),'service worker cache is v2.11');
-for(const asset of ['./data/revised-plan-content.json','./data/plan-2026-09-v2.json','./data/trip-readiness.json','./v2/trip-readiness-ui.js','./v2/trip-readiness-ui.css'])ok(sw.includes(asset),`service worker precaches ${asset}`);
+ok(sw.includes("shanghai-family-trip-v2.12"),'service worker cache is v2.12');
+for(const asset of ['./data/revised-plan-content.json','./data/plan-2026-09-v2.json','./data/trip-readiness.json','./v2/trip-readiness-ui.js','./v2/trip-readiness-ui.css','./data/day-route-maps.json','./v2/day-route-map.js','./v2/day-route-map.css'])ok(sw.includes(asset),`service worker precaches ${asset}`);
 
 const photoLib=read('v2/verified-photo-library.js');
 const verifiedKeys=[...photoLib.matchAll(/^\s*'([^']+)'\s*:\s*\{/gm)].map(m=>m[1]);
 ok(new Set(verifiedKeys).size===verifiedKeys.length,'verified photo library has unique exact-place keys');
 ok(verifiedKeys.length>=7,'verified photo library is retained');
 
-console.log(`\nQA complete: ${days.length} days, ${events.length} revised core activities, ${revised.places.length} revised-plan content items, ${contextual.contexts.length} contextual zones, readiness enabled.`);
+console.log(`\nQA complete: ${days.length} days, ${events.length} revised core activities, ${routeMaps.days.length} daily Google route maps, ${revised.places.length} revised-plan content items, ${contextual.contexts.length} contextual zones.`);
