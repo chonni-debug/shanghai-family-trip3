@@ -72,6 +72,12 @@ const ofind=cn=>overrides.places.find(p=>p.cn===cn);
 ok(ofind('静安寺')?.dayHint?.includes(3)&&ofind('北外滩滨江绿地')?.dayHint?.includes(3),'Jing’an/North Bund Explore badges move to Day 3');
 ok(ofind('豫园')?.dayHint?.includes(5)&&ofind('陆家嘴')?.dayHint?.includes(5),'Yu Garden/Lujiazui Explore badges move to Day 5');
 
+const sep15=json('data/sep15-user-details.json');
+ok(sep15.date==='2026-09-15'&&sep15.jinganMeal?.cn==='莱莱小笼','Sep 15 overlay plans Lai Lai lunch');
+ok(sep15.westNanjing?.miniStops?.some(x=>x.cn==='AMAM Lonbakery Town'),'Sep 15 overlay adds AMAM Lonbakery Town');
+ok(sep15.northBund?.miniStops?.some(x=>String(x.cn).includes('MANNER COFFEE')),'Sep 15 overlay adds Manner Coffee to North Bund');
+ok(sep15.dinner?.cn==='费大厨辣椒炒肉(北外滩来福士店)'&&sep15.dinner?.meal?.th?.includes('ชามะนาว'),'Sep 15 overlay plans Fei Da Chu dinner and requested menu');
+
 const routeMaps=json('data/day-route-maps.json');
 ok(routeMaps.days.length===6,'daily Google route map covers all 6 days');
 const rm15=routeMaps.days.find(d=>d.date==='2026-09-15'),rm16=routeMaps.days.find(d=>d.date==='2026-09-16'),rm17=routeMaps.days.find(d=>d.date==='2026-09-17');
@@ -89,24 +95,29 @@ ok(readiness.checks.find(x=>x.id==='museum-east')?.detail.includes('17 ก.ย.'
 
 const contextual=json('data/contextual-suggestions.json');
 ok(contextual.contexts.some(c=>c.day===3&&c.anchors.includes('静安寺')),'Jing’an context moved to Day 3');
+ok(contextual.contexts.some(c=>c.day===3&&c.suggestions.includes('AMAM Lonbakery Town')),'West Nanjing context includes AMAM');
 ok(contextual.contexts.some(c=>c.day===5&&c.anchors.includes('豫园')),'Yu Garden context moved to Day 5');
 ok(!contextual.contexts.some(c=>c.day===4),'Hangzhou day has no extra contextual detours');
 
 const rootHtml=read('index.html'),v2Html=read('v2/index.html');
 ok(rootHtml.includes('hangzhou-sep16-override.js')&&v2Html.includes('hangzhou-sep16-override.js'),'Sep 16 override loads in root and v2');
+ok(rootHtml.includes('sep15-user-details.js')&&v2Html.includes('sep15-user-details.js'),'Sep 15 detail overlay loads in root and v2');
 ok(rootHtml.includes('day-route-map.js')&&v2Html.includes('day-route-map.js'),'daily Google route map remains loaded');
 const appEvents=read('v2/app-events.js');
 ok(appEvents.includes("await applySep16HangzhouOverride(DATA)"),'app init applies Hangzhou override before render');
 const hzLayer=read('v2/hangzhou-sep16-override.js');
 ok(hzLayer.includes("'2026-09-15'")&&hzLayer.includes("'2026-09-17'")&&hzLayer.includes('hangzhou-sep16-plan.json'),'override safely rotates Sep 15/17 around Sep 16 Hangzhou');
+const sep15Layer=read('v2/sep15-user-details.js');
+ok(sep15Layer.includes('sep15PreviousHangzhouOverride')&&sep15Layer.includes('applySep15UserDetails'),'Sep 15 overlay runs after Hangzhou date rotation');
 
-const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/revised-place-overrides.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day-route-maps.json','data/hangzhou-sep16-plan.json','data/contextual-suggestions.json'];
+const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/revised-place-overrides.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day-route-maps.json','data/hangzhou-sep16-plan.json','data/sep15-user-details.json','data/contextual-suggestions.json'];
 const publicData=publicFiles.map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.14"),'service worker cache is v2.14');
+ok(sw.includes("shanghai-family-trip-v2.17"),'service worker cache is v2.17');
 ok(sw.includes('./v2/hangzhou-sep16-override.js')&&sw.includes('./data/hangzhou-sep16-plan.json'),'service worker precaches Sep 16 Hangzhou override/data');
+ok(sw.includes('./v2/sep15-user-details.js')&&sw.includes('./data/sep15-user-details.json'),'service worker precaches Sep 15 detail overlay/data');
 ok(sw.includes('./data/day-route-maps.json'),'service worker retains daily Google route map data');
 
 const photoLib=read('v2/verified-photo-library.js');

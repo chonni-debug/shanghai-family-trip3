@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "updated": "2026-09-06",
+  "source": "user-provided-sep15-details",
+  "date": "2026-09-15",
+  "jinganMeal": {
+    "time": "12:30",
+    "name": {"th":"มื้อกลางวัน — Lai Lai Xiao Long","zh":"午餐 — 莱莱小笼"},
+    "en": "Lai Lai Xiao Long",
+    "cn": "莱莱小笼",
+    "type": "food",
+    "meal": {
+      "th": "กำหนด Lai Lai Xiao Long เป็นมื้อของช่วง Jing’an / Nanjing West; รอบนี้ยังไม่ได้ระบุสาขา/地址 จึงให้เช็กสาขาที่เหมาะใน AMap",
+      "zh": "将莱莱小笼安排为静安 / 南京西路时段的午餐；本轮资料未指定具体门店/地址，请用高德确认最合适的门店。"
+    },
+    "route": {
+      "th": "ใช้ AMap ค้นคำว่า 莱莱小笼 แล้วเลือกสาขาที่เหมาะกับตำแหน่งจริงของวันนั้น",
+      "zh": "用高德搜索“莱莱小笼”，再按当天实际位置选择合适门店。"
+    }
+  },
+  "westNanjing": {
+    "anchor": "南京西路 / 张园",
+    "routeAppend": {
+      "th": "เพิ่ม AMAM Lonbakery Town เป็นร้านขนมระหว่างเดิน West Nanjing; ข้อมูลผู้ใช้ระบุปิด 22:00",
+      "zh": "南京西路步行段增加 AMAM Lonbakery Town 作为甜点停留点；用户资料标注22:00关门。"
+    },
+    "miniStops": [
+      {
+        "th": "ร้านขนม AMAM Lonbakery Town",
+        "cn": "AMAM Lonbakery Town",
+        "copyText": "AMAM Lonbakery Town 南京西路",
+        "city": "上海"
+      }
+    ]
+  },
+  "northBund": {
+    "anchor": "北外滩滨江绿地",
+    "route": {
+      "th": "North Bund Greenland: เดินทะลุ Sinar Mas Plaza → เจอ Starbucks → ข้ามถนนมาฝั่งตรงข้ามเข้าสู่ North Bund Greenland จากนั้นบริเวณแลนด์มาร์กทรงไข่ให้เลี้ยวขวา แล้วเดินตามริมน้ำไปเรื่อย ๆ; แวะ Manner Coffee ได้ระหว่างทาง",
+      "zh": "北外滩滨江绿地：穿过 Sinar Mas Plaza → 经过 Starbucks → 过马路到对面进入北外滩滨江绿地；到蛋形地标附近向右转，沿江继续步行，途中可在 Manner Coffee 休息。"
+    },
+    "miniStops": [
+      {"th":"Sinar Mas Plaza","cn":"Sinar Mas Plaza","copyText":"Sinar Mas Plaza North Bund Shanghai","city":"上海"},
+      {"th":"Starbucks ฝั่ง Sinar Mas Plaza","cn":"Starbucks（Sinar Mas Plaza）","copyText":"Starbucks Sinar Mas Plaza North Bund Shanghai","city":"上海"},
+      {"th":"North Bund Greenland","cn":"北外滩滨江绿地","copyText":"北外滩滨江绿地","city":"上海"},
+      {"th":"Manner Coffee ริม North Bund","cn":"MANNER COFFEE（北外滩段）","copyText":"MANNER COFFEE 北外滩","city":"上海"}
+    ]
+  },
+  "dinner": {
+    "anchor": "北外滩来福士 / 北外滩附近中餐",
+    "time": "19:00",
+    "name": {"th":"มื้อเย็น — Fei Da Chu","zh":"晚餐 — 费大厨辣椒炒肉"},
+    "en": "Fei Da Chu - North Bund Raffles City",
+    "cn": "费大厨辣椒炒肉(北外滩来福士店)",
+    "type": "food",
+    "meal": {
+      "th": "เมนูที่ต้องการ: หมูผัดพริกหยวก • เนื้อผัดน้ำพริก • ไข่ตุ๋น • เต้าหู้ราดน้ำซอส • ชามะนาว",
+      "zh": "已确认店名主打菜为辣椒炒肉；其余菜品按用户记录，到店请再确认对应中文菜名。"
+    },
+    "route": {
+      "th": "North Bund Raffles City — ผู้ใช้ล่าสุดระบุชั้น 2; ข้อมูลร้านเดิมในเว็บเคยระบุ B2 จึงให้ตรวจ floor directory/AMap วันจริงก่อนขึ้นชั้น",
+      "zh": "北外滩来福士：用户最新资料写为2楼；网页旧资料曾记录B2，因此到店当天请以商场楼层导览/高德为准。"
+    }
+  },
+  "places": [
+    {
+      "id": "sep15-amam-lonbakery",
+      "name": {"th":"AMAM Lonbakery Town","zh":"AMAM Lonbakery Town"},
+      "en": "AMAM Lonbakery Town",
+      "cn": "AMAM Lonbakery Town",
+      "cat": "cafe",
+      "city": "上海",
+      "copyText": "AMAM Lonbakery Town 南京西路",
+      "dayHint": [3],
+      "tripRole": "flexible",
+      "hours": "ปิด 22:00 / 22:00关门（ตามข้อมูลผู้ใช้）",
+      "note": {"th":"ร้านขนมที่เพิ่มในช่วง West Nanjing; รอบนี้ยังไม่มี地址 จึงให้ค้นชื่อร้านใน AMap","zh":"南京西路时段增加的甜点店；本轮资料未提供地址，请用高德搜索店名。"},
+      "verifyBeforeTrip": true
+    },
+    {
+      "id": "sep15-lailai-jingan",
+      "name": {"th":"Lai Lai Xiao Long — ช่วง Jing’an","zh":"莱莱小笼 — 静安时段用餐"},
+      "en": "Lai Lai Xiao Long",
+      "cn": "莱莱小笼",
+      "cat": "food",
+      "city": "上海",
+      "copyText": "莱莱小笼",
+      "dayHint": [3],
+      "foodStatus": "planned",
+      "tripRole": "planned",
+      "note": {"th":"กำหนดเป็นมื้อของช่วง Jing’an / Nanjing West แต่ยังไม่ล็อกสาขา/ที่อยู่ในข้อมูลรอบนี้","zh":"安排为静安 / 南京西路时段用餐，但本轮尚未锁定具体门店/地址。"},
+      "verifyBeforeTrip": true
+    },
+    {
+      "id": "sep15-manner-northbund",
+      "name": {"th":"Manner Coffee — North Bund","zh":"MANNER COFFEE（北外滩段）"},
+      "en": "Manner Coffee North Bund",
+      "cn": "MANNER COFFEE（北外滩段）",
+      "cat": "cafe",
+      "city": "上海",
+      "copyText": "MANNER COFFEE 北外滩",
+      "dayHint": [3],
+      "tripRole": "flexible",
+      "hours": "07:30–22:00（ตามข้อมูลผู้ใช้）",
+      "note": {"th":"แวะพักระหว่างเดินริมน้ำ North Bund; เลี้ยวขวาบริเวณแลนด์มาร์กทรงไข่แล้วเดินตามริมน้ำ","zh":"北外滩沿江步行时的休息点；在蛋形地标附近向右转后继续沿江走。"},
+      "verifyBeforeTrip": true
+    },
+    {
+      "id": "sep15-feidachu-planned",
+      "name": {"th":"Fei Da Chu — North Bund Raffles City","zh":"费大厨辣椒炒肉(北外滩来福士店)"},
+      "en": "Fei Da Chu - North Bund Raffles City",
+      "cn": "费大厨辣椒炒肉(北外滩来福士店)",
+      "cat": "food",
+      "city": "上海",
+      "copyText": "费大厨辣椒炒肉(北外滩来福士店)",
+      "dayHint": [3],
+      "foodStatus": "planned",
+      "tripRole": "planned",
+      "menu": {"th":"หมูผัดพริกหยวก • เนื้อผัดน้ำพริก • ไข่ตุ๋น • เต้าหู้ราดน้ำซอส • ชามะนาว","zh":"辣椒炒肉；其余菜品到店确认中文菜名"},
+      "note": {"th":"มื้อเย็นที่เลือกไว้ North Bund Raffles City; ชั้นร้านมีข้อมูลสองชุด จึงต้องตรวจ directory วันจริง","zh":"北外滩来福士计划晚餐；门店楼层资料存在两个版本，当天以商场导览为准。"},
+      "verifyBeforeTrip": true
+    }
+  ]
+}
