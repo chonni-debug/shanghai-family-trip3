@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v2.19';
+const CACHE='shanghai-family-trip-v2.20';
 
 const ESSENTIAL=[
   './',
