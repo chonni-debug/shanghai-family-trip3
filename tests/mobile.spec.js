@@ -107,9 +107,9 @@ test('Explore retains old content and adds Qinghefang and Zhiweiguan with Chines
   await page.locator('[data-tab="explore"]').click();
   const search=page.locator('#placeSearch');
   await search.fill('知味观');
-  const zhi=page.locator('.content-place-card').filter({hasText:'知味观(湖滨店)'}).first();
+  const zhi=page.locator('.content-place-card').filter({hasText:'仁和路83号'}).first();
   await expect(zhi).toBeVisible();
-  await expect(zhi).toContainText('仁和路83号');
+  await expect(zhi).toContainText('知味观(湖滨店)');
   await expect(zhi.locator('[data-copy]')).toBeVisible();
   await search.fill('清河坊');
   const old=page.locator('.content-place-card').filter({hasText:'清河坊历史文化街区'}).first();
