@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "updated": "2026-09-06",
+  "source": "user-provided-day2-details-with-public-location-checks",
+  "date": "2026-09-14",
+  "lunch": {
+    "anchor": "淮海中路附近江南菜 / 上海菜餐厅",
+    "time": "12:30",
+    "name": {"th":"มื้อกลางวัน — Grand Goldfinch","zh":"午餐 — 上金雀华人餐厅"},
+    "en": "Grand Goldfinch",
+    "cn": "上金雀华人餐厅·麻辣茶餐厅",
+    "type": "food",
+    "meal": {
+      "th": "เมนูที่อยากลองตามข้อมูลผู้ใช้: หมูแดงย่างน้ำผึ้ง หอมหวานเนื้อนุ่ม ¥38 • Mapo Tofu ¥58 — ไม่เผ็ดแต่มีความชา",
+      "zh": "按用户记录推荐：Honey Grilled BBQ Pork ¥38 • Mapo Tofu ¥58（不辣但有麻感）；具体中文菜名到店按菜单确认。"
+    },
+    "route": {
+      "th": "จาก Anfu Road ไป 上金雀华人餐厅·麻辣茶餐厅 ที่ 乌鲁木齐中路247号 • ร้านอยู่ใกล้ Wuyuan Road และอยู่ในแนวเดินต่อไป Huaihai Middle Road",
+      "zh": "从安福路前往乌鲁木齐中路247号的上金雀华人餐厅·麻辣茶餐厅 • 靠近五原路，之后可顺路继续前往淮海中路。"
+    }
+  },
+  "huaihaiWest": {
+    "anchorTime": "14:00",
+    "name": {"th":"Middle Huaihai Road — เริ่ม City Walk ช้อปปิ้ง","zh":"淮海中路 — 开始购物 City Walk"},
+    "cn": "淮海中路购物 City Walk",
+    "type": "shopping",
+    "route": {
+      "th": "เริ่มฝั่งตะวันตกแล้วเดินไปทาง Xintiandi: LOOKNOW PARK → Songmont → EMIS • เน้นร้านที่อยากเข้า ไม่ต้องเร่งทุกจุด",
+      "zh": "从西向东、朝新天地方向逛：LOOKNOW PARK → Songmont → EMIS • 只逛真正感兴趣的店，不必赶着全部打卡。"
+    },
+    "miniStops": [
+      {"th":"LOOKNOW PARK","cn":"LOOKNOW PARK","copyText":"LOOKNOW PARK 淮海中路1008号 上海","city":"上海"},
+      {"th":"Songmont Huaihai Middle Road","cn":"Songmont 山下有松(淮海中路店)","copyText":"Songmont 山下有松 淮海中路817-819号 上海","city":"上海"},
+      {"th":"EMIS China Flagship","cn":"EMIS 中国首家旗舰店","copyText":"EMIS 淮海中路795-2号 上海","city":"上海"}
+    ]
+  },
+  "huaihaiEast": {
+    "anchor": "淮海中路",
+    "time": "15:30",
+    "name": {"th":"Middle Huaihai Road — ช้อปต่อแล้วเดินไป Xintiandi","zh":"淮海中路 — 继续购物后步行去新天地"},
+    "en": "Huaihai Middle Road shopping walk",
+    "cn": "淮海中路",
+    "type": "shopping",
+    "route": {
+      "th": "ต่อจาก EMIS → MINISO Pink → FARMER BOB แล้วเดินต่อไป Xintiandi ได้เลย • ถ้าทุกคนเริ่มล้า ค่อยใช้ DiDi ระยะสั้นเป็นแผนสำรอง",
+      "zh": "从 EMIS 继续 → MINISO Pink → FARMER BOB，然后可直接步行前往新天地 • 如果大家开始疲劳，再用短程 DiDi 作为备用。"
+    },
+    "miniStops": [
+      {"th":"MINISO Pink","cn":"名创优品 MINISO Pink","copyText":"名创优品 MINISO Pink 淮海中路688号 上海","city":"上海"},
+      {"th":"FARMER BOB Shanghai Flagship","cn":"FARMER BOB(上海旗舰店)","copyText":"FARMER BOB 上海旗舰店 淮海中路627-641号 上海","city":"上海"}
+    ]
+  },
+  "xintiandi": {
+    "anchor": "新天地",
+    "time": "16:45",
+    "routeAppend": {
+      "th": "จาก FARMER BOB เดินต่อเข้า Xintiandi • ช่วงนี้ใช้เป็นเวลาเดินเล่น/พัก ก่อนขึ้น Xintiandi Style I ชั้น 3 กินมื้อเย็น",
+      "zh": "从 FARMER BOB 继续步行进入新天地 • 先逛街休息，再去新天地时尚Ⅰ三楼吃晚餐。"
+    }
+  },
+  "dinner": {
+    "anchor": "小大董 / 南京西路附近中餐",
+    "time": "18:00",
+    "name": {"th":"มื้อเย็น — Food Court @ Xintiandi Style ชั้น 3","zh":"晚餐 — 新天地时尚Ⅰ三楼 Foodie Social"},
+    "en": "Foodie Social at Xintiandi Style I",
+    "cn": "Foodie Social 南里食集(新天地时尚Ⅰ3楼)",
+    "type": "food",
+    "meal": {
+      "th": "กินแบบ Food Court / Foodie Social เลือกร้านตามที่ทุกคนอยากกิน เหมาะกับกลุ่มที่อยากเลือกคนละอย่างและนั่งพักพร้อมกัน",
+      "zh": "在三楼 Foodie Social / 南里食集按各人口味选餐，适合多人各自选择再一起坐下休息。"
+    },
+    "route": {
+      "th": "ไป Xintiandi Style I / 新天地时尚Ⅰ ชั้น 3 • หลังอาหารแวะ BUTTERFUL & CREAMOROUS และ HARMAY Shanghai Xintiandi ได้ตามแรง",
+      "zh": "前往新天地时尚Ⅰ三楼 • 用餐后可按体力顺路去 BUTTERFUL & CREAMOROUS 和 HARMAY 上海新天地店。"
+    },
+    "contentExtras": {
+      "miniStops": [
+        {"th":"BUTTERFUL & CREAMOROUS — Xintiandi","cn":"BUTTERFUL & CREAMOROUS（上海新天地）","copyText":"BUTTERFUL & CREAMOROUS 上海新天地","city":"上海"},
+        {"th":"HARMAY Shanghai Xintiandi","cn":"HARMAY 上海新天地店","copyText":"HARMAY 上海新天地店 黄陂南路380号 上海","city":"上海"}
+      ]
+    }
+  },
+  "places": [
+    {
+      "id":"day2-grand-goldfinch",
+      "name":{"th":"Grand Goldfinch / Shang Jin Que","zh":"上金雀华人餐厅·麻辣茶餐厅"},
+      "en":"Grand Goldfinch",
+      "cn":"上金雀华人餐厅·麻辣茶餐厅",
+      "cat":"food",
+      "city":"上海",
+      "addr":"乌鲁木齐中路247号",
+      "copyText":"上金雀华人餐厅·麻辣茶餐厅 乌鲁木齐中路247号 上海",
+      "dayHint":[2],
+      "foodStatus":"planned",
+      "tripRole":"planned",
+      "hours":"11:00–21:00（public listing checked 2026-09-06）",
+      "menu":{"th":"หมูแดงย่างน้ำผึ้ง ¥38 • Mapo Tofu ¥58 — ราคา/คำบรรยายตามข้อมูลผู้ใช้","zh":"Honey Grilled BBQ Pork ¥38 • Mapo Tofu ¥58 — 价格与口味描述按用户记录"},
+      "note":{"th":"มื้อกลางวันหลัง Anfu Road; เมนูจีนจริงให้ดูจากเมนูร้านวันนั้นเพื่อไม่เดาชื่ออาหารผิด","zh":"安福路之后的计划午餐；具体中文菜名以当天店内菜单为准。"},
+      "checked":"2026-09-06",
+      "sourceUrl":"https://www.trip.com/restaurant/china/shanghai/detail/restaurant-110866553/",
+      "sourceLabel":{"th":"Trip.com current listing","zh":"Trip.com 当前门店信息"}
+    },
+    {
+      "id":"day2-looknow-park",
+      "name":{"th":"LOOKNOW PARK","zh":"LOOKNOW PARK"},
+      "en":"LOOKNOW PARK",
+      "cn":"LOOKNOW PARK",
+      "cat":"shopping",
+      "city":"上海",
+      "addr":"淮海中路1008号",
+      "copyText":"LOOKNOW PARK 淮海中路1008号 上海",
+      "dayHint":[2],"tripRole":"planned","checked":"2026-09-06"
+    },
+    {
+      "id":"day2-songmont-huaihai",
+      "name":{"th":"Songmont Huaihai Middle Road","zh":"Songmont 山下有松(淮海中路店)"},
+      "en":"Songmont Huaihai Middle Road Store",
+      "cn":"Songmont 山下有松(淮海中路店)",
+      "cat":"shopping",
+      "city":"上海",
+      "addr":"淮海中路817-819号",
+      "copyText":"Songmont 山下有松 淮海中路817-819号 上海",
+      "dayHint":[2],"tripRole":"planned","hours":"10:00–22:00","checked":"2026-09-06",
+      "sourceUrl":"https://songmontofficial.com/pages/our-locations",
+      "sourceLabel":{"th":"Songmont official","zh":"Songmont 官方"}
+    },
+    {
+      "id":"day2-emis-huaihai",
+      "name":{"th":"EMIS China Flagship","zh":"EMIS 中国首家旗舰店"},
+      "en":"EMIS China Flagship",
+      "cn":"EMIS 中国首家旗舰店",
+      "cat":"shopping",
+      "city":"上海",
+      "addr":"淮海中路795-2号",
+      "copyText":"EMIS 淮海中路795-2号 上海",
+      "dayHint":[2],"tripRole":"planned","hours":"10:00–22:00","checked":"2026-09-06",
+      "sourceUrl":"https://english.shanghai.gov.cn/en-FirstStores/20250402/00e80e9fc7604ed895a546af88fcb297.html",
+      "sourceLabel":{"th":"Shanghai government","zh":"上海政府资料"}
+    },
+    {
+      "id":"day2-miniso-pink",
+      "name":{"th":"MINISO Pink — Huaihai Middle Road","zh":"名创优品 MINISO Pink"},
+      "en":"MINISO Pink Shanghai Flagship",
+      "cn":"名创优品 MINISO Pink",
+      "cat":"shopping",
+      "city":"上海",
+      "addr":"淮海中路688号",
+      "copyText":"名创优品 MINISO Pink 淮海中路688号 上海",
+      "dayHint":[2],"tripRole":"planned","checked":"2026-09-06"
+    },
+    {
+      "id":"day2-farmer-bob",
+      "name":{"th":"FARMER BOB Shanghai Flagship","zh":"FARMER BOB(上海旗舰店)"},
+      "en":"FARMER BOB Shanghai Flagship",
+      "cn":"FARMER BOB(上海旗舰店)",
+      "cat":"shopping",
+      "city":"上海",
+      "addr":"淮海中路627-641号1-2层",
+      "copyText":"FARMER BOB 上海旗舰店 淮海中路627-641号 上海",
+      "dayHint":[2],"tripRole":"planned","hours":"09:30–22:00","checked":"2026-09-06"
+    },
+    {
+      "id":"day2-foodie-social-xintiandi",
+      "name":{"th":"Foodie Social — Xintiandi Style I ชั้น 3","zh":"Foodie Social 南里食集(新天地时尚Ⅰ3楼)"},
+      "en":"Foodie Social Xintiandi Style I",
+      "cn":"Foodie Social 南里食集(新天地时尚Ⅰ3楼)",
+      "cat":"food",
+      "city":"上海",
+      "addr":"兴业路123弄6号新天地时尚Ⅰ3楼",
+      "copyText":"Foodie Social 南里食集 新天地时尚Ⅰ 兴业路123弄6号3楼 上海",
+      "dayHint":[2],"foodStatus":"planned","tripRole":"planned","checked":"2026-09-06"
+    },
+    {
+      "id":"day2-butterful-xintiandi",
+      "name":{"th":"BUTTERFUL & CREAMOROUS — Xintiandi","zh":"BUTTERFUL & CREAMOROUS（上海新天地）"},
+      "en":"BUTTERFUL & CREAMOROUS Shanghai Xintiandi",
+      "cn":"BUTTERFUL & CREAMOROUS（上海新天地）",
+      "cat":"cafe",
+      "city":"上海",
+      "copyText":"BUTTERFUL & CREAMOROUS 上海新天地",
+      "dayHint":[2],"tripRole":"flexible","verifyBeforeTrip":true,"checked":"2026-09-06",
+      "sourceUrl":"https://www.butterfulcreamorous.com/index/product1.html",
+      "sourceLabel":{"th":"BUTTERFUL & CREAMOROUS official store list","zh":"BUTTERFUL & CREAMOROUS 官方门店列表"}
+    },
+    {
+      "id":"day2-harmay-xintiandi",
+      "name":{"th":"HARMAY Shanghai Xintiandi","zh":"HARMAY 上海新天地店"},
+      "en":"HARMAY Shanghai Xintiandi Store",
+      "cn":"HARMAY 上海新天地店",
+      "cat":"shopping",
+      "city":"上海",
+      "addr":"黄陂南路380号 XINTIANDI THE HOUSE L1 101 / L2 206",
+      "copyText":"HARMAY 上海新天地店 黄陂南路380号 上海",
+      "dayHint":[2],"tripRole":"planned","hours":"10:00–22:00","checked":"2026-09-06",
+      "sourceUrl":"https://harmay.com/stores",
+      "sourceLabel":{"th":"HARMAY official","zh":"HARMAY 官方"}
+    }
+  ]
+}
