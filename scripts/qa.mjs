@@ -111,11 +111,20 @@ const contextual=json('data/contextual-suggestions.json');
 const c1=contextual.contexts.find(c=>c.day===1),c3west=contextual.contexts.find(c=>c.day===3&&c.anchors.includes('张园'));
 const c5yu=contextual.contexts.find(c=>c.day===5&&c.anchors.includes('豫园'));
 const c5lu=contextual.contexts.find(c=>c.day===5&&c.anchors.includes('陆家嘴'));
+ok(c1.anchors.length===1&&c1.anchors[0]==='人民广场','Day 1 restaurant context is scoped only to People’s Square');
+ok(c1.suggestions.includes('味香斋面馆(南京东路店)'),'Day 1 People’s Square context includes Wei Xiang Zhai Hubei Road');
 ok(!c1.suggestions.some(x=>String(x).includes('海底捞')),'Day 1 context does not repeat planned Haidilao dinner');
 ok(!c3west.suggestions.includes('AMAM Lonbakery Town'),'Day 3 context does not repeat AMAM mini-stop');
 ok(!c5yu.suggestions.includes('上海城隍庙'),'Day 5 context does not repeat City God Temple already bundled with Bazaar');
 ok(!c5lu.suggestions.some(x=>String(x).includes('牛New寿喜烧')),'Day 5 context does not repeat New Sukiyaki already named in dinner card');
 ok(!contextual.contexts.some(c=>c.day===4),'Hangzhou day has no contextual detours');
+
+const food=json('data/content-food.json');
+const wei=food.places.find(p=>p.id==='weixiang-hubei');
+ok(wei?.cn==='味香斋面馆(南京东路店)'&&wei.addr.includes('湖北路151号')&&wei.dayHint?.includes(1),'Wei Xiang Zhai Nanjing East Road is assigned to Day 1 with exact Hubei Road address');
+ok(wei?.menu?.th?.includes('炸猪排')&&wei.menu.th.includes('麻酱拌面')&&wei.menu.th.includes('小牛汤'),'Wei Xiang Zhai keeps the requested pork chop, sesame noodles and calf soup menu');
+ok(wei?.note?.th?.includes('汉口路')&&wei.note.th.includes('湖北路'),'Wei Xiang Zhai walking note uses Hankou Road to Hubei Road');
+ok(food.places.some(p=>p.id==='weixiang-yandang'&&p.name?.th?.includes('Yandang Road')),'Yandang Road branch remains separate and clearly labeled');
 
 const routeMaps=json('data/day-route-maps.json');
 ok(routeMaps.days.length===6,'daily Google route map covers all 6 days');
@@ -137,7 +146,7 @@ const publicData=publicFiles.map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.19"),'service worker cache is v2.19');
+ok(sw.includes("shanghai-family-trip-v2.20"),'service worker cache is v2.20');
 ok(sw.includes("'./v2/itinerary-audit.css'"),'service worker precaches audit UI styles');
 ok(sw.includes('./v2/day2-user-details.js')&&sw.includes('./data/day2-user-details.json'),'service worker retains Day 2 overlay/data');
 
