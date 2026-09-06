@@ -4,18 +4,18 @@
   "source": "user-provided-sep15-details",
   "date": "2026-09-15",
   "jinganMeal": {
-    "time": "10:20",
-    "name": {"th":"กินข้าว — Lai Lai Xiao Long","zh":"用餐 — 莱莱小笼"},
+    "time": "12:30",
+    "name": {"th":"มื้อกลางวัน — Lai Lai Xiao Long","zh":"午餐 — 莱莱小笼"},
     "en": "Lai Lai Xiao Long",
     "cn": "莱莱小笼",
     "type": "food",
     "meal": {
-      "th": "มื้อหลัง Jing’an Temple — Lai Lai Xiao Long; รอบนี้ยังไม่ได้ระบุสาขา/地址 จึงให้เช็กสาขาที่เหมาะใน AMap ก่อนออกจากวัด",
-      "zh": "静安寺后安排莱莱小笼；本轮资料未指定具体门店/地址，请离开静安寺前用高德确认最合适的门店。"
+      "th": "กำหนด Lai Lai Xiao Long เป็นมื้อของช่วง Jing’an / Nanjing West; รอบนี้ยังไม่ได้ระบุสาขา/地址 จึงให้เช็กสาขาที่เหมาะใน AMap",
+      "zh": "将莱莱小笼安排为静安 / 南京西路时段的午餐；本轮资料未指定具体门店/地址，请用高德确认最合适的门店。"
     },
     "route": {
-      "th": "ใช้ AMap ค้นคำว่า 莱莱小笼 จากตำแหน่ง Jing’an Temple แล้วเลือกสาขาที่เหมาะกับเส้นทางจริง",
-      "zh": "从静安寺位置用高德搜索“莱莱小笼”，再按当天路线选择合适门店。"
+      "th": "ใช้ AMap ค้นคำว่า 莱莱小笼 แล้วเลือกสาขาที่เหมาะกับตำแหน่งจริงของวันนั้น",
+      "zh": "用高德搜索“莱莱小笼”，再按当天实际位置选择合适门店。"
     }
   },
   "westNanjing": {
@@ -79,7 +79,7 @@
     },
     {
       "id": "sep15-lailai-jingan",
-      "name": {"th":"Lai Lai Xiao Long — มื้อหลัง Jing’an","zh":"莱莱小笼 — 静安寺后用餐"},
+      "name": {"th":"Lai Lai Xiao Long — ช่วง Jing’an","zh":"莱莱小笼 — 静安时段用餐"},
       "en": "Lai Lai Xiao Long",
       "cn": "莱莱小笼",
       "cat": "food",
@@ -88,7 +88,7 @@
       "dayHint": [3],
       "foodStatus": "planned",
       "tripRole": "planned",
-      "note": {"th":"กำหนดเป็นมื้อหลัง Jing’an Temple แต่ยังไม่ล็อกสาขา/ที่อยู่ในข้อมูลรอบนี้","zh":"安排在静安寺后用餐，但本轮尚未锁定具体门店/地址。"},
+      "note": {"th":"กำหนดเป็นมื้อของช่วง Jing’an / Nanjing West แต่ยังไม่ล็อกสาขา/ที่อยู่ในข้อมูลรอบนี้","zh":"安排为静安 / 南京西路时段用餐，但本轮尚未锁定具体门店/地址。"},
       "verifyBeforeTrip": true
     },
     {
