@@ -1,21 +1,21 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-09-06",
-  "source": "user-provided-sep15-details",
+  "source": "user-provided-sep15-details-with-current-map-checks",
   "date": "2026-09-15",
   "jinganMeal": {
     "time": "12:30",
-    "name": {"th":"มื้อกลางวัน — Lai Lai Xiao Long","zh":"午餐 — 莱莱小笼"},
-    "en": "Lai Lai Xiao Long",
-    "cn": "莱莱小笼",
+    "name": {"th":"มื้อกลางวัน — Lai Lai Xiao Long (Fengshengli)","zh":"午餐 — 莱莱小笼(丰盛里店)"},
+    "en": "Lai Lai Xiao Long - Fengshengli",
+    "cn": "莱莱小笼(丰盛里店)",
     "type": "food",
     "meal": {
-      "th": "กำหนด Lai Lai Xiao Long เป็นมื้อของช่วง Jing’an / Nanjing West; รอบนี้ยังไม่ได้ระบุสาขา/地址 จึงให้เช็กสาขาที่เหมาะใน AMap",
-      "zh": "将莱莱小笼安排为静安 / 南京西路时段的午餐；本轮资料未指定具体门店/地址，请用高德确认最合适的门店。"
+      "th": "สาขา丰盛里อยู่ติดโซน Nanjing West/Zhangyuan จึงไม่ต้องย้อนกลับไป Jing’an Temple • เมนูเด่น: 蟹粉鲜肉小笼 / 鲜肉小笼 / 炸猪排",
+      "zh": "丰盛里店就在南京西路/张园一带，可避免折返静安寺 • 推荐：蟹粉鲜肉小笼 / 鲜肉小笼 / 炸猪排。"
     },
     "route": {
-      "th": "ใช้ AMap ค้นคำว่า 莱莱小笼 แล้วเลือกสาขาที่เหมาะกับตำแหน่งจริงของวันนั้น",
-      "zh": "用高德搜索“莱莱小笼”，再按当天实际位置选择合适门店。"
+      "th": "หลังเดิน Nanjing West/Zhangyuan ไป 莱莱小笼(丰盛里店) ที่ 茂名北路277号 (ใกล้南京西路地铁站14号口)",
+      "zh": "逛完南京西路/张园后前往茂名北路277号的莱莱小笼(丰盛里店)，靠近南京西路地铁站14号口。"
     }
   },
   "westNanjing": {
@@ -36,14 +36,13 @@
   "northBund": {
     "anchor": "北外滩滨江绿地",
     "route": {
-      "th": "North Bund Greenland: เดินทะลุ Sinar Mas Plaza → เจอ Starbucks → ข้ามถนนมาฝั่งตรงข้ามเข้าสู่ North Bund Greenland จากนั้นบริเวณแลนด์มาร์กทรงไข่ให้เลี้ยวขวา แล้วเดินตามริมน้ำไปเรื่อย ๆ; แวะ Manner Coffee ได้ระหว่างทาง",
-      "zh": "北外滩滨江绿地：穿过 Sinar Mas Plaza → 经过 Starbucks → 过马路到对面进入北外滩滨江绿地；到蛋形地标附近向右转，沿江继续步行，途中可在 Manner Coffee 休息。"
+      "th": "North Bund Greenland: เดินทะลุ Sinar Mas Plaza → ผ่าน Starbucks → ข้ามถนนเข้าสู่ North Bund Greenland → บริเวณแลนด์มาร์กทรงไข่เลี้ยวขวา → เดินตามริมน้ำไป MANNER COFFEE 国客滨江店",
+      "zh": "北外滩滨江绿地：穿过 Sinar Mas Plaza → 经过 Starbucks → 过马路进入北外滩滨江绿地 → 到蛋形地标附近向右转 → 沿江步行至 MANNER COFFEE 国客滨江店。"
     },
     "miniStops": [
       {"th":"Sinar Mas Plaza","cn":"Sinar Mas Plaza","copyText":"Sinar Mas Plaza North Bund Shanghai","city":"上海"},
       {"th":"Starbucks ฝั่ง Sinar Mas Plaza","cn":"Starbucks（Sinar Mas Plaza）","copyText":"Starbucks Sinar Mas Plaza North Bund Shanghai","city":"上海"},
-      {"th":"North Bund Greenland","cn":"北外滩滨江绿地","copyText":"北外滩滨江绿地","city":"上海"},
-      {"th":"Manner Coffee ริม North Bund","cn":"MANNER COFFEE（北外滩段）","copyText":"MANNER COFFEE 北外滩","city":"上海"}
+      {"th":"Manner Coffee — Guoke Riverside","cn":"MANNER COFFEE(国客滨江店)","copyText":"MANNER COFFEE(国客滨江店) 太平路国际港务大厦南60米(江边) 上海","city":"上海"}
     ]
   },
   "dinner": {
@@ -54,12 +53,12 @@
     "cn": "费大厨辣椒炒肉(北外滩来福士店)",
     "type": "food",
     "meal": {
-      "th": "เมนูที่ต้องการ: หมูผัดพริกหยวก • เนื้อผัดน้ำพริก • ไข่ตุ๋น • เต้าหู้ราดน้ำซอส • ชามะนาว",
-      "zh": "已确认店名主打菜为辣椒炒肉；其余菜品按用户记录，到店请再确认对应中文菜名。"
+      "th": "เมนูที่ต้องการ: 辣椒炒肉 หมูผัดพริก • เมนูเนื้อผัดตามร้าน • ไข่/ไข่ตุ๋นตามเมนูวันจริง • 砂锅嫩豆腐 • 大王冰柠檬茶",
+      "zh": "计划菜品：辣椒炒肉 • 牛肉类菜品到店确认 • 蛋类菜品到店确认 • 砂锅嫩豆腐 • 大王冰柠檬茶。"
     },
     "route": {
-      "th": "North Bund Raffles City — ผู้ใช้ล่าสุดระบุชั้น 2; ข้อมูลร้านเดิมในเว็บเคยระบุ B2 จึงให้ตรวจ floor directory/AMap วันจริงก่อนขึ้นชั้น",
-      "zh": "北外滩来福士：用户最新资料写为2楼；网页旧资料曾记录B2，因此到店当天请以商场楼层导览/高德为准。"
+      "th": "North Bund Raffles City, 东大名路999号, ชั้น B2 • ข้อมูลแผนที่ปัจจุบันและข้อมูลเขต虹口ตรงกันที่ B2; วันจริงยังควรดู directory อีกครั้ง",
+      "zh": "北外滩来福士，东大名路999号，B2层 • 当前地图资料与虹口区资料均指向B2；当天仍建议查看商场导览。"
     }
   },
   "places": [
@@ -74,36 +73,42 @@
       "dayHint": [3],
       "tripRole": "flexible",
       "hours": "ปิด 22:00 / 22:00关门（ตามข้อมูลผู้ใช้）",
-      "note": {"th":"ร้านขนมที่เพิ่มในช่วง West Nanjing; รอบนี้ยังไม่มี地址 จึงให้ค้นชื่อร้านใน AMap","zh":"南京西路时段增加的甜点店；本轮资料未提供地址，请用高德搜索店名。"},
+      "note": {"th":"ร้านขนมช่วง West Nanjing; ยังไม่มี地址ที่ยืนยัน จึงให้ค้นชื่อร้านใน AMap วันจริง","zh":"南京西路时段甜点店；尚未核实具体地址，请当天用高德搜索店名。"},
       "verifyBeforeTrip": true
     },
     {
-      "id": "sep15-lailai-jingan",
-      "name": {"th":"Lai Lai Xiao Long — ช่วง Jing’an","zh":"莱莱小笼 — 静安时段用餐"},
-      "en": "Lai Lai Xiao Long",
-      "cn": "莱莱小笼",
+      "id": "sep15-lailai-fengshengli",
+      "name": {"th":"Lai Lai Xiao Long — Fengshengli","zh":"莱莱小笼(丰盛里店)"},
+      "en": "Lai Lai Xiao Long - Fengshengli",
+      "cn": "莱莱小笼(丰盛里店)",
       "cat": "food",
       "city": "上海",
-      "copyText": "莱莱小笼",
+      "addr": "茂名北路277号（南京西路地铁站14号口旁）",
+      "copyText": "莱莱小笼(丰盛里店) 茂名北路277号 上海",
       "dayHint": [3],
       "foodStatus": "planned",
       "tripRole": "planned",
-      "note": {"th":"กำหนดเป็นมื้อของช่วง Jing’an / Nanjing West แต่ยังไม่ล็อกสาขา/ที่อยู่ในข้อมูลรอบนี้","zh":"安排为静安 / 南京西路时段用餐，但本轮尚未锁定具体门店/地址。"},
-      "verifyBeforeTrip": true
+      "note": {"th":"เลือกสาขานี้เพราะอยู่ต่อจาก Nanjing West/Zhangyuan โดยไม่ย้อนทางกลับ Jing’an","zh":"选择此店是因为可从南京西路/张园顺路前往，无需折返静安寺。"},
+      "checked": "2026-09-06",
+      "sourceUrl": "https://www.amap.com/place/B0LDNC08HU",
+      "sourceLabel": {"th":"AMap current listing","zh":"高德地图当前门店信息"}
     },
     {
       "id": "sep15-manner-northbund",
-      "name": {"th":"Manner Coffee — North Bund","zh":"MANNER COFFEE（北外滩段）"},
-      "en": "Manner Coffee North Bund",
-      "cn": "MANNER COFFEE（北外滩段）",
+      "name": {"th":"Manner Coffee — Guoke Riverside","zh":"MANNER COFFEE(国客滨江店)"},
+      "en": "Manner Coffee - Guoke Riverside",
+      "cn": "MANNER COFFEE(国客滨江店)",
       "cat": "cafe",
       "city": "上海",
-      "copyText": "MANNER COFFEE 北外滩",
+      "addr": "太平路国际港务大厦南60米(江边)",
+      "copyText": "MANNER COFFEE(国客滨江店) 太平路国际港务大厦南60米(江边) 上海",
       "dayHint": [3],
       "tripRole": "flexible",
-      "hours": "07:30–22:00（ตามข้อมูลผู้ใช้）",
-      "note": {"th":"แวะพักระหว่างเดินริมน้ำ North Bund; เลี้ยวขวาบริเวณแลนด์มาร์กทรงไข่แล้วเดินตามริมน้ำ","zh":"北外滩沿江步行时的休息点；在蛋形地标附近向右转后继续沿江走。"},
-      "verifyBeforeTrip": true
+      "hours": "วันอังคาร 07:30–22:00 / 周二 07:30–22:00",
+      "note": {"th":"จุดพักริมน้ำ North Bund หลังเลี้ยวขวาบริเวณแลนด์มาร์กทรงไข่","zh":"北外滩沿江步行休息点，在蛋形地标附近向右转后顺江前往。"},
+      "checked": "2026-09-06",
+      "sourceUrl": "https://maps.apple.com/place?auid=1118649712232072&lsp=57879",
+      "sourceLabel": {"th":"Apple Maps / Dianping current listing","zh":"Apple 地图 / 大众点评当前门店信息"}
     },
     {
       "id": "sep15-feidachu-planned",
@@ -112,13 +117,17 @@
       "cn": "费大厨辣椒炒肉(北外滩来福士店)",
       "cat": "food",
       "city": "上海",
-      "copyText": "费大厨辣椒炒肉(北外滩来福士店)",
+      "addr": "东大名路999号北外滩来福士B2层",
+      "copyText": "费大厨辣椒炒肉(北外滩来福士店) 东大名路999号 北外滩来福士B2 上海",
       "dayHint": [3],
       "foodStatus": "planned",
       "tripRole": "planned",
-      "menu": {"th":"หมูผัดพริกหยวก • เนื้อผัดน้ำพริก • ไข่ตุ๋น • เต้าหู้ราดน้ำซอส • ชามะนาว","zh":"辣椒炒肉；其余菜品到店确认中文菜名"},
-      "note": {"th":"มื้อเย็นที่เลือกไว้ North Bund Raffles City; ชั้นร้านมีข้อมูลสองชุด จึงต้องตรวจ directory วันจริง","zh":"北外滩来福士计划晚餐；门店楼层资料存在两个版本，当天以商场导览为准。"},
-      "verifyBeforeTrip": true
+      "hours": "วันอังคาร 11:00–15:00 / 16:30–21:00（当前地图资料）",
+      "menu": {"th":"辣椒炒肉 • 砂锅嫩豆腐 • 大王冰柠檬茶 • เมนูเนื้อ/ไข่ตรวจชื่อจีนที่ร้าน","zh":"辣椒炒肉 • 砂锅嫩豆腐 • 大王冰柠檬茶 • 牛肉/蛋类菜品到店确认"},
+      "note": {"th":"มื้อเย็นที่เลือกไว้ North Bund Raffles City; ข้อมูลปัจจุบันระบุ B2","zh":"北外滩来福士计划晚餐；当前资料标注B2层。"},
+      "checked": "2026-09-06",
+      "sourceUrl": "https://maps.apple.com/place?_provider=57879&place-id=H2710I3F9759B72E564",
+      "sourceLabel": {"th":"Apple Maps / Dianping current listing","zh":"Apple 地图 / 大众点评当前门店信息"}
     }
   ]
 }
