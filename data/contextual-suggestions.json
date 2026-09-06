@@ -1,12 +1,12 @@
 {
-  "version": 5,
+  "version": 6,
   "updated": "2026-09-06",
   "contexts": [
     {
       "day": 1,
       "anchors": ["人民广场", "佳家汤包(黄河路店)", "南京路步行街"],
       "reason": {"th":"โซน People’s Square/Nanjing มีร้านดังหลายร้าน แต่แผนหลักให้กิน Jia Jia ร้านเดียวก่อน ถ้าคิวยาวค่อยใช้ร้านสำรอง","zh":"人民广场/南京路名店很多，主计划先吃佳家汤包；排队太久再用备用店。"},
-      "suggestions": ["莱莱小笼·乔艾", "舒蔡记生煎菜饭(浙江中路店)", "海底捞火锅(人民广场店)"],
+      "suggestions": ["莱莱小笼·乔艾", "舒蔡记生煎菜饭(浙江中路店)"],
       "max": 2
     },
     {
@@ -33,8 +33,8 @@
     {
       "day": 3,
       "anchors": ["南京西路 / 张园", "张园"],
-      "reason": {"th":"West Nanjing/Zhangyuan เพิ่ม AMAM Lonbakery Town เป็นร้านขนมระหว่างทาง; ตัวเลือกอื่นเลือกตามคิวและแรง แล้วกลับโรงแรมพักตามแผน","zh":"南京西路/张园已增加 AMAM Lonbakery Town 作为甜点停留点；其他选项按排队和体力选择，再按计划回酒店休息。"},
-      "suggestions": ["AMAM Lonbakery Town", "Blue Bottle Coffee蓝瓶咖啡(张园店)", "BUTTERFUL & CREAMOROUS Butter and Bread(上海旗舰店)", "路易号 / The Louis", "上海自然博物馆"],
+      "reason": {"th":"AMAM อยู่ในจุดแวะหลักของ West Nanjing แล้ว จึงไม่แสดงซ้ำในคำแนะนำ; รายการนี้เหลือเฉพาะตัวเลือกเสริมจริง","zh":"AMAM 已列入南京西路沿途停留点，因此不在推荐区重复显示；这里只保留真正的额外选项。"},
+      "suggestions": ["Blue Bottle Coffee蓝瓶咖啡(张园店)", "BUTTERFUL & CREAMOROUS Butter and Bread(上海旗舰店)", "路易号 / The Louis", "上海自然博物馆"],
       "max": 2
     },
     {
@@ -47,16 +47,16 @@
     {
       "day": 5,
       "anchors": ["豫园", "九曲桥 / 豫园商城 / 上海城隍庙"],
-      "reason": {"th":"อยู่ใน Yu Garden cluster เดียวกัน แวะได้โดยไม่เพิ่มการเดินทางข้ามย่าน","zh":"都在豫园片区内，可顺路加入，无需跨区移动。"},
-      "suggestions": ["豫园老街", "上海城隍庙"],
-      "max": 2
+      "reason": {"th":"City God Temple รวมอยู่ในการ์ด Bazaar แล้ว จึงเหลือเฉพาะ Yuyuan Old Street เป็นจุดเสริมใน cluster เดียวกัน","zh":"城隍庙已包含在商城行程卡中，因此这里只保留同片区的豫园老街作为额外选项。"},
+      "suggestions": ["豫园老街"],
+      "max": 1
     },
     {
       "day": 5,
       "anchors": ["陆家嘴", "上海中心大厦", "陆家嘴商场餐厅 / 上海中心附近餐厅"],
-      "reason": {"th":"หลัง Shanghai Tower ใช้ตัวเลือกเหล่านี้สำหรับพัก/กินเท่านั้น ไม่เพิ่ม observation deck ตึกอื่น","zh":"上海中心之后只用于休息或用餐，不再增加其他观景台。"},
-      "suggestions": ["正大广场", "牛New寿喜烧(上海中心店)"],
-      "max": 2
+      "reason": {"th":"New Sukiyaki ถูกระบุเป็นตัวเลือกมื้อเย็นในการ์ดหลักแล้ว จึงไม่แสดงซ้ำ; เหลือ Super Brand Mall เป็นตัวเลือกพัก/เดินห้าง","zh":"牛New寿喜烧已在主行程晚餐卡中作为备用，不再重复推荐；这里只保留正大广场作为休息/逛商场选项。"},
+      "suggestions": ["正大广场"],
+      "max": 1
     }
   ]
 }
