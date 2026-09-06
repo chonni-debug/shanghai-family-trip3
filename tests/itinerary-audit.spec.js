@@ -57,11 +57,12 @@ test('Day 5 contextual cards do not repeat destinations already in the core card
   await bazaar.locator('[data-v3-toggle]').click();
   const context=bazaar.locator('.context-suggestions');
   if(await context.count()){
-    await expect(context).toContainText('豫园老街');
-    await expect(context).not.toContainText('上海城隍庙');
+    const suggestions=context.locator('.context-mini-card');
+    await expect(suggestions).toContainText('豫园老街');
+    await expect(suggestions).not.toContainText('上海城隍庙');
   }
   const tower=page.locator('.v3-itinerary-card').filter({hasText:'Shanghai Tower 118F'}).first();
   await tower.locator('[data-v3-toggle]').click();
   const towerContext=tower.locator('.context-suggestions');
-  if(await towerContext.count())await expect(towerContext).not.toContainText('牛New寿喜烧');
+  if(await towerContext.count())await expect(towerContext.locator('.context-mini-card')).not.toContainText('牛New寿喜烧');
 });
