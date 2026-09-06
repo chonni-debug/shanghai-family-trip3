@@ -24,7 +24,7 @@ v3DetailedWalk=function(d){
     const secondary=state.lang==='zh'?x.th:x.cn;
     const note=bundWalkLoc(x.note);
     const copy=x.copyText||x.cn;
-    return `<div class="bund-photo-row"><i>${i+1}</i><span><b>${esc(primary)}</b><small>${esc(secondary)}</small>${note?`<em>${esc(note)}</em>`:''}</span><button class="bund-photo-copy" type="button" data-copy="${encodeURIComponent(copy)}">${state.lang==='zh'?'复制':'Copy 中文'}</button></div>`;
+    return `<div><i>${i+1}</i><span style="flex:1"><b>${esc(primary)}</b><small>${esc(secondary)}</small>${note?`<small>• ${esc(note)}</small>`:''}</span><button class="btn ghost" style="margin-left:auto;padding:5px 8px;min-height:0;font-size:10px;white-space:nowrap" type="button" data-copy="${encodeURIComponent(copy)}">${state.lang==='zh'?'复制':'Copy 中文'}</button></div>`;
   }).join('');
   return `<details class="v3-walk-detail bund-photo-walk"><summary><span>📸</span><div><b>${esc(title)}</b><small>${route.sequence.length} ${state.lang==='zh'?'个拍照点':'จุดถ่ายรูป'} · ${state.lang==='zh'?'点击展开':'แตะเพื่อดูเส้นถ่ายรูป'}</small></div></summary><div class="v3-walk-sequence">${rows}</div></details>`;
 };
