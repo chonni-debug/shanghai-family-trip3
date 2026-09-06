@@ -38,7 +38,7 @@ const has=(dayNo,txt)=>days[dayNo-1].events.some(e=>String(e.cn).includes(txt)||
 ok(has(1,'人民广场')&&has(1,'南京路步行街')&&has(1,'外滩'),'Day 1 remains Classic Shanghai');
 ok(has(2,'武康大楼')&&has(2,'安福路')&&has(2,'新天地'),'Day 2 remains French Concession');
 ok(has(3,'静安寺')&&has(3,'南京西路')&&has(3,'北外滩滨江绿地'),'Day 3 is Jing’an / Nanjing West / North Bund on Sep 15');
-ok(has(4,'G7501')&&has(4,'知味观')&&has(4,'清河坊历史文化街区')&&has(4,'灵隐飞来峰')&&has(4,'D3132'),'Day 4 is booked Hangzhou route on Sep 16');
+ok(has(4,'G7501')&&has(4,'知味观')&&has(4,'飞来峰灵隐寺')&&has(4,'飞来峰造像')&&has(4,'清河坊历史文化特色街区')&&has(4,'D3132'),'Day 4 is booked Hangzhou route with requested Feilai/Lingyin/Qinghefang order');
 ok(has(5,'豫园')&&has(5,'上海博物馆东馆')&&has(5,'上海中心大厦'),'Day 5 is Yu Garden / Museum East / Shanghai Tower on Sep 17');
 ok(has(6,'天安千树')&&has(6,'苏州河')&&has(6,'吉祥航空 HO1351'),'Day 6 remains 1000 Trees / Suzhou Creek / flight');
 
@@ -46,20 +46,24 @@ const out=days[3].events.find(e=>String(e.cn).includes('G7501'));
 const ret=days[3].events.find(e=>String(e.cn).includes('D3132')&&e.time==='19:13');
 ok(out?.time==='06:45'&&out.route.th.includes('07:57')&&out.route.th.includes('5B'),'G7501 booked departure/arrival/gate note is stored');
 ok(ret?.route.th.includes('20:32')&&days[3].events.some(e=>e.time==='18:35'&&e.route?.th?.includes('15B')),'D3132 booked departure/arrival/gate note is stored');
-ok(days[3].events.findIndex(e=>String(e.cn).includes('杭州西湖'))<days[3].events.findIndex(e=>String(e.cn).includes('知味观')),'West Lake comes before Zhiweiguan');
-ok(days[3].events.findIndex(e=>String(e.cn).includes('知味观'))<days[3].events.findIndex(e=>String(e.cn).includes('清河坊')),'Zhiweiguan comes before Qinghefang/Hefang');
-ok(days[3].events.findIndex(e=>String(e.cn).includes('清河坊'))<days[3].events.findIndex(e=>String(e.cn).includes('灵隐飞来峰')&&e.time==='14:00'),'Qinghefang/Hefang comes before Feilai Peak');
+const idx=txt=>days[3].events.findIndex(e=>String(e.cn).includes(txt));
+ok(idx('杭州西湖')<idx('知味观'),'West Lake comes before Zhiweiguan');
+ok(idx('知味观')<idx('飞来峰灵隐寺'),'Zhiweiguan comes before Feilai/Lingyin');
+ok(idx('飞来峰灵隐寺')<idx('飞来峰造像'),'Feilai/Lingyin comes before Feilai carvings');
+ok(idx('飞来峰造像')<idx('清河坊历史文化特色街区'),'Feilai carvings come before Qinghefang');
+ok(idx('清河坊历史文化特色街区')<days[3].events.findIndex(e=>e.time==='17:15'&&e.cn==='杭州东站'),'Qinghefang comes before Hangzhou East buffer');
 
 const master=json('data/plan-2026-09-v2.json');
 ok(master.booking.train.date==='2026-09-16'&&master.booking.train.status==='booked','master plan marks Sep 16 train as booked');
 ok(master.booking.train.outbound.train==='G7501'&&master.booking.train.return.train==='D3132','master plan stores both booked train numbers');
-ok(master.booking.lingyin.date==='2026-09-16','master plan moves Feilai/Lingyin booking date to Sep 16');
-ok(master.booking.museumEast.date==='2026-09-17'&&master.booking.shanghaiTower.date==='2026-09-17','Museum East and Shanghai Tower move to Sep 17');
+ok(master.booking.lingyin.date==='2026-09-16'&&master.booking.lingyin.target==='12:10–14:20','master plan aligns Feilai/Lingyin booking window with reordered route');
+ok(master.days.find(d=>d.date==='2026-09-16')?.must?.join('>').includes('飞来峰灵隐寺>飞来峰造像>清河坊历史文化特色街区>杭州东站'),'master plan stores requested Sep 16 stop order');
+ok(master.booking.museumEast.date==='2026-09-17'&&master.booking.shanghaiTower.date==='2026-09-17','Museum East and Shanghai Tower remain Sep 17');
 
 const revised=json('data/revised-plan-content.json');
 const rfind=cn=>revised.places.find(p=>p.cn===cn);
 ok(rfind('知味观(湖滨店)')?.dayHint?.includes(4),'Zhiweiguan is Day 4');
-ok(rfind('清河坊历史文化街区 / 河坊街')?.dayHint?.includes(4),'Qinghefang/Hefang combined stop is Day 4');
+ok(rfind('清河坊历史文化街区 / 河坊街')?.dayHint?.includes(4),'Qinghefang/Hefang content remains available in Explore on Day 4');
 ok(rfind('上海博物馆东馆')?.dayHint?.includes(5),'Museum East content is Day 5');
 ok(rfind('张园')?.dayHint?.includes(3),'Zhangyuan content is Day 3');
 
@@ -72,16 +76,16 @@ const routeMaps=json('data/day-route-maps.json');
 ok(routeMaps.days.length===6,'daily Google route map covers all 6 days');
 const rm15=routeMaps.days.find(d=>d.date==='2026-09-15'),rm16=routeMaps.days.find(d=>d.date==='2026-09-16'),rm17=routeMaps.days.find(d=>d.date==='2026-09-17');
 ok(rm15?.stops.some(s=>s.zh==='静安寺')&&rm15?.stops.some(s=>s.zh==='北外滩滨江绿地'),'Sep 15 map is Jing’an/North Bund');
-ok(rm16?.city==='Hangzhou'&&rm16.stops.length===6,'Sep 16 map is Hangzhou with 6 ordered main stops');
-ok(rm16.stops[1].zh==='西湖'&&rm16.stops[2].zh==='知味观(湖滨店)'&&rm16.stops[3].zh.includes('清河坊')&&rm16.stops[4].zh==='灵隐飞来峰','Hangzhou map follows West Lake → Zhiweiguan → Qinghefang/Hefang → Feilai');
+ok(rm16?.city==='Hangzhou'&&rm16.stops.length===7,'Sep 16 map is Hangzhou with seven ordered main stops');
+ok(rm16.stops.map(s=>s.zh).join('>')==='杭州东站>西湖>知味观(湖滨店)>飞来峰灵隐寺>飞来峰造像>清河坊历史文化特色街区>杭州东站','Hangzhou map matches requested 1–7 stop order');
 ok(rm17?.stops.some(s=>s.zh==='上海博物馆东馆')&&rm17?.stops.some(s=>s.zh==='上海中心大厦'),'Sep 17 map is Yu Garden/Pudong');
 
 const readiness=json('data/trip-readiness.json');
 ok(readiness.last_verified==='2026-09-06','readiness verification date is current');
 ok(readiness.checks.find(x=>x.id==='hangzhou-train')?.status==='ticket','readiness marks Hangzhou trains booked');
 ok(readiness.checks.find(x=>x.id==='hangzhou-train')?.detail.includes('G7501')&&readiness.checks.find(x=>x.id==='hangzhou-train')?.detail.includes('D3132'),'readiness shows exact booked trains');
-ok(readiness.checks.find(x=>x.id==='lingyin')?.label.includes('9 ก.ย.'),'Feilai reservation check starts Sep 9');
-ok(readiness.checks.find(x=>x.id==='museum-east')?.detail.includes('17 ก.ย.'),'Museum East readiness moved to Sep 17');
+ok(readiness.checks.find(x=>x.id==='lingyin')?.label.includes('9 ก.ย.')&&readiness.checks.find(x=>x.id==='lingyin')?.detail.includes('12:10–14:20'),'Feilai reservation check uses reordered visit window');
+ok(readiness.checks.find(x=>x.id==='museum-east')?.detail.includes('17 ก.ย.'),'Museum East readiness remains Sep 17');
 
 const contextual=json('data/contextual-suggestions.json');
 ok(contextual.contexts.some(c=>c.day===3&&c.anchors.includes('静安寺')),'Jing’an context moved to Day 3');
@@ -101,7 +105,7 @@ const publicData=publicFiles.map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.13"),'service worker cache is v2.13');
+ok(sw.includes("shanghai-family-trip-v2.14"),'service worker cache is v2.14');
 ok(sw.includes('./v2/hangzhou-sep16-override.js')&&sw.includes('./data/hangzhou-sep16-plan.json'),'service worker precaches Sep 16 Hangzhou override/data');
 ok(sw.includes('./data/day-route-maps.json'),'service worker retains daily Google route map data');
 
@@ -109,4 +113,4 @@ const photoLib=read('v2/verified-photo-library.js');
 const verifiedKeys=[...photoLib.matchAll(/^\s*'([^']+)'\s*:\s*\{/gm)].map(m=>m[1]);
 ok(new Set(verifiedKeys).size===verifiedKeys.length,'verified photo library has unique exact-place keys');
 
-console.log(`\nQA complete: ${days.length} runtime days, ${events.length} activities; Hangzhou is Sep 16 with G7501/D3132.`);
+console.log(`\nQA complete: ${days.length} runtime days, ${events.length} activities; Hangzhou Sep 16 follows requested 1–7 stop order.`);
