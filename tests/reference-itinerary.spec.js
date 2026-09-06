@@ -19,9 +19,9 @@ test('Explore still exposes screenshot-derived Huaihai food data with Chinese co
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)).toBeLessThanOrEqual(1);
 });
 
-test('Day 5 North Bund context keeps useful reference cafes without adding extra core stops',async({page})=>{
+test('Day 3 North Bund context keeps useful reference cafes without adding extra core stops',async({page})=>{
   await page.setViewportSize({width:390,height:844});
-  await page.addInitScript(()=>localStorage.setItem('sh-sim-v3',JSON.stringify({active:true,day:4,time:'16:05'})));
+  await page.addInitScript(()=>localStorage.setItem('sh-sim-v3',JSON.stringify({active:true,day:2,time:'16:05'})));
   await prime(page);
   const context=page.locator('.context-suggestions');
   await expect(context).toBeVisible();
@@ -29,7 +29,7 @@ test('Day 5 North Bund context keeps useful reference cafes without adding extra
   await expect(context).toContainText('Luneurs Rock Bund');
   await expect(context).toContainText('REi·FLOWER COFFEE BAR');
   await page.locator('[data-tab="plan"]').click();
-  await page.locator('.v3-day-chip').nth(4).click();
+  await page.locator('.v3-day-chip').nth(2).click();
   await expect(page.locator('.v3-itinerary-card')).toHaveCount(8);
   await expect(page.locator('.v3-timeline')).toContainText('North Bund');
 });
