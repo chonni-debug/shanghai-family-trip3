@@ -82,6 +82,16 @@ if(typeof applySep16HangzhouOverride==='function'){
   };
 }
 
+if(typeof requiredOfflineUrls==='function'){
+  const sep15RequiredOfflineUrls=requiredOfflineUrls;
+  requiredOfflineUrls=function(){
+    const req=sep15RequiredOfflineUrls();
+    req.app.push(new URL('sep15-user-details.js',document.baseURI).href);
+    req.data.push(new URL('../data/sep15-user-details.json',document.baseURI).href);
+    return req;
+  };
+}
+
 (async function keepSep15PlacesSynced(){
   try{
     const payload=await loadSep15UserDetails();
