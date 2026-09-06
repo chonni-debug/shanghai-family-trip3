@@ -30,7 +30,8 @@ test('Day 3 North Bund context keeps useful reference cafes without adding extra
   await expect(context).toContainText('REi·FLOWER COFFEE BAR');
   await page.locator('[data-tab="plan"]').click();
   await page.locator('.v3-day-chip').nth(2).click();
-  await expect(page.locator('.v3-itinerary-card')).toHaveCount(8);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(7);
+  await expect(page.locator('.v3-transfer-row')).toHaveCount(1);
   await expect(page.locator('.v3-timeline')).toContainText('North Bund');
 });
 
@@ -39,7 +40,8 @@ test('Day 6 stays intentionally light before the confirmed return flight',async(
   await prime(page);
   await page.locator('[data-tab="plan"]').click();
   await page.locator('.v3-day-chip').nth(5).click();
-  await expect(page.locator('.v3-itinerary-card')).toHaveCount(9);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(7);
+  await expect(page.locator('.v3-transfer-row')).toHaveCount(2);
   await expect(page.locator('.v3-timeline')).toContainText('1000 Trees');
   await expect(page.locator('.v3-timeline')).toContainText('เดินริม Suzhou Creek แบบสั้น');
   await expect(page.locator('.v3-timeline')).toContainText('HO1351');
