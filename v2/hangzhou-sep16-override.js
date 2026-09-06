@@ -25,11 +25,19 @@ async function applySep16HangzhouOverride(data){
   const old16=hzClone(data.days[i16]);
   const old17=hzClone(data.days[i17]);
 
-  // Tuesday becomes the existing Jing'an / Nanjing West / North Bund day.
   data.days[i15]=hzSetDate(old17,'2026-09-15','15 ก.ย.','9月15日');
-  // Wednesday uses the booked Hangzhou trains and the user's revised no-backtracking route.
   data.days[i16]=hzClone(plan.day);
-  // Thursday receives the existing Yu Garden / Museum East / Pudong day so Museum East is not placed on its Tuesday closure day.
   data.days[i17]=hzSetDate(old16,'2026-09-17','17 ก.ย.','9月17日');
   return data;
+}
+
+// Extend the existing Offline Readiness probe so it cannot report "ready" unless the new runtime itinerary layer is cached too.
+if(typeof requiredOfflineUrls==='function'){
+  const hzRequiredOfflineUrls=requiredOfflineUrls;
+  requiredOfflineUrls=function(){
+    const req=hzRequiredOfflineUrls();
+    req.app.push(new URL('hangzhou-sep16-override.js',document.baseURI).href);
+    req.data.push(new URL('../data/hangzhou-sep16-plan.json',document.baseURI).href);
+    return req;
+  };
 }
