@@ -79,8 +79,9 @@ test('Plan v3 rotates Sep 15-17 and uses booked Hangzhou trains on Sep 16',async
   await expect(page.locator('.v3-timeline')).toContainText('G7501');
   await expect(page.locator('.v3-timeline')).toContainText('06:45');
   await expect(page.locator('.v3-timeline')).toContainText('จือเว่ยก่วน Hubin');
-  await expect(page.locator('.v3-timeline')).toContainText('ชิงเหอฟาง + ถนนเหอฟาง');
-  await expect(page.locator('.v3-timeline')).toContainText('เฟยไหลเฟิง');
+  await expect(page.locator('.v3-timeline')).toContainText('เฟยไหลเฟิง + วัดหลิงอิ่น');
+  await expect(page.locator('.v3-timeline')).toContainText('ประติมากรรมเฟยไหลเฟิง');
+  await expect(page.locator('.v3-timeline')).toContainText('ชิงเหอฟาง — ย่านประวัติศาสตร์');
   await expect(page.locator('.v3-timeline')).toContainText('D3132');
   await expect(page.locator('.v3-timeline')).toContainText('19:13');
 
@@ -146,6 +147,7 @@ test('More readiness shows booked trains and revised Sep 16-17 dates',async({pag
   await expect(list).toContainText('G7501');
   await expect(list).toContainText('D3132');
   await expect(list).toContainText('16 ก.ย.');
+  await expect(list).toContainText('12:10–14:20');
   await expect(list).toContainText('17 ก.ย.');
   await expect(list).toContainText('Shanghai Museum East');
   await expect(list).toContainText('Shanghai Tower');
