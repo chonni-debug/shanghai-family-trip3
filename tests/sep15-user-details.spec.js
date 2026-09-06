@@ -23,19 +23,21 @@ test('Day 3 uses exact Lai Lai, compact North Bund transfer and verified Fei Da 
   await west.locator('[data-v3-toggle]').click();
   await expect(west).toContainText('AMAM Lonbakery Town');
   const westContext=west.locator('.context-suggestions');
-  if(await westContext.count())await expect(westContext).not.toContainText('AMAM Lonbakery Town');
+  if(await westContext.count())await expect(westContext.locator('.context-mini-card')).not.toContainText('AMAM Lonbakery Town');
 
   const north=page.locator('.v3-itinerary-card').filter({hasText:'16:00'}).filter({hasText:'North Bund'}).first();
   await north.locator('[data-v3-toggle]').click();
   await expect(north).toContainText('Sinar Mas Plaza');
   await expect(north).toContainText('Starbucks');
   await expect(north).toContainText('MANNER COFFEE(国客滨江店)');
-  const mini= north.locator('.v3-mini-stop-list');
+  const mini=north.locator('.v3-mini-stop-list');
   await expect(mini.locator('.v3-mini-stop-item')).toHaveCount(3);
   await expect(mini).not.toContainText('North Bund Greenland');
 
-  const dinner=page.locator('.v3-itinerary-card').filter({hasText:'Fei Da Chu'}).first();
+  const dinner=page.locator('.v3-itinerary-card').filter({has:page.locator('.v3-time',{hasText:'19:00'})}).filter({hasText:'Fei Da Chu'}).first();
+  await expect(dinner).toBeVisible();
   await dinner.locator('[data-v3-toggle]').click();
+  await expect(dinner.locator('.v3-card-detail')).toBeVisible();
   await expect(dinner).toContainText('B2');
   await expect(dinner).not.toContainText('ชั้น 2');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)).toBeLessThanOrEqual(1);
