@@ -16,20 +16,23 @@ function day2MergeLocalized(base,extra){
   for(const lang of ['th','zh']){
     const a=String(out[lang]||'').trim();
     const b=String(extra[lang]||'').trim();
-    if(b)out[lang]=a?`${a} • ${b}`:b;
+    if(b&&!a.includes(b))out[lang]=a?`${a} • ${b}`:b;
   }
   return out;
 }
 
-function day2MergeStops(existing,extra){
-  const list=[...(existing||[])];
-  for(const stop of extra||[]){
-    const key=typeof stop==='string'?stop:(stop.cn||stop.copyText||stop.th||'');
-    if(!list.some(x=>{
-      const k=typeof x==='string'?x:(x.cn||x.copyText||x.th||'');
-      return k===key;
-    }))list.push(stop);
-  }
+function day2StopKey(stop){
+  if(typeof stop==='string')return stop.trim();
+  return String(stop?.cn||stop?.copyText||stop?.th||'').trim();
+}
+function day2MergeStops(existing,...groups){
+  const list=[];
+  const add=stop=>{
+    const key=day2StopKey(stop);if(!key)return;
+    if(!list.some(x=>day2StopKey(x)===key))list.push(stop);
+  };
+  (existing||[]).forEach(add);
+  groups.flat().filter(Boolean).forEach(add);
   return list;
 }
 
@@ -43,29 +46,28 @@ function applyDay2UserDetails(data,payload){
     delete lunch.anchor;
   }
 
+  // Consolidate the two historical Huaihai cards into one shopping block.
   const west=day.events.find(e=>e.time===payload.huaihaiWest?.anchorTime);
+  const east=day.events.find(e=>e!==west&&((e.cn===payload.huaihaiEast?.anchor&&e.type==='shopping')||e.time==='15:15'));
   if(west&&payload.huaihaiWest){
     west.time=payload.huaihaiWest.anchorTime;
     west.name=JSON.parse(JSON.stringify(payload.huaihaiWest.name));
     west.en='Huaihai Middle Road shopping walk';
-    west.cn=payload.huaihaiWest.cn;
-    west.type=payload.huaihaiWest.type;
-    west.route=JSON.parse(JSON.stringify(payload.huaihaiWest.route));
+    west.cn='淮海中路';
+    west.type='shopping';
+    west.route=day2MergeLocalized(payload.huaihaiWest.route,payload.huaihaiEast?.route);
     delete west.meal;
     west.contentExtras=west.contentExtras||{};
-    west.contentExtras.miniStops=day2MergeStops(west.contentExtras.miniStops,payload.huaihaiWest.miniStops);
-  }
-
-  const east=day.events.find(e=>e.cn===payload.huaihaiEast?.anchor&&e.type==='shopping')||day.events.find(e=>e.time==='15:15');
-  if(east&&payload.huaihaiEast){
-    east.time=payload.huaihaiEast.time||east.time;
-    east.name=JSON.parse(JSON.stringify(payload.huaihaiEast.name));
-    east.en=payload.huaihaiEast.en;
-    east.cn=payload.huaihaiEast.cn;
-    east.type=payload.huaihaiEast.type;
-    east.route=JSON.parse(JSON.stringify(payload.huaihaiEast.route));
-    east.contentExtras=east.contentExtras||{};
-    east.contentExtras.miniStops=day2MergeStops(east.contentExtras.miniStops,payload.huaihaiEast.miniStops);
+    west.contentExtras.miniStops=day2MergeStops(
+      west.contentExtras.miniStops,
+      east?.contentExtras?.miniStops,
+      payload.huaihaiWest.miniStops,
+      payload.huaihaiEast?.miniStops
+    );
+    if(east){
+      const idx=day.events.indexOf(east);
+      if(idx>=0)day.events.splice(idx,1);
+    }
   }
 
   const xintiandi=day.events.find(e=>e.cn===payload.xintiandi?.anchor);

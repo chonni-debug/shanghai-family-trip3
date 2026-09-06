@@ -7,7 +7,7 @@ async function prime(page){
   await expect(page.locator('#app')).toBeVisible();
 }
 
-test('Day 2 follows Anfu lunch, Huaihai shopping walk and Xintiandi dinner',async({page})=>{
+test('Day 2 uses one Huaihai shopping card with all current stops',async({page})=>{
   await prime(page);
   await page.locator('[data-tab="plan"]').click();
   await page.locator('.v3-day-chip').nth(1).click();
@@ -15,18 +15,13 @@ test('Day 2 follows Anfu lunch, Huaihai shopping walk and Xintiandi dinner',asyn
   const timeline=page.locator('.v3-timeline');
   await expect(timeline).toContainText('Grand Goldfinch');
   await expect(timeline).toContainText('Food Court');
-  await expect(page.locator('.v3-itinerary-card')).toHaveCount(9);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(7);
+  await expect(page.locator('.v3-transfer-row')).toHaveCount(1);
 
-  const west=page.locator('.v3-itinerary-card').filter({hasText:'เริ่ม City Walk ช้อปปิ้ง'}).first();
-  await west.locator('[data-v3-toggle]').click();
-  await expect(west).toContainText('LOOKNOW PARK');
-  await expect(west).toContainText('Songmont');
-  await expect(west).toContainText('EMIS');
-
-  const east=page.locator('.v3-itinerary-card').filter({hasText:'ช้อปต่อแล้วเดินไป Xintiandi'}).first();
-  await east.locator('[data-v3-toggle]').click();
-  await expect(east).toContainText('MINISO Pink');
-  await expect(east).toContainText('FARMER BOB');
+  const huaihai=page.locator('.v3-itinerary-card').filter({hasText:'Middle Huaihai Road'});
+  await expect(huaihai).toHaveCount(1);
+  await huaihai.locator('[data-v3-toggle]').click();
+  for(const text of ['LOOKNOW PARK','Songmont','EMIS','MINISO Pink','FARMER BOB'])await expect(huaihai).toContainText(text);
 
   const dinner=page.locator('.v3-itinerary-card').filter({hasText:'Food Court'}).first();
   await dinner.locator('[data-v3-toggle]').click();

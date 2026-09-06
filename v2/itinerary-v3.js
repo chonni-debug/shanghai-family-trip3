@@ -26,13 +26,15 @@ const V3_TEXT={
   noVerifiedPhoto:{th:'ยังไม่มีรูปยืนยัน',zh:'暂无核实照片'},
   map:{th:'เปิด AMap',zh:'打开高德地图'},
   transport:{th:'เส้นทาง',zh:'路线'},
+  transfer:{th:'การเดินทาง',zh:'交通段'},
   walk:{th:'เดิน',zh:'步行'},
   taxi:{th:'DiDi / รถ',zh:'滴滴 / 汽车'},
   metro:{th:'Metro',zh:'地铁'},
   train:{th:'รถไฟ',zh:'火车'},
   flight:{th:'เที่ยวบิน',zh:'航班'},
   ferry:{th:'เรือ',zh:'轮渡'},
-  items:{th:'รายการ',zh:'项'},
+  items:{th:'กิจกรรม',zh:'活动'},
+  travelSegments:{th:'ช่วงเดินทาง',zh:'交通段'},
   completed:{th:'เสร็จแล้ว',zh:'已完成'}
 };
 function v3t(k){const v=V3_TEXT[k];return v?(v[state.lang]||v.th):k}
@@ -71,6 +73,15 @@ function v3Thumb(e){
 function v3Connector(e){
   const m=v3Transport(e);return `<div class="v3-connector"><span>${m.icon}</span><b>${esc(m.label)}</b><i></i><small>${v3t('transport')}</small></div>`;
 }
+function v3TransferRow(e){
+  const m=v3Transport(e),th=e?.name?.th||e?.en||'',zh=e?.name?.zh||e?.cn||'';
+  const primary=state.lang==='zh'?(zh||th):(th||zh),secondary=state.lang==='zh'?th:zh;
+  return `<div class="v3-transfer-row">
+    <span class="v3-transfer-icon">${m.icon}</span>
+    <div class="v3-transfer-copy"><small>${esc(e.time)} · ${v3t('transfer')} · ${esc(m.label)}</small><b>${esc(primary)}</b>${secondary?`<em>${esc(secondary)}</em>`:''}${e.route?`<p>${esc(loc(e.route))}</p>`:''}</div>
+    <a class="mini-action" href="${amapUrl(e)}">AMap</a>
+  </div>`;
+}
 function v3InfoBlock(title,value){return value?`<div class="v3-detail-block"><b>${title}</b><p>${esc(loc(value))}</p></div>`:''}
 function v3PhotoCredit(e){return e.photoCredit&&typeof photoCreditBadge==='function'?`<div class="v3-photo-credit">${photoCreditBadge(e)}</div>`:''}
 function v3MiniStops(e){
@@ -93,11 +104,11 @@ function v3Expanded(e,di,ei){
     ${context}
   </div>`;
 }
-function v3Card(e,di,ei){
+function v3Card(e,di,ei,displaySeq){
   const key=`${di}:${ei}`,expanded=state.planExpanded===key,done=getSet('sh-done').has(eventKey(di,ei,e)),skipped=v3IsSkipped(di,ei,e),optional=v3IsOptional(e);
   return `<article class="v3-itinerary-card ${expanded?'expanded':''} ${done?'done':''} ${skipped?'skipped':''}">
     <button class="v3-card-summary" type="button" data-v3-toggle="${key}" aria-expanded="${expanded?'true':'false'}">
-      <span class="v3-seq">${ei+1}</span>
+      <span class="v3-seq">${displaySeq}</span>
       <span class="v3-card-copy">
         <span class="v3-time">${esc(e.time)}</span>
         ${v3Names(e)}
@@ -117,15 +128,23 @@ function v3DayChips(){return `<div class="v3-day-chips" aria-label="${tr('plan')
 
 renderPlan=function(){
   const d=DATA.days[state.selectedDay],done=getSet('sh-done'),skip=typeof skippedSet==='function'?skippedSet():new Set();
-  const doneCount=d.events.filter((e,i)=>done.has(eventKey(state.selectedDay,i,e))).length,skipCount=d.events.filter((e,i)=>skip.has(eventKey(state.selectedDay,i,e))).length;
+  const activityEvents=d.events.filter(e=>e.type!=='transport'),travelCount=d.events.length-activityEvents.length;
+  const doneCount=d.events.filter((e,i)=>e.type!=='transport'&&done.has(eventKey(state.selectedDay,i,e))).length;
+  const skipCount=d.events.filter((e,i)=>e.type!=='transport'&&skip.has(eventKey(state.selectedDay,i,e))).length;
   const hotel=DATA.trip?.hotel;
-  const cards=d.events.map((e,i)=>`${i?v3Connector(e):''}${v3Card(e,state.selectedDay,i)}`).join('');
+  let visibleSeq=0;
+  const cards=d.events.map((e,i)=>{
+    if(e.type==='transport')return v3TransferRow(e);
+    visibleSeq+=1;
+    const previous=d.events[i-1],connector=i&&previous?.type!=='transport'?v3Connector(e):'';
+    return `${connector}${v3Card(e,state.selectedDay,i,visibleSeq)}`;
+  }).join('');
   return `<section class="v3-plan">
     ${v3DayChips()}
-    <header class="v3-day-header"><div><small>DAY ${state.selectedDay+1} · ${esc(v3DayDate(d))}</small><h1>${esc(state.lang==='zh'?d.title.zh:d.title.th)}</h1><div class="v3-day-zh">${esc(state.lang==='zh'?d.title.th:d.title.zh)}</div><p>${esc(loc(d.theme))}</p></div><div class="v3-day-stats"><b>${doneCount}/${d.events.length}</b><small>${v3t('completed')}</small>${skipCount?`<span>↷ ${skipCount}</span>`:''}</div></header>
+    <header class="v3-day-header"><div><small>DAY ${state.selectedDay+1} · ${esc(v3DayDate(d))}</small><h1>${esc(state.lang==='zh'?d.title.zh:d.title.th)}</h1><div class="v3-day-zh">${esc(state.lang==='zh'?d.title.th:d.title.zh)}</div><p>${esc(loc(d.theme))}</p></div><div class="v3-day-stats"><b>${doneCount}/${activityEvents.length}</b><small>${v3t('completed')}</small>${skipCount?`<span>↷ ${skipCount}</span>`:''}</div></header>
     ${hotel?`<div class="v3-hotel-strip"><span>🏨</span><div><small>${v3t('base')}</small><b>${esc(loc(hotel.name))}</b><em>${esc(hotel.cn)}</em></div><button class="btn ghost" data-driver="hotel">中文</button></div>`:''}
     ${v3DetailedWalk(d)}
-    <div class="v3-overview-label"><b>${v3t('overview')}</b><small>${d.events.length} ${v3t('items')} · ${v3t('detail')}</small></div>
+    <div class="v3-overview-label"><b>${v3t('overview')}</b><small>${activityEvents.length} ${v3t('items')}${travelCount?` · ${travelCount} ${v3t('travelSegments')}`:''} · ${v3t('detail')}</small></div>
     <div class="v3-timeline">${cards}</div>
   </section>`;
 };
