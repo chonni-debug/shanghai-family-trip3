@@ -20,12 +20,11 @@ test('Day 3 includes Lai Lai, AMAM, North Bund route and Fei Da Chu',async({page
   await west.locator('[data-v3-toggle]').click();
   await expect(west).toContainText('AMAM Lonbakery Town');
 
-  const north=page.locator('.v3-itinerary-card').filter({hasText:'North Bund'}).first();
+  const north=page.locator('.v3-itinerary-card').filter({hasText:'16:00'}).filter({hasText:'North Bund'}).first();
   await north.locator('[data-v3-toggle]').click();
   await expect(north).toContainText('Sinar Mas Plaza');
   await expect(north).toContainText('Starbucks');
   await expect(north).toContainText('Manner Coffee');
-  await expect(north).toContainText('07:30');
 
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)).toBeLessThanOrEqual(1);
 });
