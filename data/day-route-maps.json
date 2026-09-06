@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "updated": "2026-09-06",
   "note": {
     "th": "แผนที่นี้ใช้ดูตำแหน่งและลำดับจุดหลักของวัน ไม่แทนวิธีเดินทางจริงในแต่ละช่วง ซึ่งให้ยึด AMap/ข้อมูลในการ์ดเป็นหลักเมื่ออยู่ในจีน",
@@ -7,7 +7,7 @@
   },
   "days": [
     {"date":"2026-09-13","city":"Shanghai","stops":[{"th":"จัตุรัสประชาชน","zh":"人民广场","query":"人民广场 上海"},{"th":"เจียเจียทังเปา (ถ้าคิวไหว)","zh":"佳家汤包(黄河路店)","query":"佳家汤包 黄河路127号 上海"},{"th":"ถนนคนเดินหนานจิง","zh":"南京路步行街","query":"南京路步行街 上海"},{"th":"เดอะบันด์","zh":"外滩","query":"外滩 上海"}]},
-    {"date":"2026-09-14","city":"Shanghai","stops":[{"th":"อาคารอู่คัง","zh":"武康大楼","query":"武康大楼 上海"},{"th":"ถนนอู่คัง","zh":"武康路","query":"武康路 上海"},{"th":"ถนนอันฝู","zh":"安福路","query":"安福路 上海"},{"th":"ถนนหวยไห่กลาง","zh":"淮海中路","query":"淮海中路 上海"},{"th":"ซินเทียนตี้","zh":"新天地","query":"新天地 上海"}]},
+    {"date":"2026-09-14","city":"Shanghai","stops":[{"th":"อาคารอู่คัง","zh":"武康大楼","query":"武康大楼 上海"},{"th":"ถนนอู่คัง","zh":"武康路","query":"武康路 上海"},{"th":"ถนนอันฝู","zh":"安福路","query":"安福路 上海"},{"th":"Grand Goldfinch","zh":"上金雀华人餐厅","query":"上金雀华人餐厅 乌鲁木齐中路247号 上海"},{"th":"LOOKNOW PARK","zh":"LOOKNOW PARK","query":"LOOKNOW PARK 淮海中路1008号 上海"},{"th":"Songmont Huaihai","zh":"Songmont 山下有松","query":"Songmont 山下有松 淮海中路817-819号 上海"},{"th":"EMIS China Flagship","zh":"EMIS 中国首家旗舰店","query":"EMIS 淮海中路795-2号 上海"},{"th":"MINISO Pink","zh":"名创优品 MINISO Pink","query":"名创优品 MINISO Pink 淮海中路688号 上海"},{"th":"FARMER BOB","zh":"FARMER BOB(上海旗舰店)","query":"FARMER BOB 上海旗舰店 淮海中路627-641号 上海"},{"th":"ซินเทียนตี้","zh":"新天地","query":"新天地 上海"},{"th":"Foodie Social — Xintiandi Style I ชั้น 3","zh":"Foodie Social 南里食集","query":"Foodie Social 南里食集 新天地时尚I 兴业路123弄6号3楼 上海"},{"th":"BUTTERFUL & CREAMOROUS","zh":"BUTTERFUL & CREAMOROUS（上海新天地）","query":"BUTTERFUL & CREAMOROUS 上海新天地"},{"th":"HARMAY Shanghai Xintiandi","zh":"HARMAY 上海新天地店","query":"HARMAY 上海新天地店 黄陂南路380号 上海"}]},
     {"date":"2026-09-15","city":"Shanghai","stops":[{"th":"วัดจิ้งอัน","zh":"静安寺","query":"静安寺 上海"},{"th":"ถนนหนานจิงตะวันตก","zh":"南京西路","query":"南京西路 上海"},{"th":"จางหยวน","zh":"张园","query":"张园 上海"},{"th":"North Bund Riverside","zh":"北外滩滨江绿地","query":"北外滩滨江绿地 上海"}]},
     {"date":"2026-09-16","city":"Hangzhou","stops":[{"th":"สถานีหางโจวตะวันออก","zh":"杭州东站","query":"杭州东站"},{"th":"ทะเลสาบซีหู","zh":"西湖","query":"杭州西湖风景名胜区"},{"th":"จือเว่ยก่วน Hubin","zh":"知味观(湖滨店)","query":"知味观 湖滨店 仁和路83号 杭州"},{"th":"เฟยไหลเฟิง + วัดหลิงอิ่น","zh":"飞来峰灵隐寺","query":"飞来峰 灵隐寺 杭州"},{"th":"ประติมากรรมเฟยไหลเฟิง","zh":"飞来峰造像","query":"飞来峰造像 杭州"},{"th":"ชิงเหอฟาง — ย่านประวัติศาสตร์","zh":"清河坊历史文化特色街区","query":"清河坊历史文化特色街区 杭州"},{"th":"สถานีหางโจวตะวันออก","zh":"杭州东站","query":"杭州东站"}]},
     {"date":"2026-09-17","city":"Shanghai","stops":[{"th":"สวนอวี้หยวน","zh":"豫园","query":"豫园 上海"},{"th":"สะพานเก้าโค้ง / Bazaar","zh":"九曲桥 / 豫园商城","query":"九曲桥 上海"},{"th":"Shanghai Museum East","zh":"上海博物馆东馆","query":"上海博物馆东馆 世纪大道1952号 上海"},{"th":"ลู่เจียจุ่ย","zh":"陆家嘴","query":"陆家嘴 上海"},{"th":"Shanghai Tower","zh":"上海中心大厦","query":"上海中心大厦 上海"}]},
