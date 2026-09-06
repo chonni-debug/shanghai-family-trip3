@@ -72,6 +72,14 @@ const ofind=cn=>overrides.places.find(p=>p.cn===cn);
 ok(ofind('静安寺')?.dayHint?.includes(3)&&ofind('北外滩滨江绿地')?.dayHint?.includes(3),'Jing’an/North Bund Explore badges move to Day 3');
 ok(ofind('豫园')?.dayHint?.includes(5)&&ofind('陆家嘴')?.dayHint?.includes(5),'Yu Garden/Lujiazui Explore badges move to Day 5');
 
+const day2=json('data/day2-user-details.json');
+ok(day2.date==='2026-09-14'&&day2.lunch?.cn==='上金雀华人餐厅·麻辣茶餐厅','Day 2 overlay plans Grand Goldfinch lunch');
+ok(day2.lunch?.meal?.th?.includes('¥38')&&day2.lunch?.meal?.th?.includes('¥58'),'Day 2 overlay stores requested Grand Goldfinch dishes');
+ok(day2.huaihaiWest?.miniStops?.map(x=>x.cn).join('>').includes('LOOKNOW PARK>Songmont 山下有松(淮海中路店)>EMIS 中国首家旗舰店'),'Day 2 overlay stores west Huaihai shopping order');
+ok(day2.huaihaiEast?.miniStops?.map(x=>x.cn).join('>')==='名创优品 MINISO Pink>FARMER BOB(上海旗舰店)','Day 2 overlay stores east Huaihai shopping order');
+ok(day2.dinner?.cn==='Foodie Social 南里食集(新天地时尚Ⅰ3楼)','Day 2 overlay plans Xintiandi Style third-floor dinner');
+ok(day2.dinner?.contentExtras?.miniStops?.some(x=>String(x.cn).includes('BUTTERFUL'))&&day2.dinner?.contentExtras?.miniStops?.some(x=>String(x.cn).includes('HARMAY')),'Day 2 overlay stores Butterful and Harmay stops');
+
 const sep15=json('data/sep15-user-details.json');
 ok(sep15.date==='2026-09-15'&&sep15.jinganMeal?.cn==='莱莱小笼','Sep 15 overlay plans Lai Lai lunch');
 ok(sep15.westNanjing?.miniStops?.some(x=>x.cn==='AMAM Lonbakery Town'),'Sep 15 overlay adds AMAM Lonbakery Town');
@@ -80,7 +88,9 @@ ok(sep15.dinner?.cn==='费大厨辣椒炒肉(北外滩来福士店)'&&sep15.dinn
 
 const routeMaps=json('data/day-route-maps.json');
 ok(routeMaps.days.length===6,'daily Google route map covers all 6 days');
-const rm15=routeMaps.days.find(d=>d.date==='2026-09-15'),rm16=routeMaps.days.find(d=>d.date==='2026-09-16'),rm17=routeMaps.days.find(d=>d.date==='2026-09-17');
+const rm14=routeMaps.days.find(d=>d.date==='2026-09-14'),rm15=routeMaps.days.find(d=>d.date==='2026-09-15'),rm16=routeMaps.days.find(d=>d.date==='2026-09-16'),rm17=routeMaps.days.find(d=>d.date==='2026-09-17');
+ok(rm14?.stops?.length===13,'Sep 14 map includes expanded 13-stop route');
+ok(rm14?.stops?.map(s=>s.zh).join('>').includes('上金雀华人餐厅>LOOKNOW PARK>Songmont 山下有松>EMIS 中国首家旗舰店>名创优品 MINISO Pink>FARMER BOB(上海旗舰店)>新天地>Foodie Social 南里食集>BUTTERFUL & CREAMOROUS（上海新天地）>HARMAY 上海新天地店'),'Sep 14 map follows requested Huaihai to Xintiandi order');
 ok(rm15?.stops.some(s=>s.zh==='静安寺')&&rm15?.stops.some(s=>s.zh==='北外滩滨江绿地'),'Sep 15 map is Jing’an/North Bund');
 ok(rm16?.city==='Hangzhou'&&rm16.stops.length===7,'Sep 16 map is Hangzhou with seven ordered main stops');
 ok(rm16.stops.map(s=>s.zh).join('>')==='杭州东站>西湖>知味观(湖滨店)>飞来峰灵隐寺>飞来峰造像>清河坊历史文化特色街区>杭州东站','Hangzhou map matches requested 1–7 stop order');
@@ -102,6 +112,7 @@ ok(!contextual.contexts.some(c=>c.day===4),'Hangzhou day has no extra contextual
 const rootHtml=read('index.html'),v2Html=read('v2/index.html');
 ok(rootHtml.includes('hangzhou-sep16-override.js')&&v2Html.includes('hangzhou-sep16-override.js'),'Sep 16 override loads in root and v2');
 ok(rootHtml.includes('sep15-user-details.js')&&v2Html.includes('sep15-user-details.js'),'Sep 15 detail overlay loads in root and v2');
+ok(rootHtml.includes('day2-user-details.js')&&v2Html.includes('day2-user-details.js'),'Day 2 detail overlay loads in root and v2');
 ok(rootHtml.includes('day-route-map.js')&&v2Html.includes('day-route-map.js'),'daily Google route map remains loaded');
 const appEvents=read('v2/app-events.js');
 ok(appEvents.includes("await applySep16HangzhouOverride(DATA)"),'app init applies Hangzhou override before render');
@@ -109,19 +120,22 @@ const hzLayer=read('v2/hangzhou-sep16-override.js');
 ok(hzLayer.includes("'2026-09-15'")&&hzLayer.includes("'2026-09-17'")&&hzLayer.includes('hangzhou-sep16-plan.json'),'override safely rotates Sep 15/17 around Sep 16 Hangzhou');
 const sep15Layer=read('v2/sep15-user-details.js');
 ok(sep15Layer.includes('sep15PreviousHangzhouOverride')&&sep15Layer.includes('applySep15UserDetails'),'Sep 15 overlay runs after Hangzhou date rotation');
+const day2Layer=read('v2/day2-user-details.js');
+ok(day2Layer.includes('day2PreviousItineraryOverride')&&day2Layer.includes('applyDay2UserDetails'),'Day 2 overlay chains after existing itinerary overrides');
 
-const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/revised-place-overrides.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day-route-maps.json','data/hangzhou-sep16-plan.json','data/sep15-user-details.json','data/contextual-suggestions.json'];
+const publicFiles=['data/app-trip.json','data/app-days-1.json','data/app-days-2.json','data/app-days-3.json','data/app-support.json','data/content-places.json','data/content-food.json','data/reference-itinerary-ideas.json','data/revised-plan-content.json','data/revised-place-overrides.json','data/plan-2026-09-v2.json','data/trip-readiness.json','data/day-route-maps.json','data/hangzhou-sep16-plan.json','data/sep15-user-details.json','data/day2-user-details.json','data/contextual-suggestions.json'];
 const publicData=publicFiles.map(read).join('\n');
 for(const forbidden of ['"policyNo"','"bookingReference"','"passengers"','"insuredPersons"'])ok(!publicData.includes(forbidden),`public data excludes private key ${forbidden}`);
 
 const sw=read('sw.js');
-ok(sw.includes("shanghai-family-trip-v2.17"),'service worker cache is v2.17');
+ok(sw.includes("shanghai-family-trip-v2.18"),'service worker cache is v2.18');
 ok(sw.includes('./v2/hangzhou-sep16-override.js')&&sw.includes('./data/hangzhou-sep16-plan.json'),'service worker precaches Sep 16 Hangzhou override/data');
 ok(sw.includes('./v2/sep15-user-details.js')&&sw.includes('./data/sep15-user-details.json'),'service worker precaches Sep 15 detail overlay/data');
+ok(sw.includes('./v2/day2-user-details.js')&&sw.includes('./data/day2-user-details.json'),'service worker precaches Day 2 detail overlay/data');
 ok(sw.includes('./data/day-route-maps.json'),'service worker retains daily Google route map data');
 
 const photoLib=read('v2/verified-photo-library.js');
 const verifiedKeys=[...photoLib.matchAll(/^\s*'([^']+)'\s*:\s*\{/gm)].map(m=>m[1]);
 ok(new Set(verifiedKeys).size===verifiedKeys.length,'verified photo library has unique exact-place keys');
 
-console.log(`\nQA complete: ${days.length} runtime days, ${events.length} activities; Hangzhou Sep 16 follows requested 1–7 stop order.`);
+console.log(`\nQA complete: ${days.length} runtime days, ${events.length} activities; Day 2 and Hangzhou route overlays are structurally ready.`);
