@@ -28,19 +28,21 @@ test('Thai and Chinese navigation both render',async({page})=>{
   await expect(page.locator('#bottomNav button').first()).toContainText('今天');
 });
 
-test('Plan v3 Day 1 is the revised Classic Shanghai itinerary and retains detail actions',async({page})=>{
+test('Plan v3 Day 1 separates airport transfer from numbered activities',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await prime(page);
   await page.locator('[data-tab="plan"]').click();
   await expect(page.locator('.v3-day-chip')).toHaveCount(6);
-  await expect(page.locator('.v3-itinerary-card')).toHaveCount(9);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(8);
+  await expect(page.locator('.v3-transfer-row')).toHaveCount(1);
+  await expect(page.locator('.v3-transfer-row')).toContainText('ถึงสนามบินผู่ตง T2');
+  await expect(page.locator('.v3-transfer-row')).toContainText('抵达浦东机场 T2');
   await expect(page.locator('.v3-day-header')).toContainText('Classic Shanghai');
   await expect(page.locator('.v3-timeline')).toContainText('จัตุรัสประชาชน');
   await expect(page.locator('.v3-timeline')).toContainText('ถนนคนเดินหนานจิง');
   await expect(page.locator('.v3-timeline')).toContainText('เดอะบันด์');
   const first=page.locator('.v3-itinerary-card').first();
-  await expect(first).toContainText('ถึงสนามบินผู่ตง T2');
-  await expect(first).toContainText('抵达浦东机场 T2');
+  await expect(first).toContainText('ถึงโรงแรม / ฝากกระเป๋า / พัก');
   await first.locator('.v3-card-summary').click();
   await expect(first.locator('.v3-card-detail')).toBeVisible();
   await expect(first.locator('[data-copy]')).toBeVisible();
@@ -52,7 +54,7 @@ test('Plan v3 Day 1 is the revised Classic Shanghai itinerary and retains detail
   await expect(page.locator('.v3-itinerary-card.skipped')).toHaveCount(0);
 });
 
-test('Plan v3 Day 2 exposes the focused French Concession detail route',async({page})=>{
+test('Plan v3 Day 2 exposes the current French Concession detail route without stale duplicates',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await prime(page);
   await page.locator('[data-tab="plan"]').click();
@@ -60,7 +62,10 @@ test('Plan v3 Day 2 exposes the focused French Concession detail route',async({p
   await expect(page.locator('.v3-day-header')).toContainText('French Concession');
   const walk=page.locator('.v3-walk-detail');
   await expect(walk).toBeVisible();
-  await expect(walk.locator('.v3-walk-sequence > div')).toHaveCount(9);
+  await expect(walk.locator('.v3-walk-sequence > div')).toHaveCount(17);
+  await expect(walk).toContainText('Grand Goldfinch');
+  await expect(walk).toContainText('FARMER BOB');
+  await expect(walk).toContainText('Foodie Social');
 });
 
 test('Plan v3 rotates Sep 15-17 and uses booked Hangzhou trains on Sep 16',async({page})=>{
@@ -75,7 +80,8 @@ test('Plan v3 rotates Sep 15-17 and uses booked Hangzhou trains on Sep 16',async
 
   await page.locator('.v3-day-chip').nth(3).click();
   await expect(page.locator('.v3-day-header')).toContainText('Hangzhou One Day Trip');
-  await expect(page.locator('.v3-itinerary-card')).toHaveCount(13);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(9);
+  await expect(page.locator('.v3-transfer-row')).toHaveCount(4);
   await expect(page.locator('.v3-timeline')).toContainText('G7501');
   await expect(page.locator('.v3-timeline')).toContainText('06:45');
   await expect(page.locator('.v3-timeline')).toContainText('จือเว่ยก่วน Hubin');
@@ -88,7 +94,8 @@ test('Plan v3 rotates Sep 15-17 and uses booked Hangzhou trains on Sep 16',async
   await page.locator('.v3-day-chip').nth(4).click();
   await expect(page.locator('.v3-timeline')).toContainText('Shanghai Museum East');
   await expect(page.locator('.v3-timeline')).toContainText('Shanghai Tower 118F');
-  await expect(page.locator('.v3-itinerary-card')).toHaveCount(9);
+  await expect(page.locator('.v3-itinerary-card')).toHaveCount(8);
+  await expect(page.locator('.v3-transfer-row')).toHaveCount(1);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth)).toBeLessThanOrEqual(1);
 });
 
@@ -97,9 +104,12 @@ test('Plan v3 keeps Thai visible when UI switches to Chinese',async({page})=>{
   await prime(page);
   await page.locator('#langBtn').click();
   await page.locator('[data-tab="plan"]').click();
+  const transfer=page.locator('.v3-transfer-row').first();
+  await expect(transfer).toContainText('抵达浦东机场 T2');
+  await expect(transfer).toContainText('ถึงสนามบินผู่ตง T2');
   const first=page.locator('.v3-itinerary-card').first();
-  await expect(first).toContainText('抵达浦东机场 T2');
-  await expect(first).toContainText('ไทย · ถึงสนามบินผู่ตง T2');
+  await expect(first).toContainText('到酒店 / 寄存行李 / 休息');
+  await expect(first).toContainText('ไทย · ถึงโรงแรม / ฝากกระเป๋า / พัก');
 });
 
 test('Explore retains old content and adds Qinghefang and Zhiweiguan with Chinese copy',async({page})=>{
