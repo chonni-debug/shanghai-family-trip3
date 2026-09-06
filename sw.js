@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v2.17';
+const CACHE='shanghai-family-trip-v2.18';
 
 const ESSENTIAL=[
   './',
@@ -26,6 +26,7 @@ const ESSENTIAL=[
   './v2/revised-place-overrides.js',
   './v2/hangzhou-sep16-override.js',
   './v2/sep15-user-details.js',
+  './v2/day2-user-details.js',
   './v2/contextual-suggestions.js',
   './v2/itinerary-v3.js',
   './v2/bund-photo-walk.js',
@@ -53,6 +54,7 @@ const ESSENTIAL=[
   './data/day-route-maps.json',
   './data/hangzhou-sep16-plan.json',
   './data/sep15-user-details.json',
+  './data/day2-user-details.json',
   './data/day1-citywalk.json',
   './data/day1-bund-photo-walk.json',
   './data/contextual-suggestions.json',
