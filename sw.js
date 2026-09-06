@@ -1,4 +1,4 @@
-const CACHE='shanghai-family-trip-v2.18';
+const CACHE='shanghai-family-trip-v2.19';
 
 const ESSENTIAL=[
   './',
@@ -11,6 +11,7 @@ const ESSENTIAL=[
   './v2/content-library.css',
   './v2/contextual-suggestions.css',
   './v2/itinerary-v3.css',
+  './v2/itinerary-audit.css',
   './v2/mobile-detail-hotfix.css',
   './v2/day-route-map.css',
   './v2/photo-integrity.css',
