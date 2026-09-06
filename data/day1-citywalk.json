@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "date": "2026-09-14",
   "routeTitle": {"th":"Day 2 French Concession — เส้นแวะฉบับละเอียด","zh":"Day 2 法租界 — 详细停留路线"},
   "sequence": [
@@ -10,13 +10,21 @@
     {"cn":"LOOKNOW&FLOW 安福路168号","th":"LOOKNOW&FLOW"},
     {"cn":"Baker & Spice 安福路195号","th":"Baker & Spice"},
     {"cn":"wiggle wiggle上海旗舰店 安福路308号","th":"Wiggle Wiggle"},
-    {"cn":"TEENIE WEENIE武康路概念店 淮海中路1946号","th":"TEENIE WEENIE"},
-    {"cn":"淮海中路","th":"ถนนหวยไห่กลาง"}
+    {"cn":"上金雀华人餐厅·麻辣茶餐厅 乌鲁木齐中路247号","th":"Grand Goldfinch"},
+    {"cn":"LOOKNOW PARK 淮海中路1008号","th":"LOOKNOW PARK"},
+    {"cn":"Songmont 山下有松(淮海中路店) 淮海中路817-819号","th":"Songmont Huaihai"},
+    {"cn":"EMIS 中国首家旗舰店 淮海中路795-2号","th":"EMIS China Flagship"},
+    {"cn":"名创优品 MINISO Pink 淮海中路688号","th":"MINISO Pink"},
+    {"cn":"FARMER BOB(上海旗舰店) 淮海中路627-641号","th":"FARMER BOB"},
+    {"cn":"新天地","th":"ซินเทียนตี้"},
+    {"cn":"Foodie Social 南里食集(新天地时尚Ⅰ3楼)","th":"Foodie Social — Xintiandi Style I ชั้น 3"},
+    {"cn":"BUTTERFUL & CREAMOROUS（上海新天地）","th":"BUTTERFUL & CREAMOROUS"},
+    {"cn":"HARMAY 上海新天地店 黄陂南路380号","th":"HARMAY Shanghai Xintiandi"}
   ],
   "eventExtras": {
-    "武康大楼": {"miniStops":["武康路","LOOKNOW武康路旗舰店","TEENIE WEENIE武康路概念店"]},
+    "武康大楼": {"miniStops":["LOOKNOW武康路旗舰店"]},
     "安福路": {"miniStops":["LOOKNOW&FLOW","Baker & Spice 安福路店","wiggle wiggle上海旗舰店"]},
-    "淮海中路": {"miniStops":["TEENIE WEENIE武康路概念店","ตามแรงแล้วต่อ DiDi ไป 新天地"]}
+    "淮海中路": {"miniStops":["LOOKNOW PARK","Songmont 山下有松(淮海中路店)","EMIS 中国首家旗舰店","名创优品 MINISO Pink","FARMER BOB(上海旗舰店)"]}
   },
-  "preservedInExplore": ["五原路","乌鲁木齐中路","延庆路","延庆坊","ULT.","延庆路历史建筑 / 老洋房"]
+  "preservedInExplore": ["五原路","乌鲁木齐中路","延庆路","延庆坊","ULT.","延庆路历史建筑 / 老洋房","TEENIE WEENIE武康路概念店"]
 }
