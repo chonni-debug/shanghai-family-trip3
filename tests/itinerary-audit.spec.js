@@ -18,6 +18,19 @@ test('transport legs are compact rows and do not consume numbered activity slots
   expect(seq).toEqual(seq.map((_,i)=>String(i+1)));
 });
 
+test('Day 2 Wukang and Anfu cards do not repeat the same zone recommendations',async({page})=>{
+  await prime(page);
+  await page.locator('.v3-day-chip').nth(1).click();
+  for(const name of ['อาคารอู่คัง','ถนนอู่คัง','ถนนอันฝู']){
+    const card=page.locator('.v3-itinerary-card').filter({hasText:name}).first();
+    await expect(card).toBeVisible();
+    await card.locator('[data-v3-toggle]').click();
+    await expect(card.locator('.context-suggestions')).toHaveCount(0);
+    await expect(card).not.toContainText('SunFlour สาขา Anfu Road');
+    await expect(card).not.toContainText('O’Mills Yongjia Road');
+  }
+});
+
 test('Sep 17 shows one Yu Garden activity plus its compact inbound transfer',async({page})=>{
   await prime(page);
   await page.locator('.v3-day-chip').nth(4).click();
