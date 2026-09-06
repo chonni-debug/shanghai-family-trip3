@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "updated": "2026-09-06",
   "contexts": [
     {
@@ -26,23 +26,23 @@
     {
       "day": 3,
       "anchors": ["静安寺"],
-      "reason": {"th":"ถ้าหิวหลัง Jing’an Temple ร้าน Huxi เป็นตัวเลือกใกล้โซน ไม่จำเป็นต้องบังคับกิน","zh":"静安寺后如果饿，沪西老弄堂面馆可顺路考虑，不必强行安排。"},
+      "reason": {"th":"Day 3 วาง Lai Lai Xiao Long เป็นมื้อแล้ว; Huxi เก็บเป็นร้านสำรองถ้า Lai Lai ไม่สะดวกวันจริง","zh":"Day 3 已把莱莱小笼安排为用餐；若当天不方便，再用沪西老弄堂面馆作为备用。"},
       "suggestions": ["沪西老弄堂面馆(静安寺店)"],
       "max": 1
     },
     {
       "day": 3,
       "anchors": ["南京西路 / 张园", "张园"],
-      "reason": {"th":"West Nanjing/Zhangyuan มีตัวเลือกเยอะ ให้เลือกแค่ 1–2 จุดตามคิวและแรง แล้วกลับโรงแรมพักตามแผน","zh":"南京西路/张园选择很多，只按排队和体力选1–2个，然后按计划回酒店休息。"},
-      "suggestions": ["Blue Bottle Coffee蓝瓶咖啡(张园店)", "BUTTERFUL & CREAMOROUS Butter and Bread(上海旗舰店)", "路易号 / The Louis", "上海自然博物馆"],
+      "reason": {"th":"West Nanjing/Zhangyuan เพิ่ม AMAM Lonbakery Town เป็นร้านขนมระหว่างทาง; ตัวเลือกอื่นเลือกตามคิวและแรง แล้วกลับโรงแรมพักตามแผน","zh":"南京西路/张园已增加 AMAM Lonbakery Town 作为甜点停留点；其他选项按排队和体力选择，再按计划回酒店休息。"},
+      "suggestions": ["AMAM Lonbakery Town", "Blue Bottle Coffee蓝瓶咖啡(张园店)", "BUTTERFUL & CREAMOROUS Butter and Bread(上海旗舰店)", "路易号 / The Louis", "上海自然博物馆"],
       "max": 2
     },
     {
       "day": 3,
-      "anchors": ["北外滩滨江绿地", "北外滩来福士 / 北外滩附近中餐"],
-      "reason": {"th":"North Bund เน้น skyline เป็นหลัก ถ้าต้องการพักหรือมื้อเย็นค่อยเลือกจากจุดใกล้เคียง ไม่เดินข้ามโซนเพิ่ม","zh":"北外滩重点是天际线；需要休息或晚餐时再选附近点，不再跨区。"},
-      "suggestions": ["Luneurs(洛克·外滩源店)", "REi·FLOWER COFFEE BAR", "费大厨辣椒炒肉(北外滩来福士店)"],
-      "max": 2
+      "anchors": ["北外滩滨江绿地", "费大厨辣椒炒肉(北外滩来福士店)"],
+      "reason": {"th":"North Bund ใช้เส้น Sinar Mas Plaza → Starbucks → North Bund Greenland → Manner Coffee และวาง Fei Da Chu เป็นมื้อเย็นแล้ว; รายการด้านล่างเป็นแค่ตัวเลือกเสริม","zh":"北外滩按 Sinar Mas Plaza → Starbucks → 北外滩滨江绿地 → Manner Coffee 行走，并已安排费大厨晚餐；以下仅为额外备选。"},
+      "suggestions": ["Luneurs(洛克·外滩源店)", "REi·FLOWER COFFEE BAR"],
+      "max": 1
     },
     {
       "day": 5,
