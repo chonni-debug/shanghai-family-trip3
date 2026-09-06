@@ -23,7 +23,10 @@ test('Day 3 uses exact Lai Lai, compact North Bund transfer and verified Fei Da 
   await west.locator('[data-v3-toggle]').click();
   await expect(west).toContainText('AMAM Lonbakery Town');
   const westContext=west.locator('.context-suggestions');
-  if(await westContext.count())await expect(westContext.locator('.context-mini-card')).not.toContainText('AMAM Lonbakery Town');
+  if(await westContext.count()){
+    const suggestionText=(await westContext.locator('.context-mini-card').allTextContents()).join('\n');
+    expect(suggestionText).not.toContain('AMAM Lonbakery Town');
+  }
 
   const north=page.locator('.v3-itinerary-card').filter({hasText:'16:00'}).filter({hasText:'North Bund'}).first();
   await north.locator('[data-v3-toggle]').click();
